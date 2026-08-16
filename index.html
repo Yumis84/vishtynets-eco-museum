@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Виштынецкий эколого-исторический музей — карта, статьи, проекты и путеводитель по Краснолесью и Роминтской пуще.">
+  <title>Виштынецкий экомузей</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="app">
+  <section class="screen screen-map on" id="mapScreen" data-screen="map">
+    <div id="map" aria-label="Карта достопримечательностей"></div>
+    <header class="map-top">
+      <div class="brandbar">
+        <div class="brandmark" aria-hidden="true">⌁</div>
+        <div class="brandcopy"><strong>Виштынецкий экомузей</strong><span>Краснолесье · Роминтская пуща</span></div>
+        <button class="icon-btn" id="locateBtn" type="button" aria-label="Вернуться к моей геопозиции">◎</button>
+      </div>
+      <label class="searchbox">
+        <span>⌕</span>
+        <input id="globalSearch" type="search" placeholder="Место, статья, проект…" autocomplete="off">
+      </label>
+      <div class="chips" id="mapChips" aria-label="Категории карты"></div>
+    </header>
+    <div class="map-cards" id="mapCards" aria-label="Объекты на карте"></div>
+  </section>
+
+  <section class="screen content-screen" id="catalogScreen" data-screen="catalog">
+    <header class="section-head">
+      <div><div class="eyebrow">Путеводитель</div><h1>Места</h1></div>
+      <button class="pill-btn" id="favoritesOnly" type="button">♡ Избранное</button>
+    </header>
+    <label class="section-search"><span>⌕</span><input id="catalogSearch" type="search" placeholder="Искать места"></label>
+    <div class="chips static-chips" id="catalogChips"></div>
+    <div class="place-list" id="placeList"></div>
+    <aside class="service-card">
+      <div><div class="eyebrow">Туризм</div><h2>Где остановиться</h2><p>Актуальный каталог гостевых домов Краснолесья вынесен в отдельный сервис.</p></div>
+      <a href="https://yumis84.github.io/guest-house-map/" target="_blank" rel="noopener">Открыть гостевые дома ↗</a>
+    </aside>
+  </section>
+
+  <section class="screen content-screen" id="articlesScreen" data-screen="articles">
+    <header class="section-head"><div><div class="eyebrow">Цифровой архив</div><h1>Статьи</h1></div></header>
+    <label class="section-search"><span>⌕</span><input id="articleSearch" type="search" placeholder="Природа, история, культура…"></label>
+    <div class="article-categories" id="articleCategories"></div>
+    <div class="article-list" id="articleList"></div>
+  </section>
+
+  <section class="screen content-screen" id="aiScreen" data-screen="ai">
+    <header class="section-head"><div><div class="eyebrow">Цифровой консультант</div><h1>Спросить музей</h1></div></header>
+    <div class="ai-hero">
+      <div class="ai-orbit">✦</div>
+      <h2>Помощник по Роминтской пуще</h2>
+      <p>Сюда будет подключён единый музейный AI-агент через n8n. Он будет искать по актуальным данным, статьям музея и объектам карты.</p>
+      <div class="prompt-grid">
+        <button type="button">Что посмотреть за 2 часа?</button>
+        <button type="button">Расскажи про Роминтскую пущу</button>
+        <button type="button">Куда сходить с ребёнком?</button>
+        <button type="button">Какие программы есть в музее?</button>
+      </div>
+      <div class="ai-status"><span></span> Интерфейс готов · backend подключим отдельным этапом</div>
+    </div>
+  </section>
+
+  <nav class="bottom-nav" aria-label="Основная навигация">
+    <button class="on" data-nav="map"><span>⌖</span>Карта</button>
+    <button data-nav="catalog"><span>▦</span>Каталог</button>
+    <button data-nav="articles"><span>≡</span>Статьи</button>
+    <button data-nav="ai"><span>✦</span>AI</button>
+  </nav>
+
+  <div class="sheet-backdrop" id="placeDetail" aria-hidden="true"><article class="detail-sheet" id="placeSheet"></article></div>
+  <div class="reader-backdrop" id="articleReader" aria-hidden="true"><article class="reader" id="readerBody"></article></div>
+  <div class="toast" id="toast" role="status"></div>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="museum-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
