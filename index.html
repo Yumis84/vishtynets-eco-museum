@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="theme-natural.css?v=2">
+  <link rel="stylesheet" href="home-v3.css?v=1">
 </head>
 <body>
 <main id="app">
@@ -25,6 +26,7 @@
     <section class="forest-hero">
       <div class="forest-glow forest-glow-one"></div>
       <div class="forest-glow forest-glow-two"></div>
+      <div class="hero-place"><span>Краснолесье · Калининградская область</span><span>Экомузей</span></div>
       <div class="hero-logo" aria-label="Виштынецкий эколого-исторический музей">
         <img class="hero-leaf" src="https://www.wystynez.ru/sc-pic/i1666.png" alt="">
         <div class="hero-logo-type">
@@ -33,30 +35,36 @@
         </div>
       </div>
       <div class="hero-copy-new">
-        <div class="eyebrow">Краснолесье · Виштынецкая возвышенность</div>
-        <h1>Природа, история и память Роминтской пущи</h1>
-        <p>Современный цифровой музей, путеводитель и архив территории.</p>
+        <h1>Место, где природа хранит память</h1>
+        <p>Музей природы, истории и культуры Роминтской пущи — и мобильный путеводитель по её местам.</p>
+        <div class="hero-kinds"><span>Музей</span><span>Путеводитель</span><span>Цифровой архив</span></div>
       </div>
       <div class="home-portals" aria-label="Главные разделы">
-        <button data-nav="explore"><span class="portal-icon">⌁</span><strong>Исследовать</strong><small>Места и достопримечательности</small></button>
-        <button data-nav="map"><span class="portal-icon">⌖</span><strong>Карта</strong><small>Все точки и маршруты</small></button>
-        <button data-nav="articles"><span class="portal-icon">≡</span><strong>Статьи</strong><small>История, природа, культура</small></button>
-        <button data-nav="ai"><span class="portal-icon">✦</span><strong>AI-консультант</strong><small>Спросить музей</small></button>
+        <button data-nav="explore"><span class="portal-icon">⌁</span><strong>Исследовать</strong><small>Места, темы и достопримечательности</small></button>
+        <button data-nav="map"><span class="portal-icon">⌖</span><strong>Карта</strong><small>Точки, маршруты и гостевые дома</small></button>
+        <button data-nav="articles"><span class="portal-icon">≡</span><strong>Статьи</strong><small>Природа, история и культура</small></button>
+        <button data-nav="ai"><span class="portal-icon">✦</span><strong>AI-консультант</strong><small>Спросить музей и спланировать визит</small></button>
       </div>
-      <button class="hero-visit-link" data-home-action="visit">Посетить музей ↓</button>
+      <button class="hero-visit-link" data-home-action="visit">Информация для посетителей ↓</button>
     </section>
 
-    <section class="home-section" id="visitBlock">
-      <div class="section-title-row"><div><div class="eyebrow">Посетителям</div><h2>Музей в Краснолесье</h2></div><button class="text-button" data-menu-target="contacts">Контакты →</button></div>
+    <section class="home-section compact-first" id="visitBlock">
+      <div class="section-title-row"><div><div class="eyebrow">Сегодня</div><h2>Посетить музей</h2></div><button class="text-button" data-menu-target="contacts">Контакты →</button></div>
       <div class="visit-card">
+        <div class="visit-status-row"><div class="visit-live"><i></i><span>Актуальный режим</span></div><a class="visit-phone" href="tel:+79062126823">+7 906 212-68-23</a></div>
         <div class="visit-main"><strong id="todayHours">10:00–18:00</strong><span id="todayStatus">Режим работы</span></div>
-        <div class="visit-address">Калининградская область · Краснолесье · ул. Школьная, 5А</div>
-        <div class="visit-actions"><button class="route-museum">⌖ Маршрут</button><button class="visit-more" data-open-article="about-museum">О музее</button></div>
+        <div class="visit-address">Краснолесье, ул. Школьная, 5А</div>
+        <div class="visit-actions"><button class="route-museum">⌖ Построить маршрут</button><button class="visit-more" data-open-article="about-museum">О музее</button></div>
       </div>
     </section>
 
     <section class="home-section">
-      <div class="section-title-row"><div><div class="eyebrow">Темы</div><h2>Открывайте по интересам</h2></div></div>
+      <div class="section-title-row"><div><div class="eyebrow">Рядом</div><h2>Начать исследование</h2></div><button class="text-button" data-nav="explore">Все места →</button></div>
+      <div class="home-place-scroll" id="homePlaces"></div>
+    </section>
+
+    <section class="home-section">
+      <div class="section-title-row"><div><div class="eyebrow">Темы музея</div><h2>Открывайте по интересам</h2></div></div>
       <div class="topic-grid">
         <button class="topic-card nature" data-home-category="Природа"><span>⌁</span><strong>Природа</strong><small>Озёра, реки, лес, птицы</small></button>
         <button class="topic-card history" data-home-category="История"><span>⌛</span><strong>История</strong><small>Роминта, поселения, события</small></button>
@@ -68,14 +76,14 @@
     </section>
 
     <section class="home-section">
-      <div class="section-title-row"><div><div class="eyebrow">Рекомендуем</div><h2>Начните отсюда</h2></div><button class="text-button" data-nav="articles">Все статьи →</button></div>
+      <div class="section-title-row"><div><div class="eyebrow">Из архива музея</div><h2>Истории, с которых стоит начать</h2></div><button class="text-button" data-nav="articles">Все статьи →</button></div>
       <div class="featured-scroll" id="homeFeatured"></div>
     </section>
 
     <section class="home-section">
       <div class="map-teaser">
         <div class="map-teaser-art">⌖</div>
-        <div><div class="eyebrow">Карта территории</div><h2>Роминтская пуща рядом</h2><p>Музейные статьи связаны с реальными местами. Гостевые дома включаются отдельным слоем.</p></div>
+        <div><div class="eyebrow">Карта территории</div><h2>Роминтская пуща на ладони</h2><p>Достопримечательности связаны со статьями музея. Жильё включается отдельным слоем и ведёт в актуальный сервис гостевых домов.</p></div>
         <button class="primary-action" data-nav="map">Открыть карту</button>
       </div>
     </section>
@@ -87,6 +95,8 @@
       <button data-menu-filter="Проекты">Проекты</button>
       <button data-menu-filter="Публикации">Публикации</button>
     </nav>
+
+    <footer class="home-footer-note"><strong>Виштынецкий экомузей</strong>Сохраняем оригинальные музейные материалы и связываем их с живой территорией Роминтской пущи.</footer>
   </section>
 
   <section class="screen content-screen explore-screen" id="exploreScreen" data-screen="explore">
@@ -170,5 +180,6 @@
 <script src="museum-data.js"></script>
 <script src="museum-extra-data.js"></script>
 <script src="app.js"></script>
+<script src="home-v3.js"></script>
 </body>
 </html>
