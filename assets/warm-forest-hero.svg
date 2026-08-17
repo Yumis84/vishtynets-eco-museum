@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-label="Тёплый пейзаж Роминтской пущи">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2e5c7"/><stop offset=".42" stop-color="#d9dfcc"/><stop offset="1" stop-color="#9dad91"/></linearGradient>
+  <radialGradient id="sun" cx="72%" cy="17%" r="27%"><stop offset="0" stop-color="#fff1c8" stop-opacity=".98"/><stop offset=".34" stop-color="#efd7a7" stop-opacity=".58"/><stop offset="1" stop-color="#efd7a7" stop-opacity="0"/></radialGradient>
+  <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9c8bd"/><stop offset="1" stop-color="#7f988d"/></linearGradient>
+  <linearGradient id="mist" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#f7f0df" stop-opacity=".22"/><stop offset=".5" stop-color="#fff8e9" stop-opacity=".66"/><stop offset="1" stop-color="#f7f0df" stop-opacity=".18"/></linearGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="14"/></filter>
+</defs>
+<rect width="1200" height="1500" fill="url(#sky)"/><rect width="1200" height="700" fill="url(#sun)"/>
+<path d="M0 635 Q180 510 355 592 T690 575 T1030 562 T1200 596 V850 H0Z" fill="#81927c" opacity=".52"/>
+<path d="M0 710 Q175 590 360 675 T720 650 T1030 630 T1200 680 V900 H0Z" fill="#667d68" opacity=".68"/>
+<ellipse cx="600" cy="835" rx="670" ry="120" fill="url(#mist)" filter="url(#soft)"/>
+<path d="M0 820 C260 765 370 805 520 790 C700 770 850 792 1200 815 V1500 H0Z" fill="url(#water)"/>
+<path d="M0 910 C230 840 370 875 520 855 C720 825 900 865 1200 905" fill="none" stroke="#e7e7d4" stroke-width="9" opacity=".33"/>
+<g fill="#334f3b">
+  <path d="M0 610 l76-180 77 180h-42l66 152h-68l55 130H0z"/><path d="M85 690 l70-175 71 175h-36l58 135h-61l47 110H82z"/><path d="M975 625 l70-170 71 170h-37l59 138h-61l47 112H948z"/><path d="M1080 705 l58-145 62 145v250h-120z"/>
+</g>
+<g fill="#49644c">
+  <path d="M205 735 l52-128 53 128h-27l42 96h-44l36 87H190z"/><path d="M890 720 l51-126 52 126h-27l43 100h-46l37 89H870z"/><path d="M790 760 l42-103 43 103h-22l34 80h-37l30 73H775z"/>
+</g>
+<g opacity=".33" fill="#eef0dd"><ellipse cx="560" cy="926" rx="290" ry="24"/><ellipse cx="685" cy="1020" rx="220" ry="13"/><ellipse cx="390" cy="1125" rx="170" ry="10"/></g>
+<path d="M0 1260 C180 1170 335 1210 430 1270 C585 1370 730 1240 845 1215 C995 1180 1080 1230 1200 1285 V1500 H0Z" fill="#405b46" opacity=".92"/>
+<path d="M0 1350 C210 1265 370 1335 485 1380 C650 1446 820 1315 945 1325 C1065 1335 1130 1370 1200 1405 V1500 H0Z" fill="#2f4937"/>
+<rect width="1200" height="1500" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
+</svg>
