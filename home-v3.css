@@ -1,0 +1,61 @@
+/* Canonical Home — Variant 3 “Тёплый лес” */
+.home-screen{padding:0 10px 46px;background:linear-gradient(180deg,#f7f1e5 0%,#f3ebdc 62%,#eee5d4 100%)}
+.forest-hero{min-height:min(760px,calc(100dvh - 138px));padding:22px 18px 18px;border-radius:0 0 32px 32px;margin:0 -10px 0;background-image:linear-gradient(180deg,rgba(249,244,231,.20) 0%,rgba(244,238,222,.05) 32%,rgba(42,61,47,.08) 60%,rgba(35,54,41,.24) 100%),url('assets/hero-warm-forest.svg');background-size:cover;background-position:center bottom;border:0;border-bottom:1px solid rgba(80,93,75,.18);box-shadow:0 24px 56px rgba(46,61,49,.14)}
+.forest-hero:before{background:linear-gradient(180deg,rgba(255,251,241,.42),rgba(255,251,241,.02) 42%,rgba(38,57,44,.04) 100%)}
+.forest-hero:after{display:none}
+.forest-glow{display:none}
+.hero-place{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#4e6353;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.hero-place span:last-child{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:rgba(252,249,240,.58);border:1px solid rgba(255,255,255,.65);backdrop-filter:blur(12px)}
+.hero-logo{margin-top:20px;justify-content:center;flex-direction:column;gap:7px;text-align:center}
+.hero-leaf{width:54px;height:54px}
+.hero-logo-type{align-items:center}
+.hero-logo-type img:first-child{width:min(248px,72vw)}
+.hero-logo-type img:last-child{width:min(278px,78vw)}
+.hero-copy-new{margin:24px auto 0;text-align:center;max-width:560px}
+.hero-copy-new .eyebrow{display:none}
+.hero-copy-new h1{font-size:clamp(34px,9vw,48px);line-height:.98;margin:0 auto 12px;max-width:510px;text-wrap:balance;color:#273d31;text-shadow:0 1px rgba(255,255,255,.35)}
+.hero-copy-new p{max-width:430px;margin:0 auto;color:#516158;font-size:15px;line-height:1.52;text-wrap:balance}
+.hero-kinds{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:14px}
+.hero-kinds span{padding:6px 9px;border-radius:999px;background:rgba(249,246,237,.54);border:1px solid rgba(255,255,255,.52);color:#5c6a5d;font-size:9px;font-weight:850;letter-spacing:.045em;backdrop-filter:blur(10px)}
+.home-portals{margin-top:auto;padding-top:24px;gap:10px}
+.home-portals button{min-height:124px;border-radius:23px;background:rgba(249,246,237,.72);border:1px solid rgba(255,255,255,.68);box-shadow:0 14px 32px rgba(49,66,53,.11),inset 0 1px rgba(255,255,255,.62);backdrop-filter:blur(18px) saturate(1.04)}
+.home-portals button:nth-child(2){background:rgba(243,241,231,.74)}
+.home-portals button:nth-child(3){background:rgba(247,241,230,.76)}
+.home-portals button:nth-child(4){background:rgba(236,242,235,.78)}
+.home-portals .portal-icon{background:rgba(242,239,226,.82);border:1px solid rgba(79,105,83,.10)}
+.home-portals strong{font-size:19px}
+.home-portals small{font-size:10px;max-width:130px}
+.hero-visit-link{margin-top:13px;background:rgba(248,244,234,.62);border:1px solid rgba(255,255,255,.44);backdrop-filter:blur(10px)}
+
+.home-section{max-width:860px;margin-left:auto;margin-right:auto}
+.home-section.compact-first{margin-top:22px}
+.visit-card{position:relative;overflow:hidden;padding:18px;border-radius:26px;background:rgba(251,247,238,.91)}
+.visit-card:after{content:"";position:absolute;width:150px;height:150px;border-radius:50%;right:-70px;bottom:-85px;background:rgba(119,137,103,.10)}
+.visit-status-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.visit-live{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:900;color:#536952}.visit-live i{width:9px;height:9px;border-radius:50%;background:#6f8a68;box-shadow:0 0 0 5px rgba(111,138,104,.12)}
+.visit-phone{font-size:11px;color:#6b7168;text-decoration:none;font-weight:800}
+.visit-main{align-items:flex-start}
+.visit-main strong{font-size:31px;line-height:1}.visit-main span{max-width:145px;line-height:1.3}
+.visit-address{display:flex;gap:7px;align-items:flex-start;margin-top:10px;line-height:1.45}
+.visit-address:before{content:"⌖";color:#65775f;font-weight:900}
+.visit-actions{position:relative;z-index:1}
+
+.home-place-scroll{display:flex;gap:10px;overflow:auto;scroll-snap-type:x mandatory;margin:0 -10px;padding:0 10px 5px;scrollbar-width:none}.home-place-scroll::-webkit-scrollbar{display:none}
+.home-place-card{flex:0 0 min(80vw,330px);min-height:178px;scroll-snap-align:center;position:relative;overflow:hidden;border:1px solid rgba(197,188,171,.72);border-radius:25px;background:linear-gradient(145deg,#e7eadf,#f8f3e8);box-shadow:var(--shadowSoft);padding:16px;text-align:left;color:var(--text)}
+.home-place-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 88% 8%,rgba(255,255,255,.72),transparent 32%);pointer-events:none}
+.home-place-card .place-symbol{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:rgba(251,248,239,.76);border:1px solid rgba(255,255,255,.75);font-size:24px;color:#526a56;position:relative}
+.home-place-card .kicker{margin-top:24px;position:relative}.home-place-card h3{position:relative;margin:4px 0 6px;font-family:Georgia,"Times New Roman",serif;font-size:22px;line-height:1.05;color:#2e4437;font-weight:600}.home-place-card p{position:relative;margin:0;color:#6d736b;font-size:11px;line-height:1.45;max-width:260px}.home-place-card .home-place-open{position:relative;margin-top:12px;display:inline-flex;align-items:center;gap:5px;color:#49604e;font-weight:900;font-size:11px}
+.home-place-card.bridge{background:linear-gradient(145deg,#e8e1d5,#f8f2e7)}.home-place-card.lake{background:linear-gradient(145deg,#dfe8e5,#f7f3e9)}.home-place-card.legend{background:linear-gradient(145deg,#e5e7d8,#f7f2e7)}
+
+.topic-grid{grid-template-columns:repeat(2,1fr)}
+.topic-card{min-height:128px;border-radius:23px}
+.featured-scroll{padding-bottom:5px}
+.featured-card{flex-basis:min(82vw,340px)}
+.map-teaser{border-radius:28px;padding:22px}.map-teaser h2{font-size:29px}
+.home-quick-links{justify-content:flex-start;padding-bottom:18px}
+
+.home-footer-note{max-width:860px;margin:30px auto 5px;padding:17px 16px;border-top:1px solid rgba(189,181,164,.7);color:#7a7d75;font-size:11px;line-height:1.55;text-align:center}.home-footer-note strong{display:block;font-family:Georgia,"Times New Roman",serif;color:#405646;font-size:16px;margin-bottom:4px;font-weight:600}
+
+@media(min-width:720px){
+  .forest-hero{margin-left:0;margin-right:0;border-radius:34px;min-height:680px;padding:34px}.home-screen{padding-top:14px}.hero-logo{margin-top:24px}.home-portals{grid-template-columns:repeat(4,1fr)}.home-portals button{min-height:140px}.topic-grid{grid-template-columns:repeat(3,1fr)}
+}
