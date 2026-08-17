@@ -6,15 +6,15 @@
   <meta name="theme-color" content="#f4efe5">
   <meta name="description" content="Виштынецкий экомузей — музей природы, истории и культуры Роминтской пущи и мобильный путеводитель по территории.">
   <title>Виштынецкий экомузей</title>
-  <link rel="stylesheet" href="app.css?v=4">
+  <link rel="stylesheet" href="app.css?v=5">
 </head>
 <body>
 <div class="museum-app" id="museumApp">
   <main class="screens">
     <section class="screen screen-home is-active" data-screen="home" aria-label="Главная">
       <section class="warm-hero">
-        <img class="warm-hero-art" src="assets/warm-forest-hero.svg" alt="Тёплый пейзаж Роминтской пущи" fetchpriority="high">
-        <div class="warm-hero-overlay"></div>
+        <img class="warm-hero-art" src="https://www.wystynez.ru/sc-pic/i1423.jpg" alt="Роминтская пуща" fetchpriority="high" style="object-position:center;">
+        <div class="warm-hero-overlay" style="background:linear-gradient(180deg,rgba(34,48,37,.08) 0%,rgba(30,45,34,.10) 35%,rgba(27,42,32,.48) 62%,rgba(23,37,28,.82) 100%);"></div>
         <header class="home-head">
           <button class="museum-brand hero-brand" data-nav="home" type="button" aria-label="Виштынецкий экомузей">
             <img class="museum-brand-leaf" src="https://www.wystynez.ru/sc-pic/i1666.png" alt="">
@@ -27,16 +27,15 @@
         </header>
 
         <div class="warm-hero-copy">
-          <span class="home-kicker">Краснолесье · Роминтская пуща</span>
-          <h1>Место, где природа хранит память</h1>
-          <p>Музей природы, истории и культуры — и современный путеводитель по Виштынецкой возвышенности.</p>
+          <span class="home-kicker" style="color:#eef2e9;text-shadow:0 1px 8px rgba(0,0,0,.32);">Краснолесье · Роминтская пуща</span>
+          <h1 style="color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.32);">Место, где природа хранит память</h1>
+          <p style="color:#f0f2ec;text-shadow:0 1px 10px rgba(0,0,0,.30);">Музей природы, истории и культуры — и современный путеводитель по Виштынецкой возвышенности.</p>
         </div>
 
         <div class="home-entry-grid" aria-label="Главные разделы">
           <button class="entry-card" data-nav="explore" type="button"><span class="entry-icon">⌁</span><strong>Исследовать</strong><small>Места и темы</small></button>
           <button class="entry-card" data-nav="map" type="button"><span class="entry-icon">⌖</span><strong>Карта</strong><small>Точки и маршруты</small></button>
-          <button class="entry-card" data-nav="articles" type="button"><span class="entry-icon">▤</span><strong>Статьи</strong><small>Архив музея</small></button>
-          <button class="entry-card" data-nav="ai" type="button"><span class="entry-icon">✦</span><strong>AI-консультант</strong><small>Спросить музей</small></button>
+          <button class="entry-card" data-nav="articles" type="button" style="grid-column:1 / -1;min-height:88px;"><span class="entry-icon">▤</span><strong>Статьи</strong><small>Архив музея</small></button>
         </div>
       </section>
 
