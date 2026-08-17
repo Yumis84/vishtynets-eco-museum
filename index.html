@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#f3efe5">
   <meta name="description" content="Виштынецкий эколого-исторический музей — современный мобильный путеводитель по музею, Краснолесью и Роминтской пуще.">
   <title>Виштынецкий экомузей</title>
   <link rel="preconnect" href="https://unpkg.com">
@@ -14,46 +14,55 @@
 <main id="app">
   <header class="app-topbar">
     <button class="brand-button" type="button" data-nav="home" aria-label="На главную">
-      <span class="brand-symbol">⌁</span>
+      <span class="brand-symbol"><img src="https://www.wystynez.ru/sc-pic/i1666.png" alt=""></span>
       <span><strong>Виштынецкий экомузей</strong><small>Краснолесье · Роминтская пуща</small></span>
     </button>
     <button class="menu-button" id="menuBtn" type="button" aria-label="Открыть меню">☰</button>
   </header>
 
   <section class="screen content-screen home-screen on" id="homeScreen" data-screen="home">
-    <div class="hero-panel">
-      <div class="hero-copy">
-        <div class="eyebrow">Эколого-исторический музей</div>
-        <h1>Место, где природа встречается с историей</h1>
-        <p>Исследуйте Роминтскую пущу, Виштынецкую возвышенность, музейные проекты, легенды и места вокруг Краснолесья.</p>
-        <div class="hero-actions">
-          <button class="primary-action" data-home-action="visit">Посетить музей</button>
-          <button class="secondary-action" data-nav="explore">Исследовать окрестности</button>
+    <section class="forest-hero">
+      <div class="forest-glow forest-glow-one"></div>
+      <div class="forest-glow forest-glow-two"></div>
+      <div class="hero-logo" aria-label="Виштынецкий эколого-исторический музей">
+        <img class="hero-leaf" src="https://www.wystynez.ru/sc-pic/i1666.png" alt="">
+        <div class="hero-logo-type">
+          <img src="https://www.wystynez.ru/sc-pic/i1667.png" alt="Виштынецкий">
+          <img src="https://www.wystynez.ru/sc-pic/i1668.png" alt="эколого-исторический музей">
         </div>
       </div>
-      <figure class="hero-media">
-        <img src="https://www.wystynez.ru/sc-pic/i1665.jpg" alt="Виштынецкий экомузей" loading="eager">
-      </figure>
-    </div>
+      <div class="hero-copy-new">
+        <div class="eyebrow">Краснолесье · Виштынецкая возвышенность</div>
+        <h1>Природа, история и память Роминтской пущи</h1>
+        <p>Современный цифровой музей, путеводитель и архив территории.</p>
+      </div>
+      <div class="home-portals" aria-label="Главные разделы">
+        <button data-nav="explore"><span class="portal-icon">⌁</span><strong>Исследовать</strong><small>Места и достопримечательности</small></button>
+        <button data-nav="map"><span class="portal-icon">⌖</span><strong>Карта</strong><small>Все точки и маршруты</small></button>
+        <button data-nav="articles"><span class="portal-icon">≡</span><strong>Статьи</strong><small>История, природа, культура</small></button>
+        <button data-nav="ai"><span class="portal-icon">✦</span><strong>AI-консультант</strong><small>Спросить музей</small></button>
+      </div>
+      <button class="hero-visit-link" data-home-action="visit">Посетить музей ↓</button>
+    </section>
 
     <section class="home-section" id="visitBlock">
-      <div class="section-title-row"><div><div class="eyebrow">Посетителям</div><h2>Сегодня в музее</h2></div><button class="text-button" data-menu-target="contacts">Контакты →</button></div>
+      <div class="section-title-row"><div><div class="eyebrow">Посетителям</div><h2>Музей в Краснолесье</h2></div><button class="text-button" data-menu-target="contacts">Контакты →</button></div>
       <div class="visit-card">
-        <div class="visit-main"><strong id="todayHours">10:00–18:00</strong><span id="todayStatus">Режим работы уточняется</span></div>
-        <div class="visit-address">Краснолесье · ул. Школьная, 5А</div>
-        <button class="route-museum">⌖ Построить маршрут</button>
+        <div class="visit-main"><strong id="todayHours">10:00–18:00</strong><span id="todayStatus">Режим работы</span></div>
+        <div class="visit-address">Калининградская область · Краснолесье · ул. Школьная, 5А</div>
+        <div class="visit-actions"><button class="route-museum">⌖ Маршрут</button><button class="visit-more" data-open-article="about-museum">О музее</button></div>
       </div>
     </section>
 
     <section class="home-section">
-      <div class="section-title-row"><div><div class="eyebrow">Темы</div><h2>Открывайте музей по интересам</h2></div></div>
+      <div class="section-title-row"><div><div class="eyebrow">Темы</div><h2>Открывайте по интересам</h2></div></div>
       <div class="topic-grid">
-        <button class="topic-card" data-home-category="Природа"><span>⌁</span><strong>Природа</strong><small>Озёра, реки, лес, птицы</small></button>
-        <button class="topic-card" data-home-category="История"><span>⌛</span><strong>История</strong><small>Роминта, поселения, события</small></button>
-        <button class="topic-card" data-home-category="Культура"><span>✦</span><strong>Культура</strong><small>Легенды и Донелайтис</small></button>
-        <button class="topic-card" data-home-category="Музей"><span>⌂</span><strong>Музей</strong><small>Экспозиции и программы</small></button>
-        <button class="topic-card" data-home-category="Проекты"><span>◇</span><strong>Проекты</strong><small>Исследования и инициативы</small></button>
-        <button class="topic-card" data-home-category="Публикации"><span>≡</span><strong>Публикации</strong><small>Книги, путеводители, архив</small></button>
+        <button class="topic-card nature" data-home-category="Природа"><span>⌁</span><strong>Природа</strong><small>Озёра, реки, лес, птицы</small></button>
+        <button class="topic-card history" data-home-category="История"><span>⌛</span><strong>История</strong><small>Роминта, поселения, события</small></button>
+        <button class="topic-card culture" data-home-category="Культура"><span>✦</span><strong>Культура</strong><small>Легенды и Донелайтис</small></button>
+        <button class="topic-card museum" data-home-category="Музей"><span>⌂</span><strong>Музей</strong><small>Экспозиции и программы</small></button>
+        <button class="topic-card projects" data-home-category="Проекты"><span>◇</span><strong>Проекты</strong><small>Исследования и инициативы</small></button>
+        <button class="topic-card publications" data-home-category="Публикации"><span>≡</span><strong>Публикации</strong><small>Книги и путеводители</small></button>
       </div>
     </section>
 
@@ -64,55 +73,70 @@
 
     <section class="home-section">
       <div class="map-teaser">
-        <div><div class="eyebrow">Путеводитель</div><h2>Роминтская пуща на карте</h2><p>Достопримечательности связаны со статьями музея. Отдельным слоем можно включить актуальные гостевые дома.</p></div>
+        <div class="map-teaser-art">⌖</div>
+        <div><div class="eyebrow">Карта территории</div><h2>Роминтская пуща рядом</h2><p>Музейные статьи связаны с реальными местами. Гостевые дома включаются отдельным слоем.</p></div>
         <button class="primary-action" data-nav="map">Открыть карту</button>
       </div>
     </section>
+
+    <nav class="home-quick-links" aria-label="Дополнительные разделы">
+      <button data-open-article="about-museum">О музее</button>
+      <button data-menu-target="visit">Посетителям</button>
+      <button data-menu-filter="Музей">Экспозиции</button>
+      <button data-menu-filter="Проекты">Проекты</button>
+      <button data-menu-filter="Публикации">Публикации</button>
+    </nav>
   </section>
 
-  <section class="screen content-screen" id="exploreScreen" data-screen="explore">
+  <section class="screen content-screen explore-screen" id="exploreScreen" data-screen="explore">
     <header class="section-head"><div><div class="eyebrow">Путеводитель</div><h1>Исследовать</h1></div><button class="pill-btn" id="favoritesOnly">♡ Избранное</button></header>
     <p class="section-intro">Места Роминтской пущи, о которых рассказывает музей.</p>
     <label class="section-search"><span>⌕</span><input id="exploreSearch" type="search" placeholder="Место, мост, озеро, легенда…"></label>
     <div class="chips static-chips" id="exploreChips"></div>
     <div class="place-list" id="placeList"></div>
     <aside class="service-card">
-      <div><div class="eyebrow">Где остановиться</div><h2>Гостевые дома</h2><p>На музейной карте дома доступны отдельным слоем. Полные карточки и актуальные данные — в специализированном сервисе.</p></div>
-      <a href="https://yumis84.github.io/guest-house-map/" target="_blank" rel="noopener">Открыть сервис ↗</a>
+      <div><div class="eyebrow">Где остановиться</div><h2>Гостевые дома</h2><p>На музейной карте жильё доступно отдельным слоем. Подробные карточки остаются в специализированном сервисе.</p></div>
+      <a href="https://yumis84.github.io/guest-house-map/" target="_blank" rel="noopener">Открыть каталог жилья ↗</a>
     </aside>
   </section>
 
   <section class="screen map-screen" id="mapScreen" data-screen="map">
-    <div id="map" aria-label="Карта Роминтской пущи"></div>
+    <div id="map" aria-label="Карта достопримечательностей"></div>
     <div class="map-toolbar">
-      <div class="map-title"><div><div class="eyebrow">Путеводитель</div><strong>Карта Роминтской пущи</strong></div><button class="locate-btn" id="locateBtn" aria-label="Моя геопозиция">◎</button></div>
-      <label class="map-search"><span>⌕</span><input id="mapSearch" type="search" placeholder="Найти место"></label>
-      <div class="chips" id="mapChips"></div>
+      <div class="map-title"><div><small>Путеводитель</small><strong>Карта Роминтской пущи</strong></div><button class="locate-btn" id="locateBtn" aria-label="Моё местоположение">◎</button></div>
+      <label class="map-search"><span>⌕</span><input id="mapSearch" type="search" placeholder="Найти место на карте"></label>
+      <div class="chips map-chips" id="mapChips"></div>
     </div>
-    <div class="map-selection" id="mapSelection" aria-live="polite"></div>
+    <div class="map-selection" id="mapSelection"></div>
   </section>
 
-  <section class="screen content-screen" id="articlesScreen" data-screen="articles">
+  <section class="screen content-screen articles-screen" id="articlesScreen" data-screen="articles">
     <header class="section-head"><div><div class="eyebrow">Цифровой музей</div><h1>Статьи</h1></div></header>
-    <p class="section-intro">Оригинальное наследие старого сайта — в новой понятной структуре.</p>
+    <p class="section-intro">Оригинальные музейные материалы в современной, читаемой форме.</p>
     <label class="section-search"><span>⌕</span><input id="articleSearch" type="search" placeholder="Природа, история, культура…"></label>
     <div class="article-categories" id="articleCategories"></div>
     <div class="article-list" id="articleList"></div>
   </section>
 
-  <section class="screen content-screen" id="aiScreen" data-screen="ai">
+  <section class="screen content-screen ai-screen" id="aiScreen" data-screen="ai">
     <header class="section-head"><div><div class="eyebrow">Цифровой консультант</div><h1>Спросить музей</h1></div></header>
     <div class="ai-hero">
-      <div class="ai-orbit">✦</div><h2>Помощник по Роминтской пуще</h2>
-      <p>Будет искать по музейным статьям, местам, маршрутам и актуальной информации — через единый музейный AI-агент.</p>
-      <div class="prompt-grid"><button>Что посмотреть за 2 часа?</button><button>Расскажи про Роминтскую пущу</button><button>Куда сходить с ребёнком?</button><button>Что сейчас есть в музее?</button></div>
-      <div class="ai-status"><span></span> Интерфейс готов · backend подключим отдельно</div>
+      <div class="ai-orbit">✦</div>
+      <h2>Помощник по Роминтской пуще</h2>
+      <p>Он будет искать ответы в музейных статьях, объектах карты и актуальной информации для посетителей.</p>
+      <div class="prompt-grid">
+        <button type="button">Расскажи о Чёртовом камне</button>
+        <button type="button">Что посмотреть за 2 часа?</button>
+        <button type="button">Куда сходить с детьми?</button>
+        <button type="button">Что посмотреть у озера?</button>
+      </div>
+      <div class="ai-status"><span></span> Интерфейс готов · backend подключим через n8n</div>
     </div>
   </section>
 
   <nav class="bottom-nav" aria-label="Основная навигация">
     <button class="on" data-nav="home"><span>⌂</span>Главная</button>
-    <button data-nav="explore"><span>◇</span>Исследовать</button>
+    <button data-nav="explore"><span>⌁</span>Исследовать</button>
     <button data-nav="map"><span>⌖</span>Карта</button>
     <button data-nav="articles"><span>≡</span>Статьи</button>
     <button data-nav="ai"><span>✦</span>AI</button>
@@ -120,17 +144,17 @@
 
   <div class="drawer-backdrop" id="drawer" aria-hidden="true">
     <aside class="drawer-panel">
-      <div class="drawer-head"><div><div class="eyebrow">Виштынецкий экомузей</div><h2>Меню</h2></div><button id="drawerClose" aria-label="Закрыть">×</button></div>
+      <div class="drawer-head"><div><div class="eyebrow">Навигация</div><h2>Музей</h2></div><button id="drawerClose" aria-label="Закрыть">×</button></div>
       <nav class="drawer-nav">
-        <button data-open-article="about-museum"><span>О музее</span><b>→</b></button>
-        <button data-menu-target="visit"><span>Посетителям</span><b>→</b></button>
-        <button data-menu-filter="Музей"><span>Экспозиции</span><b>→</b></button>
-        <button data-menu-search="программа"><span>Образовательные программы</span><b>→</b></button>
-        <button data-menu-filter="Проекты"><span>Проекты</span><b>→</b></button>
-        <button data-menu-filter="Публикации"><span>Публикации</span><b>→</b></button>
-        <button data-menu-search="архив"><span>Хронология</span><b>→</b></button>
-        <a href="https://yumis84.github.io/guest-house-map/" target="_blank" rel="noopener"><span>Где остановиться</span><b>↗</b></a>
-        <button data-menu-target="contacts"><span>Контакты</span><b>→</b></button>
+        <button data-open-article="about-museum">О музее <b>→</b></button>
+        <button data-menu-target="visit">Посетителям <b>→</b></button>
+        <button data-menu-filter="Музей">Экспозиции и программы <b>→</b></button>
+        <button data-menu-filter="Проекты">Проекты <b>→</b></button>
+        <button data-menu-filter="Публикации">Публикации <b>→</b></button>
+        <button data-menu-search="Соседи">Хронология и события <b>→</b></button>
+        <a href="https://yumis84.github.io/guest-house-map/" target="_blank" rel="noopener">Где остановиться <b>↗</b></a>
+        <button data-menu-target="contacts">Контакты <b>↓</b></button>
+        <a href="https://www.wystynez.ru/" target="_blank" rel="noopener">Архивный сайт <b>↗</b></a>
       </nav>
       <div class="drawer-contact" id="drawerContact"></div>
     </aside>
