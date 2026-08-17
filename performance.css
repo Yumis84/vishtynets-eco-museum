@@ -1,0 +1,71 @@
+/* Mobile performance overrides.
+   Keep the visual language of Variant 3 while avoiding expensive live blurs
+   during vertical scrolling on Android/iOS. */
+
+@media (max-width: 719px){
+  /* Fixed chrome: solid/translucent paint is much cheaper than backdrop-filter. */
+  .app-topbar{
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    background:#f7f1e5 !important;
+  }
+  .bottom-nav{
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    background:#f8f3ea !important;
+    box-shadow:0 8px 24px rgba(46,61,49,.12) !important;
+  }
+
+  /* Home: remove live backdrop blur from cards. */
+  .home-portals button,
+  .visit-card,
+  .topic-card{
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+  }
+  .home-portals button{background:#f7f2e7 !important}
+  .home-portals button:nth-child(2){background:#f3eee2 !important}
+  .home-portals button:nth-child(3){background:#f5efe5 !important}
+  .home-portals button:nth-child(4){background:#edf1e9 !important}
+  .visit-card{background:#faf6ec !important}
+
+  /* The large soft glows looked nice but are costly to repaint while scrolling. */
+  .forest-glow{display:none !important}
+  .forest-hero:after{
+    filter:none !important;
+    opacity:.82;
+  }
+  .hero-leaf,
+  .hero-logo-type{
+    filter:none !important;
+  }
+
+  /* Reduce oversized shadows that trigger large repaint areas. */
+  .forest-hero{box-shadow:0 12px 32px rgba(43,55,45,.12) !important}
+  .featured-card,.place-item,.article-card,.visit-card,.topic-card{
+    box-shadow:0 5px 16px rgba(46,61,49,.055) !important;
+  }
+
+  /* Browser can skip layout/paint work for sections far outside the viewport. */
+  .home-section{
+    content-visibility:auto;
+    contain-intrinsic-size:320px;
+  }
+
+  /* More predictable compositor behavior for the one actual scroll container. */
+  .content-screen{
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-y:contain;
+  }
+  .home-screen{
+    will-change:auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto !important;
+    transition-duration:.01ms !important;
+    animation-duration:.01ms !important;
+  }
+}
