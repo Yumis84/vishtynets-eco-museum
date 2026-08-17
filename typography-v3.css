@@ -1,0 +1,106 @@
+/* Variant 3 — «Тёплый лес»: mobile-first readable typography */
+
+body{font-size:15px;line-height:1.52}
+
+/* Small labels must stay readable on a phone */
+.eyebrow,.home-kicker{font-size:10.5px;letter-spacing:.11em}
+.museum-brand-text small{font-size:11px}
+
+/* Hero cards */
+.entry-copy strong{font-size:19px;line-height:1.08}
+.entry-copy small{font-size:12px;line-height:1.35;margin-top:5px}
+
+/* Visit block */
+.visit-ribbon{font-size:10px;min-height:27px}
+.open-dot{font-size:12px}
+.visit-line strong{font-size:14px;line-height:1.35}
+.visit-line small{font-size:12px;line-height:1.35;margin-top:3px}
+.btn-primary,.btn-light,.btn-outline{font-size:13.5px}
+
+/* Home recommendations and topics */
+.recommend-copy strong{font-size:16px;line-height:1.12}
+.recommend-copy small{font-size:10.5px;line-height:1.3;letter-spacing:.055em}
+.topic-preview-grid strong{font-size:18px;line-height:1.12}
+.topic-preview-grid small{font-size:12px;line-height:1.3;margin-top:5px}
+.archive-copy p{font-size:14px;line-height:1.58}
+.inline-link{font-size:12.5px}
+
+/* Search */
+.search-box{height:48px}
+.search-box input{font-size:14px}
+
+/* Explore filters */
+.category-grid{gap:8px}
+.category-grid button{min-height:48px;padding:7px 6px;font-size:12px;line-height:1.15}
+.category-grid button .v3-category-label{font-size:12px;line-height:1.15}
+.list-heading h2{font-size:21px}
+.list-heading button{font-size:12.5px}
+
+/* Place cards */
+.place-row{grid-template-columns:102px 1fr;min-height:128px}
+.place-row-media{min-height:128px}
+.place-row-copy{padding:13px 40px 12px 13px}
+.place-row-copy .place-type{font-size:10px;letter-spacing:.075em;line-height:1.2}
+.place-row-copy h3{font-size:18px;line-height:1.12;margin:4px 0 7px}
+.place-row-copy p{font-size:12.5px;line-height:1.45}
+.place-distance{font-size:11px;line-height:1.25;margin-top:8px}
+.fav-button{width:34px;height:34px}
+
+/* Map controls and cards */
+.map-tools button{height:36px;font-size:11.5px;padding:0 12px}
+.map-chips button{height:34px;padding:0 12px;font-size:11px}
+.map-place-card{grid-template-columns:96px 1fr;gap:12px;padding:11px}
+.map-place-photo{height:108px}
+.map-place-copy h3{font-size:18px;line-height:1.1;margin:2px 0 6px}
+.map-place-copy p{font-size:12px;line-height:1.42}
+.map-place-actions button,.map-place-actions a{min-height:36px;font-size:11.5px;padding:0 11px}
+.leaflet-control-attribution{font-size:9px!important}
+
+/* Articles list */
+.article-chips{gap:7px;margin:14px 0}
+.article-chips button{height:35px;padding:0 12px;font-size:11.5px}
+.article-card{grid-template-columns:112px 1fr}
+.article-media{min-height:128px}
+.article-copy{padding:13px}
+.article-copy span{font-size:10px;letter-spacing:.075em;line-height:1.2}
+.article-copy h3{font-size:18px;line-height:1.12;margin:4px 0 7px}
+.article-copy p{font-size:12.5px;line-height:1.45}
+
+/* Article reader */
+.reader-title span{font-size:10.5px;letter-spacing:.09em}
+.reader-title h1{font-size:33px;line-height:1.03}
+.reader-meta{font-size:11.5px;line-height:1.3;gap:10px}
+.reader-lead{font-size:17px;line-height:1.55}
+.reader-body p{font-size:16.5px;line-height:1.7}
+.reader-body h2{font-size:24px;line-height:1.15}
+.reader-map-link p{font-size:13.5px;line-height:1.5}
+.reader-map-link button{font-size:13px}
+.reader-top button{font-size:13px}
+
+/* AI */
+.ai-card h2{font-size:25px;line-height:1.12}
+.ai-card>p{font-size:14px;line-height:1.55}
+.ai-prompts button{font-size:13px;line-height:1.35;min-height:44px}
+.ai-input input{font-size:13px}
+
+/* Full menu */
+.full-menu-nav button,.full-menu-nav a{font-size:17px;line-height:1.2}
+.menu-footer p{font-size:15px}
+
+/* Bottom navigation */
+.bottom-nav button{font-size:10.5px;line-height:1.05;letter-spacing:-.01em}
+
+/* Sheets / auxiliary content */
+.sheet-panel{font-size:14px}
+.sheet-panel p,.sheet-panel li{font-size:14px;line-height:1.55}
+.sheet-panel small{font-size:11.5px}
+
+@media(max-width:360px){
+  .entry-copy strong{font-size:18px}
+  .entry-copy small{font-size:11.5px}
+  .category-grid button,.category-grid button .v3-category-label{font-size:11.5px}
+  .place-row{grid-template-columns:94px 1fr}
+  .place-row-copy h3,.article-copy h3{font-size:17px}
+  .place-row-copy p,.article-copy p{font-size:12px}
+  .bottom-nav button{font-size:10px}
+}
