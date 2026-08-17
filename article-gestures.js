@@ -21,6 +21,12 @@ function reader(){return $(READER_SELECTOR)}
 function active(){return !!screen()?.classList.contains('is-active')}
 function currentFilteredIds(){return $$(LIST_SELECTOR).map(el=>el.dataset.openArticle).filter(Boolean)}
 
+function syncRootOverscroll(){
+  const isOpen=active();
+  document.documentElement.classList.toggle('article-reader-open',isOpen);
+  document.body?.classList.toggle('article-reader-open',isOpen);
+}
+
 function syncCurrentArticle(){
   const title=$(`${READER_SELECTOR} .reader-title h1`)?.textContent?.trim();
   if(!title)return;
@@ -71,6 +77,7 @@ function navigateArticle(step){
     currentArticleId=ids[nextIndex];
     window.scrollTo(0,0);
     resetVisual(false);
+    syncRootOverscroll();
     gestureLocked=false;
   },120);
 }
@@ -89,6 +96,7 @@ function closeArticle(){
   setTimeout(()=>{
     back.click();
     resetVisual(false);
+    setTimeout(syncRootOverscroll,0);
     gestureLocked=false;
   },120);
 }
@@ -99,11 +107,13 @@ function interactiveTarget(target){
 
 function begin(touch,target){
   if(!active()||gestureLocked||interactiveTarget(target))return;
+  const scrollY=window.scrollY||document.documentElement.scrollTop||0;
   start={
     x:touch.clientX,
     y:touch.clientY,
     time:performance.now(),
-    scrollY:window.scrollY||document.documentElement.scrollTop||0
+    scrollY,
+    atTop:scrollY<=8
   };
   mode=null;
   resetVisual(false);
@@ -114,11 +124,18 @@ function move(touch,e){
   const dx=touch.clientX-start.x;
   const dy=touch.clientY-start.y;
   const ax=Math.abs(dx),ay=Math.abs(dy);
-  const atTop=start.scrollY<=8;
+  const atTop=start.atTop;
 
-  if(!mode&&Math.max(ax,ay)>12){
-    if(ax>ay*1.12)mode='horizontal';
-    else if(atTop&&dy>0&&ay>ax*1.12)mode='down';
+  // Kill Android/Chrome pull-to-refresh immediately when a downward gesture
+  // starts at the top of an open article. Do this before the full gesture
+  // direction is locked so the browser never gets ownership of the pull.
+  if(atTop&&dy>2&&ay>=ax*.72){
+    e.preventDefault();
+  }
+
+  if(!mode&&Math.max(ax,ay)>8){
+    if(ax>ay*1.08)mode='horizontal';
+    else if(atTop&&dy>0&&ay>ax*.92)mode='down';
     else mode='scroll';
   }
 
@@ -165,8 +182,8 @@ function end(touch){
 
 function install(){
   const s=screen();
-  if(!s||s.dataset.gesturesV2)return;
-  s.dataset.gesturesV2='1';
+  if(!s||s.dataset.gesturesV3)return;
+  s.dataset.gesturesV3='1';
 
   s.addEventListener('touchstart',e=>{
     if(e.touches.length!==1){start=null;mode=null;return;}
@@ -176,7 +193,7 @@ function install(){
   s.addEventListener('touchmove',e=>{
     if(e.touches.length!==1)return;
     move(e.touches[0],e);
-  },{passive:false});
+  },{passive:false,capture:true});
 
   s.addEventListener('touchend',e=>{
     if(e.changedTouches.length!==1){start=null;mode=null;resetVisual(true);return;}
@@ -188,19 +205,27 @@ function install(){
   document.addEventListener('click',e=>{
     const card=e.target.closest?.('[data-open-article]');
     if(card)currentArticleId=card.dataset.openArticle||currentArticleId;
+    setTimeout(syncRootOverscroll,0);
   },true);
 
   const r=reader();
-  if(r)new MutationObserver(syncCurrentArticle).observe(r,{childList:true,subtree:true});
+  if(r)new MutationObserver(()=>{syncCurrentArticle();syncRootOverscroll()}).observe(r,{childList:true,subtree:true});
+
+  const sObserver=new MutationObserver(syncRootOverscroll);
+  sObserver.observe(s,{attributes:true,attributeFilter:['class']});
+
   syncCurrentArticle();
+  syncRootOverscroll();
 }
 
 function installStyles(){
-  if($('#articleGestureStylesV2'))return;
+  if($('#articleGestureStylesV3'))return;
   const style=document.createElement('style');
-  style.id='articleGestureStylesV2';
+  style.id='articleGestureStylesV3';
   style.textContent=`
-    .screen-article{overscroll-behavior-y:none;touch-action:pan-y;}
+    html.article-reader-open,
+    body.article-reader-open{overscroll-behavior-y:none!important;}
+    .screen-article{overscroll-behavior:none;touch-action:pan-y;}
     .screen-article .reader-top{position:relative;}
     .screen-article .reader-top::after{content:"";position:absolute;left:50%;top:calc(env(safe-area-inset-top) + 5px);width:38px;height:4px;border-radius:999px;background:#aaa596;opacity:.78;transform:translateX(-50%);pointer-events:none;}
     .screen-article #articleReader{will-change:transform,opacity;}
