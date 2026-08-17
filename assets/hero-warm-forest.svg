@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+<title id="title">Тёплый лесной пейзаж Виштынецкой возвышенности</title>
+<desc id="desc">Стилизованный рассвет над озером, холмами и хвойным лесом в тёплой природной палитре.</desc>
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#efe5c9"/>
+    <stop offset="0.42" stop-color="#d9d7bd"/>
+    <stop offset="1" stop-color="#9aa996"/>
+  </linearGradient>
+  <radialGradient id="sun" cx="70%" cy="24%" r="32%">
+    <stop offset="0" stop-color="#fff7d6" stop-opacity=".95"/>
+    <stop offset=".28" stop-color="#f4dca8" stop-opacity=".48"/>
+    <stop offset="1" stop-color="#f4dca8" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#b8c5b7"/>
+    <stop offset="1" stop-color="#758f83"/>
+  </linearGradient>
+  <linearGradient id="mist" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#f7f1df" stop-opacity="0"/>
+    <stop offset=".5" stop-color="#f7f1df" stop-opacity=".64"/>
+    <stop offset="1" stop-color="#f7f1df" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="blur"><feGaussianBlur stdDeviation="12"/></filter>
+</defs>
+<rect width="1200" height="900" fill="url(#sky)"/>
+<rect width="1200" height="900" fill="url(#sun)"/>
+<path d="M0 390 C150 310 285 305 405 355 C520 403 585 372 690 322 C840 251 1024 292 1200 365 L1200 570 L0 570Z" fill="#889985" opacity=".72"/>
+<path d="M0 438 C180 365 310 392 442 432 C557 466 689 421 799 385 C940 338 1065 361 1200 422 L1200 590 L0 590Z" fill="#6f846f" opacity=".83"/>
+<path d="M0 510 C240 460 345 500 493 521 C668 545 790 487 964 475 C1056 469 1122 486 1200 505 L1200 670 L0 670Z" fill="#526c59"/>
+<path d="M0 550 C210 525 315 557 480 575 C654 594 777 557 924 540 C1020 529 1100 538 1200 554 L1200 900 L0 900Z" fill="url(#lake)"/>
+<ellipse cx="610" cy="625" rx="525" ry="44" fill="url(#mist)" filter="url(#blur)"/>
+<path d="M0 755 C215 707 385 727 525 755 C675 785 815 782 950 750 C1045 727 1125 724 1200 736 L1200 900 L0 900Z" fill="#415c49"/>
+<g fill="#334f3d" opacity=".96">
+  <path d="M95 695 l32-89 32 89h-17l22 49h-74l22-49z"/><path d="M170 715 l27-76 27 76h-14l18 41h-62l18-41z"/>
+  <path d="M250 694 l35-102 35 102h-19l25 57h-82l25-57z"/><path d="M940 703 l31-91 31 91h-17l22 51h-73l22-51z"/>
+  <path d="M1030 688 l37-112 37 112h-19l25 58h-86l25-58z"/><path d="M1122 716 l28-81 28 81h-15l18 42h-64l19-42z"/>
+</g>
+<g fill="#59725d" opacity=".62">
+  <path d="M350 635 l22-63 22 63h-12l15 34h-50l15-34z"/><path d="M405 648 l19-55 19 55h-10l13 30h-44l13-30z"/>
+  <path d="M835 639 l23-68 23 68h-12l15 35h-53l15-35z"/><path d="M790 648 l18-52 18 52h-9l12 28h-42l12-28z"/>
+</g>
+<path d="M470 605 C535 590 618 590 685 607" stroke="#f5ecd2" stroke-opacity=".42" stroke-width="8" stroke-linecap="round" fill="none"/>
+<path d="M0 840 C175 809 356 810 520 838 C676 864 860 870 1200 822" stroke="#d6dfd1" stroke-opacity=".2" stroke-width="3" fill="none"/>
+</svg>
