@@ -12,9 +12,11 @@
 .screen-explore .category-grid button .v3-svg-icon{width:20px;height:20px}
 .screen-explore .category-grid button .v3-category-label{font-size:13px;white-space:nowrap}
 .screen-explore .category-grid button.is-active{background:#dfe7d8;border-color:#aebba7;color:#2f4a39;box-shadow:0 5px 14px rgba(52,77,59,.07)}
+.screen-explore.is-routes-mode .category-grid{display:none}
 
 /* Места / Маршруты */
 .explore-mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:17px 0 14px;padding:4px;border:1px solid #d8cfbf;border-radius:16px;background:#eee6d9}
+.screen-explore.is-routes-mode .explore-mode-switch{margin-top:14px}
 .explore-mode-switch button{min-height:42px;border:0;border-radius:12px;background:transparent;color:#70766d;font-size:13.5px;font-weight:850}
 .explore-mode-switch button.is-active{background:#fbf7ee;color:#304b39;box-shadow:0 3px 10px rgba(45,58,47,.08)}
 .explore-mode-switch button .v3-svg-icon{width:18px;height:18px;margin-right:7px;display:inline-block;vertical-align:-4px}
@@ -72,6 +74,11 @@
 .info-sheet.is-place-detail #sheetContent>div:last-child{display:grid!important;grid-template-columns:1fr 1fr;gap:9px!important;margin-top:20px!important}
 .info-sheet.is-place-detail #sheetContent>div:last-child>*{min-height:46px;border-radius:14px!important;justify-content:center;text-align:center;font-size:13px}
 html.place-detail-open,html.place-detail-open body{overscroll-behavior-y:none}
+
+/* Информационная карточка будущего маршрута */
+.info-sheet.is-route-detail .sheet-panel{border-radius:26px 26px 0 0;background:#f8f2e8}
+.info-sheet.is-route-detail #sheetContent>h2{font:600 26px/1.08 Georgia,"Times New Roman",serif;color:#304338}
+.info-sheet.is-route-detail #sheetContent>p{font-size:14px;line-height:1.55;color:#59645b}
 
 @media(max-width:380px){
   .screen-explore .place-row{grid-template-columns:112px minmax(0,1fr)}
