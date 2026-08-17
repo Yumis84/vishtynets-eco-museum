@@ -2,6 +2,13 @@
 // Loaded after museum-data.js and before app.js.
 (function(){
   'use strict';
+  if(!document.querySelector('link[data-v3-icons]')){
+    const iconStyles=document.createElement('link');
+    iconStyles.rel='stylesheet';
+    iconStyles.href='icons-v3.css?v=1';
+    iconStyles.dataset.v3Icons='1';
+    document.head.appendChild(iconStyles);
+  }
   const points=window.MUSEUM_POINTS=window.MUSEUM_POINTS||[];
   const articles=window.MUSEUM_ARTICLES=window.MUSEUM_ARTICLES||[];
 
