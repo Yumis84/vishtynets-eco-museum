@@ -1,5 +1,10 @@
 (()=>{
 'use strict';
+const iconLinks=[...document.querySelectorAll('link[href*="icons-v3.css"]')];
+if(iconLinks.length){
+  iconLinks[0].href='icons-v3.css?v=3';
+  iconLinks.slice(1).forEach(link=>link.remove());
+}
 const I=()=>window.MuseumIcons;
 const catIcon=label=>({'Все':'filter','Природа':'leaf','История':'history','Камни':'stone','Мосты':'map','Культура':'culture','Музей':'museum'}[label]||'pin');
 function all(root,sel){const a=[];if(root?.matches?.(sel))a.push(root);root?.querySelectorAll?.(sel).forEach(x=>a.push(x));return a}
