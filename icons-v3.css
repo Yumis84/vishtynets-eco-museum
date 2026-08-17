@@ -16,6 +16,9 @@
 .entry-articles .entry-icon{background:#eadcc4;color:#866a43}
 .entry-card>b{font-size:22px;color:#6d7c69;display:grid;place-items:center}
 .entry-card>b .v3-svg-icon{width:19px;height:19px}
+.entry-copy{min-width:0;overflow:hidden}
+.entry-copy strong,.entry-copy small{max-width:100%}
+.entry-copy strong{white-space:normal;overflow-wrap:normal;word-break:normal}
 
 /* Блок посетителя */
 .visit-line{grid-template-columns:42px 1fr;align-items:center;min-height:54px}
@@ -84,7 +87,8 @@
 
 /* Нижняя навигация: крупные иконки, но без тяжёлых blur */
 .bottom-nav{height:68px;border-radius:22px;padding:4px 3px;background:#faf5eb;border-color:#d3cab9;box-shadow:0 8px 22px rgba(46,59,49,.13)}
-.bottom-nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:9px;line-height:1;color:#7a8078;padding:2px 1px}
+.bottom-nav button{min-width:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:9px;line-height:1;color:#7a8078;padding:2px 1px;white-space:nowrap}
+.bottom-nav button[data-nav="explore"]{font-size:8px;letter-spacing:-.12px}
 .bottom-nav button span{width:36px;height:36px;margin:0;display:grid;place-items:center;border-radius:50%;font-size:24px;line-height:1;color:#66736a;transition:background-color .14s ease,color .14s ease,transform .14s ease}
 .bottom-nav button span .v3-svg-icon{width:23px;height:23px}
 .bottom-nav button.is-active{color:#36513f}
@@ -96,10 +100,17 @@
 .bottom-nav button[data-nav="articles"].is-active span{background:#eadcc4;color:#80653f}
 .bottom-nav button[data-nav="ai"].is-active span{background:#dfe6d6;color:#526a50}
 
+@media(max-width:420px){
+  .entry-explore .entry-copy strong{font-size:15px}
+}
 @media(max-width:360px){
-  .entry-card{grid-template-columns:50px 1fr 18px}
-  .entry-icon{width:46px;height:46px;font-size:24px}
-  .entry-icon .v3-svg-icon{width:24px;height:24px}
+  .entry-card{grid-template-columns:46px 1fr 16px;gap:8px;padding:12px}
+  .entry-icon{width:44px;height:44px;font-size:24px}
+  .entry-icon .v3-svg-icon{width:23px;height:23px}
+  .entry-explore .entry-copy strong{font-size:14px}
+  .entry-copy small{font-size:8px}
+  .bottom-nav button{font-size:8px}
+  .bottom-nav button[data-nav="explore"]{font-size:7.5px;letter-spacing:-.18px}
   .bottom-nav button span{width:34px;height:34px;font-size:22px}
   .bottom-nav button span .v3-svg-icon{width:21px;height:21px}
 }
