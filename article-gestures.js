@@ -4,25 +4,22 @@
 const ARTICLE_SELECTOR='.screen-article';
 const READER_SELECTOR='#articleReader';
 const LIST_SELECTOR='#articleList [data-open-article]';
-const SWIPE_X=72;
-const SWIPE_DOWN=96;
-const MAX_TIME=900;
+const SWIPE_X=54;
+const SWIPE_DOWN=72;
+const MAX_TIME=1500;
 
 let currentArticleId=null;
 let start=null;
+let mode=null;
 let gestureLocked=false;
 
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 
-function activeArticleScreen(){
-  const screen=$(ARTICLE_SELECTOR);
-  return !!screen?.classList.contains('is-active');
-}
-
-function currentFilteredIds(){
-  return $$(LIST_SELECTOR).map(el=>el.dataset.openArticle).filter(Boolean);
-}
+function screen(){return $(ARTICLE_SELECTOR)}
+function reader(){return $(READER_SELECTOR)}
+function active(){return !!screen()?.classList.contains('is-active')}
+function currentFilteredIds(){return $$(LIST_SELECTOR).map(el=>el.dataset.openArticle).filter(Boolean)}
 
 function syncCurrentArticle(){
   const title=$(`${READER_SELECTOR} .reader-title h1`)?.textContent?.trim();
@@ -31,37 +28,51 @@ function syncCurrentArticle(){
   if(article)currentArticleId=article.id;
 }
 
+function resetVisual(animate=true){
+  const r=reader();
+  if(!r)return;
+  r.style.transition=animate?'transform .16s ease, opacity .16s ease':'none';
+  r.style.transform='';
+  r.style.opacity='';
+  if(animate)setTimeout(()=>{if(r)r.style.transition=''},190);
+}
+
 function flash(direction){
-  const screen=$(ARTICLE_SELECTOR);
-  if(!screen)return;
-  screen.classList.remove('gesture-prev','gesture-next','gesture-close');
-  void screen.offsetWidth;
-  screen.classList.add(direction);
-  window.setTimeout(()=>screen.classList.remove(direction),180);
+  const s=screen();
+  if(!s)return;
+  s.classList.remove('gesture-prev','gesture-next','gesture-close');
+  void s.offsetWidth;
+  s.classList.add(direction);
+  setTimeout(()=>s.classList.remove(direction),180);
 }
 
 function navigateArticle(step){
   if(gestureLocked)return;
   syncCurrentArticle();
   const ids=currentFilteredIds();
-  if(!ids.length||!currentArticleId)return;
   const index=ids.indexOf(currentArticleId);
-  if(index<0)return;
+  if(index<0)return resetVisual(true);
   const nextIndex=index+step;
   if(nextIndex<0||nextIndex>=ids.length){
     flash(step>0?'gesture-next':'gesture-prev');
-    return;
+    return resetVisual(true);
   }
   const target=$(`${LIST_SELECTOR}[data-open-article="${CSS.escape(ids[nextIndex])}"]`);
-  if(!target)return;
+  if(!target)return resetVisual(true);
   gestureLocked=true;
-  flash(step>0?'gesture-next':'gesture-prev');
-  window.setTimeout(()=>{
+  const r=reader();
+  if(r){
+    r.style.transition='transform .14s ease, opacity .14s ease';
+    r.style.transform=`translateX(${step>0?'-42px':'42px'})`;
+    r.style.opacity='.55';
+  }
+  setTimeout(()=>{
     target.click();
     currentArticleId=ids[nextIndex];
-    window.scrollTo({top:0,left:0,behavior:'instant'});
+    window.scrollTo(0,0);
+    resetVisual(false);
     gestureLocked=false;
-  },110);
+  },120);
 }
 
 function closeArticle(){
@@ -69,130 +80,138 @@ function closeArticle(){
   const back=$('#articleBack');
   if(!back)return;
   gestureLocked=true;
-  flash('gesture-close');
-  window.setTimeout(()=>{
+  const r=reader();
+  if(r){
+    r.style.transition='transform .14s ease, opacity .14s ease';
+    r.style.transform='translateY(70px)';
+    r.style.opacity='.38';
+  }
+  setTimeout(()=>{
     back.click();
+    resetVisual(false);
     gestureLocked=false;
-  },90);
+  },120);
 }
 
 function interactiveTarget(target){
   return !!target?.closest?.('button,a,input,textarea,select,label,[role="button"]');
 }
 
-function beginGesture(touch,target){
-  if(!activeArticleScreen()||interactiveTarget(target))return;
+function begin(touch,target){
+  if(!active()||gestureLocked||interactiveTarget(target))return;
   start={
     x:touch.clientX,
     y:touch.clientY,
     time:performance.now(),
     scrollY:window.scrollY||document.documentElement.scrollTop||0
   };
+  mode=null;
+  resetVisual(false);
 }
 
-function endGesture(touch){
-  if(!start||!activeArticleScreen()){
-    start=null;
-    return;
+function move(touch,e){
+  if(!start||!active())return;
+  const dx=touch.clientX-start.x;
+  const dy=touch.clientY-start.y;
+  const ax=Math.abs(dx),ay=Math.abs(dy);
+  const atTop=start.scrollY<=8;
+
+  if(!mode&&Math.max(ax,ay)>12){
+    if(ax>ay*1.12)mode='horizontal';
+    else if(atTop&&dy>0&&ay>ax*1.12)mode='down';
+    else mode='scroll';
+  }
+
+  const r=reader();
+  if(mode==='horizontal'){
+    e.preventDefault();
+    if(r){
+      r.style.transition='none';
+      r.style.transform=`translateX(${Math.max(-110,Math.min(110,dx*.72))}px)`;
+      r.style.opacity=String(Math.max(.58,1-ax/360));
+    }
+  }else if(mode==='down'){
+    e.preventDefault();
+    if(r){
+      const pull=Math.max(0,Math.min(130,dy*.62));
+      r.style.transition='none';
+      r.style.transform=`translateY(${pull}px)`;
+      r.style.opacity=String(Math.max(.62,1-dy/420));
+    }
+  }
+}
+
+function end(touch){
+  if(!start||!active()){
+    start=null;mode=null;resetVisual(true);return;
   }
   const dx=touch.clientX-start.x;
   const dy=touch.clientY-start.y;
-  const ax=Math.abs(dx);
-  const ay=Math.abs(dy);
   const elapsed=performance.now()-start.time;
-  const startedAtTop=start.scrollY<=10;
-  start=null;
+  const chosen=mode;
+  start=null;mode=null;
 
-  if(elapsed>MAX_TIME)return;
-
-  // Horizontal article paging. Left = next, right = previous.
-  if(ax>=SWIPE_X && ax>ay*1.25){
+  if(elapsed>MAX_TIME){resetVisual(true);return;}
+  if(chosen==='horizontal'&&Math.abs(dx)>=SWIPE_X){
     navigateArticle(dx<0?1:-1);
     return;
   }
-
-  // Pull/swipe down closes only when the gesture started at the top of the article.
-  if(startedAtTop && dy>=SWIPE_DOWN && ay>ax*1.35){
+  if(chosen==='down'&&dy>=SWIPE_DOWN){
     closeArticle();
+    return;
   }
+  resetVisual(true);
 }
 
-function installTouchGestures(){
-  const screen=$(ARTICLE_SELECTOR);
-  if(!screen||screen.dataset.gesturesReady)return;
-  screen.dataset.gesturesReady='1';
+function install(){
+  const s=screen();
+  if(!s||s.dataset.gesturesV2)return;
+  s.dataset.gesturesV2='1';
 
-  screen.addEventListener('touchstart',e=>{
-    if(e.touches.length!==1){start=null;return;}
-    beginGesture(e.touches[0],e.target);
+  s.addEventListener('touchstart',e=>{
+    if(e.touches.length!==1){start=null;mode=null;return;}
+    begin(e.touches[0],e.target);
   },{passive:true});
 
-  screen.addEventListener('touchend',e=>{
-    if(e.changedTouches.length!==1){start=null;return;}
-    endGesture(e.changedTouches[0]);
+  s.addEventListener('touchmove',e=>{
+    if(e.touches.length!==1)return;
+    move(e.touches[0],e);
+  },{passive:false});
+
+  s.addEventListener('touchend',e=>{
+    if(e.changedTouches.length!==1){start=null;mode=null;resetVisual(true);return;}
+    end(e.changedTouches[0]);
   },{passive:true});
 
-  screen.addEventListener('touchcancel',()=>{start=null},{passive:true});
-}
+  s.addEventListener('touchcancel',()=>{start=null;mode=null;resetVisual(true)},{passive:true});
 
-function installMousePointerFallback(){
-  const screen=$(ARTICLE_SELECTOR);
-  if(!screen||!window.PointerEvent)return;
-  let pointerId=null;
-  screen.addEventListener('pointerdown',e=>{
-    if(e.pointerType==='touch'||e.button!==0||interactiveTarget(e.target))return;
-    pointerId=e.pointerId;
-    beginGesture(e,e.target);
-  });
-  screen.addEventListener('pointerup',e=>{
-    if(pointerId!==e.pointerId)return;
-    pointerId=null;
-    endGesture(e);
-  });
-  screen.addEventListener('pointercancel',()=>{pointerId=null;start=null});
+  document.addEventListener('click',e=>{
+    const card=e.target.closest?.('[data-open-article]');
+    if(card)currentArticleId=card.dataset.openArticle||currentArticleId;
+  },true);
+
+  const r=reader();
+  if(r)new MutationObserver(syncCurrentArticle).observe(r,{childList:true,subtree:true});
+  syncCurrentArticle();
 }
 
 function installStyles(){
-  if($('#articleGestureStyles'))return;
+  if($('#articleGestureStylesV2'))return;
   const style=document.createElement('style');
-  style.id='articleGestureStyles';
+  style.id='articleGestureStylesV2';
   style.textContent=`
-    .screen-article{overscroll-behavior-y:contain;touch-action:pan-y;}
+    .screen-article{overscroll-behavior-y:none;touch-action:pan-y;}
     .screen-article .reader-top{position:relative;}
-    .screen-article .reader-top::after{
-      content:"";position:absolute;left:50%;top:calc(env(safe-area-inset-top) + 5px);
-      width:34px;height:4px;border-radius:999px;background:#c7c0b3;opacity:.72;
-      transform:translateX(-50%);pointer-events:none;
-    }
-    .screen-article #articleReader{transition:transform .16s ease,opacity .16s ease;will-change:transform,opacity;}
-    .screen-article.gesture-next #articleReader{transform:translateX(-22px);opacity:.78;}
-    .screen-article.gesture-prev #articleReader{transform:translateX(22px);opacity:.78;}
-    .screen-article.gesture-close #articleReader{transform:translateY(26px);opacity:.72;}
+    .screen-article .reader-top::after{content:"";position:absolute;left:50%;top:calc(env(safe-area-inset-top) + 5px);width:38px;height:4px;border-radius:999px;background:#aaa596;opacity:.78;transform:translateX(-50%);pointer-events:none;}
+    .screen-article #articleReader{will-change:transform,opacity;}
+    .screen-article.gesture-next #articleReader{transform:translateX(-20px);}
+    .screen-article.gesture-prev #articleReader{transform:translateX(20px);}
     @media (prefers-reduced-motion:reduce){.screen-article #articleReader{transition:none!important;}}
   `;
   document.head.appendChild(style);
 }
 
-function observeReader(){
-  const reader=$(READER_SELECTOR);
-  if(!reader)return;
-  new MutationObserver(syncCurrentArticle).observe(reader,{childList:true,subtree:true});
-  syncCurrentArticle();
-
-  // Capture the selected list item before app.js opens it.
-  document.addEventListener('click',e=>{
-    const card=e.target.closest?.('[data-open-article]');
-    if(card)currentArticleId=card.dataset.openArticle||currentArticleId;
-  },true);
-}
-
-function init(){
-  installStyles();
-  installTouchGestures();
-  installMousePointerFallback();
-  observeReader();
-}
-
+function init(){installStyles();install()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
 else init();
 })();
