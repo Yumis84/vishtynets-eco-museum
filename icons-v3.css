@@ -1,24 +1,30 @@
-/* Variant 3 — «Тёплый лес»: крупная единая система иконок */
+/* Variant 3 — «Тёплый лес»: крупная единая система SVG-иконок */
 :root{--nav-h:76px}
+.v3-svg-icon{width:1em;height:1em;display:block;flex:0 0 auto;overflow:visible}
 
 /* Общая кнопка меню */
 .round-menu{width:48px;height:48px;font-size:22px;border-radius:50%;background:#f7f1e5;border-color:#cec5b3;box-shadow:0 5px 14px rgba(46,61,49,.08)}
+.round-menu .v3-svg-icon{width:24px;height:24px}
 
 /* Главные действия на hero */
 .entry-card{grid-template-columns:54px 1fr 20px;gap:11px;padding:14px}
 .entry-icon{width:50px;height:50px;font-size:27px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(72,91,72,.07)}
+.entry-icon .v3-svg-icon{width:27px;height:27px}
 .entry-explore .entry-icon{background:#dfe7d6;color:#48634e}
 .entry-map .entry-icon{background:#dce8e7;color:#52757a}
 .entry-articles .entry-icon{background:#eadcc4;color:#866a43}
-.entry-card>b{font-size:22px;color:#6d7c69}
+.entry-card>b{font-size:22px;color:#6d7c69;display:grid;place-items:center}
+.entry-card>b .v3-svg-icon{width:19px;height:19px}
 
 /* Блок посетителя */
 .visit-line{grid-template-columns:42px 1fr;align-items:center;min-height:54px}
 .visit-line>span{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:22px;background:#e5eadc;color:#58705a}
+.visit-line>span .v3-svg-icon{width:21px;height:21px}
 .visit-line:nth-child(2)>span{background:#dfe9e6;color:#527378}
 
 /* Темы музея */
 .topic-preview-grid button>span{width:48px;height:48px;font-size:23px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(62,79,63,.055)}
+.topic-preview-grid button>span .v3-svg-icon{width:25px;height:25px}
 .topic-nature>span{background:#dce8d7!important;color:#4f6c52!important}
 .topic-history>span{background:#eadcc7!important;color:#826a48!important}
 .topic-stone>span{background:#e1ddd3!important;color:#6f685c!important}
@@ -26,26 +32,53 @@
 
 /* Архив */
 .archive-ornament{width:58px;height:58px;font-size:30px;background:#dfe6d7;color:#566f57}
+.archive-ornament .v3-svg-icon{width:29px;height:29px}
 .home-story-intro{grid-template-columns:64px 1fr}
 
 /* Поиск и служебные элементы */
 .search-box span{font-size:23px;min-width:25px;text-align:center}
+.search-box span .v3-svg-icon{width:21px;height:21px;margin:auto}
 .locate-button{width:50px;height:50px;font-size:25px;background:#faf6ed;border-color:#cec6b6}
+.locate-button .v3-svg-icon{width:25px;height:25px;margin:auto}
+.map-tools button,.list-heading button{display:inline-flex;align-items:center;gap:6px}
+.map-tools button .v3-svg-icon{width:16px;height:16px}
+.list-heading button .v3-svg-icon{width:16px;height:16px}
+.reader-top #articleBack{display:inline-flex;align-items:center;gap:7px}
+.reader-top #articleBack .v3-svg-icon{width:18px;height:18px}
+.reader-top #articleFavorite .v3-svg-icon{width:20px;height:20px;margin:auto}
+.menu-close .v3-svg-icon,.sheet-close .v3-svg-icon{width:21px;height:21px;margin:auto}
+
+/* Категории Исследовать */
+.category-grid button{display:flex;align-items:center;justify-content:center;gap:6px}
+.category-grid button .v3-svg-icon{width:17px;height:17px;flex:0 0 auto}
+.category-grid button .v3-category-label{font-size:10px;font-weight:800}
+
+/* Карта и маркеры */
+.poi-pin span,.guest-pin span{display:grid;place-items:center}
+.poi-pin .v3-svg-icon,.guest-pin .v3-svg-icon{width:16px;height:16px}
 
 /* AI */
 .ai-orb{width:76px!important;height:76px!important;font-size:32px!important;background:linear-gradient(145deg,#45624d,#304b39)!important;box-shadow:0 10px 22px rgba(49,77,58,.18)}
+.ai-orb .v3-svg-icon{width:34px;height:34px}
+.ai-input button{display:grid;place-items:center}
+.ai-input button .v3-svg-icon{width:20px;height:20px}
 
 /* Полноэкранное меню */
 .full-menu-nav button,.full-menu-nav a{grid-template-columns:50px 1fr 20px;min-height:68px}
 .full-menu-nav button>span,.full-menu-nav a>span{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#e7eadf;color:#5e735e;font-size:21px}
+.full-menu-nav button>span .v3-svg-icon,.full-menu-nav a>span .v3-svg-icon{width:21px;height:21px}
 .full-menu-nav button:nth-child(2)>span{background:#e8dfcf;color:#806c4e}
 .full-menu-nav button:nth-child(3)>span{background:#dfe8e5;color:#527277}
 .full-menu-nav button:nth-child(5)>span{background:#dde6d8;color:#567059}
+.full-menu-nav b{display:grid;place-items:center}
+.full-menu-nav b .v3-svg-icon{width:18px;height:18px}
+.menu-footer>span .v3-svg-icon{width:27px;height:27px;margin:auto}
 
 /* Нижняя навигация: крупные иконки, но без тяжёлых blur */
 .bottom-nav{height:68px;border-radius:22px;padding:4px 3px;background:#faf5eb;border-color:#d3cab9;box-shadow:0 8px 22px rgba(46,59,49,.13)}
 .bottom-nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:9px;line-height:1;color:#7a8078;padding:2px 1px}
 .bottom-nav button span{width:36px;height:36px;margin:0;display:grid;place-items:center;border-radius:50%;font-size:24px;line-height:1;color:#66736a;transition:background-color .14s ease,color .14s ease,transform .14s ease}
+.bottom-nav button span .v3-svg-icon{width:23px;height:23px}
 .bottom-nav button.is-active{color:#36513f}
 .bottom-nav button.is-active span{background:#dfe7d6;color:#36513f;transform:translateY(-1px)}
 .bottom-nav button[data-nav="map"] span{color:#5f7c80}
@@ -58,5 +91,7 @@
 @media(max-width:360px){
   .entry-card{grid-template-columns:50px 1fr 18px}
   .entry-icon{width:46px;height:46px;font-size:24px}
+  .entry-icon .v3-svg-icon{width:24px;height:24px}
   .bottom-nav button span{width:34px;height:34px;font-size:22px}
+  .bottom-nav button span .v3-svg-icon{width:21px;height:21px}
 }
