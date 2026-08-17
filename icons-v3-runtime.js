@@ -5,6 +5,13 @@ if(iconLinks.length){
   iconLinks[0].href='icons-v3.css?v=3';
   iconLinks.slice(1).forEach(link=>link.remove());
 }
+if(!document.querySelector('link[data-v3-typography]')){
+  const typography=document.createElement('link');
+  typography.rel='stylesheet';
+  typography.href='typography-v3.css?v=1';
+  typography.dataset.v3Typography='1';
+  document.head.appendChild(typography);
+}
 const I=()=>window.MuseumIcons;
 const catIcon=label=>({'Все':'filter','Природа':'leaf','История':'history','Камни':'stone','Мосты':'map','Культура':'culture','Музей':'museum'}[label]||'pin');
 function all(root,sel){const a=[];if(root?.matches?.(sel))a.push(root);root?.querySelectorAll?.(sel).forEach(x=>a.push(x));return a}
