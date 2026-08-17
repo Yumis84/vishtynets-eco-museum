@@ -1,6 +1,7 @@
 /* Variant 3 — «Тёплый лес»: крупная единая система SVG-иконок */
 :root{--nav-h:76px}
 .v3-svg-icon{width:1em;height:1em;display:block;flex:0 0 auto;overflow:visible}
+.v3-label{display:inline-block}
 
 /* Общая кнопка меню */
 .round-menu{width:48px;height:48px;font-size:22px;border-radius:50%;background:#f7f1e5;border-color:#cec5b3;box-shadow:0 5px 14px rgba(46,61,49,.08)}
@@ -43,10 +44,17 @@
 .map-tools button,.list-heading button{display:inline-flex;align-items:center;gap:6px}
 .map-tools button .v3-svg-icon{width:16px;height:16px}
 .list-heading button .v3-svg-icon{width:16px;height:16px}
+.inline-link{display:inline-flex;align-items:center;gap:5px}
+.inline-link .v3-svg-icon{width:15px;height:15px}
+.place-distance{display:flex;align-items:center;gap:5px}
+.place-distance .v3-svg-icon{width:13px;height:13px}
 .reader-top #articleBack{display:inline-flex;align-items:center;gap:7px}
 .reader-top #articleBack .v3-svg-icon{width:18px;height:18px}
 .reader-top #articleFavorite .v3-svg-icon{width:20px;height:20px;margin:auto}
+.reader-meta>span{display:inline-flex;align-items:center;gap:5px}
+.reader-meta .v3-svg-icon{width:13px;height:13px}
 .menu-close .v3-svg-icon,.sheet-close .v3-svg-icon{width:21px;height:21px;margin:auto}
+.menu-footer a[href^="mailto:"] .v3-svg-icon{width:16px;height:16px;margin:auto}
 
 /* Категории Исследовать */
 .category-grid button{display:flex;align-items:center;justify-content:center;gap:6px}
