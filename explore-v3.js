@@ -70,11 +70,8 @@ function openRoute(route){
 function updateHeading(forcedCount){
   const h2=heading.querySelector('h2');
   if(!h2)return;
-  h2.textContent=mode==='routes'?'Маршруты':'Места';
-  let count=heading.querySelector('.explore-count');
-  if(!count){count=document.createElement('small');count.className='explore-count';h2.after(count)}
   const n=Number.isFinite(forcedCount)?forcedCount:$$('.place-row',list).length;
-  count.textContent=mode==='routes'?`${n} в подготовке`:`${n} ${n===1?'место':'мест'}`;
+  h2.innerHTML=`<span>${mode==='routes'?'Маршруты':'Места'}</span><small class="explore-count">${mode==='routes'?`${n} в подготовке`:`${n} ${n===1?'место':'мест'}`}</small>`;
 }
 
 function setMode(next){
