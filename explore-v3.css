@@ -1,0 +1,83 @@
+/* Explore v3 — «Тёплый лес»: мобильный путеводитель */
+.screen-explore{padding-left:16px;padding-right:16px}
+.screen-explore .section-header{margin-bottom:16px}
+.screen-explore .section-header h1{font-size:34px}
+.screen-explore .search-box{height:52px;border-radius:17px;padding:0 14px;background:#fbf7ee;box-shadow:0 6px 18px rgba(45,58,47,.05)}
+.screen-explore .search-box input{font-size:15px}
+
+/* Крупные тематические фильтры */
+.screen-explore .category-grid{display:flex;gap:9px;overflow-x:auto;margin:14px -16px 0;padding:0 16px 4px;scrollbar-width:none;scroll-snap-type:x proximity}
+.screen-explore .category-grid::-webkit-scrollbar{display:none}
+.screen-explore .category-grid button{flex:0 0 auto;min-width:104px;min-height:52px;border-radius:17px;padding:0 14px;display:flex;align-items:center;justify-content:flex-start;gap:8px;background:#f1e9dd;border:1px solid #d7cebd;color:#4d6152;font-size:13px;font-weight:850;scroll-snap-align:start;box-shadow:0 3px 10px rgba(47,60,49,.025)}
+.screen-explore .category-grid button .v3-svg-icon{width:20px;height:20px}
+.screen-explore .category-grid button .v3-category-label{font-size:13px;white-space:nowrap}
+.screen-explore .category-grid button.is-active{background:#dfe7d8;border-color:#aebba7;color:#2f4a39;box-shadow:0 5px 14px rgba(52,77,59,.07)}
+
+/* Места / Маршруты */
+.explore-mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:17px 0 14px;padding:4px;border:1px solid #d8cfbf;border-radius:16px;background:#eee6d9}
+.explore-mode-switch button{min-height:42px;border:0;border-radius:12px;background:transparent;color:#70766d;font-size:13.5px;font-weight:850}
+.explore-mode-switch button.is-active{background:#fbf7ee;color:#304b39;box-shadow:0 3px 10px rgba(45,58,47,.08)}
+.explore-mode-switch button .v3-svg-icon{width:18px;height:18px;margin-right:7px;display:inline-block;vertical-align:-4px}
+
+.screen-explore .list-heading{margin:10px 0 11px;align-items:center}
+.screen-explore .list-heading h2{font-size:23px}
+.explore-count{display:block;margin-top:2px;color:#7b8178;font-size:11.5px;font-weight:650}
+.screen-explore .list-heading button{min-height:38px;padding:0 9px;border:1px solid transparent;border-radius:12px;font-size:12.5px}
+.screen-explore .list-heading button.is-active{background:#e8e2d6;border-color:#d4cbbb;color:#36513f}
+
+/* Карточки мест */
+.screen-explore .place-list{display:grid;gap:12px}
+.screen-explore .place-row{grid-template-columns:126px minmax(0,1fr);min-height:154px;border-radius:22px;border:1px solid #d7cfbf;background:#fbf7ee;box-shadow:0 7px 18px rgba(45,58,47,.055);overflow:hidden}
+.screen-explore .place-row-media{min-height:154px;background:#dce4d9}
+.screen-explore .place-row-media img{width:100%;height:100%;object-fit:cover}
+.screen-explore .place-row-copy{padding:14px 42px 13px 14px;display:flex;flex-direction:column;min-width:0}
+.screen-explore .place-row-copy .place-type{font-size:10.5px;line-height:1.2;color:#70806d;letter-spacing:.075em}
+.screen-explore .place-row-copy h3{font-size:19px;line-height:1.08;margin:5px 0 7px;color:#2f4336}
+.screen-explore .place-row-copy p{font-size:13px;line-height:1.42;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.screen-explore .place-distance{margin-top:auto;padding-top:9px;font-size:11.5px;color:#63775f}
+.screen-explore .fav-button{top:9px;right:8px;width:34px;height:34px;border-radius:50%;background:#f7f1e7;color:#536a58;box-shadow:0 2px 8px rgba(48,61,50,.07)}
+
+/* Маршруты */
+.explore-routes{display:none;gap:12px}
+.explore-routes.is-active{display:grid}
+.explore-route-card{position:relative;overflow:hidden;border:1px solid #d3c9b8;border-radius:23px;background:linear-gradient(145deg,#f7f1e5,#e9e6d8);padding:18px;text-align:left;color:#304338;box-shadow:0 7px 18px rgba(45,58,47,.05)}
+.explore-route-card::after{content:"";position:absolute;width:130px;height:130px;border-radius:50%;right:-42px;top:-52px;background:rgba(129,150,116,.10);pointer-events:none}
+.explore-route-card[data-tone="water"]{background:linear-gradient(145deg,#f4f0e5,#dfe9e6)}
+.explore-route-card[data-tone="ochre"]{background:linear-gradient(145deg,#f8f1e6,#eadcc5)}
+.explore-route-card[data-tone="stone"]{background:linear-gradient(145deg,#f4f0e8,#e2ddd3)}
+.explore-route-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
+.explore-route-icon{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:#dfe7d8;color:#4d6a52}
+.explore-route-card[data-tone="water"] .explore-route-icon{background:#d8e6e4;color:#507278}
+.explore-route-card[data-tone="ochre"] .explore-route-icon{background:#eadbc2;color:#846a44}
+.explore-route-card[data-tone="stone"] .explore-route-icon{background:#ddd8ce;color:#6e675c}
+.explore-route-icon .v3-svg-icon{width:25px;height:25px}
+.explore-route-status{position:relative;z-index:1;padding:6px 9px;border-radius:999px;background:rgba(251,247,238,.76);border:1px solid rgba(196,186,168,.72);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:#6c756a}
+.explore-route-card h3{position:relative;z-index:1;margin:0;font:600 21px/1.08 Georgia,"Times New Roman",serif;color:#304338}
+.explore-route-card p{position:relative;z-index:1;margin:8px 0 0;font-size:13px;line-height:1.48;color:#687168}
+.explore-route-foot{position:relative;z-index:1;display:flex;align-items:center;gap:6px;margin-top:14px;color:#536b57;font-size:12px;font-weight:850}
+.explore-route-foot .v3-svg-icon{width:15px;height:15px}
+.explore-empty{padding:22px 18px;border:1px solid #d8cfbf;border-radius:20px;background:#f8f2e8;color:#6d746c;font-size:13px;line-height:1.5}
+
+/* Полноэкранная карточка места на базе существующего infoSheet */
+.info-sheet.is-place-detail{position:fixed;inset:0;z-index:95;background:#f7f1e5;display:block;overflow:hidden}
+.info-sheet.is-place-detail .sheet-panel{position:absolute;inset:0;width:100%;max-width:none;max-height:none;border:0;border-radius:0;background:#f7f1e5;padding:calc(env(safe-area-inset-top) + 58px) 17px calc(28px + env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior-y:none;box-shadow:none;transition:transform .15s ease,opacity .15s ease;will-change:transform,opacity}
+.info-sheet.is-place-detail .sheet-panel::before{content:"";position:fixed;z-index:3;left:50%;top:calc(env(safe-area-inset-top) + 8px);width:40px;height:4px;border-radius:999px;background:#aaa596;transform:translateX(-50%)}
+.info-sheet.is-place-detail .sheet-close{position:fixed;z-index:5;top:calc(env(safe-area-inset-top) + 14px);left:14px;width:40px;height:40px;border:1px solid #d6cebd;border-radius:50%;background:#fbf7ee;color:#455a49;box-shadow:0 4px 14px rgba(45,58,47,.08)}
+.info-sheet.is-place-detail #sheetContent{max-width:620px;margin:0 auto}
+.info-sheet.is-place-detail #sheetContent>.eyebrow{font-size:10.5px;margin-bottom:5px}
+.info-sheet.is-place-detail #sheetContent>h2{margin:0 0 14px;font:600 32px/1.03 Georgia,"Times New Roman",serif;color:#2f4336;letter-spacing:-.02em}
+.info-sheet.is-place-detail #sheetContent>img{height:min(43vh,360px)!important;border-radius:24px!important;margin:0 0 18px!important;box-shadow:0 8px 22px rgba(45,58,47,.08)}
+.info-sheet.is-place-detail #sheetContent>p{font:15.5px/1.62 Georgia,"Times New Roman",serif;color:#465148;margin:14px 0}
+.info-sheet.is-place-detail #sheetContent>h3{font:600 20px/1.15 Georgia,"Times New Roman",serif;color:#304338;margin:22px 0 7px}
+.info-sheet.is-place-detail #sheetContent>div:last-child{display:grid!important;grid-template-columns:1fr 1fr;gap:9px!important;margin-top:20px!important}
+.info-sheet.is-place-detail #sheetContent>div:last-child>*{min-height:46px;border-radius:14px!important;justify-content:center;text-align:center;font-size:13px}
+html.place-detail-open,html.place-detail-open body{overscroll-behavior-y:none}
+
+@media(max-width:380px){
+  .screen-explore .place-row{grid-template-columns:112px minmax(0,1fr)}
+  .screen-explore .place-row-copy{padding-left:12px}
+  .screen-explore .place-row-copy h3{font-size:18px}
+  .screen-explore .place-row-copy p{font-size:12.5px;-webkit-line-clamp:3}
+  .screen-explore .category-grid button{min-width:98px;padding:0 12px}
+  .info-sheet.is-place-detail #sheetContent>h2{font-size:29px}
+}
