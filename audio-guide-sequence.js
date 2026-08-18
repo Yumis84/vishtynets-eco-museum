@@ -16,11 +16,16 @@ const ordered=[intro,...expositions].filter(Boolean);
 const byId=new Map(ordered.map(track=>[track.id,track]));
 
 let sequenceActive=false;
+let sequencePaused=false;
 let pendingTrackId=null;
 let currentTrackId=null;
 let feature=null;
 let featureSmall=null;
+let featureIconPath=null;
 let advancePending=false;
+
+const playPath='M8 5v14l11-7z';
+const pausePath='M8 5v14M16 5v14';
 
 function nextAfter(track){
   const index=ordered.findIndex(item=>item.id===track?.id);
@@ -40,14 +45,17 @@ function isPlaying(track){
     return document.querySelector('.audio-guide-start')?.textContent?.trim()==='Пауза';
   }
   const path=cardFor(track)?.querySelector('.audio-guide-track-action svg path')?.getAttribute('d')||'';
-  return path==='M8 5v14M16 5v14';
+  return path===pausePath;
 }
 
-function setFeatureState(active,text){
+function setFeatureState(active,text,playing=false){
   if(!feature)return;
   feature.setAttribute('aria-pressed',active?'true':'false');
   feature.dataset.sequenceActive=active?'1':'0';
-  if(featureSmall)featureSmall.textContent=text||(active?'Автопереход включён':'Треки по порядку');
+  feature.dataset.sequencePaused=active&&!playing?'1':'0';
+  if(featureSmall)featureSmall.textContent=text||(playing?'Автопереход включён':'Треки по порядку');
+  if(featureIconPath)featureIconPath.setAttribute('d',playing?pausePath:playPath);
+  feature.setAttribute('aria-label',playing?'Поставить треки по порядку на паузу':active?'Продолжить треки по порядку':'Слушать треки по порядку');
   feature.style.cursor='pointer';
   feature.style.userSelect='none';
   feature.style.boxShadow=active?'0 0 0 2px rgba(77,105,81,.18)':'';
@@ -55,10 +63,11 @@ function setFeatureState(active,text){
 
 function stopSequence(message='Треки по порядку'){
   sequenceActive=false;
+  sequencePaused=false;
   pendingTrackId=null;
   currentTrackId=null;
   advancePending=false;
-  setFeatureState(false,message);
+  setFeatureState(false,message,false);
 }
 
 function startTrack(track){
@@ -67,6 +76,7 @@ function startTrack(track){
     return false;
   }
   currentTrackId=track.id;
+  sequencePaused=false;
   advancePending=false;
 
   if(!track.audio?.publicUrl){
@@ -83,7 +93,7 @@ function startTrack(track){
       stopSequence('Приветствие сейчас недоступно');
       return false;
     }
-    setFeatureState(true,'Автопереход включён');
+    setFeatureState(true,'Автопереход включён',true);
     if(!isPlaying(track))start.click();
     return true;
   }
@@ -96,56 +106,96 @@ function startTrack(track){
 
   if(card.dataset.locked==='1'){
     pendingTrackId=track.id;
-    setFeatureState(true,'Ждёт активации');
+    setFeatureState(true,'Ждёт активации',false);
     card.click();
     return true;
   }
 
   pendingTrackId=null;
-  setFeatureState(true,'Автопереход включён');
+  setFeatureState(true,'Автопереход включён',true);
   if(!isPlaying(track))card.click();
   return true;
 }
 
+function currentSequenceTrack(){
+  return byId.get(currentTrackId)||selectedTrack()||intro||ordered[0]||null;
+}
+
+function pauseSequence(){
+  if(!sequenceActive)return;
+  const current=currentSequenceTrack();
+  if(!current)return;
+
+  if(current.kind==='intro'){
+    const start=document.querySelector('.audio-guide-start');
+    if(start&&isPlaying(current))start.click();
+  }else{
+    const card=cardFor(current);
+    if(card&&card.dataset.locked!=='1'&&isPlaying(current))card.click();
+  }
+
+  sequencePaused=true;
+  advancePending=false;
+  setFeatureState(true,'На паузе',false);
+}
+
+function resumeSequence(){
+  if(!sequenceActive)return;
+  if(pendingTrackId){
+    sequencePaused=false;
+    setFeatureState(true,'Ждёт активации',false);
+    return;
+  }
+  const current=currentSequenceTrack();
+  sequencePaused=false;
+  if(current)startTrack(current);
+  else startTrack(intro||ordered[0]);
+}
+
 function startSequence(){
   sequenceActive=true;
+  sequencePaused=false;
   pendingTrackId=null;
   advancePending=false;
-  setFeatureState(true,'Автопереход включён');
 
   if(document.querySelector('.audio-guide-start')?.textContent?.trim()==='Пауза'){
     currentTrackId=intro.id;
+    setFeatureState(true,'Автопереход включён',true);
     return;
   }
   const selected=selectedTrack();
   if(selected){
     currentTrackId=selected.id;
-    if(!isPlaying(selected))startTrack(selected);
+    startTrack(selected);
     return;
   }
   startTrack(intro||ordered[0]);
 }
 
 function toggleSequence(){
-  if(sequenceActive){
-    stopSequence();
+  if(!sequenceActive){
+    startSequence();
     return;
   }
-  startSequence();
+  if(sequencePaused){
+    resumeSequence();
+    return;
+  }
+  pauseSequence();
 }
 
 function advanceFromCurrent(){
-  if(!sequenceActive||advancePending)return;
-  const current=byId.get(currentTrackId)||selectedTrack()||intro;
+  if(!sequenceActive||sequencePaused||advancePending)return;
+  const current=currentSequenceTrack();
   const next=nextAfter(current);
   if(!next){
     stopSequence('Экскурсия завершена');
     return;
   }
   advancePending=true;
-  setFeatureState(true,'Следующий трек…');
+  setFeatureState(true,'Следующий трек…',true);
   window.setTimeout(()=>{
-    if(!sequenceActive)return;
+    if(!sequenceActive||sequencePaused)return;
     advancePending=false;
     startTrack(next);
   },180);
@@ -157,7 +207,7 @@ function bindProgressWatcher(){
   const check=()=>{
     const value=Number(progress.getAttribute('aria-valuenow'))||0;
     if(value<99.5){advancePending=false;return}
-    if(sequenceActive)advanceFromCurrent();
+    if(sequenceActive&&!sequencePaused)advanceFromCurrent();
   };
   new MutationObserver(check).observe(progress,{attributes:true,attributeFilter:['aria-valuenow']});
 }
@@ -166,9 +216,9 @@ function bindFeature(){
   feature=document.querySelector('.audio-guide-features .audio-guide-feature');
   if(!feature)return;
   featureSmall=feature.querySelector('small');
+  featureIconPath=feature.querySelector('svg path');
   feature.setAttribute('role','button');
   feature.setAttribute('tabindex','0');
-  feature.setAttribute('aria-label','Слушать треки по порядку');
   feature.setAttribute('aria-pressed','false');
   feature.addEventListener('click',toggleSequence);
   feature.addEventListener('keydown',event=>{
@@ -176,20 +226,41 @@ function bindFeature(){
     event.preventDefault();
     toggleSequence();
   });
-  setFeatureState(false,'Треки по порядку');
+  setFeatureState(false,'Треки по порядку',false);
   bindProgressWatcher();
 }
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bindFeature,{once:true});
 else bindFeature();
 
-// Keep the sequence aligned if the visitor manually chooses a track.
+// Keep the sequence aligned when the visitor manually plays or pauses a track.
 document.addEventListener('click',event=>{
   if(!sequenceActive)return;
   const start=event.target.closest('.audio-guide-start');
-  if(start){currentTrackId=intro.id;advancePending=false;return}
+  if(start){
+    currentTrackId=intro.id;
+    advancePending=false;
+    window.setTimeout(()=>{
+      if(!sequenceActive)return;
+      const playing=isPlaying(intro);
+      sequencePaused=!playing;
+      setFeatureState(true,playing?'Автопереход включён':'На паузе',playing);
+    },0);
+    return;
+  }
+
   const card=event.target.closest('.audio-guide-track-card-v2');
-  if(card?.dataset?.trackId){currentTrackId=card.dataset.trackId;advancePending=false}
+  if(!card?.dataset?.trackId)return;
+  currentTrackId=card.dataset.trackId;
+  advancePending=false;
+  if(card.dataset.locked==='1')return;
+  const track=byId.get(currentTrackId);
+  window.setTimeout(()=>{
+    if(!sequenceActive||!track)return;
+    const playing=isPlaying(track);
+    sequencePaused=!playing;
+    setFeatureState(true,playing?'Автопереход включён':'На паузе',playing);
+  },0);
 });
 
 // The prototype activation button unlocks the catalogue in the core player.
@@ -204,6 +275,7 @@ document.addEventListener('click',event=>{
     const card=cardFor(track);
     if(!track||!card||card.dataset.locked==='1')return;
     pendingTrackId=null;
+    sequencePaused=false;
     startTrack(track);
   },80);
 });
