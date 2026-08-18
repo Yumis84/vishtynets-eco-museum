@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="articles-v3.css?v=2">
   <link rel="stylesheet" href="menu-v3.css?v=2">
   <link rel="stylesheet" href="ai-v3.css?v=2">
+  <link rel="stylesheet" href="audioguide-v1.css?v=1">
 </head>
 <body>
 <div class="museum-app" id="museumApp">
@@ -37,7 +38,8 @@
         <div class="home-entry-grid" aria-label="Главные разделы">
           <button class="entry-card entry-explore" data-nav="explore" type="button"><span class="entry-icon">⌁</span><span class="entry-copy"><strong>Исследовать</strong><small>Места и темы</small></span><b>→</b></button>
           <button class="entry-card entry-map" data-nav="map" type="button"><span class="entry-icon">⌖</span><span class="entry-copy"><strong>Карта</strong><small>Точки и маршруты</small></span><b>→</b></button>
-          <button class="entry-card entry-articles entry-card-wide" data-nav="articles" type="button"><span class="entry-icon">▤</span><span class="entry-copy"><strong>Статьи</strong><small>Оригинальные материалы и цифровой архив музея</small></span><b>→</b></button>
+          <button class="entry-card entry-articles" data-nav="articles" type="button"><span class="entry-icon">▤</span><span class="entry-copy"><strong>Статьи</strong><small>Цифровой архив</small></span><b>→</b></button>
+          <button class="entry-card entry-audio" data-nav="audioguide" type="button"><span class="entry-icon" aria-hidden="true"></span><span class="entry-copy"><strong>Аудиогид</strong><small>Экскурсия по музею</small></span><b>→</b></button>
         </div>
       </section>
 
@@ -72,6 +74,37 @@
           <div class="archive-copy"><span class="eyebrow">Цифровой архив</span><h2>Истории Роминтской пущи</h2><p>Оригинальные музейные материалы возвращаются в современной журнальной подаче — с фотографиями, связанными местами и картой.</p><button class="btn-outline" data-nav="articles" type="button">Открыть статьи</button></div>
         </section>
       </div>
+    </section>
+
+    <section class="screen screen-audioguide" data-screen="audioguide" aria-label="Аудиогид">
+      <header class="section-header"><div><span class="eyebrow">Экскурсия по музею</span><h1>Аудиогид</h1></div><button class="round-menu light" data-open-menu type="button" aria-label="Открыть меню">☰</button></header>
+      <section class="audio-guide-hero">
+        <span class="audio-guide-badge">Готовим первую запись</span>
+        <h2>Слушайте музей в своём темпе</h2>
+        <p>Начнём с одной полной записи аудиогида. Позже её можно будет разделить на отдельные остановки и связать с экспонатами и QR-кодами в музее.</p>
+        <div class="audio-guide-status">
+          <div class="audio-guide-stat"><strong>0 треков</strong><small>Первую запись добавим следующим этапом</small></div>
+          <div class="audio-guide-stat"><strong>Готово к развитию</strong><small>Плеер, главы и расшифровка появятся вместе с аудио</small></div>
+        </div>
+        <button class="audio-guide-placeholder" type="button" disabled>Аудиозапись пока не добавлена</button>
+      </section>
+
+      <section class="audio-guide-section">
+        <h3>Как будет работать</h3>
+        <p>Интерфейс рассчитан и на одну длинную экскурсию, и на набор коротких музейных остановок.</p>
+        <div class="audio-guide-flow">
+          <div class="audio-guide-step"><span>1</span><div><strong>Начать экскурсию</strong><small>Одна большая кнопка запускает первую или единственную запись.</small></div></div>
+          <div class="audio-guide-step"><span>2</span><div><strong>Слушать и продолжать</strong><small>Пауза, перемотка и сохранение позиции прямо в браузере.</small></div></div>
+          <div class="audio-guide-step"><span>3</span><div><strong>Открыть текст</strong><small>Под записью можно разместить расшифровку и связанные музейные материалы.</small></div></div>
+        </div>
+      </section>
+
+      <section class="audio-guide-section">
+        <h3>Аудиозаписи</h3>
+        <p>Здесь появится первый трек после добавления файла.</p>
+        <div class="audio-guide-empty">Пока список пуст. Никакие демонстрационные записи или вымышленные остановки не добавлены.</div>
+        <div class="audio-guide-note">Следующий этап: загрузить вашу запись, подключить HTML5-плеер и проверить воспроизведение на Android.</div>
+      </section>
     </section>
 
     <section class="screen screen-explore" data-screen="explore" aria-label="Исследовать"><header class="section-header"><div><span class="eyebrow">Путеводитель по территории</span><h1>Исследовать</h1></div><button class="round-menu light" data-open-menu type="button" aria-label="Открыть меню">☰</button></header><label class="search-box"><span>⌕</span><input id="exploreSearch" type="search" placeholder="Поиск по местам и темам"></label><div class="category-grid" id="exploreCategories"></div><div class="list-heading"><h2>Популярные места</h2><button id="favoritesToggle" type="button">♡ Избранное</button></div><div class="place-list" id="exploreList"></div></section>
