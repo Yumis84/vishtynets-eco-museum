@@ -32,6 +32,9 @@ if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-
 if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-11]')){
   document.write('<script data-legacy-batch-11 src="museum-legacy-batch-11.js?v=1"><\/script>');
 }
+if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-12]')){
+  document.write('<script data-legacy-batch-12 src="museum-legacy-batch-12.js?v=1"><\/script>');
+}
 
 // Owner decision: no museum logo on the homepage hero for now.
 const heroBrand=document.querySelector('.hero-brand');
