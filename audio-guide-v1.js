@@ -14,10 +14,31 @@ const SAMPLE_DURATION=Number(track.preview?.seconds)||5;
 const previewGlobal=track.preview?.global||'';
 const previewMime=track.preview?.mime||'audio/webm;codecs=opus';
 const b64=previewGlobal?window[previewGlobal]||'':'';
-const audio=b64?new Audio(`data:${previewMime};base64,${b64}`):null;
-if(audio)audio.preload='metadata';
 
-let activated=sessionStorage.getItem(ACCESS_KEY)==='1';
+let previewObjectUrl='';
+function createPreviewAudio(){
+  if(!b64)return null;
+  try{
+    const binary=atob(b64);
+    const bytes=new Uint8Array(binary.length);
+    for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
+    const blob=new Blob([bytes],{type:previewMime});
+    previewObjectUrl=URL.createObjectURL(blob);
+    return new Audio(previewObjectUrl);
+  }catch(_err){
+    return new Audio(`data:${previewMime};base64,${b64}`);
+  }
+}
+
+const audio=createPreviewAudio();
+if(audio){
+  audio.preload='auto';
+  audio.setAttribute('playsinline','');
+  try{audio.load()}catch(_err){}
+}
+
+let activated=false;
+try{activated=sessionStorage.getItem(ACCESS_KEY)==='1'}catch(_err){}
 let playing=false;
 
 const playSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
@@ -91,11 +112,24 @@ function setUnavailable(){
   const small=player?.querySelector('small');
   if(small)small.textContent='Не удалось воспроизвести тестовый фрагмент на этом устройстве';
 }
+function playAudio(){
+  if(!audio){setUnavailable();return}
+  if(audio.ended||audio.currentTime>=SAMPLE_DURATION-0.05){
+    try{audio.currentTime=0}catch(_err){}
+    setProgress(0,SAMPLE_DURATION);
+  }
+  const promise=audio.play();
+  if(promise&&typeof promise.then==='function'){
+    promise.then(()=>setPlaying(true)).catch(setUnavailable);
+  }else{
+    setPlaying(true);
+  }
+}
 function toggleAudio(){
   if(!activated){openAccess();return}
   if(!audio){setUnavailable();return}
   if(!audio.paused){audio.pause();setPlaying(false);return}
-  audio.play().then(()=>setPlaying(true)).catch(setUnavailable);
+  playAudio();
 }
 
 if(audio){
@@ -109,8 +143,16 @@ $('.audio-track-play')?.addEventListener('click',toggleAudio);
 modal.addEventListener('click',e=>{if(e.target.closest('[data-audio-close]'))closeAccess()});
 $('.audio-access-test')?.addEventListener('click',()=>{
   activated=true;
-  sessionStorage.setItem(ACCESS_KEY,'1');
+  try{sessionStorage.setItem(ACCESS_KEY,'1')}catch(_err){}
   closeAccess();
-  setTimeout(toggleAudio,80);
+  // Keep play() in the same user-gesture call stack. Mobile browsers may block
+  // playback when it is delayed through setTimeout/requestAnimationFrame.
+  playAudio();
 });
+window.addEventListener('pagehide',()=>{
+  if(previewObjectUrl){
+    try{URL.revokeObjectURL(previewObjectUrl)}catch(_err){}
+    previewObjectUrl='';
+  }
+},{once:true});
 })();
