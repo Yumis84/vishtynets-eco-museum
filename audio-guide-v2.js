@@ -23,6 +23,7 @@ let audio=null;
 let audioTrackId=null;
 let expiryTimer=null;
 let isScrubbing=false;
+let pendingCardSeek=null;
 
 const playSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
 const pauseSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>';
@@ -163,6 +164,29 @@ if(count)count.textContent=`${expositionTracks.length} экспозиций`;
 const heading=$('.audio-guide-section-head h2');
 if(heading)heading.textContent='Экспозиции по залам';
 
+function updateCardProgress(track,media=null){
+  if(!track?.id)return;
+  const card=document.querySelector(`.audio-guide-track-card-v2[data-track-id="${track.id}"]`);
+  if(!card)return;
+  const bar=card.querySelector('[data-card-progress-bar]');
+  const thumb=card.querySelector('[data-card-progress-thumb]');
+  const time=card.querySelector('[data-card-progress-time]');
+  const scrubber=card.querySelector('[data-card-scrubber]');
+  const mediaDuration=media&&Number.isFinite(Number(media.duration))&&Number(media.duration)>0?Number(media.duration):0;
+  const declaredDuration=Number(track?.duration)>0?Number(track.duration):0;
+  const duration=mediaDuration||declaredDuration;
+  const current=media&&audioTrackId===track.id&&Number.isFinite(Number(media.currentTime))?Math.max(0,Number(media.currentTime)):0;
+  const ratio=duration>0?Math.max(0,Math.min(1,current/duration)):0;
+  const percent=Math.round(ratio*100);
+  if(bar)bar.style.width=`${(ratio*100).toFixed(1)}%`;
+  if(thumb)thumb.style.left=`${(ratio*100).toFixed(1)}%`;
+  if(time)time.textContent=duration>0?`${clock(current)} / ${clock(duration)}`:'00:00 / --:--';
+  if(scrubber){
+    scrubber.setAttribute('aria-valuenow',String(percent));
+    scrubber.setAttribute('aria-valuetext',duration>0?`${clock(current)} из ${clock(duration)}`:'Аудио ещё не загружено');
+  }
+}
+
 function updatePlaybackProgress(media=null,track=currentTrack){
   const mediaDuration=media&&Number.isFinite(Number(media.duration))&&Number(media.duration)>0?Number(media.duration):0;
   const declaredDuration=Number(track?.duration)>0?Number(track.duration):0;
@@ -181,6 +205,7 @@ function updatePlaybackProgress(media=null,track=currentTrack){
       ?`${clock(current)} / ${clock(duration)} · ${percent}%`
       :`${clock(current)} · ${percent}%`;
   }
+  updateCardProgress(track,media);
 }
 
 function seekToRatio(ratio){
@@ -232,6 +257,89 @@ if(progressTrack){
     e.preventDefault();
     try{audio.currentTime=next}catch(_err){}
     updatePlaybackProgress(audio,currentTrack);
+  });
+}
+
+function seekCardTrack(track,ratio){
+  if(!track)return false;
+  if(isLocked(track)){openAccess();return false}
+  if(!track.audio?.publicUrl){showTrack(track);return false}
+  const clamped=Math.max(0,Math.min(1,Number(ratio)||0));
+  if(!audio||audioTrackId!==track.id){
+    pendingCardSeek={trackId:track.id,ratio:clamped};
+    showTrack(track);
+    return true;
+  }
+  const duration=Number(audio.duration);
+  if(!Number.isFinite(duration)||duration<=0){
+    pendingCardSeek={trackId:track.id,ratio:clamped};
+    return false;
+  }
+  try{audio.currentTime=clamped*duration}catch(_err){return false}
+  updatePlaybackProgress(audio,track);
+  return true;
+}
+
+function bindCardProgress(card,track,locked){
+  const scrubber=card.querySelector('[data-card-scrubber]');
+  if(!scrubber)return;
+  let dragging=false;
+  const ratioFromX=x=>{
+    const rect=scrubber.getBoundingClientRect();
+    if(!rect.width)return 0;
+    return Math.max(0,Math.min(1,(Number(x)-rect.left)/rect.width));
+  };
+  const seekX=x=>seekCardTrack(track,ratioFromX(x));
+  scrubber.addEventListener('click',e=>e.stopPropagation());
+  scrubber.addEventListener('pointerdown',e=>{
+    e.preventDefault();
+    e.stopPropagation();
+    if(locked){openAccess();return}
+    if(!track.audio?.publicUrl){showTrack(track);return}
+    dragging=true;
+    try{scrubber.setPointerCapture(e.pointerId)}catch(_err){}
+    seekX(e.clientX);
+  });
+  scrubber.addEventListener('pointermove',e=>{
+    if(!dragging)return;
+    e.preventDefault();
+    e.stopPropagation();
+    seekX(e.clientX);
+  });
+  const finish=e=>{
+    if(!dragging)return;
+    e.preventDefault();
+    e.stopPropagation();
+    seekX(e.clientX);
+    dragging=false;
+    try{scrubber.releasePointerCapture(e.pointerId)}catch(_err){}
+  };
+  scrubber.addEventListener('pointerup',finish);
+  scrubber.addEventListener('pointercancel',()=>{dragging=false});
+  scrubber.addEventListener('keydown',e=>{
+    e.stopPropagation();
+    if(locked){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();openAccess()}
+      return;
+    }
+    if(!track.audio?.publicUrl)return;
+    if((!audio||audioTrackId!==track.id)&&(e.key==='Enter'||e.key===' ')){
+      e.preventDefault();
+      showTrack(track);
+      return;
+    }
+    if(!audio||audioTrackId!==track.id)return;
+    const duration=Number(audio.duration);
+    if(!Number.isFinite(duration)||duration<=0)return;
+    let next=null;
+    if(e.key==='ArrowLeft')next=Math.max(0,Number(audio.currentTime)-5);
+    if(e.key==='ArrowRight')next=Math.min(duration,Number(audio.currentTime)+5);
+    if(e.key==='Home')next=0;
+    if(e.key==='End')next=duration;
+    if(next===null)return;
+    e.preventDefault();
+    try{audio.currentTime=next}catch(_err){}
+    updatePlaybackProgress(audio,track);
   });
 }
 
@@ -313,6 +421,7 @@ function stopAudio(){
   audio=null;
   audioTrackId=null;
   isScrubbing=false;
+  pendingCardSeek=null;
   if(previous){
     try{previous.pause()}catch(_err){}
   }
@@ -378,8 +487,17 @@ function showTrack(track){
   instance.preload='metadata';
   instance.setAttribute('playsinline','');
   const syncProgress=()=>{if(audio===instance)updatePlaybackProgress(instance,track)};
-  instance.addEventListener('loadedmetadata',syncProgress);
-  instance.addEventListener('durationchange',syncProgress);
+  const applyPendingCardSeek=()=>{
+    if(audio!==instance||pendingCardSeek?.trackId!==track.id)return;
+    const duration=Number(instance.duration);
+    if(!Number.isFinite(duration)||duration<=0)return;
+    const ratio=Math.max(0,Math.min(1,Number(pendingCardSeek.ratio)||0));
+    pendingCardSeek=null;
+    try{instance.currentTime=ratio*duration}catch(_err){}
+    syncProgress();
+  };
+  instance.addEventListener('loadedmetadata',()=>{applyPendingCardSeek();syncProgress()});
+  instance.addEventListener('durationchange',()=>{applyPendingCardSeek();syncProgress()});
   instance.addEventListener('timeupdate',syncProgress);
   instance.addEventListener('seeking',syncProgress);
   instance.addEventListener('seeked',syncProgress);
@@ -411,6 +529,21 @@ function showTrack(track){
   });
 }
 
+function styleCardProgress(card){
+  const wrap=card.querySelector('.audio-guide-card-progress');
+  const meta=card.querySelector('.audio-guide-card-progress-meta');
+  const metaHint=meta?.querySelector('small');
+  const scrubber=card.querySelector('[data-card-scrubber]');
+  const bar=card.querySelector('[data-card-progress-bar]');
+  const thumb=card.querySelector('[data-card-progress-thumb]');
+  if(wrap)Object.assign(wrap.style,{gridColumn:'1 / -1',marginTop:'1px',padding:'0 2px 1px'});
+  if(meta)Object.assign(meta.style,{display:'flex',alignItems:'center',justifyContent:'space-between',gap:'10px',marginBottom:'3px',color:'#777d74',fontSize:'9px',fontWeight:'800'});
+  if(metaHint)Object.assign(metaHint.style,{fontSize:'8.5px',fontWeight:'750',color:'#858a82'});
+  if(scrubber)Object.assign(scrubber.style,{position:'relative',height:'20px',background:'linear-gradient(to bottom,transparent 6px,#e2ddd2 6px,#e2ddd2 13px,transparent 13px)',overflow:'visible',cursor:'pointer',touchAction:'none',outline:'none'});
+  if(bar)Object.assign(bar.style,{position:'absolute',left:'0',top:'6px',width:'0%',height:'7px',borderRadius:'999px',background:'#6f846d',pointerEvents:'none'});
+  if(thumb)Object.assign(thumb.style,{position:'absolute',left:'0%',top:'50%',width:'14px',height:'14px',borderRadius:'50%',background:'#6f846d',boxShadow:'0 1px 5px rgba(47,77,58,.28)',transform:'translate(-50%,-50%)',pointerEvents:'none'});
+}
+
 function makeTrackCard(track){
   const locked=track.access==='paid'&&!paidAccessAvailable();
   const duration=fmt(track.duration);
@@ -430,7 +563,12 @@ function makeTrackCard(track){
   }
   if(!track.audio?.publicUrl&&!locked)accessMeta='аудиофайл ещё не добавлен';
   const meta=[duration,accessMeta].filter(Boolean).join(' · ');
-  card.innerHTML=`<button class="audio-guide-track-action" type="button" tabindex="-1" aria-hidden="true">${locked?lockSvg:playSvg}</button><div class="audio-guide-track-copy-v2"><span>Экспозиция ${String(localNumber).padStart(2,'0')}</span><strong>${track.title}</strong><p>${track.description||''}</p><small>${meta}</small></div><span class="audio-guide-track-status">${status}</span>`;
+  const sliderHint=locked?'После активации':track.audio?.publicUrl?'Можно перематывать':'Аудио ожидается';
+  const sliderTab=locked||!track.audio?.publicUrl?'-1':'0';
+  card.innerHTML=`<button class="audio-guide-track-action" type="button" tabindex="-1" aria-hidden="true">${locked?lockSvg:playSvg}</button><div class="audio-guide-track-copy-v2"><span>Экспозиция ${String(localNumber).padStart(2,'0')}</span><strong>${track.title}</strong><p>${track.description||''}</p><small>${meta}</small></div><span class="audio-guide-track-status">${status}</span><div class="audio-guide-card-progress"><div class="audio-guide-card-progress-meta"><span data-card-progress-time>00:00 / ${duration||'--:--'}</span><small>${sliderHint}</small></div><div class="audio-guide-card-scrubber" data-card-scrubber role="slider" tabindex="${sliderTab}" aria-label="Перемотка ${track.title}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i data-card-progress-bar></i><b data-card-progress-thumb></b></div></div>`;
+  styleCardProgress(card);
+  bindCardProgress(card,track,locked);
+  updateCardProgress(track,null);
   card.addEventListener('click',()=>showTrack(track));
   card.addEventListener('keydown',e=>{
     if(e.key!=='Enter'&&e.key!==' ')return;
@@ -457,8 +595,10 @@ function renderTracks(){
     group.appendChild(list);
     host.appendChild(group);
   });
-  if(audio&&audioTrackId&&currentTrack)syncPlaybackButtons(currentTrack,!audio.paused);
-  else syncIntroButton(null,false);
+  if(audio&&audioTrackId&&currentTrack){
+    syncPlaybackButtons(currentTrack,!audio.paused);
+    updateCardProgress(currentTrack,audio);
+  }else syncIntroButton(null,false);
 }
 
 start?.addEventListener('click',()=>showTrack(introTrack));
