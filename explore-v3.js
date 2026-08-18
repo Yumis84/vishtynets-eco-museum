@@ -101,7 +101,7 @@ function createRouteList(){
 function clearPlaceDetail(){
   const sheet=$('#infoSheet');
   const panel=sheet?.querySelector('.sheet-panel');
-  sheet?.classList.remove('is-place-detail','is-route-detail');
+  sheet?.classList.remove('is-place-detail','is-route-detail','map-control-sheet');
   document.documentElement.classList.remove('place-detail-open');
   if(panel){panel.style.transform='';panel.style.opacity='';panel.style.transition=''}
 }
@@ -110,7 +110,7 @@ function markPlaceDetail(){
   const sheet=$('#infoSheet'),content=$('#sheetContent');
   if(!sheet||!content||!sheet.classList.contains('is-open'))return;
   if(!content.querySelector(':scope > img'))return;
-  sheet.classList.remove('is-route-detail');
+  sheet.classList.remove('is-route-detail','map-control-sheet');
   sheet.classList.add('is-place-detail');
   document.documentElement.classList.add('place-detail-open');
 }
@@ -190,6 +190,7 @@ function initExplore(){
 document.addEventListener('click',e=>{
   if(e.target.closest('[data-nav="explore"]'))setTimeout(initExplore,0);
   if(e.target.closest('[data-open-place],[data-home-point]'))setTimeout(markPlaceDetail,0);
+  if(e.target.closest('#sheetArticle,#sheetMap,[data-sheet-article]'))clearPlaceDetail();
   if(e.target.closest('#sheetClose')||e.target.id==='infoSheet')setTimeout(clearPlaceDetail,0);
 });
 
