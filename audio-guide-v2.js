@@ -421,7 +421,6 @@ function stopAudio(){
   audio=null;
   audioTrackId=null;
   isScrubbing=false;
-  pendingCardSeek=null;
   if(previous){
     try{previous.pause()}catch(_err){}
   }
