@@ -1,0 +1,85 @@
+/* Map v3 — «Тёплый лес»: отдельный мобильный картографический экран */
+.screen-map{background:#dbe3d6}
+.screen-map .map-canvas{background:linear-gradient(145deg,#e5e5d7,#cdd8c7 48%,#a8bec0)}
+
+/* Верхняя музейная панель поверх карты */
+.screen-map .map-top{
+  top:calc(env(safe-area-inset-top) + 10px);
+  left:10px;
+  right:10px;
+  padding:12px;
+  border:1px solid rgba(207,198,180,.94);
+  border-radius:22px;
+  background:rgba(251,247,238,.97);
+  box-shadow:0 9px 24px rgba(43,58,47,.13);
+}
+.screen-map .map-title-row{min-height:44px}
+.screen-map .map-title-row h1{font-size:30px;line-height:1;color:#2f4336}
+.screen-map .map-title-row::after{content:"Проверенные точки";margin-left:auto;margin-right:9px;padding:5px 8px;border-radius:999px;background:#e5eadf;color:#61715f;font-size:9.5px;font-weight:850;letter-spacing:.02em;white-space:nowrap}
+.screen-map .map-title-row .round-menu{width:42px;height:42px;flex:0 0 auto}
+.screen-map .map-search{height:48px;margin-top:8px;border-radius:15px;background:#f7f1e7}
+.screen-map .map-search input{font-size:14px}
+
+/* Фильтры и слои — большие пальцеориентированные кнопки */
+.screen-map .map-tools{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}
+.screen-map .map-tools button{height:40px;border-radius:13px;padding:0 12px;justify-content:center;background:#f4ede2;border-color:#d4cbbb;color:#516456;font-size:12px;font-weight:850}
+.screen-map .map-tools button .v3-svg-icon{width:18px;height:18px}
+.screen-map .map-tools button.is-layer-active{background:#dfe7d8;border-color:#afbea9;color:#36513f}
+
+/* Категории карты */
+.screen-map .map-chips{gap:8px;margin:9px -12px -1px;padding:0 12px 3px;scroll-snap-type:x proximity}
+.screen-map .map-chips button{height:36px;padding:0 13px;border-radius:999px;font-size:11.5px;scroll-snap-align:start;background:#f8f3ea;border-color:#d7cfbf;color:#657067}
+.screen-map .map-chips button.is-active{background:#dfe7d8;border-color:#aebba7;color:#304b39;box-shadow:0 3px 10px rgba(52,77,59,.06)}
+
+/* Геолокация */
+.screen-map .locate-button{right:14px;bottom:184px;width:52px;height:52px;border-radius:50%;background:#fbf7ee;border-color:#cec5b5;box-shadow:0 7px 18px rgba(44,59,47,.15)}
+.screen-map .locate-button .v3-svg-icon{width:25px;height:25px}
+
+/* Карточка выбранной точки — крупный bottom card */
+.screen-map .map-card-wrap{left:10px;right:10px;bottom:10px}
+.screen-map .map-place-card{position:relative;grid-template-columns:112px minmax(0,1fr);gap:13px;padding:11px;border-radius:22px;background:#fbf7ee;border-color:#d2c9ba;box-shadow:0 12px 30px rgba(42,57,45,.18);overflow:hidden;transition:transform .15s ease,opacity .15s ease;will-change:transform,opacity}
+.screen-map .map-place-card::before{content:"";position:absolute;left:50%;top:5px;width:34px;height:4px;border-radius:999px;background:#c5bdaf;transform:translateX(-50%);opacity:.8}
+.screen-map .map-place-photo{height:122px;margin-top:5px;border-radius:16px;background:#dde5da;font-size:28px;color:#5c735e}
+.screen-map .map-place-copy{padding:7px 2px 2px 0;min-width:0}
+.screen-map .map-place-copy .eyebrow{font-size:9.5px;letter-spacing:.08em}
+.screen-map .map-place-copy h3{font-size:19px;line-height:1.08;margin:4px 0 7px;color:#2e4235}
+.screen-map .map-place-copy p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:12.5px;line-height:1.42;color:#687168}
+.screen-map .map-place-actions{gap:7px;margin-top:10px}
+.screen-map .map-place-actions button,.screen-map .map-place-actions a{min-height:38px;border-radius:11px;padding:0 12px;font-size:12px;font-weight:850}
+.screen-map .map-place-actions a{background:#36513f}
+
+/* Маркеры */
+.screen-map .poi-pin,.screen-map .guest-pin{width:38px;height:38px;border-width:2px;box-shadow:0 5px 12px rgba(29,43,34,.25)}
+.screen-map .poi-pin .v3-svg-icon,.screen-map .guest-pin .v3-svg-icon{width:18px;height:18px}
+.screen-map .user-dot{width:17px;height:17px}
+
+/* Leaflet controls in the same visual language */
+.screen-map .leaflet-control-zoom{margin-right:14px!important;margin-bottom:14px!important;border-radius:14px!important;box-shadow:0 5px 16px rgba(44,59,47,.12)!important}
+.screen-map .leaflet-control-zoom a{width:38px!important;height:38px!important;line-height:38px!important;font-size:19px!important;background:#fbf7ee!important}
+.screen-map .leaflet-control-attribution{font-size:9px!important;background:rgba(251,247,238,.78)!important}
+
+/* Sheet для фильтров/слоёв */
+.info-sheet.map-control-sheet .sheet-panel{padding-top:26px}
+.map-sheet-intro{margin:0 0 14px;color:#687168;font-size:13.5px;line-height:1.5}
+.map-filter-sheet-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.map-filter-sheet-grid button{min-height:54px;border:1px solid #d5cdbc;border-radius:16px;background:#f4ede2;color:#506254;display:flex;align-items:center;gap:9px;padding:0 13px;font-size:13px;font-weight:850;text-align:left}
+.map-filter-sheet-grid button .v3-svg-icon{width:21px;height:21px}
+.map-filter-sheet-grid button.is-active{background:#dfe7d8;border-color:#afbea9;color:#304b39}
+.map-layer-list{display:grid;gap:10px}
+.map-layer-row{min-height:66px;border:1px solid #d5cdbc;border-radius:18px;background:#f7f1e7;padding:11px 12px;display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:10px;align-items:center}
+.map-layer-icon{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#e3e8dc;color:#536b57}
+.map-layer-icon .v3-svg-icon{width:21px;height:21px}
+.map-layer-row strong{display:block;color:#33483a;font-size:14px}
+.map-layer-row small{display:block;margin-top:2px;color:#747a72;font-size:11px;line-height:1.3}
+.map-layer-switch{width:44px;height:26px;border:0;border-radius:999px;background:#cfc8bc;padding:3px;display:flex;justify-content:flex-start}
+.map-layer-switch::after{content:"";width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.map-layer-switch.is-active{background:#70846e;justify-content:flex-end}
+
+@media(max-width:370px){
+  .screen-map .map-top{left:8px;right:8px;padding:10px}
+  .screen-map .map-title-row::after{font-size:8.5px;padding:4px 6px;margin-right:6px}
+  .screen-map .map-place-card{grid-template-columns:98px minmax(0,1fr);gap:11px}
+  .screen-map .map-place-photo{height:112px}
+  .screen-map .map-place-copy h3{font-size:18px}
+  .screen-map .map-place-copy p{font-size:12px}
+}
