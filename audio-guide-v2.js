@@ -1,11 +1,15 @@
 (()=>{
 'use strict';
+const removeBottomPlayer=()=>{
+  document.querySelector('.audio-guide-player')?.remove();
+};
 const loadCore=()=>{
   if(document.querySelector('script[data-audioguide-core]'))return;
   const core=document.createElement('script');
-  core.src='audio-guide-v2-core.js?v=6';
+  core.src='audio-guide-v2-core.js?v=7';
   core.async=false;
   core.dataset.audioguideCore='1';
+  core.addEventListener('load',removeBottomPlayer,{once:true});
   document.head.appendChild(core);
 };
 
