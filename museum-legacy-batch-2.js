@@ -9,13 +9,20 @@
   add({
     id:'birds-red-forest',slug:'birds-red-forest',title:'Птицы Красного леса',category:'Природа',subcategory:'Животный мир',legacyUrl:'https://www.wystynez.ru/p38.htm',date:null,author:'Игорь Шелякин',
     deck:'Музейный материал о птицах Виштынецкой возвышенности, разнообразии их местообитаний и природоохранной ценности Красного леса.',
-    hero:null,images:[],relatedPoiIds:['poi_vishtynets_lake'],archival:true,
+    hero:'https://wystynez.ru/sc-pic/i0317.png',
+    images:[
+      {src:'https://wystynez.ru/sc-pic/i0318.png',caption:'Серая цапля',credit:'Cliparts, Dinamite SoftWare Group, 2003 — общий фотокредит исходной страницы'},
+      {src:'https://wystynez.ru/sc-pic/i0320.png',caption:'Удод',credit:'Cliparts, Dinamite SoftWare Group, 2003 — общий фотокредит исходной страницы'},
+      {src:'https://wystynez.ru/sc-pic/i0321.png',caption:'Выпь',credit:'Cliparts, Dinamite SoftWare Group, 2003 — общий фотокредит исходной страницы'},
+      {src:'https://wystynez.ru/sc-pic/i1238.jpg',caption:'Малый подорлик',credit:'Cliparts, Dinamite SoftWare Group, 2003 — общий фотокредит исходной страницы'}
+    ],relatedPoiIds:['poi_vishtynets_lake'],archival:true,
     content:[
       {type:'paragraph',text:'Материал рассказывает о птицах Виштынецкой возвышенности и Красного леса как о важной части природного облика территории.'},
       {type:'paragraph',text:'Разнообразный рельеф, леса, поля, озёра, реки и заболоченные низины создают множество местообитаний для птиц. На старой странице отдельно описаны птицы озёр и лесов, включая виды, встречающиеся во время миграций.'},
       {type:'paragraph',text:'В тексте подчёркивается природоохранное значение территории и приводятся сведения о редких и охраняемых видах птиц. Источник, указанный музеем: Г. В. Гришанов, «Ключевые орнитологические территории Балтийского региона России», 2000.'},
-      {type:'paragraph',text:'Текст: Игорь Шелякин. Фото/иллюстрации на исходной странице: Cliparts, Dinamite SoftWare Group, 2003.'}
-    ],migrationStatus:'verified_legacy_summary',photoCredits:['Cliparts','Dinamite SoftWare Group, 2003']
+      {type:'paragraph',text:'Текст: Игорь Шелякин. Фото/иллюстрации на исходной странице: Cliparts, Dinamite SoftWare Group, 2003.'},
+      {type:'gallery'}
+    ],migrationStatus:'verified_legacy_summary',photoCredits:['Cliparts','Dinamite SoftWare Group, 2003'],sourceMediaInventory:'data/legacy-media.json'
   });
 
   add({
@@ -34,7 +41,7 @@
     deck:'Музейная страница о Кристионасе Донелайтисе, Чистых Прудах, поэме «Времена года» и культурной памяти Виштынецкой возвышенности.',
     hero:null,images:[],relatedPoiIds:[],archival:true,
     content:[
-      {type:'paragraph',text:'Материал посвящён Кристионасу Донелайтису и месту его жизни и служения в Тольмингкемене — современных Чистых Прудах.'},
+      {type:'paragraph',text:'Материал посвящён Кристионасу Донелайтисе и месту его жизни и служения в Тольмингкемене — современных Чистых Прудах.'},
       {type:'paragraph',text:'Страница связывает культурный ландшафт Виштынецкой возвышенности с поэмой «Времена года» и мемориальным музеем поэта.'},
       {type:'paragraph',text:'Отдельный блок исходной страницы посвящён 300-летию со дня рождения Донелайтиса и празднованию юбилея в Краснолесье в 2014 году.'},
       {type:'paragraph',text:'Фото на исходной странице: Э. Барсуков, А. Соколов.'}
@@ -56,12 +63,33 @@
   add({
     id:'neighbors-2023',slug:'neighbors-2023',title:'Соседи — 2023 и «Вкусы Виштынецкой возвышенности»',category:'Культура',subcategory:'Праздники и местные сообщества',legacyUrl:'https://www.wystynez.ru/p0125.htm',date:'5 августа 2023',author:null,
     deck:'Возвращение праздника «Соседи» в Краснолесье и мастерская местной кухни «Вкусы Виштынецкой возвышенности».',
-    hero:null,images:[],relatedPoiIds:['poi_museum'],archival:true,
+    hero:'https://wystynez.ru/sc-pic/i2335.jpg',
+    images:[
+      {src:'https://wystynez.ru/sc-pic/i2360.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2361.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2362.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2363.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2364.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2365.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2366.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2367.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2368.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2369.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2378.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2371.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2372.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2373.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2374.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2375.jpg',caption:null,credit:null},
+      {src:'https://wystynez.ru/sc-pic/i2376.jpg',caption:null,credit:null}
+    ],relatedPoiIds:['poi_museum'],archival:true,
     content:[
       {type:'paragraph',text:'5 августа 2023 года в Краснолесье после трёхлетнего перерыва снова состоялся праздник «Соседи», который музей проводил в предыдущие годы как праздник гостеприимства и общения людей, живущих рядом и любящих эту территорию.'},
       {type:'paragraph',text:'В программу вошли концертные и творческие события, ярмарка местных жителей и мастерская «Вкусы Виштынецкой возвышенности».'},
-      {type:'paragraph',text:'Исходная страница подробно перечисляет участников ярмарки, местные блюда, продукты, ремесленные и культурные инициативы. Эти имена и детали должны сохраняться при полном переносе страницы и медиаматериалов.'}
-    ],migrationStatus:'verified_legacy_summary'
+      {type:'paragraph',text:'Исходная страница подробно перечисляет участников ярмарки, местные блюда, продукты, ремесленные и культурные инициативы. Эти имена и детали должны сохраняться при полном переносе страницы и медиаматериалов.'},
+      {type:'paragraph',text:'Общий фотокредит исходной страницы: Наталья Матусевичене, Юлия Алексеева, Ирина Ковардо.'},
+      {type:'gallery'}
+    ],migrationStatus:'verified_legacy_summary',photoCredits:['Наталья Матусевичене','Юлия Алексеева','Ирина Ковардо'],sourceMediaInventory:'data/legacy-media-batch-2.json'
   });
 
   const museum=points.find(point=>point.id==='poi_museum');
