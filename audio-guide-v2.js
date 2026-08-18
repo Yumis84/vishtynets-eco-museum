@@ -152,6 +152,10 @@ if(host){
 
 const player=$('.audio-guide-player');
 const playerBtn=$('.audio-guide-play');
+const transcriptPanel=document.createElement('div');
+transcriptPanel.className='audio-guide-transcript-note';
+transcriptPanel.hidden=true;
+player?.insertAdjacentElement('afterend',transcriptPanel);
 if(player){
   player.removeAttribute('aria-disabled');
   player.classList.add('is-ready');
@@ -177,6 +181,11 @@ function stopAudio(){
 
 function renderPlayer(track,message){
   currentTrack=track;
+  if(transcriptPanel){
+    const transcript=String(track?.transcript||'').trim();
+    transcriptPanel.hidden=!transcript;
+    transcriptPanel.textContent=transcript?`Текст: ${transcript}`:'';
+  }
   const strong=player?.querySelector('strong');
   const small=player?.querySelector('small');
   if(strong)strong.textContent=track?.title||'Плеер аудиогида';
