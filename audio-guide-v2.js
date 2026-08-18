@@ -14,6 +14,7 @@ const HOUR_MS=60*60*1000;
 const activeHours=Number(guide?.access?.activeHours)||24;
 let currentTrack=tracks[0]||null;
 let audio=null;
+let audioTrackId=null;
 let expiryTimer=null;
 
 const playSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
@@ -173,13 +174,31 @@ document.body.appendChild(modal);
 function openAccess(){modal.classList.add('is-open');modal.setAttribute('aria-hidden','false')}
 function closeAccess(){modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true')}
 
-function stopAudio(){
-  if(audio){
-    try{audio.pause()}catch(_err){}
-    audio=null;
+function syncPlaybackButtons(track,playing){
+  if(playerBtn){
+    playerBtn.innerHTML=playing?pauseSvg:playSvg;
+    playerBtn.setAttribute('aria-label',`${playing?'Пауза':'Воспроизвести'} ${track?.title||'трек'}`);
   }
-  document.querySelectorAll('.audio-guide-track-action').forEach(btn=>btn.innerHTML=btn.closest('.is-locked')?lockSvg:playSvg);
-  if(playerBtn)playerBtn.innerHTML=playSvg;
+  document.querySelectorAll('.audio-guide-track-action').forEach(btn=>{
+    const card=btn.closest('.audio-guide-track-card-v2');
+    if(!card)return;
+    if(card.classList.contains('is-locked')){
+      btn.innerHTML=lockSvg;
+      return;
+    }
+    const isCurrent=Boolean(track&&card.dataset.trackId===track.id);
+    btn.innerHTML=isCurrent&&playing?pauseSvg:playSvg;
+  });
+}
+
+function stopAudio(){
+  const previous=audio;
+  audio=null;
+  audioTrackId=null;
+  if(previous){
+    try{previous.pause()}catch(_err){}
+  }
+  syncPlaybackButtons(null,false);
 }
 
 function renderPlayer(track,message){
@@ -205,29 +224,57 @@ function renderPlayer(track,message){
 }
 
 function showTrack(track){
-  stopAudio();
+  if(!track)return;
   if(isLocked(track)){openAccess();return}
   if(!track?.audio?.publicUrl){
+    stopAudio();
     const message=track?.access==='free'
       ?(isAwaitingSiteUpload(track)?`Запись приветствия готова · ${fmt(track.duration)||'аудио готово'}. Осталось опубликовать MP3 в папке сайта.`:'Аудиозапись приветствия пока не подключена.')
       :'Аудиофайл этой экспозиции пока не подключён.';
     renderPlayer(track,message);
     return;
   }
+
+  if(audio&&audioTrackId===track.id){
+    currentTrack=track;
+    if(audio.paused){
+      try{if(audio.ended)audio.currentTime=0}catch(_err){}
+      const p=audio.play();
+      syncPlaybackButtons(track,true);
+      if(p&&typeof p.catch==='function')p.catch(()=>{
+        syncPlaybackButtons(track,false);
+        renderPlayer(track,'Не удалось продолжить аудио на этом устройстве');
+      });
+    }else{
+      audio.pause();
+      syncPlaybackButtons(track,false);
+    }
+    return;
+  }
+
+  stopAudio();
   renderPlayer(track);
-  audio=new Audio(track.audio.publicUrl);
-  audio.preload='metadata';
-  audio.setAttribute('playsinline','');
-  if(track.access==='paid'&&entitlement.state==='pending')audio.addEventListener('playing',startPaidWindow,{once:true});
-  const p=audio.play();
-  if(playerBtn)playerBtn.innerHTML=pauseSvg;
-  const cardBtn=document.querySelector(`[data-track-id="${track.id}"] .audio-guide-track-action`);
-  if(cardBtn)cardBtn.innerHTML=pauseSvg;
-  if(p&&typeof p.catch==='function')p.catch(()=>renderPlayer(track,'Не удалось запустить аудио на этом устройстве'));
-  audio.addEventListener('ended',()=>{
-    if(playerBtn)playerBtn.innerHTML=playSvg;
-    const latestBtn=document.querySelector(`[data-track-id="${track.id}"] .audio-guide-track-action`);
-    if(latestBtn)latestBtn.innerHTML=playSvg;
+  const instance=new Audio(track.audio.publicUrl);
+  audio=instance;
+  audioTrackId=track.id;
+  instance.preload='metadata';
+  instance.setAttribute('playsinline','');
+  if(track.access==='paid'&&entitlement.state==='pending')instance.addEventListener('playing',startPaidWindow,{once:true});
+  instance.addEventListener('playing',()=>{
+    if(audio===instance)syncPlaybackButtons(track,true);
+  });
+  instance.addEventListener('pause',()=>{
+    if(audio===instance&&!instance.ended)syncPlaybackButtons(track,false);
+  });
+  instance.addEventListener('ended',()=>{
+    if(audio===instance)syncPlaybackButtons(track,false);
+  });
+  const p=instance.play();
+  syncPlaybackButtons(track,true);
+  if(p&&typeof p.catch==='function')p.catch(()=>{
+    if(audio!==instance)return;
+    syncPlaybackButtons(track,false);
+    renderPlayer(track,'Не удалось запустить аудио на этом устройстве');
   });
 }
 
@@ -256,16 +303,11 @@ function renderTracks(){
     card.querySelector('.audio-guide-track-status')?.addEventListener('click',()=>showTrack(track));
     host.appendChild(card);
   });
+  if(audio&&audioTrackId&&currentTrack)syncPlaybackButtons(currentTrack,!audio.paused);
 }
 
 start?.addEventListener('click',()=>showTrack(tracks[0]));
-playerBtn?.addEventListener('click',()=>{
-  if(!currentTrack)return;
-  if(isLocked(currentTrack)){openAccess();return}
-  if(!currentTrack.audio?.publicUrl){showTrack(currentTrack);return}
-  if(audio&&!audio.paused){audio.pause();playerBtn.innerHTML=playSvg;return}
-  showTrack(currentTrack);
-});
+playerBtn?.addEventListener('click',()=>showTrack(currentTrack));
 modal.addEventListener('click',e=>{if(e.target.closest('[data-audio-close]'))closeAccess()});
 modal.querySelector('.audio-access-test-v2')?.addEventListener('click',()=>{
   activatePending('prototype');
