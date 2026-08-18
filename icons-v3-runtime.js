@@ -34,4 +34,26 @@ function pass(root=document){
 }
 pass();
 new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)pass(n);else if(n.nodeType===3&&n.parentElement)pass(n.parentElement)}))).observe(document.body,{childList:true,subtree:true});
+
+let exploreV3Loading=false;
+function loadExploreV3(){
+  if(exploreV3Loading||document.querySelector('script[data-explore-v3-safe]'))return;
+  exploreV3Loading=true;
+  if(!document.querySelector('link[data-explore-v3-safe]')){
+    const css=document.createElement('link');
+    css.rel='stylesheet';
+    css.href='explore-v3.css?v=4';
+    css.dataset.exploreV3Safe='1';
+    document.head.appendChild(css);
+  }
+  const script=document.createElement('script');
+  script.src='explore-v3.js?v=4';
+  script.dataset.exploreV3Safe='1';
+  script.onload=()=>{exploreV3Loading=false};
+  script.onerror=()=>{exploreV3Loading=false;script.remove()};
+  document.body.appendChild(script);
+}
+document.addEventListener('click',e=>{
+  if(e.target.closest?.('[data-nav="explore"]'))loadExploreV3();
+},{capture:true});
 })();
