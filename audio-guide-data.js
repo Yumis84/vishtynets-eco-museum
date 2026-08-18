@@ -10,6 +10,10 @@ window.VISHTYNETS_AUDIO_GUIDES={
       activationCodeValidDays:7,
       methods:['yookassa','staff_code']
     },
+    halls:[
+      {id:'hall-1',number:1,title:'Зал 1'},
+      {id:'hall-2',number:2,title:'Зал 2'}
+    ],
     tracks:[
       {
         id:'welcome',
@@ -30,17 +34,28 @@ window.VISHTYNETS_AUDIO_GUIDES={
         }
       },
       {
-        id:'exposition-01',
-        number:1,
-        kind:'exposition',
-        title:'Экспозиция 1',
-        description:'Первая полноценная экспозиция музейного аудиогида.',
-        access:'paid',
-        duration:null,
-        audio:{
-          publicUrl:null,
-          status:'awaiting_upload'
-        }
+        id:'exposition-01',number:1,kind:'exposition',hall:1,hallOrder:1,title:'Экспозиция 1',description:'Первая экспозиция первого зала.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}
+      },
+      {
+        id:'exposition-02',number:2,kind:'exposition',hall:1,hallOrder:2,title:'Экспозиция 2',description:'Вторая экспозиция первого зала.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}
+      },
+      {
+        id:'exposition-03',number:3,kind:'exposition',hall:1,hallOrder:3,title:'Экспозиция 3',description:'Третья экспозиция первого зала.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}
+      },
+      {
+        id:'exposition-04',number:4,kind:'exposition',hall:1,hallOrder:4,title:'Экспозиция 4',description:'Четвёртая экспозиция первого зала.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}
+      },
+      {
+        id:'exposition-05',number:5,kind:'exposition',hall:2,hallOrder:1,title:'Экспозиция 1',description:'Первая экспозиция второго зала.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}
+      },
+      {
+        id:'exposition-06',number:6,kind:'exposition',hall:2,hallOrder:2,title:'Экспозиция 2',description:'Вторая экспозиция второго зала.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}
+      },
+      {
+        id:'exposition-07',number:7,kind:'exposition',hall:2,hallOrder:3,title:'Экспозиция 3',description:'Третья экспозиция второго зала.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}
+      },
+      {
+        id:'exposition-08',number:8,kind:'exposition',hall:2,hallOrder:4,title:'Экспозиция 4',description:'Четвёртая экспозиция второго зала.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}
       }
     ]
   },
