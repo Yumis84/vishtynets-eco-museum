@@ -25,6 +25,7 @@ const fmt=n=>{
   const m=Math.floor(n/60),s=n%60;
   return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 };
+const isAwaitingSiteUpload=track=>track?.audio?.status==='awaiting_site_upload';
 const emptyEntitlement=()=>({state:'none',activatedAt:null,startsAt:null,expiresAt:null,source:null});
 
 function normalizeEntitlement(value){
@@ -125,7 +126,7 @@ if(heroText)heroText.textContent='Начните с бесплатного пр�
 const progressHead=$('.audio-guide-progress-head span');
 if(progressHead)progressHead.textContent=`0 из ${tracks.length} треков`;
 const start=$('.audio-guide-start');
-if(start){start.disabled=false;start.textContent=currentTrack?.audio?.publicUrl?'Слушать приветствие':'Открыть приветствие'}
+if(start){start.disabled=false;start.textContent=currentTrack?.audio?.publicUrl?'Слушать приветствие':isAwaitingSiteUpload(currentTrack)?'Запись готова':'Открыть приветствие'}
 const note=$('.audio-guide-note');
 const count=$('.audio-guide-section-head>span');
 if(count)count.textContent=`${tracks.length} трека`;
@@ -139,6 +140,8 @@ function updateAccessCopy(){
     note.textContent=`Доступ активирован. ${activeHours} часов начнутся только с первого запуска платной экспозиции.`;
   }else if(entitlement.state==='active'){
     note.textContent=`Платные экспозиции открыты · ${remainingText()}.`;
+  }else if(isAwaitingSiteUpload(tracks[0])){
+    note.textContent='Бесплатное приветствие уже записано и ожидает публикации MP3 в папке сайта. Платные экспозиции открываются после активации.';
   }else{
     note.textContent='Приветствие доступно бесплатно. Экспозиция 1 и следующие записи открываются после активации аудиогида.';
   }
@@ -182,7 +185,8 @@ function stopAudio(){
 function renderPlayer(track,message){
   currentTrack=track;
   if(transcriptPanel){
-    const transcript=String(track?.transcript||'').trim();
+    const transcriptIsVerified=track?.transcriptStatus!=='draft_pre_recording';
+    const transcript=transcriptIsVerified?String(track?.transcript||'').trim():'';
     transcriptPanel.hidden=!transcript;
     transcriptPanel.textContent=transcript?`Текст: ${transcript}`:'';
   }
@@ -205,7 +209,7 @@ function showTrack(track){
   if(isLocked(track)){openAccess();return}
   if(!track?.audio?.publicUrl){
     const message=track?.access==='free'
-      ?'Текст приветствия уже подготовлен. Осталось записать и подключить аудиофайл.'
+      ?(isAwaitingSiteUpload(track)?`Запись приветствия готова · ${fmt(track.duration)||'аудио готово'}. Осталось опубликовать MP3 в папке сайта.`:'Аудиозапись приветствия пока не подключена.')
       :'Аудиофайл этой экспозиции пока не подключён.';
     renderPlayer(track,message);
     return;
@@ -239,7 +243,7 @@ function renderTracks(){
     card.dataset.trackId=track.id;
     const label=track.kind==='intro'?'Вступление':`Экспозиция ${String(track.number).padStart(2,'0')}`;
     let status='Бесплатно';
-    let accessMeta='доступно всем';
+    let accessMeta=track.access==='free'&&isAwaitingSiteUpload(track)?'запись готова · публикация на сайте':'доступно всем';
     if(track.access==='paid'){
       if(locked){status='Закрыто';accessMeta='после активации'}
       else if(entitlement.state==='pending'){status='Активировано';accessMeta=`${activeHours} ч с первого запуска`}
@@ -275,5 +279,5 @@ modal.querySelector('.audio-access-test-v2')?.addEventListener('click',()=>{
 renderTracks();
 updateAccessCopy();
 scheduleExpiry();
-renderPlayer(currentTrack,currentTrack.audio?.publicUrl?'Бесплатно':'Текст приветствия подготовлен · аудиозапись ещё не подключена');
+renderPlayer(currentTrack,currentTrack.audio?.publicUrl?'Бесплатно':isAwaitingSiteUpload(currentTrack)?`Запись готова · ${fmt(currentTrack.duration)||'MP3'} · ожидает публикации на сайте`:'Аудиозапись ещё не подключена');
 })();
