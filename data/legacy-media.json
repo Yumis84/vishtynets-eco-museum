@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-19",
+  "sourceDomain": "https://www.wystynez.ru",
+  "rules": {
+    "creditPolicy": "Page-level photo credits are preserved as page-level metadata and are not silently assigned to every individual file unless the source explicitly ties a credit to that image.",
+    "reachabilityPolicy": "cache_miss means the exact legacy media URL was extracted from the source page/link but the crawler could not fetch the binary during this pass."
+  },
+  "pages": [
+    {
+      "legacyUrl": "https://www.wystynez.ru/p0117.htm",
+      "title": "Проект «В гости к камню»",
+      "captureStatus": "page_text_and_media_urls_verified",
+      "pagePhotoCredits": ["А. Соколов"],
+      "images": [
+        {"url":"https://wystynez.ru/sc-pic/i1595.png","context":"project/page graphic; exact caption unresolved","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2157.jpg","context":"project introduction image; exact caption unresolved","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2158.jpg","context":"near source text about the boulder at Mount Dozor; caption association not yet proven","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2159.jpg","context":"project/boulder image; exact caption unresolved","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2160.jpg","context":"adjacent to source label «Полевой шпат»; likely mineral illustration, exact caption association pending","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2167.jpg","context":"adjacent to source text about field expedition material","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2162.jpg","context":"adjacent to source text about the interactive boulder map","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2208.jpg","context":"project news image before the 22 May 2021 results link","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2214.jpg","context":"image adjacent to the interactive boulder map link; exact role pending","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2165.jpg","context":"project news image; exact caption unresolved","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2193.jpg","context":"adjacent to the 24 September 2020 information-meeting item","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2196.jpg","context":"adjacent to the «Легенда о камне» contest-results link","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2163.png","context":"partner/support graphic; exact identity pending","creditScope":"not_photo_credit","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i1604.png","context":"support/partner graphic near Public Chamber acknowledgement; exact identity pending","creditScope":"not_photo_credit","reachability":"cache_miss"}
+      ],
+      "linkedAssets": [
+        {"type":"interactive_map","title":"Интерактивная карта валунов Виштынецкой возвышенности","url":"https://wystynez.ru/p0121.htm","status":"dedicated_url_verified_content_capture_pending"},
+        {"type":"brochure","title":"Брошюра о валунах Виштынецкой возвышенности","url":null,"status":"download_anchor_verified_exact_url_pending"}
+      ]
+    },
+    {
+      "legacyUrl": "https://www.wystynez.ru/p38.htm",
+      "title": "Птицы Красного леса",
+      "captureStatus": "page_text_and_media_urls_verified",
+      "author": "Игорь Шелякин",
+      "pagePhotoCredits": ["Cliparts", "Dinamite SoftWare Group, 2003"],
+      "images": [
+        {"url":"https://wystynez.ru/sc-pic/i0317.png","context":"top-page bird/landscape illustration; exact caption unresolved","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i0318.png","context":"near the source caption «Серая цапля»; association pending final visual check","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i0192.jpg","context":"legacy page/navigation image; content role unresolved","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i0195.png","context":"legacy page/navigation image; content role unresolved","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i1237.png","context":"legacy page/navigation or section image; content role unresolved","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i0320.png","context":"adjacent to source label «Удод»; association pending final visual check","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i0321.png","context":"adjacent to source label «Выпь»; association pending final visual check","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i1238.jpg","context":"adjacent to source label «Малый подорлик»; association pending final visual check","creditScope":"page_level_only","reachability":"cache_miss"}
+      ]
+    }
+  ],
+  "unresolved": [
+    {"item":"Exact download URL for the boulder brochure linked from p0122.htm","status":"search_index_confirms_anchor_but_target_url_not_exposed"},
+    {"item":"Full content of p0121.htm interactive boulder map page","status":"dedicated_link_verified_but_direct_fetch_cache_miss"}
+  ]
+}
