@@ -34,8 +34,8 @@ window.VISHTYNETS_AUDIO_GUIDES={
         access:'paid',
         duration:873,
         audio:{
-          publicUrl:null,
-          status:'source_supplied'
+          publicUrl:'https://drive.google.com/uc?export=download&id=1qh91-ABf1qbCiKyhI8M_cjYp96L0HOkP',
+          status:'drive_hosted'
         }
       }
     ]
