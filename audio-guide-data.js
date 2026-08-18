@@ -32,10 +32,10 @@ window.VISHTYNETS_AUDIO_GUIDES={
         title:'Экспозиция 1',
         description:'Первая полноценная экспозиция музейного аудиогида.',
         access:'paid',
-        duration:873,
+        duration:null,
         audio:{
-          publicUrl:'assets/audio/audioguide/exposition-01.m4a',
-          status:'site_hosted'
+          publicUrl:null,
+          status:'awaiting_upload'
         }
       }
     ]
