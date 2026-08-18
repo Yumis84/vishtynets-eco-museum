@@ -1,5 +1,15 @@
 (()=>{
 'use strict';
+const loadHomepageBrand=()=>{
+  if(document.querySelector('script[data-homepage-brand]'))return;
+  const brand=document.createElement('script');
+  brand.src='homepage-brand.js?v=1';
+  brand.async=false;
+  brand.dataset.homepageBrand='1';
+  document.head.appendChild(brand);
+};
+loadHomepageBrand();
+
 const hideBottomPlayer=()=>{
   const player=document.querySelector('.audio-guide-player');
   if(player)player.style.display='none';
