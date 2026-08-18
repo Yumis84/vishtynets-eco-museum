@@ -32,7 +32,6 @@ const fmt=n=>{
   const m=Math.floor(n/60),s=n%60;
   return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 };
-const isAwaitingSiteUpload=track=>track?.audio?.status==='awaiting_site_upload';
 const emptyEntitlement=()=>({state:'none',activatedAt:null,startsAt:null,expiresAt:null,source:null});
 
 function normalizeEntitlement(value){
@@ -147,7 +146,7 @@ function updateAccessCopy(){
   }else if(entitlement.state==='active'){
     note.textContent=`Экспозиции открыты · ${remainingText()}.`;
   }else{
-    note.textContent='Приветствие доступно бесплатно. Все 8 экспозиций видны ниже и откроются после активации аудиогида.';
+    note.textContent='Приветствие доступно бесплатно. Все 8 экспозиций видны ниже; замок открывает окно оплаты и активации.';
   }
 }
 
@@ -203,7 +202,7 @@ function syncPlaybackButtons(track,playing){
   document.querySelectorAll('.audio-guide-track-action').forEach(btn=>{
     const card=btn.closest('.audio-guide-track-card-v2');
     if(!card)return;
-    if(card.classList.contains('is-locked')){
+    if(card.dataset.locked==='1'){
       btn.innerHTML=lockSvg;
       return;
     }
@@ -300,21 +299,28 @@ function makeTrackCard(track){
   const locked=track.access==='paid'&&!paidAccessAvailable();
   const duration=fmt(track.duration);
   const card=document.createElement('article');
-  card.className=`audio-guide-track-card-v2 ${locked?'is-locked':'is-unlocked'}${currentTrack?.id===track.id?' is-selected':''}`;
+  card.className=`audio-guide-track-card-v2 is-unlocked${currentTrack?.id===track.id?' is-selected':''}`;
   card.dataset.trackId=track.id;
+  card.dataset.locked=locked?'1':'0';
+  card.setAttribute('role','button');
+  card.tabIndex=0;
+  card.setAttribute('aria-label',`${locked?'Открыть оплату для':'Открыть'} ${track.title}`);
   const localNumber=Number(track.hallOrder)||Number(track.number)||1;
-  let status='Закрыто';
+  let status='Открыть';
   let accessMeta='после активации';
   if(!locked){
     if(entitlement.state==='pending'){status='Активировано';accessMeta=`${activeHours} ч с первого запуска`}
     else{status='Открыто';accessMeta=remainingText()||'доступ активен'}
   }
-  if(!track.audio?.publicUrl&& !locked)accessMeta='аудиофайл ещё не добавлен';
+  if(!track.audio?.publicUrl&&!locked)accessMeta='аудиофайл ещё не добавлен';
   const meta=[duration,accessMeta].filter(Boolean).join(' · ');
-  card.innerHTML=`<button class="audio-guide-track-action" type="button" aria-label="${locked?'Активировать':'Открыть'} ${track.title}">${locked?lockSvg:playSvg}</button><div class="audio-guide-track-copy-v2"><span>Экспозиция ${String(localNumber).padStart(2,'0')}</span><strong>${track.title}</strong><p>${track.description||''}</p><small>${meta}</small></div><span class="audio-guide-track-status">${status}</span>`;
-  card.querySelector('.audio-guide-track-action')?.addEventListener('click',()=>showTrack(track));
-  card.querySelector('.audio-guide-track-copy-v2')?.addEventListener('click',()=>showTrack(track));
-  card.querySelector('.audio-guide-track-status')?.addEventListener('click',()=>showTrack(track));
+  card.innerHTML=`<button class="audio-guide-track-action" type="button" tabindex="-1" aria-hidden="true">${locked?lockSvg:playSvg}</button><div class="audio-guide-track-copy-v2"><span>Экспозиция ${String(localNumber).padStart(2,'0')}</span><strong>${track.title}</strong><p>${track.description||''}</p><small>${meta}</small></div><span class="audio-guide-track-status">${status}</span>`;
+  card.addEventListener('click',()=>showTrack(track));
+  card.addEventListener('keydown',e=>{
+    if(e.key!=='Enter'&&e.key!==' ')return;
+    e.preventDefault();
+    showTrack(track);
+  });
   return card;
 }
 
