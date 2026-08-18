@@ -42,12 +42,12 @@ function loadExploreV3(){
   if(!document.querySelector('link[data-explore-v3-safe]')){
     const css=document.createElement('link');
     css.rel='stylesheet';
-    css.href='explore-v3.css?v=4';
+    css.href='explore-v3.css?v=5';
     css.dataset.exploreV3Safe='1';
     document.head.appendChild(css);
   }
   const script=document.createElement('script');
-  script.src='explore-v3.js?v=4';
+  script.src='explore-v3.js?v=5';
   script.dataset.exploreV3Safe='1';
   script.onload=()=>{exploreV3Loading=false};
   script.onerror=()=>{exploreV3Loading=false;script.remove()};
