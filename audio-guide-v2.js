@@ -22,6 +22,7 @@ let currentTrack=introTrack||null;
 let audio=null;
 let audioTrackId=null;
 let expiryTimer=null;
+let isScrubbing=false;
 
 const playSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
 const pauseSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>';
@@ -133,8 +134,24 @@ const heroText=$('.audio-guide-hero p');
 if(heroText)heroText.textContent='Сначала послушайте бесплатное приветствие. Ниже — восемь экспозиций, разделённых по двум залам музея.';
 const progressTitle=$('.audio-guide-progress-head strong');
 const progressHead=$('.audio-guide-progress-head span');
+const progressTrack=$('.audio-guide-progress-track');
 const progressBar=$('.audio-guide-progress-track i');
+const progressThumb=document.createElement('b');
 if(progressTitle)progressTitle.textContent='Прогресс трека';
+if(progressTrack){
+  progressTrack.removeAttribute('aria-hidden');
+  progressTrack.setAttribute('role','slider');
+  progressTrack.setAttribute('tabindex','0');
+  progressTrack.setAttribute('aria-label','Перемотка аудио');
+  progressTrack.setAttribute('aria-valuemin','0');
+  progressTrack.setAttribute('aria-valuemax','100');
+  progressTrack.setAttribute('aria-valuenow','0');
+  Object.assign(progressTrack.style,{height:'20px',marginTop:'7px',background:'linear-gradient(to bottom,transparent 6px,#e2ddd2 6px,#e2ddd2 13px,transparent 13px)',overflow:'visible',position:'relative',cursor:'pointer',touchAction:'none'});
+  if(progressBar)Object.assign(progressBar.style,{position:'absolute',left:'0',top:'6px',height:'7px',borderRadius:'999px',transition:'none'});
+  progressThumb.className='audio-guide-progress-thumb';
+  Object.assign(progressThumb.style,{position:'absolute',left:'0%',top:'50%',width:'14px',height:'14px',borderRadius:'50%',background:'#6f846d',boxShadow:'0 1px 5px rgba(47,77,58,.28)',transform:'translate(-50%,-50%)',pointerEvents:'none'});
+  progressTrack.appendChild(progressThumb);
+}
 const start=$('.audio-guide-start');
 if(start){
   start.disabled=!introTrack?.audio?.publicUrl;
@@ -154,11 +171,68 @@ function updatePlaybackProgress(media=null,track=currentTrack){
   const ratio=duration>0?Math.max(0,Math.min(1,current/duration)):0;
   const percent=Math.round(ratio*100);
   if(progressBar)progressBar.style.width=`${(ratio*100).toFixed(1)}%`;
+  if(progressThumb)progressThumb.style.left=`${(ratio*100).toFixed(1)}%`;
+  if(progressTrack){
+    progressTrack.setAttribute('aria-valuenow',String(percent));
+    progressTrack.setAttribute('aria-valuetext',duration>0?`${clock(current)} из ${clock(duration)}`:`${clock(current)}`);
+  }
   if(progressHead){
     progressHead.textContent=duration>0
       ?`${clock(current)} / ${clock(duration)} · ${percent}%`
       :`${clock(current)} · ${percent}%`;
   }
+}
+
+function seekToRatio(ratio){
+  if(!audio)return false;
+  const duration=Number(audio.duration);
+  if(!Number.isFinite(duration)||duration<=0)return false;
+  const clamped=Math.max(0,Math.min(1,Number(ratio)||0));
+  try{audio.currentTime=clamped*duration}catch(_err){return false}
+  updatePlaybackProgress(audio,currentTrack);
+  return true;
+}
+function seekFromClientX(clientX){
+  if(!progressTrack)return false;
+  const rect=progressTrack.getBoundingClientRect();
+  if(!rect.width)return false;
+  return seekToRatio((Number(clientX)-rect.left)/rect.width);
+}
+if(progressTrack){
+  progressTrack.addEventListener('pointerdown',e=>{
+    if(!audio||!Number.isFinite(Number(audio.duration))||Number(audio.duration)<=0)return;
+    e.preventDefault();
+    isScrubbing=true;
+    try{progressTrack.setPointerCapture(e.pointerId)}catch(_err){}
+    seekFromClientX(e.clientX);
+  });
+  progressTrack.addEventListener('pointermove',e=>{
+    if(!isScrubbing)return;
+    e.preventDefault();
+    seekFromClientX(e.clientX);
+  });
+  const finishScrub=e=>{
+    if(!isScrubbing)return;
+    seekFromClientX(e.clientX);
+    isScrubbing=false;
+    try{progressTrack.releasePointerCapture(e.pointerId)}catch(_err){}
+  };
+  progressTrack.addEventListener('pointerup',finishScrub);
+  progressTrack.addEventListener('pointercancel',()=>{isScrubbing=false});
+  progressTrack.addEventListener('keydown',e=>{
+    if(!audio)return;
+    const duration=Number(audio.duration);
+    if(!Number.isFinite(duration)||duration<=0)return;
+    let next=null;
+    if(e.key==='ArrowLeft')next=Math.max(0,Number(audio.currentTime)-5);
+    if(e.key==='ArrowRight')next=Math.min(duration,Number(audio.currentTime)+5);
+    if(e.key==='Home')next=0;
+    if(e.key==='End')next=duration;
+    if(next===null)return;
+    e.preventDefault();
+    try{audio.currentTime=next}catch(_err){}
+    updatePlaybackProgress(audio,currentTrack);
+  });
 }
 
 function updateAccessCopy(){
@@ -238,6 +312,7 @@ function stopAudio(){
   const previous=audio;
   audio=null;
   audioTrackId=null;
+  isScrubbing=false;
   if(previous){
     try{previous.pause()}catch(_err){}
   }
