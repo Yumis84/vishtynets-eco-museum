@@ -53,7 +53,28 @@ function loadExploreV3(){
   script.onerror=()=>{exploreV3Loading=false;script.remove()};
   document.body.appendChild(script);
 }
+
+let mapV3Loading=false;
+function loadMapV3(){
+  if(mapV3Loading||document.querySelector('script[data-map-v3-safe]'))return;
+  mapV3Loading=true;
+  if(!document.querySelector('link[data-map-v3-safe]')){
+    const css=document.createElement('link');
+    css.rel='stylesheet';
+    css.href='map-v3.css?v=2';
+    css.dataset.mapV3Safe='1';
+    document.head.appendChild(css);
+  }
+  const script=document.createElement('script');
+  script.src='map-v3.js?v=2';
+  script.dataset.mapV3Safe='1';
+  script.onload=()=>{mapV3Loading=false};
+  script.onerror=()=>{mapV3Loading=false;script.remove()};
+  document.body.appendChild(script);
+}
+
 document.addEventListener('click',e=>{
   if(e.target.closest?.('[data-nav="explore"]'))loadExploreV3();
+  if(e.target.closest?.('[data-nav="map"]'))loadMapV3();
 },{capture:true});
 })();
