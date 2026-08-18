@@ -18,11 +18,15 @@ window.VISHTYNETS_AUDIO_GUIDES={
         title:'Добро пожаловать',
         description:'Короткое знакомство с музеем и аудиогидом перед началом экскурсии.',
         access:'free',
-        duration:null,
+        duration:196.872,
         transcript:'Добро пожаловать в Виштынецкий эколого-исторический музей. Здесь природа, история и память Роминтской пущи соединяются в одной экскурсии. Мы предлагаем пройти музей вместе с аудиогидом: слушайте записи по порядку и двигайтесь от экспозиции к экспозиции. Это вступление доступно бесплатно. Если вам понравится формат, после него можно открыть полную экскурсию и продолжить с первой экспозиции.',
+        transcriptStatus:'draft_pre_recording',
         audio:{
           publicUrl:null,
-          status:'awaiting_recording'
+          status:'awaiting_site_upload',
+          sourceFormat:'mp3',
+          sourceBytes:1181232,
+          sourceSha256:'eced47b1a0d05fb8e19034c1d34abf93f3c076fd342bea8414e45243dccf0a29'
         }
       },
       {
