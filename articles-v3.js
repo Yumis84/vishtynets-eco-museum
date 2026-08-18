@@ -57,6 +57,26 @@ function enrichCards(){
   updateCount();
 }
 
+function currentReaderArticle(){
+  const title=$('.reader-title h1',reader)?.textContent?.trim();
+  if(!title)return null;
+  return articles.find(article=>article.title===title)||null;
+}
+
+function addLegacySourceLink(){
+  const article=currentReaderArticle();
+  const meta=$('.reader-meta',reader);
+  if(!article?.legacyUrl||!meta||meta.querySelector('.reader-legacy-source'))return;
+  const link=document.createElement('a');
+  link.className='reader-legacy-source';
+  link.href=article.legacyUrl;
+  link.target='_blank';
+  link.rel='noopener';
+  link.textContent='Оригинал на старом сайте ↗';
+  Object.assign(link.style,{display:'inline-flex',alignItems:'center',minHeight:'30px',padding:'0 9px',border:'1px solid #d6cebd',borderRadius:'999px',color:'#36513f',background:'#fbf7ee',textDecoration:'none',fontWeight:'800'});
+  meta.append(link);
+}
+
 function addReaderSwipeNote(){
   const body=$('.reader-body',reader);
   if(!body||$('.reader-swipe-note',body))return;
@@ -67,14 +87,17 @@ function addReaderSwipeNote(){
 }
 
 function enhanceReader(){
-  requestAnimationFrame(addReaderSwipeNote);
+  requestAnimationFrame(()=>{
+    addLegacySourceLink();
+    addReaderSwipeNote();
+  });
 }
 
 function init(){
   createOverview();
   enrichCards();
   new MutationObserver(enrichCards).observe(articleList,{childList:true});
-  new MutationObserver(enhanceReader).observe(reader,{childList:true});
+  new MutationObserver(enhanceReader).observe(reader,{childList:true,subtree:true});
   enhanceReader();
 }
 
