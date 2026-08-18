@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-19",
+  "pages": [
+    {
+      "legacyUrl": "https://www.wystynez.ru/p0109.htm",
+      "title": "Торжественное открытие «Неизвестный Виштынец»",
+      "captureStatus": "page_text_and_media_urls_verified",
+      "pagePhotoCredits": ["Юлия Алексеева"],
+      "images": [
+        {"url":"https://wystynez.ru/sc-pic/i1713.png","context":"page/project graphic; exact role unresolved","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i1595.png","context":"project/support graphic reused across project pages; exact role unresolved","creditScope":"not_assigned_per_image","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i1711.jpg","context":"adjacent to source caption «Центральный экспонат новой экспозиции — макет озера Виштынецкое»","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i1616.jpg","context":"project/partner image near partner block; exact caption unresolved","creditScope":"page_level_only","reachability":"cache_miss"}
+      ]
+    },
+    {
+      "legacyUrl": "https://www.wystynez.ru/p0125.htm",
+      "title": "Соседи — 2023 и «Вкусы Виштынецкой возвышенности»",
+      "captureStatus": "page_text_and_media_urls_verified",
+      "pagePhotoCredits": ["Наталья Матусевичене", "Юлия Алексеева", "Ирина Ковардо"],
+      "images": [
+        {"url":"https://wystynez.ru/sc-pic/i2334.png","context":"event/page graphic; exact caption unresolved","creditScope":"not_assigned_per_image","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2335.jpg","context":"event header/lead image; exact caption unresolved","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2344.png","context":"programme/event graphic near «Программа праздника»","creditScope":"not_assigned_per_image","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2360.jpg","context":"event gallery image 1","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2361.jpg","context":"event gallery image 2","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2362.jpg","context":"event gallery image 3","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2363.jpg","context":"event gallery image 4","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2364.jpg","context":"event gallery image 5","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2365.jpg","context":"event gallery image 6","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2366.jpg","context":"event gallery image 7","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2367.jpg","context":"event gallery image 8","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2368.jpg","context":"event gallery image 9","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2369.jpg","context":"event gallery image 10","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2378.jpg","context":"event gallery image 11","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2371.jpg","context":"event gallery image 12","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2372.jpg","context":"event gallery image 13","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2373.jpg","context":"event gallery image 14","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2374.jpg","context":"event gallery image 15","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2375.jpg","context":"event gallery image 16","creditScope":"page_level_only","reachability":"cache_miss"},
+        {"url":"https://wystynez.ru/sc-pic/i2376.jpg","context":"event gallery image 17","creditScope":"page_level_only","reachability":"cache_miss"}
+      ]
+    }
+  ]
+}
