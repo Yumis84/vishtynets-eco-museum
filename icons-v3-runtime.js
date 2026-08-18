@@ -1,5 +1,19 @@
 (()=>{
 'use strict';
+
+// Load verified legacy migration data synchronously before app.js builds article categories.
+if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-2]')){
+  document.write('<script data-legacy-batch-2 src="museum-legacy-batch-2.js?v=1"><\/script>');
+}
+
+// Owner decision: no museum logo on the homepage hero for now.
+const heroBrand=document.querySelector('.hero-brand');
+if(heroBrand){
+  heroBrand.remove();
+  const homeHead=document.querySelector('.home-head');
+  if(homeHead)homeHead.style.justifyContent='flex-end';
+}
+
 const iconLinks=[...document.querySelectorAll('link[href*="icons-v3.css"]')];
 if(iconLinks.length){
   iconLinks[0].href='icons-v3.css?v=3';
@@ -73,7 +87,37 @@ function loadMapV3(){
   document.body.appendChild(script);
 }
 
+function openHomepageTopic(topic){
+  const mapping={
+    'topic-nature':'Природа',
+    'topic-history':'История',
+    'topic-culture':'Культура',
+    'topic-stone':'Камни'
+  };
+  const cls=Object.keys(mapping).find(name=>topic.classList.contains(name));
+  const target=mapping[cls];
+  if(!target)return;
+  window.setTimeout(()=>{
+    const search=document.querySelector('#articleSearch');
+    if(search)search.value='';
+    const chips=[...document.querySelectorAll('[data-article-category]')];
+    const allChip=chips.find(button=>button.dataset.articleCategory==='Все');
+    if(target==='Камни'){
+      allChip?.click();
+      if(search){
+        search.value='кам';
+        search.dispatchEvent(new Event('input',{bubbles:true}));
+      }
+      return;
+    }
+    const chip=chips.find(button=>button.dataset.articleCategory===target);
+    chip?.click();
+  },0);
+}
+
 document.addEventListener('click',e=>{
+  const topic=e.target.closest?.('.topic-preview-grid button');
+  if(topic)openHomepageTopic(topic);
   if(e.target.closest?.('[data-nav="explore"]'))loadExploreV3();
   if(e.target.closest?.('[data-nav="map"]'))loadMapV3();
 },{capture:true});
