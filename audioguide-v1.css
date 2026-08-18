@@ -1,0 +1,35 @@
+/* Audioguide v1 — «Тёплый лес». Статический каркас без аудиофайлов. */
+.entry-audio{background:rgba(239,235,224,.97)}
+.entry-audio .entry-icon{background:#e3e2d2;color:#5d6d57;font-size:0}
+.entry-audio .entry-icon::before{content:"";width:18px;height:18px;border:2px solid currentColor;border-bottom:0;border-radius:18px 18px 0 0;display:block;transform:translateY(2px)}
+.entry-audio .entry-icon::after{content:"";position:absolute;width:5px;height:12px;border-radius:5px;background:currentColor;box-shadow:17px 0 0 currentColor;transform:translate(-8.5px,7px)}
+.entry-audio .entry-icon{position:relative}
+
+.screen-audioguide{padding:calc(env(safe-area-inset-top) + 18px) 14px 30px;background:linear-gradient(180deg,#f8f3e9,#f1e8da)}
+.audio-guide-hero{position:relative;overflow:hidden;padding:24px 18px 20px;border-radius:27px;background:linear-gradient(145deg,#eef0e4,#e8dfd0);border:1px solid #d5ccbb;box-shadow:0 8px 22px rgba(45,58,47,.06)}
+.audio-guide-hero::after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-82px;top:-78px;background:rgba(113,129,95,.09);pointer-events:none}
+.audio-guide-badge{display:inline-flex;align-items:center;min-height:28px;padding:0 9px;border:1px solid #cfc6b5;border-radius:999px;background:rgba(251,247,238,.78);color:#6c745f;font-size:10px;font-weight:850}
+.audio-guide-hero h2{position:relative;z-index:1;margin:14px 0 8px;max-width:430px;font:600 30px/1.04 Georgia,"Times New Roman",serif;color:#30463a;letter-spacing:-.02em}
+.audio-guide-hero p{position:relative;z-index:1;margin:0;max-width:520px;color:#687168;font-size:14px;line-height:1.55}
+.audio-guide-status{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:19px}
+.audio-guide-stat{padding:13px;border-radius:16px;background:rgba(251,247,238,.72);border:1px solid rgba(207,198,181,.78)}
+.audio-guide-stat strong{display:block;color:#344b3d;font-size:15px}
+.audio-guide-stat small{display:block;margin-top:3px;color:#7a7f77;font-size:10.5px;line-height:1.3}
+.audio-guide-placeholder{margin-top:14px;min-height:48px;width:100%;border:1px solid #d4cbbb;border-radius:14px;background:#ece6da;color:#8a8d85;font-weight:850}
+.audio-guide-placeholder[disabled]{opacity:1}
+
+.audio-guide-section{margin-top:18px;padding:18px 16px;border:1px solid #d6cebd;border-radius:23px;background:#fbf7ee;box-shadow:0 5px 16px rgba(45,58,47,.045)}
+.audio-guide-section h3{margin:0;font:600 22px/1.08 Georgia,"Times New Roman",serif;color:#30453a}
+.audio-guide-section>p{margin:8px 0 0;color:#71776f;font-size:12.5px;line-height:1.5}
+.audio-guide-flow{display:grid;gap:9px;margin-top:14px}
+.audio-guide-step{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;padding:11px;border:1px solid #ddd4c5;border-radius:15px;background:#f6f0e6}
+.audio-guide-step span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#e2e7db;color:#516b56;font-weight:900}
+.audio-guide-step strong{display:block;color:#3b4e40;font-size:13px}
+.audio-guide-step small{display:block;margin-top:2px;color:#7a7f77;font-size:11px;line-height:1.35}
+.audio-guide-empty{margin-top:14px;padding:16px;border:1px dashed #cfc5b4;border-radius:17px;background:#f5eee3;color:#70766e;font-size:12.5px;line-height:1.5}
+.audio-guide-note{margin-top:14px;color:#888a83;font-size:10.5px;line-height:1.45}
+
+@media(max-width:360px){
+  .audio-guide-hero h2{font-size:27px}
+  .audio-guide-status{grid-template-columns:1fr}
+}
