@@ -17,20 +17,11 @@ const byId=new Map(ordered.map(track=>[track.id,track]));
 
 let sequenceActive=false;
 let pendingTrackId=null;
-let latestAudio=null;
+let currentTrackId=null;
 let feature=null;
 let featureSmall=null;
+let advancePending=false;
 
-const NativeAudio=window.Audio;
-function trackUrl(track){
-  if(!track?.audio?.publicUrl)return null;
-  try{return new URL(track.audio.publicUrl,window.location.href).href}catch(_err){return null}
-}
-function trackForAudio(media){
-  if(!media)return null;
-  const src=media.currentSrc||media.src||'';
-  return ordered.find(track=>trackUrl(track)===src)||null;
-}
 function nextAfter(track){
   const index=ordered.findIndex(item=>item.id===track?.id);
   return index>=0?ordered[index+1]||null:null;
@@ -42,6 +33,14 @@ function selectedTrack(){
 function cardFor(track){
   if(!track?.id)return null;
   return document.querySelector(`.audio-guide-track-card-v2[data-track-id="${track.id}"]`);
+}
+function isPlaying(track){
+  if(!track)return false;
+  if(track.kind==='intro'){
+    return document.querySelector('.audio-guide-start')?.textContent?.trim()==='Пауза';
+  }
+  const path=cardFor(track)?.querySelector('.audio-guide-track-action svg path')?.getAttribute('d')||'';
+  return path==='M8 5v14M16 5v14';
 }
 
 function setFeatureState(active,text){
@@ -57,6 +56,8 @@ function setFeatureState(active,text){
 function stopSequence(message='Треки по порядку'){
   sequenceActive=false;
   pendingTrackId=null;
+  currentTrackId=null;
+  advancePending=false;
   setFeatureState(false,message);
 }
 
@@ -65,6 +66,8 @@ function startTrack(track){
     stopSequence('Экскурсия завершена');
     return false;
   }
+  currentTrackId=track.id;
+  advancePending=false;
 
   if(!track.audio?.publicUrl){
     const card=cardFor(track);
@@ -81,7 +84,7 @@ function startTrack(track){
       return false;
     }
     setFeatureState(true,'Автопереход включён');
-    start.click();
+    if(!isPlaying(track))start.click();
     return true;
   }
 
@@ -100,31 +103,27 @@ function startTrack(track){
 
   pendingTrackId=null;
   setFeatureState(true,'Автопереход включён');
-  card.click();
+  if(!isPlaying(track))card.click();
   return true;
 }
 
 function startSequence(){
   sequenceActive=true;
   pendingTrackId=null;
+  advancePending=false;
   setFeatureState(true,'Автопереход включён');
 
-  const current=trackForAudio(latestAudio);
-  if(current&&latestAudio){
-    if(latestAudio.ended){
-      const next=nextAfter(current);
-      startTrack(next||ordered[0]);
-      return;
-    }
-    if(latestAudio.paused){
-      const result=latestAudio.play();
-      if(result&&typeof result.catch==='function')result.catch(()=>startTrack(current));
-    }
+  if(document.querySelector('.audio-guide-start')?.textContent?.trim()==='Пауза'){
+    currentTrackId=intro.id;
     return;
   }
-
   const selected=selectedTrack();
-  startTrack(selected||ordered[0]);
+  if(selected){
+    currentTrackId=selected.id;
+    if(!isPlaying(selected))startTrack(selected);
+    return;
+  }
+  startTrack(intro||ordered[0]);
 }
 
 function toggleSequence(){
@@ -135,30 +134,33 @@ function toggleSequence(){
   startSequence();
 }
 
-function onEnded(media){
-  if(!sequenceActive)return;
-  const current=trackForAudio(media);
-  if(!current)return;
+function advanceFromCurrent(){
+  if(!sequenceActive||advancePending)return;
+  const current=byId.get(currentTrackId)||selectedTrack()||intro;
   const next=nextAfter(current);
   if(!next){
     stopSequence('Экскурсия завершена');
     return;
   }
+  advancePending=true;
   setFeatureState(true,'Следующий трек…');
   window.setTimeout(()=>{
-    if(sequenceActive)startTrack(next);
+    if(!sequenceActive)return;
+    advancePending=false;
+    startTrack(next);
   },180);
 }
 
-function WrappedAudio(...args){
-  const media=new NativeAudio(...args);
-  latestAudio=media;
-  media.addEventListener('ended',()=>onEnded(media));
-  return media;
+function bindProgressWatcher(){
+  const progress=document.querySelector('.audio-guide-progress-track');
+  if(!progress)return;
+  const check=()=>{
+    const value=Number(progress.getAttribute('aria-valuenow'))||0;
+    if(value<99.5){advancePending=false;return}
+    if(sequenceActive)advanceFromCurrent();
+  };
+  new MutationObserver(check).observe(progress,{attributes:true,attributeFilter:['aria-valuenow']});
 }
-WrappedAudio.prototype=NativeAudio.prototype;
-try{Object.setPrototypeOf(WrappedAudio,NativeAudio)}catch(_err){}
-window.Audio=WrappedAudio;
 
 function bindFeature(){
   feature=document.querySelector('.audio-guide-features .audio-guide-feature');
@@ -175,13 +177,23 @@ function bindFeature(){
     toggleSequence();
   });
   setFeatureState(false,'Треки по порядку');
+  bindProgressWatcher();
 }
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bindFeature,{once:true});
 else bindFeature();
 
-// The current prototype activation button is handled by the core player first.
-// If sequence mode was waiting at a locked track, resume that exact track afterwards.
+// Keep the sequence aligned if the visitor manually chooses a track.
+document.addEventListener('click',event=>{
+  if(!sequenceActive)return;
+  const start=event.target.closest('.audio-guide-start');
+  if(start){currentTrackId=intro.id;advancePending=false;return}
+  const card=event.target.closest('.audio-guide-track-card-v2');
+  if(card?.dataset?.trackId){currentTrackId=card.dataset.trackId;advancePending=false}
+});
+
+// The prototype activation button unlocks the catalogue in the core player.
+// Resume the exact track that the sequential mode was waiting for.
 document.addEventListener('click',event=>{
   if(!sequenceActive||!pendingTrackId)return;
   if(!event.target.closest('.audio-access-test-v2'))return;
@@ -193,6 +205,6 @@ document.addEventListener('click',event=>{
     if(!track||!card||card.dataset.locked==='1')return;
     pendingTrackId=null;
     startTrack(track);
-  },40);
+  },80);
 });
 })();
