@@ -1,0 +1,34 @@
+name: Temporary audio import
+
+on:
+  push:
+    branches:
+      - audio-import-temp
+
+permissions:
+  contents: write
+
+jobs:
+  import-audio:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download exposition audio
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/audio/audioguide
+          curl --fail --location --retry 3 --retry-delay 2 \
+            'https://sdmntprnorthcentralus.oaiusercontent.com/files/00000000-8eb4-822f-9c11-4bae0d39ca81/raw?se=2026-08-18T14%3A33%3A53Z&sp=r&sv=2026-02-06&sr=b&scid=5a626f6c-2808-51e7-a678-5e2d207e798f&skoid=5c9dda00-298b-4376-81e9-b4568c8a3c0f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-18T05%3A14%3A29Z&ske=2026-08-19T05%3A14%3A29Z&sks=b&skv=2026-02-06&sig=HGKYJAUbempApfTffqv8l1Q5Jk%2B46V9oDf%2FnEr0nrtY%3D' \
+            --output assets/audio/audioguide/exposition-01.m4a
+          test "$(stat -c%s assets/audio/audioguide/exposition-01.m4a)" -eq 14136632
+      - name: Commit imported audio and remove temporary workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Yumis'
+          git config user.email '52785831+Yumis84@users.noreply.github.com'
+          git add assets/audio/audioguide/exposition-01.m4a
+          git rm .github/workflows/import-audio-temp.yml
+          git commit -m 'Import exposition 01 audio asset'
+          git push origin HEAD:audio-import-temp
