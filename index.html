@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="articles-v3.css?v=2">
   <link rel="stylesheet" href="menu-v3.css?v=2">
   <link rel="stylesheet" href="ai-v3.css?v=2">
+  <link rel="stylesheet" href="audio-guide-v1.css?v=1">
 </head>
 <body>
 <div class="museum-app" id="museumApp">
@@ -37,7 +38,8 @@
         <div class="home-entry-grid" aria-label="Главные разделы">
           <button class="entry-card entry-explore" data-nav="explore" type="button"><span class="entry-icon">⌁</span><span class="entry-copy"><strong>Исследовать</strong><small>Места и темы</small></span><b>→</b></button>
           <button class="entry-card entry-map" data-nav="map" type="button"><span class="entry-icon">⌖</span><span class="entry-copy"><strong>Карта</strong><small>Точки и маршруты</small></span><b>→</b></button>
-          <button class="entry-card entry-articles entry-card-wide" data-nav="articles" type="button"><span class="entry-icon">▤</span><span class="entry-copy"><strong>Статьи</strong><small>Оригинальные материалы и цифровой архив музея</small></span><b>→</b></button>
+          <button class="entry-card entry-articles" data-nav="articles" type="button"><span class="entry-icon">▤</span><span class="entry-copy"><strong>Статьи</strong><small>Архив музея</small></span><b>→</b></button>
+          <button class="entry-card entry-audio" data-nav="audio" type="button"><span class="entry-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 13v-2a8 8 0 0 1 16 0v2"/><path d="M6.5 12.5H5a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1.5z"/><path d="M17.5 12.5H19a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1.5z"/></svg></span><span class="entry-copy"><strong>Аудиогид</strong><small>Экскурсия по музею</small></span><b>→</b></button>
         </div>
       </section>
 
@@ -81,6 +83,44 @@
     <section class="screen screen-articles" data-screen="articles" aria-label="Статьи"><header class="section-header"><div><span class="eyebrow">Цифровой музей</span><h1>Статьи</h1></div><button class="round-menu light" data-open-menu type="button" aria-label="Открыть меню">☰</button></header><label class="search-box"><span>⌕</span><input id="articleSearch" type="search" placeholder="Поиск по музейному архиву"></label><div class="article-chips" id="articleCategories"></div><div class="article-list" id="articleList"></div></section>
 
     <section class="screen screen-article" data-screen="article" aria-label="Статья"><header class="reader-top"><button id="articleBack" type="button">← Назад</button><div><button id="articleFavorite" type="button" aria-label="В избранное">♡</button><button data-open-menu type="button" aria-label="Открыть меню">☰</button></div></header><article id="articleReader"></article></section>
+
+    <section class="screen screen-audio" data-screen="audio" aria-label="Аудиогид по музею">
+      <header class="audio-guide-top"><button class="audio-guide-back" data-nav="home" type="button">← На главную</button><button class="round-menu light" data-open-menu type="button" aria-label="Открыть меню">☰</button></header>
+      <section class="audio-guide-hero">
+        <span class="audio-guide-badge"><i></i>Готовится</span>
+        <div class="audio-guide-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 13v-2a8 8 0 0 1 16 0v2"/><path d="M6.5 12.5H5a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1.5z"/><path d="M17.5 12.5H19a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1.5z"/></svg></div>
+        <span class="eyebrow">Экскурсия в вашем телефоне</span>
+        <h1>Аудиогид по музею</h1>
+        <p>Слушайте экскурсию в своём темпе прямо во время посещения. Аудиозаписи добавим следующим этапом — интерфейс уже готов для треков и текстовых расшифровок.</p>
+      </section>
+
+      <section class="audio-guide-progress" aria-label="Прогресс аудиогида">
+        <div class="audio-guide-progress-head"><strong>Ваша экскурсия</strong><span>0 из 0 треков</span></div>
+        <div class="audio-guide-progress-track" aria-hidden="true"><i></i></div>
+        <button class="audio-guide-start" type="button" disabled>Начать экскурсию</button>
+        <p class="audio-guide-note">Кнопка станет активной после добавления первой аудиозаписи.</p>
+      </section>
+
+      <div class="audio-guide-features" aria-label="Возможности аудиогида">
+        <div class="audio-guide-feature"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><strong>Слушать</strong><small>Треки по порядку</small></div>
+        <div class="audio-guide-feature"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v16H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg><strong>Читать</strong><small>Расшифровка каждого трека</small></div>
+        <div class="audio-guide-feature"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="8"/></svg><strong>Продолжить</strong><small>Прогресс сохранится</small></div>
+      </div>
+
+      <section class="audio-guide-section">
+        <div class="audio-guide-section-head"><div><span class="eyebrow">Маршрут аудиогида</span><h2>Остановки экскурсии</h2></div><span>0 треков</span></div>
+        <div class="audio-guide-empty">
+          <div class="audio-guide-empty-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 13v-2a8 8 0 0 1 16 0v2"/><path d="M6.5 12.5H5a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1.5z"/><path d="M17.5 12.5H19a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1.5z"/></svg></div>
+          <strong>Аудиозапись добавим следующим этапом</strong>
+          <p>Когда загрузим запись, здесь появятся отдельные треки или главы, длительность, текстовая расшифровка и кнопка воспроизведения.</p>
+        </div>
+      </section>
+
+      <div class="audio-guide-player" aria-disabled="true">
+        <button class="audio-guide-play" type="button" disabled aria-label="Воспроизведение пока недоступно"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+        <div><strong>Плеер аудиогида</strong><small>Выберите трек после добавления записей</small></div>
+      </div>
+    </section>
 
     <section class="screen screen-ai" data-screen="ai" aria-label="AI-консультант"><header class="section-header"><div><span class="eyebrow">Музейный помощник</span><h1>AI-консультант</h1></div><button class="round-menu light" data-open-menu type="button" aria-label="Открыть меню">☰</button></header><div class="ai-card surface-card"><div class="ai-orb">✦</div><h2>Спросите о Роминтской пуще</h2><p>Помощник будет отвечать по материалам музея, местам на карте и актуальной информации для посетителей.</p><div class="ai-prompts"><button type="button">Расскажи о Чёртовом камне</button><button type="button">Что посмотреть за 2 часа?</button><button type="button">Куда сходить с детьми?</button><button type="button">Что посмотреть у озера?</button></div><div class="ai-input"><input disabled placeholder="AI подключим после подготовки базы знаний"><button disabled>↑</button></div></div></section>
 
