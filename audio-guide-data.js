@@ -11,8 +11,8 @@ window.VISHTYNETS_AUDIO_GUIDES={
       methods:['yookassa','staff_code']
     },
     halls:[
-      {id:'hall-1',number:1,title:'Зал 1'},
-      {id:'hall-2',number:2,title:'Зал 2'}
+      {id:'hall-1',number:1,title:'Первый зал'},
+      {id:'hall-2',number:2,title:'Второй зал'}
     ],
     tracks:[
       {
