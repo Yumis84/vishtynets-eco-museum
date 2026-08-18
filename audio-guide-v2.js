@@ -32,6 +32,12 @@ const fmt=n=>{
   const m=Math.floor(n/60),s=n%60;
   return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 };
+const clock=n=>{
+  n=Math.max(0,Math.floor(Number(n)||0));
+  const h=Math.floor(n/3600),m=Math.floor((n%3600)/60),s=n%60;
+  if(h>0)return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+};
 const emptyEntitlement=()=>({state:'none',activatedAt:null,startsAt:null,expiresAt:null,source:null});
 
 function normalizeEntitlement(value){
@@ -125,8 +131,10 @@ const badge=$('.audio-guide-badge');
 if(badge)badge.innerHTML=`<i></i>${halls.length} зала · ${expositionTracks.length} экспозиций`;
 const heroText=$('.audio-guide-hero p');
 if(heroText)heroText.textContent='Сначала послушайте бесплатное приветствие. Ниже — восемь экспозиций, разделённых по двум залам музея.';
+const progressTitle=$('.audio-guide-progress-head strong');
 const progressHead=$('.audio-guide-progress-head span');
-if(progressHead)progressHead.textContent=`0 из ${expositionTracks.length} экспозиций`;
+const progressBar=$('.audio-guide-progress-track i');
+if(progressTitle)progressTitle.textContent='Прогресс трека';
 const start=$('.audio-guide-start');
 if(start){
   start.disabled=!introTrack?.audio?.publicUrl;
@@ -137,6 +145,21 @@ const count=$('.audio-guide-section-head>span');
 if(count)count.textContent=`${expositionTracks.length} экспозиций`;
 const heading=$('.audio-guide-section-head h2');
 if(heading)heading.textContent='Экспозиции по залам';
+
+function updatePlaybackProgress(media=null,track=currentTrack){
+  const mediaDuration=media&&Number.isFinite(Number(media.duration))&&Number(media.duration)>0?Number(media.duration):0;
+  const declaredDuration=Number(track?.duration)>0?Number(track.duration):0;
+  const duration=mediaDuration||declaredDuration;
+  const current=media&&Number.isFinite(Number(media.currentTime))?Math.max(0,Number(media.currentTime)):0;
+  const ratio=duration>0?Math.max(0,Math.min(1,current/duration)):0;
+  const percent=Math.round(ratio*100);
+  if(progressBar)progressBar.style.width=`${(ratio*100).toFixed(1)}%`;
+  if(progressHead){
+    progressHead.textContent=duration>0
+      ?`${clock(current)} / ${clock(duration)} · ${percent}%`
+      :`${clock(current)} · ${percent}%`;
+  }
+}
 
 function updateAccessCopy(){
   if(!note)return;
@@ -223,6 +246,7 @@ function stopAudio(){
 
 function renderPlayer(track,message){
   currentTrack=track;
+  updatePlaybackProgress(null,track);
   if(transcriptPanel){
     const transcriptIsVerified=track?.transcriptStatus!=='draft_pre_recording';
     const transcript=transcriptIsVerified?String(track?.transcript||'').trim():'';
@@ -256,6 +280,7 @@ function showTrack(track){
     currentTrack=track;
     if(audio.paused){
       try{if(audio.ended)audio.currentTime=0}catch(_err){}
+      updatePlaybackProgress(audio,track);
       const p=audio.play();
       syncPlaybackButtons(track,true);
       if(p&&typeof p.catch==='function')p.catch(()=>{
@@ -264,6 +289,7 @@ function showTrack(track){
       });
     }else{
       audio.pause();
+      updatePlaybackProgress(audio,track);
       syncPlaybackButtons(track,false);
     }
     return;
@@ -276,15 +302,30 @@ function showTrack(track){
   audioTrackId=track.id;
   instance.preload='metadata';
   instance.setAttribute('playsinline','');
+  const syncProgress=()=>{if(audio===instance)updatePlaybackProgress(instance,track)};
+  instance.addEventListener('loadedmetadata',syncProgress);
+  instance.addEventListener('durationchange',syncProgress);
+  instance.addEventListener('timeupdate',syncProgress);
+  instance.addEventListener('seeking',syncProgress);
+  instance.addEventListener('seeked',syncProgress);
   if(track.access==='paid'&&entitlement.state==='pending')instance.addEventListener('playing',startPaidWindow,{once:true});
   instance.addEventListener('playing',()=>{
-    if(audio===instance)syncPlaybackButtons(track,true);
+    if(audio===instance){
+      syncProgress();
+      syncPlaybackButtons(track,true);
+    }
   });
   instance.addEventListener('pause',()=>{
-    if(audio===instance&&!instance.ended)syncPlaybackButtons(track,false);
+    if(audio===instance&&!instance.ended){
+      syncProgress();
+      syncPlaybackButtons(track,false);
+    }
   });
   instance.addEventListener('ended',()=>{
-    if(audio===instance)syncPlaybackButtons(track,false);
+    if(audio===instance){
+      updatePlaybackProgress(instance,track);
+      syncPlaybackButtons(track,false);
+    }
   });
   const p=instance.play();
   syncPlaybackButtons(track,true);
