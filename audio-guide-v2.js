@@ -20,7 +20,7 @@ if(window.__VISHTYNETS_AUDIO_SEQUENCE__){
 }
 
 const sequence=document.createElement('script');
-sequence.src='audio-guide-sequence.js?v=2';
+sequence.src='audio-guide-sequence.js?v=3';
 sequence.async=false;
 sequence.dataset.audioguideSequence='1';
 sequence.addEventListener('load',loadCore,{once:true});
