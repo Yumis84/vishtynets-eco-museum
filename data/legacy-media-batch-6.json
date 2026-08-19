@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-19",
+  "pages": [
+    {
+      "legacyUrl": "https://wystynez.ru/p24.htm",
+      "title": "Озеро Виштынецкое",
+      "captureStatus": "page_text_and_exact_media_urls_verified",
+      "pagePhotoCredits": ["А. Соколов"],
+      "creditPolicy": "The source gives a page-level photo credit. Preserve it as page-level provenance and do not infer image-by-image authorship.",
+      "images": [
+        "https://wystynez.ru/sc-pic/i0188.jpg",
+        "https://wystynez.ru/sc-pic/i0192.jpg",
+        "https://wystynez.ru/sc-pic/i0195.png",
+        "https://wystynez.ru/sc-pic/i0197.jpg",
+        "https://wystynez.ru/sc-pic/i0198.jpg",
+        "https://wystynez.ru/sc-pic/i0199.jpg",
+        "https://wystynez.ru/sc-pic/i0200.jpg",
+        "https://wystynez.ru/sc-pic/i0201.jpg",
+        "https://wystynez.ru/sc-pic/i0202.jpg",
+        "https://wystynez.ru/sc-pic/i0208.jpg",
+        "https://wystynez.ru/sc-pic/i0205.png",
+        "https://wystynez.ru/sc-pic/i0206.jpg",
+        "https://wystynez.ru/sc-pic/i0204.jpg",
+        "https://wystynez.ru/sc-pic/i0203.jpg",
+        "https://wystynez.ru/sc-pic/i0207.jpg"
+      ],
+      "verifiedCaptionContexts": [
+        "Носток сливовидный — сине-зелёная водоросль озера",
+        "вид с российского берега на восточный литовский берег",
+        "руины мельницы в посёлке Ягодное",
+        "водопад на реке Писсе в Ягодном",
+        "мельничный пруд на реке Писсе"
+      ],
+      "reachability": "Exact media targets extracted from source HTML links; crawler binary fetch returned cache miss during this pass."
+    }
+  ]
+}
