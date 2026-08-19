@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-19",
+  "pages": [
+    {
+      "legacyUrl": "https://wystynez.ru/p103.htm",
+      "title": "Музейная почта",
+      "captureStatus": "page_text_and_exact_media_urls_verified",
+      "pagePhotoCredits": ["Э. Барсуков"],
+      "creditPolicy": "The legacy page gives a page-level photo credit. The same credit is preserved for the migrated gallery without claiming image-by-image attribution beyond the source.",
+      "images": [
+        "https://wystynez.ru/sc-pic/i0911.jpg",
+        "https://wystynez.ru/sc-pic/i0912.jpg",
+        "https://wystynez.ru/sc-pic/i0913.jpg",
+        "https://wystynez.ru/sc-pic/i0914.jpg",
+        "https://wystynez.ru/sc-pic/i0915.jpg",
+        "https://wystynez.ru/sc-pic/i0916.jpg",
+        "https://wystynez.ru/sc-pic/i0917.jpg",
+        "https://wystynez.ru/sc-pic/i0918.jpg",
+        "https://wystynez.ru/sc-pic/i0919.jpg",
+        "https://wystynez.ru/sc-pic/i0920.jpg",
+        "https://wystynez.ru/sc-pic/i0921.jpg",
+        "https://wystynez.ru/sc-pic/i0922.jpg",
+        "https://wystynez.ru/sc-pic/i0923.jpg",
+        "https://wystynez.ru/sc-pic/i0924.jpg",
+        "https://wystynez.ru/sc-pic/i0925.jpg",
+        "https://wystynez.ru/sc-pic/i0926.jpg",
+        "https://wystynez.ru/sc-pic/i0927.jpg",
+        "https://wystynez.ru/sc-pic/i0928.jpg",
+        "https://wystynez.ru/sc-pic/i0929.jpg",
+        "https://wystynez.ru/sc-pic/i0930.jpg",
+        "https://wystynez.ru/sc-pic/i0909.jpg"
+      ],
+      "verifiedCaptionContexts": [
+        "Почтовый ящик и штемпель",
+        "Первые посетители «Музейной почты»",
+        "Открытие выставки",
+        "Открытки на стеллаже с картой достопримечательностей Роминтской пущи",
+        "Репродукции старых открыток в выставочном зале",
+        "Открытки, отправленные в первый день работы",
+        "Открытки, изданные в рамках проекта",
+        "Железнодорожный мост в посёлке Токаревка"
+      ],
+      "reachability": "exact URLs extracted; crawler binary fetch returned cache miss during this pass"
+    }
+  ]
+}
