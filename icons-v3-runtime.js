@@ -44,6 +44,15 @@ if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-
 if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-15]')){
   document.write('<script data-legacy-batch-15 src="museum-legacy-batch-15.js?v=1"><\/script>');
 }
+if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-16]')){
+  document.write('<script data-legacy-batch-16 src="museum-legacy-batch-16.js?v=1"><\/script>');
+}
+if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-17]')){
+  document.write('<script data-legacy-batch-17 src="museum-legacy-batch-17.js?v=1"><\/script>');
+}
+if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-18]')){
+  document.write('<script data-legacy-batch-18 src="museum-legacy-batch-18.js?v=1"><\/script>');
+}
 
 // Owner decision: no museum logo on the homepage hero for now.
 const heroBrand=document.querySelector('.hero-brand');
