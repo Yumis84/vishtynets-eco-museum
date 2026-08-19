@@ -2,71 +2,15 @@
 'use strict';
 
 // Load verified legacy migration data synchronously before app.js builds article categories.
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-2]')){
-  document.write('<script data-legacy-batch-2 src="museum-legacy-batch-2.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-3]')){
-  document.write('<script data-legacy-batch-3 src="museum-legacy-batch-3.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-4]')){
-  document.write('<script data-legacy-batch-4 src="museum-legacy-batch-4.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-5]')){
-  document.write('<script data-legacy-batch-5 src="museum-legacy-batch-5.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-6]')){
-  document.write('<script data-legacy-batch-6 src="museum-legacy-batch-6.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-7]')){
-  document.write('<script data-legacy-batch-7 src="museum-legacy-batch-7.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-8]')){
-  document.write('<script data-legacy-batch-8 src="museum-legacy-batch-8.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-9]')){
-  document.write('<script data-legacy-batch-9 src="museum-legacy-batch-9.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-10]')){
-  document.write('<script data-legacy-batch-10 src="museum-legacy-batch-10.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-11]')){
-  document.write('<script data-legacy-batch-11 src="museum-legacy-batch-11.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-12]')){
-  document.write('<script data-legacy-batch-12 src="museum-legacy-batch-12.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-13]')){
-  document.write('<script data-legacy-batch-13 src="museum-legacy-batch-13.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-14]')){
-  document.write('<script data-legacy-batch-14 src="museum-legacy-batch-14.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-15]')){
-  document.write('<script data-legacy-batch-15 src="museum-legacy-batch-15.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-16]')){
-  document.write('<script data-legacy-batch-16 src="museum-legacy-batch-16.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-17]')){
-  document.write('<script data-legacy-batch-17 src="museum-legacy-batch-17.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-18]')){
-  document.write('<script data-legacy-batch-18 src="museum-legacy-batch-18.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-19]')){
-  document.write('<script data-legacy-batch-19 src="museum-legacy-batch-19.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-20]')){
-  document.write('<script data-legacy-batch-20 src="museum-legacy-batch-20.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-21]')){
-  document.write('<script data-legacy-batch-21 src="museum-legacy-batch-21.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-22]')){
-  document.write('<script data-legacy-batch-22 src="museum-legacy-batch-22.js?v=1"><\/script>');
-}
-if(document.readyState==='loading'&&!document.querySelector('script[data-legacy-batch-23]')){
-  document.write('<script data-legacy-batch-23 src="museum-legacy-batch-23.js?v=1"><\/script>');
+const LEGACY_BATCH_MAX=23;
+const LEGACY_BATCH_VERSIONS={23:2};
+if(document.readyState==='loading'){
+  for(let batch=2;batch<=LEGACY_BATCH_MAX;batch+=1){
+    const marker=`script[data-legacy-batch-${batch}]`;
+    if(document.querySelector(marker))continue;
+    const version=LEGACY_BATCH_VERSIONS[batch]||1;
+    document.write(`<script data-legacy-batch-${batch} src="museum-legacy-batch-${batch}.js?v=${version}"><\/script>`);
+  }
 }
 
 // Owner decision: no museum logo on the homepage hero for now.
