@@ -1,7 +1,7 @@
 (()=>{
 'use strict';
-const LEGACY_BATCH_MAX=31;
-const LEGACY_BATCH_VERSIONS={31:1,30:1,29:1,28:1,27:1,26:1,25:1,24:1,23:2};
+const LEGACY_BATCH_MAX=32;
+const LEGACY_BATCH_VERSIONS={32:1,31:1,30:1,29:1,28:1,27:1,26:1,25:1,24:1,23:2};
 if(document.readyState==='loading'){
   for(let batch=2;batch<=LEGACY_BATCH_MAX;batch+=1){
     const marker=`script[data-legacy-batch-${batch}]`;
