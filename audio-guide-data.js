@@ -1,64 +1,26 @@
 window.VISHTYNETS_AUDIO_GUIDES={
   museum:{
-    id:'museum',
-    type:'museum',
-    title:'Аудиогид по музею',
-    access:{
-      mode:'ui_gated',
-      startsOn:'first_paid_play',
-      activeHours:24,
-      activationCodeValidDays:7,
-      methods:['yookassa','staff_code']
-    },
+    id:'museum',type:'museum',title:'Аудиогид по музею',
+    access:{mode:'ui_gated',startsOn:'first_paid_play',activeHours:24,activationCodeValidDays:7,methods:['yookassa','staff_code']},
     halls:[
-      {id:'hall-1',number:1,title:'Первый зал'},
-      {id:'hall-2',number:2,title:'Второй зал'}
+      {id:'hall-1',number:1,title:'Зал 1 · Главный зал'},
+      {id:'hall-2',number:2,title:'Зал 2 · Зал быта и истории'}
     ],
     tracks:[
-      {
-        id:'welcome',
-        number:0,
-        kind:'intro',
-        title:'Добро пожаловать',
-        description:'Короткое знакомство с музеем и аудиогидом перед началом экскурсии.',
-        access:'free',
-        duration:196.872,
-        transcript:'Добро пожаловать в Виштынецкий эколого-исторический музей. Здесь природа, история и память Роминтской пущи соединяются в одной экскурсии. Мы предлагаем пройти музей вместе с аудиогидом: слушайте записи по порядку и двигайтесь от экспозиции к экспозиции. Это вступление доступно бесплатно. Если вам понравится формат, после него можно открыть полную экскурсию и продолжить с первой экспозиции.',
-        transcriptStatus:'draft_pre_recording',
-        audio:{
-          publicUrl:'assets/audio/вступление.mp3',
-          status:'site_hosted',
-          sourceFormat:'mp3',
-          sourceBytes:1181232,
-          sourceGitBlob:'a15d604fe688deacff0adc28cead87be7e816d79',
-          sourceSha256:'eced47b1a0d05fb8e19034c1d34abf93f3c076fd342bea8414e45243dccf0a29'
-        }
-      },
-      {
-        id:'exposition-01',number:1,kind:'exposition',hall:1,hallOrder:1,title:'Карта',description:'Первая экспозиция первого зала.',access:'paid',duration:null,audio:{publicUrl:'assets/audio/№1-Карта.mp3',status:'site_hosted',sourceFormat:'mp3',sourceBytes:2343751,sourceGitBlob:'f6f5c1d88cb9faf7603127dea5464ee7c3eaab5a'}
-      },
-      {
-        id:'exposition-02',number:2,kind:'exposition',hall:1,hallOrder:2,title:'Экспозиция 2',description:'Вторая экспозиция первого зала.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}
-      },
-      {
-        id:'exposition-03',number:3,kind:'exposition',hall:1,hallOrder:3,title:'Экспозиция 3',description:'Третья экспозиция первого зала.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}
-      },
-      {
-        id:'exposition-04',number:4,kind:'exposition',hall:1,hallOrder:4,title:'Экспозиция 4',description:'Четвёртая экспозиция первого зала.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}
-      },
-      {
-        id:'exposition-05',number:5,kind:'exposition',hall:2,hallOrder:1,title:'Экспозиция 1',description:'Первая экспозиция второго зала.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}
-      },
-      {
-        id:'exposition-06',number:6,kind:'exposition',hall:2,hallOrder:2,title:'Экспозиция 2',description:'Вторая экспозиция второго зала.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}
-      },
-      {
-        id:'exposition-07',number:7,kind:'exposition',hall:2,hallOrder:3,title:'Экспозиция 3',description:'Третья экспозиция второго зала.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}
-      },
-      {
-        id:'exposition-08',number:8,kind:'exposition',hall:2,hallOrder:4,title:'Экспозиция 4',description:'Четвёртая экспозиция второго зала.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}
-      }
+      {id:'h1-01',number:1,kind:'intro',hall:1,hallOrder:1,title:'Добро пожаловать',description:'Знакомство с Краснолесьем, музеем и Роминтской пущей.',access:'free',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+      {id:'h1-02',number:2,kind:'exposition',hall:1,hallOrder:2,title:'Лес после войны',description:'История восстановления леса после войны и появления названия «Красный лес».',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+      {id:'h1-03',number:3,kind:'exposition',hall:1,hallOrder:3,title:'Холмы, камни и ледник',description:'Геология Виштынецкой возвышенности и камни, принесённые ледником.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+      {id:'h1-04',number:4,kind:'exposition',hall:1,hallOrder:4,title:'Озеро Виштынецкое',description:'Ледниковое происхождение, глубина, вода, рыбы и связь озера с морем.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+      {id:'h1-05',number:5,kind:'exposition',hall:1,hallOrder:5,title:'Легенда об озере',description:'Легенда о цыплёнке и происхождении названия Виштынецкого озера.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+      {id:'h1-06',number:6,kind:'exposition',hall:1,hallOrder:6,title:'Подводный мир и кремень',description:'Чистота воды, экосистема озера и значение кремня в истории человека.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+      {id:'h1-07',number:7,kind:'exposition',hall:1,hallOrder:7,title:'Благородный олень Роминтенской пущи',description:'Благородный олень, его рога и уникальный экотип Роминтенской пущи.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+      {id:'h2-01',number:8,kind:'exposition',hall:2,hallOrder:1,title:'Пруссия и смешение культур',description:'Пруссия, Реформация и переселение европейских народов в этот край.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+      {id:'h2-02',number:9,kind:'exposition',hall:2,hallOrder:2,title:'Деревянные башмаки и Кристионас Доналайтис',description:'Кломпы, литовская культура и жизнь Кристионаса Доналайтиса.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+      {id:'h2-03',number:10,kind:'exposition',hall:2,hallOrder:3,title:'Аисты, журавли и природа',description:'Перелётные птицы и связь экосистем Роминтенской пущи с Африкой.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+      {id:'h2-04',number:11,kind:'exposition',hall:2,hallOrder:4,title:'Императорский охотничий дом',description:'Вильгельм II, норвежский стиль и история охотничьей резиденции в Роминтене.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+      {id:'h2-05',number:12,kind:'exposition',hall:2,hallOrder:5,title:'Самовары, быт и лесное хозяйство',description:'Предметы быта переселенцев, инструменты лесного хозяйства и дары леса.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+      {id:'h2-06',number:13,kind:'exposition',hall:2,hallOrder:6,title:'Что значит «Роминтен»',description:'Значение названия Роминтен и чувство тишины, которое хранит пуща.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+      {id:'h2-07',number:14,kind:'exposition',hall:2,hallOrder:7,title:'На прощание',description:'Другие пространства музея, минералы, рептилии, земноводные и дом гномов.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}}
     ]
-  },
-  routes:[]
+  },routes:[]
 };
