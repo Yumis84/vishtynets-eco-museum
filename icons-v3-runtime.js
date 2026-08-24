@@ -2,8 +2,8 @@
 'use strict';
 
 // Load verified legacy migration data synchronously before app.js builds article categories.
-const LEGACY_BATCH_MAX=23;
-const LEGACY_BATCH_VERSIONS={23:2};
+const LEGACY_BATCH_MAX=24;
+const LEGACY_BATCH_VERSIONS={24:1,23:2};
 if(document.readyState==='loading'){
   for(let batch=2;batch<=LEGACY_BATCH_MAX;batch+=1){
     const marker=`script[data-legacy-batch-${batch}]`;
