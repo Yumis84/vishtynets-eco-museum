@@ -1,158 +1,32 @@
 (()=>{
 'use strict';
-const $=s=>document.querySelector(s);
-const screen=$('.screen-audio');
+const screen=document.querySelector('.screen-audio');
 if(!screen)return;
-
 const guide=window.VISHTYNETS_AUDIO_GUIDES?.museum;
 const track=guide?.tracks?.[0];
 if(!track)return;
-
-const ACCESS_KEY='vishtynets_test_audio_access_v3';
-const FULL_DURATION=Number(track.duration)||0;
-const SAMPLE_DURATION=Number(track.preview?.seconds)||5;
-const previewGlobal=track.preview?.global||'';
-const previewMime=track.preview?.mime||'audio/webm;codecs=opus';
-const b64=previewGlobal?window[previewGlobal]||'':'';
-
-let previewObjectUrl='';
-function createPreviewAudio(){
-  if(!b64)return null;
-  try{
-    const binary=atob(b64);
-    const bytes=new Uint8Array(binary.length);
-    for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
-    const blob=new Blob([bytes],{type:previewMime});
-    previewObjectUrl=URL.createObjectURL(blob);
-    return new Audio(previewObjectUrl);
-  }catch(_err){
-    return new Audio(`data:${previewMime};base64,${b64}`);
-  }
-}
-
-const audio=createPreviewAudio();
-if(audio){
-  audio.preload='auto';
-  audio.setAttribute('playsinline','');
-  try{audio.load()}catch(_err){}
-}
-
-let activated=false;
-try{activated=sessionStorage.getItem(ACCESS_KEY)==='1'}catch(_err){}
-let playing=false;
-
-const playSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
-const pauseSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>';
-const fmt=n=>{
-  n=Math.max(0,Math.floor(Number(n)||0));
-  const m=Math.floor(n/60),s=n%60;
-  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-};
-
-const badge=$('.audio-guide-badge');
-if(badge)badge.innerHTML=`<i></i>${guide.tracks.length} экспозиция добавлена`;
-const heroText=$('.audio-guide-hero p');
-if(heroText)heroText.textContent='Аудиогид уже собирается как настоящий плейлист музея. Список экспозиций открыт для просмотра, а воспроизведение полного аудио будет доступно после активации.';
-const progressHead=$('.audio-guide-progress-head span');
-if(progressHead)progressHead.textContent=`0 из ${guide.tracks.length} экспозиции`;
-const start=$('.audio-guide-start');
-if(start){start.disabled=false;start.textContent='Начать экскурсию'}
-const note=$('.audio-guide-note');
-if(note)note.textContent=`${track.title} · полная длительность ${fmt(FULL_DURATION)}. Для проверки сейчас доступен короткий фрагмент настоящей записи.`;
-const count=$('.audio-guide-section-head>span');
-if(count)count.textContent=`${guide.tracks.length} экспозиция`;
-const heading=$('.audio-guide-section-head h2');
-if(heading)heading.textContent='Экспозиции аудиогида';
-
-const empty=$('.audio-guide-empty');
-if(empty){
-  empty.classList.add('audio-guide-track-card');
-  empty.innerHTML=`<button class="audio-track-play" type="button" aria-label="Воспроизвести ${track.title}">${playSvg}</button><div class="audio-track-copy"><span>Экспозиция ${String(track.number).padStart(2,'0')}</span><strong>${track.title}</strong><p>${track.description}</p><small>${fmt(FULL_DURATION)} · полный трек после активации</small></div>`;
-}
-
-const player=$('.audio-guide-player');
-const playerBtn=$('.audio-guide-play');
-if(player){
-  player.removeAttribute('aria-disabled');
-  player.classList.add('is-ready');
-  const strong=player.querySelector('strong'),small=player.querySelector('small');
-  if(strong)strong.textContent=track.title;
-  if(small)small.textContent=`Фрагмент 00:00 / ${fmt(SAMPLE_DURATION)} · полный трек ${fmt(FULL_DURATION)}`;
-}
-if(playerBtn){
-  playerBtn.disabled=false;
-  playerBtn.setAttribute('aria-label',`Воспроизвести ${track.title}`);
-  playerBtn.innerHTML=playSvg;
-}
-
-const modal=document.createElement('div');
-modal.className='audio-access-modal';
-modal.setAttribute('aria-hidden','true');
-modal.innerHTML=`<div class="audio-access-backdrop" data-audio-close></div><section class="audio-access-card" role="dialog" aria-modal="true" aria-labelledby="audioAccessTitle"><button class="audio-access-close" data-audio-close type="button" aria-label="Закрыть">×</button><span class="eyebrow">Доступ к плейлисту</span><h2 id="audioAccessTitle">Активировать аудиогид</h2><p>В рабочей версии полный плейлист будет открываться после оплаты через ЮKassa или ввода кода от сотрудника музея. Доступ действует 24 часа с первого запуска аудио. Сейчас можно проверить этот сценарий на коротком фрагменте ${track.title.toLowerCase()}.</p><button class="audio-access-test" type="button">Активировать тестовый доступ</button><div class="audio-access-future"><button type="button" disabled>Оплатить онлайн · скоро</button><button type="button" disabled>Ввести код · скоро</button></div><small>Тестовая активация не является оплатой. Полный аудиофайл не публикуется в открытом доступе.</small></section>`;
-document.body.appendChild(modal);
-
-function openAccess(){modal.classList.add('is-open');modal.setAttribute('aria-hidden','false')}
-function closeAccess(){modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true')}
-function setProgress(current=0,duration=SAMPLE_DURATION){
-  const safeDuration=Number.isFinite(duration)&&duration>0?duration:SAMPLE_DURATION;
-  const bar=$('.audio-guide-progress-track i');
-  if(bar)bar.style.width=`${Math.min(100,(current/safeDuration)*100)}%`;
-  const small=player?.querySelector('small');
-  if(small)small.textContent=`Фрагмент ${fmt(current)} / ${fmt(safeDuration)} · полный трек ${fmt(FULL_DURATION)}`;
-}
-function setPlaying(value){
-  playing=value;
-  document.querySelectorAll('.audio-guide-play,.audio-track-play').forEach(b=>{
-    b.innerHTML=value?pauseSvg:playSvg;
-    b.classList.toggle('is-playing',value);
-  });
-}
-function setUnavailable(){
-  setPlaying(false);
-  const small=player?.querySelector('small');
-  if(small)small.textContent='Не удалось воспроизвести тестовый фрагмент на этом устройстве';
-}
-function playAudio(){
-  if(!audio){setUnavailable();return}
-  if(audio.ended||audio.currentTime>=SAMPLE_DURATION-0.05){
-    try{audio.currentTime=0}catch(_err){}
-    setProgress(0,SAMPLE_DURATION);
-  }
-  const promise=audio.play();
-  if(promise&&typeof promise.then==='function'){
-    promise.then(()=>setPlaying(true)).catch(setUnavailable);
-  }else{
-    setPlaying(true);
-  }
-}
-function toggleAudio(){
-  if(!activated){openAccess();return}
-  if(!audio){setUnavailable();return}
-  if(!audio.paused){audio.pause();setPlaying(false);return}
-  playAudio();
-}
-
-if(audio){
-  audio.addEventListener('timeupdate',()=>setProgress(audio.currentTime,audio.duration||SAMPLE_DURATION));
-  audio.addEventListener('ended',()=>{setProgress(audio.duration||SAMPLE_DURATION,audio.duration||SAMPLE_DURATION);setPlaying(false)});
-  audio.addEventListener('error',setUnavailable);
-}
-start?.addEventListener('click',toggleAudio);
-playerBtn?.addEventListener('click',toggleAudio);
-$('.audio-track-play')?.addEventListener('click',toggleAudio);
-modal.addEventListener('click',e=>{if(e.target.closest('[data-audio-close]'))closeAccess()});
-$('.audio-access-test')?.addEventListener('click',()=>{
-  activated=true;
-  try{sessionStorage.setItem(ACCESS_KEY,'1')}catch(_err){}
-  closeAccess();
-  // Keep play() in the same user-gesture call stack. Mobile browsers may block
-  // playback when it is delayed through setTimeout/requestAnimationFrame.
-  playAudio();
-});
-window.addEventListener('pagehide',()=>{
-  if(previewObjectUrl){
-    try{URL.revokeObjectURL(previewObjectUrl)}catch(_err){}
-    previewObjectUrl='';
-  }
-},{once:true});
+const src=track.audio?.publicUrl;
+const fmt=n=>{n=Math.max(0,Math.floor(Number(n)||0));return `${String(Math.floor(n/60)).padStart(2,'0')}:${String(n%60).padStart(2,'0')}`};
+const badge=document.querySelector('.audio-guide-badge');
+if(badge)badge.innerHTML='<i></i>1 дорожка доступна';
+const head=document.querySelector('.audio-guide-progress-head span');
+if(head)head.textContent='0 из 1 дорожки';
+const count=document.querySelector('.audio-guide-section-head>span');
+if(count)count.textContent='1 дорожка';
+const hero=document.querySelector('.audio-guide-hero p');
+if(hero)hero.textContent='Добро пожаловать в аудиогид Виштынецкого экомузея.';
+const start=document.querySelector('.audio-guide-start');
+const empty=document.querySelector('.audio-guide-empty');
+if(empty){empty.classList.add('audio-guide-track-card');empty.innerHTML=`<button class="audio-track-play" type="button" aria-label="Воспроизвести ${track.title}">▶</button><div class="audio-track-copy"><span>Дорожка 01</span><strong>${track.title}</strong><p>${track.description||''}</p><small>Старая запись · временная версия</small></div>`}
+let audio=null;
+if(src){audio=new Audio(src);audio.preload='metadata';audio.setAttribute('playsinline','');}
+const player=document.querySelector('.audio-guide-player');
+const playerBtn=document.querySelector('.audio-guide-play');
+if(player){player.classList.add('is-ready');const strong=player.querySelector('strong');if(strong)strong.textContent=track.title;}
+if(playerBtn){playerBtn.disabled=false;playerBtn.innerHTML='▶';playerBtn.setAttribute('aria-label',`Воспроизвести ${track.title}`)}
+function update(){if(!audio)return;const dur=audio.duration||0,cur=audio.currentTime||0;const bar=document.querySelector('.audio-guide-progress-track i');if(bar)bar.style.width=dur?`${cur/dur*100}%`:'0%';const small=player?.querySelector('small');if(small)small.textContent=`${fmt(cur)} / ${fmt(dur)} · старая запись`}
+function setPlaying(v){document.querySelectorAll('.audio-guide-play,.audio-track-play').forEach(b=>{b.innerHTML=v?'Ⅱ':'▶';b.classList.toggle('is-playing',v)})}
+function toggle(){if(!audio)return;if(audio.paused){audio.play().then(()=>setPlaying(true)).catch(()=>{});}else{audio.pause();setPlaying(false)}}
+start?.addEventListener('click',toggle);playerBtn?.addEventListener('click',toggle);document.querySelector('.audio-track-play')?.addEventListener('click',toggle);
+audio?.addEventListener('timeupdate',update);audio?.addEventListener('loadedmetadata',update);audio?.addEventListener('ended',()=>setPlaying(false));
 })();
