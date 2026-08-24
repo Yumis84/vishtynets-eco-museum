@@ -7,7 +7,7 @@ window.VISHTYNETS_AUDIO_GUIDES={
       {id:'hall-2',number:2,title:'Зал 2 · Зал быта и истории'}
     ],
     tracks:[
-      {id:'h1-01',number:1,kind:'intro',hall:1,hallOrder:1,title:'Добро пожаловать',description:'Знакомство с Краснолесьем, музеем и Роминтской пущей.',access:'free',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+      {id:'h1-01',number:1,kind:'intro',hall:1,hallOrder:1,title:'Добро пожаловать',description:'Знакомство с Краснолесьем, музеем и Роминтенской пущей.',access:'free',duration:null,audio:{publicUrl:'assets/audio/%D0%B2%D1%81%D1%82%D1%83%D0%BF%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5.mp3',status:'available'}},
       {id:'h1-02',number:2,kind:'exposition',hall:1,hallOrder:2,title:'Лес после войны',description:'История восстановления леса после войны и появления названия «Красный лес».',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
       {id:'h1-03',number:3,kind:'exposition',hall:1,hallOrder:3,title:'Холмы, камни и ледник',description:'Геология Виштынецкой возвышенности и камни, принесённые ледником.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
       {id:'h1-04',number:4,kind:'exposition',hall:1,hallOrder:4,title:'Озеро Виштынецкое',description:'Ледниковое происхождение, глубина, вода, рыбы и связь озера с морем.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
