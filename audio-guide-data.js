@@ -1,26 +1,15 @@
-window.VISHTYNETS_AUDIO_GUIDES={
-  museum:{
-    id:'museum',type:'museum',title:'Аудиогид по музею',
-    access:{mode:'ui_gated',startsOn:'first_paid_play',activeHours:24,activationCodeValidDays:7,methods:['yookassa','staff_code']},
-    halls:[
-      {id:'hall-1',number:1,title:'Зал 1 · Главный зал'},
-      {id:'hall-2',number:2,title:'Зал 2 · Зал быта и истории'}
-    ],
-    tracks:[
-      {id:'h1-01',number:1,kind:'intro',hall:1,hallOrder:1,title:'Добро пожаловать',description:'Знакомство с Краснолесьем, музеем и Роминтенской пущей.',access:'free',duration:null,audio:{publicUrl:'assets/audio/%D0%B2%D1%81%D1%82%D1%83%D0%BF%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5.mp3',status:'available'}},
-      {id:'h1-02',number:2,kind:'exposition',hall:1,hallOrder:2,title:'Лес после войны',description:'История восстановления леса после войны и появления названия «Красный лес».',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
-      {id:'h1-03',number:3,kind:'exposition',hall:1,hallOrder:3,title:'Холмы, камни и ледник',description:'Геология Виштынецкой возвышенности и камни, принесённые ледником.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
-      {id:'h1-04',number:4,kind:'exposition',hall:1,hallOrder:4,title:'Озеро Виштынецкое',description:'Ледниковое происхождение, глубина, вода, рыбы и связь озера с морем.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
-      {id:'h1-05',number:5,kind:'exposition',hall:1,hallOrder:5,title:'Легенда об озере',description:'Легенда о цыплёнке и происхождении названия Виштынецкого озера.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
-      {id:'h1-06',number:6,kind:'exposition',hall:1,hallOrder:6,title:'Подводный мир и кремень',description:'Чистота воды, экосистема озера и значение кремня в истории человека.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
-      {id:'h1-07',number:7,kind:'exposition',hall:1,hallOrder:7,title:'Благородный олень Роминтенской пущи',description:'Благородный олень, его рога и уникальный экотип Роминтенской пущи.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
-      {id:'h2-01',number:8,kind:'exposition',hall:2,hallOrder:1,title:'Пруссия и смешение культур',description:'Пруссия, Реформация и переселение европейских народов в этот край.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
-      {id:'h2-02',number:9,kind:'exposition',hall:2,hallOrder:2,title:'Деревянные башмаки и Кристионас Доналайтис',description:'Кломпы, литовская культура и жизнь Кристионаса Доналайтиса.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
-      {id:'h2-03',number:10,kind:'exposition',hall:2,hallOrder:3,title:'Аисты, журавли и природа',description:'Перелётные птицы и связь экосистем Роминтенской пущи с Африкой.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
-      {id:'h2-04',number:11,kind:'exposition',hall:2,hallOrder:4,title:'Императорский охотничий дом',description:'Вильгельм II, норвежский стиль и история охотничьей резиденции в Роминтене.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
-      {id:'h2-05',number:12,kind:'exposition',hall:2,hallOrder:5,title:'Самовары, быт и лесное хозяйство',description:'Предметы быта переселенцев, инструменты лесного хозяйства и дары леса.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
-      {id:'h2-06',number:13,kind:'exposition',hall:2,hallOrder:6,title:'Что значит «Роминтен»',description:'Значение названия Роминтен и чувство тишины, которое хранит пуща.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
-      {id:'h2-07',number:14,kind:'exposition',hall:2,hallOrder:7,title:'На прощание',description:'Другие пространства музея, минералы, рептилии, земноводные и дом гномов.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}}
-    ]
-  },routes:[]
-};
+window.VISHTYNETS_AUDIO_GUIDES={museum:{id:'museum',type:'museum',title:'Аудиогид по музею',access:{mode:'ui_gated',startsOn:'first_paid_play',activeHours:24,activationCodeValidDays:7,methods:['yookassa','staff_code']},halls:[{id:'hall-1',number:1,title:'Зал 1 · Главный зал'},{id:'hall-2',number:2,title:'Зал 2 · Зал быта и истории'}],tracks:[
+{id:'h1-01',number:1,kind:'intro',hall:1,hallOrder:1,title:'Добро пожаловать',description:'Знакомство с Краснолесьем, музеем и Роминтенской пущей.',access:'free',duration:null,audio:{publicUrl:'assets/audio/%D0%B2%D1%81%D1%82%D1%83%D0%BF%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5.mp3',status:'available'}},
+{id:'h1-02',number:2,kind:'exposition',hall:1,hallOrder:2,title:'Лес после войны',description:'История восстановления леса после войны и появления названия «Красный лес».',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+{id:'h1-03',number:3,kind:'exposition',hall:1,hallOrder:3,title:'Холмы, камни и ледник',description:'Геология Виштынецкой возвышенности и камни, принесённые ледником.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+{id:'h1-04',number:4,kind:'exposition',hall:1,hallOrder:4,title:'Озеро Виштынецкое',description:'Ледниковое происхождение, глубина, вода, рыбы и связь озера с морем.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+{id:'h1-05',number:5,kind:'exposition',hall:1,hallOrder:5,title:'Легенда об озере',description:'Легенда о цыплёнке и происхождении названия Виштынецкого озера.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+{id:'h1-06',number:6,kind:'exposition',hall:1,hallOrder:6,title:'Подводный мир и кремень',description:'Чистота воды, экосистема озера и значение кремня в истории человека.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+{id:'h1-07',number:7,kind:'exposition',hall:1,hallOrder:7,title:'Благородный олень Роминтенской пущи',description:'Благородный олень, его рога и уникальный экотип Роминтенской пущи.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+{id:'h2-01',number:8,kind:'exposition',hall:2,hallOrder:1,title:'Пруссия и смешение культур',description:'Пруссия, Реформация и переселение европейских народов в этот край.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+{id:'h2-02',number:9,kind:'exposition',hall:2,hallOrder:2,title:'Деревянные башмаки и Кристионас Доналайтис',description:'Кломпы, литовская культура и жизнь Кристионаса Доналайтиса.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+{id:'h2-03',number:10,kind:'exposition',hall:2,hallOrder:3,title:'Аисты, журавли и природа',description:'Перелётные птицы и связь экосистем Роминтенской пущи с Африкой.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+{id:'h2-04',number:11,kind:'exposition',hall:2,hallOrder:4,title:'Императорский охотничий дом',description:'Вильгельм II, норвежский стиль и история охотничьей резиденции в Роминтене.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+{id:'h2-05',number:12,kind:'exposition',hall:2,hallOrder:5,title:'Самовары, быт и лесное хозяйство',description:'Предметы быта переселенцев, инструменты лесного хозяйства и дары леса.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+{id:'h2-06',number:13,kind:'exposition',hall:2,hallOrder:6,title:'Что значит «Роминтен»',description:'Значение названия Роминтен и чувство тишины, которое хранит пуща.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}},
+{id:'h2-07',number:14,kind:'exposition',hall:2,hallOrder:7,title:'На прощание',description:'Другие пространства музея, минералы, рептилии, земноводные и дом гномов.',access:'paid',duration:null,audio:{publicUrl:null,status:'awaiting_upload'}}] },routes:[]};
