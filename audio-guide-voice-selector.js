@@ -28,61 +28,56 @@ function addStyles(){
   const style=document.createElement('style');
   style.dataset.audioguideVoice='1';
   style.textContent=`
-.audio-guide-voice-selector{width:100%;margin:8px 0 0;padding:0}
-.audio-guide-voice-selector-inner{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid rgba(71,88,70,.16);border-radius:12px;background:rgba(248,247,242,.92);box-shadow:0 3px 10px rgba(35,45,35,.04)}
+.audio-guide-voice-selector{width:100%;margin:6px 0 0;padding:0;box-sizing:border-box}
+.audio-guide-voice-selector-inner{display:flex;align-items:center;gap:10px;padding:7px 9px;border:1px solid rgba(71,88,70,.16);border-radius:11px;background:rgba(248,247,242,.94);box-sizing:border-box}
 .audio-guide-voice-selector label{font-size:12px;font-weight:700;color:#344638;white-space:nowrap}
-.audio-guide-voice-select{flex:1;min-width:0;padding:7px 28px 7px 9px;border:1px solid rgba(71,88,70,.2);border-radius:9px;background:#fff;color:#344638;font:inherit;font-size:13px}
+.audio-guide-voice-select{flex:1;min-width:0;padding:6px 26px 6px 8px;border:1px solid rgba(71,88,70,.2);border-radius:8px;background:#fff;color:#344638;font:inherit;font-size:13px}
 .audio-guide-voice-note{font-size:10px;opacity:.58;white-space:nowrap}
-.audio-guide-hall-divider{max-width:980px;margin:38px auto 24px;padding:0 18px}
-.audio-guide-hall-divider-inner{display:flex;align-items:center;gap:14px}
-.audio-guide-hall-divider::before,.audio-guide-hall-divider::after{content:'';height:2px;flex:1;background:rgba(71,88,70,.22);border-radius:2px}
-.audio-guide-hall-divider-title{padding:9px 16px;border:1px solid rgba(71,88,70,.2);border-radius:12px;background:#f8f7f2;color:#344638;font-size:18px;font-weight:700;letter-spacing:.02em;white-space:nowrap}
-@media(max-width:680px){.audio-guide-voice-selector-inner{display:flex;gap:8px;padding:7px 8px}.audio-guide-voice-selector label{font-size:11px}.audio-guide-voice-select{font-size:12px;padding:6px 24px 6px 8px}.audio-guide-voice-note{display:none}.audio-guide-hall-divider{margin-top:30px}.audio-guide-hall-divider-title{font-size:16px;padding:8px 12px}}
+@media(max-width:680px){.audio-guide-voice-selector-inner{gap:7px;padding:6px 8px}.audio-guide-voice-selector label{font-size:11px}.audio-guide-voice-select{font-size:12px;padding:6px 22px 6px 7px}.audio-guide-voice-note{display:none}}
 `;
   document.head.appendChild(style);
 }
 
-function injectVoice(){
-  if(document.querySelector('.audio-guide-voice-selector'))return;
-  const player=document.querySelector('.audio-guide-player');
-  const screen=document.querySelector('.screen-audio');
-  if(!player)return;
+function buildSelector(){
   const wrap=document.createElement('section');
   wrap.className='audio-guide-voice-selector';
   wrap.setAttribute('aria-label','Выбор озвучки');
   wrap.innerHTML=`<div class="audio-guide-voice-selector-inner"><label for="audio-guide-voice">Озвучка</label><select id="audio-guide-voice" class="audio-guide-voice-select" data-audio-voice-select aria-label="Выбор озвучки">${versions.map(v=>`<option value="${v.id}" ${v.id===selectedId?'selected':''} ${available(v)?'':'disabled'}>${v.id==='alexey'?'🎙️ ':'✨ '}${v.title}${available(v)?'':' — скоро'}</option>`).join('')}</select><span class="audio-guide-voice-note">Выбор сохраняется</span></div>`;
-  const range=player.querySelector('input[type="range"]');
-  if(range){
-    const rangeBox=range.closest('div');
-    if(rangeBox&&rangeBox.parentElement&&rangeBox.parentElement!==player){rangeBox.parentElement.insertBefore(wrap,rangeBox.nextSibling)}
-    else range.parentNode.insertBefore(wrap,range.nextSibling);
-  }else{
-    const controls=player.querySelector('.audio-guide-controls,.audio-controls');
-    if(controls)controls.insertAdjacentElement('afterend',wrap); else player.appendChild(wrap);
-  }
   wrap.querySelector('select').addEventListener('change',e=>applyVoice(e.target.value));
+  return wrap;
 }
 
-function injectHallDividers(){
-  const tracks=[...document.querySelectorAll('[data-audio-track],[data-track-id],[data-audio-id]')];
-  if(!tracks.length)return;
-  const hallMarkers=new Map();
-  guide.tracks.forEach((track,index)=>{
-    const hall=track.hall||track.room||track.exposition?.hall;
-    if(hall&&!hallMarkers.has(hall))hallMarkers.set(hall,index);
-  });
-  if(hallMarkers.size<2)return;
-  [...hallMarkers.entries()].forEach(([hall,index])=>{
-    const target=tracks[index];
-    if(!target||target.previousElementSibling?.classList.contains('audio-guide-hall-divider'))return;
-    const divider=document.createElement('div');
-    divider.className='audio-guide-hall-divider';
-    divider.innerHTML=`<div class="audio-guide-hall-divider-inner"><span class="audio-guide-hall-divider-title">ЗАЛ ${hall}</span></div>`;
-    target.parentNode.insertBefore(divider,target);
-  });
+function injectVoice(){
+  if(document.querySelector('.audio-guide-voice-selector'))return true;
+  const player=document.querySelector('.audio-guide-player');
+  if(!player)return false;
+  const wrap=buildSelector();
+  // Put the selector immediately below the visible progress/scrubber row.
+  const scrubber=player.querySelector('.audio-guide-scrubber, .audio-scrubber, input[type="range"]');
+  if(scrubber){
+    const row=scrubber.closest('.audio-guide-progress,.audio-progress,.audio-guide-progress-row,.audio-progress-row');
+    (row||scrubber).insertAdjacentElement('afterend',wrap);
+    return true;
+  }
+  // Fallback: insert before the transcript/controls that follow the player content,
+  // never after the whole player element.
+  const progressLike=[...player.querySelectorAll('div')].find(el=>/0:00|\d+:\d+/.test(el.textContent||'')&&el.querySelector?.('button'));
+  if(progressLike){progressLike.insertAdjacentElement('afterend',wrap);return true}
+  player.insertBefore(wrap,player.firstChild?.nextSibling||null);
+  return true;
 }
 
-function init(){addStyles();applyVoice(selectedId);injectVoice();injectHallDividers()}
+function init(){
+  addStyles();
+  applyVoice(selectedId);
+  injectVoice();
+  // The core script can finish rendering the player after this script runs.
+  const observer=new MutationObserver(()=>{
+    if(injectVoice())observer.disconnect();
+  });
+  observer.observe(document.body,{childList:true,subtree:true});
+  setTimeout(()=>observer.disconnect(),10000);
+}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
 else init();
 })();
