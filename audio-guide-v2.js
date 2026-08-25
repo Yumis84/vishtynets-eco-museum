@@ -10,14 +10,26 @@ const loadHomepageBrand=()=>{
 };
 loadHomepageBrand();
 
+const loadVoiceSelector=()=>{
+  if(document.querySelector('script[data-audioguide-voice-selector]'))return;
+  const voice=document.createElement('script');
+  voice.src='audio-guide-voice-selector.js?v=1';
+  voice.async=false;
+  voice.dataset.audioguideVoiceSelector='1';
+  document.head.appendChild(voice);
+};
 const hideBottomPlayer=()=>{
   const player=document.querySelector('.audio-guide-player');
   if(player)player.style.display='none';
+  loadVoiceSelector();
 };
 const loadCore=()=>{
-  if(document.querySelector('script[data-audioguide-core]'))return;
+  if(document.querySelector('script[data-audioguide-core]')){
+    loadVoiceSelector();
+    return;
+  }
   const core=document.createElement('script');
-  core.src='audio-guide-v2-core.js?v=8';
+  core.src='audio-guide-v2-core.js?v=9';
   core.async=false;
   core.dataset.audioguideCore='1';
   core.addEventListener('load',hideBottomPlayer,{once:true});
