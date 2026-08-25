@@ -29,11 +29,11 @@ function addStyles(){
   style.dataset.audioguideVoice='1';
   style.textContent=`
 .audio-guide-voice-selector{width:100%;margin:8px 0 0;padding:0;box-sizing:border-box;position:relative;z-index:20}
-.audio-guide-voice-selector-inner{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid rgba(71,88,70,.16);border-radius:11px;background:#f8f7f2;box-sizing:border-box}
-.audio-guide-voice-selector label{font-size:12px;font-weight:700;color:#344638;white-space:nowrap}
-.audio-guide-voice-select{flex:1;min-width:0;padding:7px 28px 7px 9px;border:1px solid rgba(71,88,70,.2);border-radius:8px;background:#fff;color:#344638;font:inherit;font-size:13px}
+.audio-guide-voice-selector-inner{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid rgba(71,88,70,.18);border-radius:12px;background:#f8f7f2;box-sizing:border-box}
+.audio-guide-voice-selector label{font-size:12px;font-weight:800;color:#344638;white-space:nowrap}
+.audio-guide-voice-select{flex:1;min-width:0;padding:7px 28px 7px 9px;border:1px solid rgba(71,88,70,.25);border-radius:9px;background:#fff;color:#344638;font:inherit;font-size:13px;appearance:auto}
 .audio-guide-voice-note{font-size:10px;opacity:.58;white-space:nowrap}
-@media(max-width:680px){.audio-guide-voice-selector-inner{gap:7px;padding:7px 8px}.audio-guide-voice-selector label{font-size:11px}.audio-guide-voice-select{font-size:12px;padding:7px 22px 7px 7px}.audio-guide-voice-note{display:none}}
+@media(max-width:680px){.audio-guide-voice-selector-inner{gap:7px;padding:7px 8px}.audio-guide-voice-selector label{font-size:11px}.audio-guide-voice-select{font-size:12px;padding:7px 22px 7px 8px}.audio-guide-voice-note{display:none}}
 `;
   document.head.appendChild(style);
 }
@@ -41,29 +41,31 @@ function addStyles(){
 function buildSelector(){
   const wrap=document.createElement('section');
   wrap.className='audio-guide-voice-selector';
-  wrap.setAttribute('aria-label','Выбор озвучки');
-  wrap.innerHTML=`<div class="audio-guide-voice-selector-inner"><label for="audio-guide-voice">Озвучка</label><select id="audio-guide-voice" class="audio-guide-voice-select" data-audio-voice-select aria-label="Выбор озвучки">${versions.map(v=>`<option value="${v.id}" ${v.id===selectedId?'selected':''} ${available(v)?'':'disabled'}>${v.id==='alexey'?'🎙️ ':'✨ '}${v.title}${available(v)?'':' — скоро'}</option>`).join('')}</select><span class="audio-guide-voice-note">Выбор сохраняется</span></div>`;
+  wrap.setAttribute('aria-label','Выбор рассказчика');
+  wrap.innerHTML=`<div class="audio-guide-voice-selector-inner"><label for="audio-guide-voice">Рассказчик</label><select id="audio-guide-voice" class="audio-guide-voice-select" data-audio-voice-select aria-label="Выбор рассказчика">${versions.map(v=>`<option value="${v.id}" ${v.id===selectedId?'selected':''} ${available(v)?'':'disabled'}>${v.id==='alexey'?'🎙️ ':'✨ '}${v.title}${available(v)?'':' — скоро'}</option>`).join('')}</select><span class="audio-guide-voice-note">Сохраняется</span></div>`;
   wrap.querySelector('select').addEventListener('change',e=>applyVoice(e.target.value));
   return wrap;
 }
 
 function injectVoice(){
   const progress=document.querySelector('.screen-audio .audio-guide-progress');
-  if(!progress)return false;
+  const track=progress?.querySelector('.audio-guide-progress-track');
+  if(!progress||!track)return false;
 
-  // The selector belongs to the visible progress block, not the bottom player.
   document.querySelectorAll('.audio-guide-voice-selector').forEach(el=>{
     if(!progress.contains(el))el.remove();
   });
 
-  const existing=progress.querySelector('.audio-guide-voice-selector');
-  if(existing&&existing.previousElementSibling===progress.querySelector('.audio-guide-progress-track'))return true;
-  if(existing)existing.remove();
+  let existing=progress.querySelector('.audio-guide-voice-selector');
+  if(existing){
+    if(existing.previousElementSibling!==track)track.insertAdjacentElement('afterend',existing);
+    const select=existing.querySelector('[data-audio-voice-select]');
+    if(select)select.value=selectedId;
+    return true;
+  }
 
   const wrap=buildSelector();
-  const track=progress.querySelector('.audio-guide-progress-track');
-  if(track)track.insertAdjacentElement('afterend',wrap);
-  else progress.appendChild(wrap);
+  track.insertAdjacentElement('afterend',wrap);
   return true;
 }
 
