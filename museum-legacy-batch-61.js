@@ -1,0 +1,4 @@
+(()=>{ 'use strict'; const records=[
+{id:'legacy-p0093-sosedi-2016',year:2016,title:'«Соседи» — 2016',type:'event',status:'archive',source:'https://wystynez.ru/p0093.htm',summary:'Архивный материал праздника «Соседи» 2016 года.',details:['Программа включала выставочные, экскурсионные и культурные мероприятия.','Сохраняется как исторический материал без смешения с текущими событиями музея.']},
+{id:'legacy-p0109-unknown-vishtynets-2019',year:2019,title:'«Неизвестный Виштынец» — 2019',type:'exhibition',status:'archive',source:'https://wystynez.ru/p0109.htm',summary:'Материал об открытии экспозиции озера Виштынец и смотровой площадки.',details:['Сохраняется как архивная экспозиция.','Источник — старая страница музея.']}
+]; window.MuseumLegacyBatch61=records; window.MuseumLegacyBatches=window.MuseumLegacyBatches||{}; window.MuseumLegacyBatches[61]=records; })();
