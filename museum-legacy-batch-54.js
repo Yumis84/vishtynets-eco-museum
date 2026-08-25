@@ -1,0 +1,18 @@
+(()=>{
+'use strict';
+const records=[
+ {id:'legacy-archive-railways-romint-2024',year:2024,title:'Железные дороги Роминтской пущи',type:'exhibition',status:'archive',source:'https://wystynez.ru/p0008.htm',date:'2024-05-01',summary:'Архив музея фиксирует выставку «Железные дороги Роминтской пущи» с 1 мая 2024 года.',details:['Сохраняется как историческая запись архива, а не как текущая выставка.']},
+ {id:'legacy-archive-neighbors-2019',year:2019,title:'Международный праздник «Соседи»',type:'event',status:'archive',source:'https://wystynez.ru/p0008.htm',date:'2019-08-10',summary:'Архив музея фиксирует международный праздник «Соседи» 10 августа 2019 года.',details:['Историческая запись культурно-фольклорного фестиваля.']},
+ {id:'legacy-archive-unknown-vishtynets-2019',year:2019,title:'«Неизвестный Виштынец» — торжественное мероприятие',type:'project',status:'archive',source:'https://wystynez.ru/p0008.htm',date:'2019-06-16',summary:'16 июня 2019 года в архиве отмечено торжественное мероприятие проекта «Неизвестный Виштынец или по дороге к чуду».',details:['Связано с одноимённым проектом 2018–2019 годов.']},
+ {id:'legacy-archive-colors-summer-2019',year:2019,title:'Выставка «Краски лета»',type:'exhibition',status:'archive',source:'https://wystynez.ru/p0008.htm',date:'2019-10-15',summary:'Архив музея фиксирует выставку живописи Натальи Урвачёвой «Краски лета» с 15 октября 2019 года.',details:['Историческая запись выставочного архива.']},
+ {id:'legacy-archive-grass-breath-2019',year:2019,title:'«Дыхание трав» — флористические сюжеты',type:'exhibition',status:'archive',source:'https://wystynez.ru/p0008.htm',date:'2019-10-13',summary:'Архив музея фиксирует выставку «Дыхание трав» с флористическими сюжетами Ирины Губаревой.',details:['Историческая запись выставочного архива.']},
+ {id:'legacy-archive-concert-2019',year:2019,title:'Концерт «Танцы возле Красного леса»',type:'event',status:'archive',source:'https://wystynez.ru/p0008.htm',date:'2019-08-24',summary:'24 августа 2019 года состоялся концерт «Танцы возле Красного леса».',details:['Историческая запись культурной программы музея.']},
+ {id:'legacy-archive-russias-magic-2018',year:2018,title:'«Неизвестный Виштынец» — проект',type:'project',status:'archive',source:'https://wystynez.ru/p0008.htm',date:'2018-01-01',summary:'Архив фиксирует реализацию проекта «Неизвестный Виштынец или по дороге к чуду», поддержанного Фондом президентских грантов в 2018 году.',details:['Связан с торжественным мероприятием проекта 16 июня 2019 года.']},
+ {id:'legacy-archive-neighbors-2018',year:2018,title:'Международный праздник «Соседи»',type:'event',status:'archive',source:'https://wystynez.ru/p0008.htm',date:'2018-08-25',summary:'25 августа 2018 года состоялся международный праздник «Соседи».',details:['Историческая запись культурно-фольклорного фестиваля.']},
+ {id:'legacy-archive-stone-runestone-2016',year:2016,title:'«Каменные руны и шёпот дерева»',type:'exhibition',status:'archive',source:'https://wystynez.ru/p0008.htm',date:'2016-07-02',summary:'Архив музея фиксирует выставку «Каменные руны и шёпот дерева» с 2 июля по 5 августа 2016 года.',details:['Историческая выставочная запись.']},
+ {id:'legacy-archive-forest-people-2016',year:2016,title:'Выставка «Лес и люди»',type:'exhibition',status:'archive',source:'https://wystynez.ru/p0008.htm',date:'2016-08-06',summary:'Архив музея фиксирует выставку «Лес и люди» с 6 августа 2016 года по 14 июля 2017 года.',details:['Историческая запись выставочного архива.']}
+];
+window.MuseumLegacyBatch54=records;
+window.MuseumLegacyBatches=window.MuseumLegacyBatches||{};
+window.MuseumLegacyBatches[54]=records;
+})();
