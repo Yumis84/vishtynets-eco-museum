@@ -28,8 +28,8 @@ function addStyles(){
   const style=document.createElement('style');
   style.dataset.audioguideVoice='1';
   style.textContent=`
-.audio-guide-voice-selector{width:100%;margin:6px 0 0;padding:0;box-sizing:border-box}
-.audio-guide-voice-selector-inner{display:flex;align-items:center;gap:10px;padding:7px 9px;border:1px solid rgba(71,88,70,.16);border-radius:11px;background:rgba(248,247,242,.94);box-sizing:border-box}
+.audio-guide-voice-selector{width:100%;margin:7px 0 0;padding:0;box-sizing:border-box;position:relative;z-index:5}
+.audio-guide-voice-selector-inner{display:flex;align-items:center;gap:10px;padding:7px 9px;border:1px solid rgba(71,88,70,.16);border-radius:11px;background:rgba(248,247,242,.96);box-sizing:border-box}
 .audio-guide-voice-selector label{font-size:12px;font-weight:700;color:#344638;white-space:nowrap}
 .audio-guide-voice-select{flex:1;min-width:0;padding:6px 26px 6px 8px;border:1px solid rgba(71,88,70,.2);border-radius:8px;background:#fff;color:#344638;font:inherit;font-size:13px}
 .audio-guide-voice-note{font-size:10px;opacity:.58;white-space:nowrap}
@@ -48,22 +48,24 @@ function buildSelector(){
 }
 
 function injectVoice(){
-  if(document.querySelector('.audio-guide-voice-selector'))return true;
   const player=document.querySelector('.audio-guide-player');
   if(!player)return false;
+
+  // Remove any selector left outside the current player by an earlier version.
+  document.querySelectorAll('.audio-guide-voice-selector').forEach(el=>{
+    if(!player.contains(el))el.remove();
+  });
+
+  const existing=player.querySelector('.audio-guide-voice-selector');
+  const progress=player.querySelector('.audio-guide-progress-track');
+  if(!progress)return false;
+
+  // If the player re-rendered, move/recreate the selector next to the real progress bar.
+  if(existing&&existing.previousElementSibling===progress)return true;
+  if(existing)existing.remove();
+
   const wrap=buildSelector();
-  // Put the selector immediately below the visible progress/scrubber row.
-  const scrubber=player.querySelector('.audio-guide-scrubber, .audio-scrubber, input[type="range"]');
-  if(scrubber){
-    const row=scrubber.closest('.audio-guide-progress,.audio-progress,.audio-guide-progress-row,.audio-progress-row');
-    (row||scrubber).insertAdjacentElement('afterend',wrap);
-    return true;
-  }
-  // Fallback: insert before the transcript/controls that follow the player content,
-  // never after the whole player element.
-  const progressLike=[...player.querySelectorAll('div')].find(el=>/0:00|\d+:\d+/.test(el.textContent||'')&&el.querySelector?.('button'));
-  if(progressLike){progressLike.insertAdjacentElement('afterend',wrap);return true}
-  player.insertBefore(wrap,player.firstChild?.nextSibling||null);
+  progress.insertAdjacentElement('afterend',wrap);
   return true;
 }
 
@@ -71,13 +73,18 @@ function init(){
   addStyles();
   applyVoice(selectedId);
   injectVoice();
-  // The core script can finish rendering the player after this script runs.
+
+  // audio-guide-v2-core.js renders/re-renders the player dynamically.
+  // Keep the selector attached to the actual progress bar after every render.
+  let scheduled=false;
   const observer=new MutationObserver(()=>{
-    if(injectVoice())observer.disconnect();
+    if(scheduled)return;
+    scheduled=true;
+    requestAnimationFrame(()=>{scheduled=false;injectVoice()});
   });
   observer.observe(document.body,{childList:true,subtree:true});
-  setTimeout(()=>observer.disconnect(),10000);
 }
+
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
 else init();
 })();
