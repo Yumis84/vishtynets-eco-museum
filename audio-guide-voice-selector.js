@@ -19,13 +19,8 @@ function applyVoice(id){
     track.audio.publicUrl=`${version.audioBase}/${filename}`;
     track.audio.voiceVersion=id;
   });
-  document.querySelectorAll('[data-audio-voice]').forEach(button=>{
-    const active=button.dataset.audioVoice===id;
-    button.classList.toggle('is-active',active);
-    button.setAttribute('aria-pressed',active?'true':'false');
-    const label=button.querySelector('[data-voice-label]');
-    if(label)label.textContent=active?'Выбрано':'Слушать';
-  });
+  const select=document.querySelector('[data-audio-voice-select]');
+  if(select)select.value=id;
 }
 
 function addStyles(){
@@ -33,53 +28,52 @@ function addStyles(){
   const style=document.createElement('style');
   style.dataset.audioguideVoice='1';
   style.textContent=`
-.audio-guide-voice-selector{margin:0 auto 28px;max-width:980px;padding:0 18px}
-.audio-guide-voice-selector-inner{padding:20px;border:1px solid rgba(71,88,70,.16);border-radius:20px;background:rgba(248,247,242,.92);box-shadow:0 8px 24px rgba(35,45,35,.06)}
-.audio-guide-voice-heading{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:14px}
-.audio-guide-voice-heading strong{font-size:18px;color:#344638}
-.audio-guide-voice-heading span{font-size:13px;opacity:.68}
-.audio-guide-voice-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.audio-guide-voice-option{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;text-align:left;padding:14px 15px;border:1px solid rgba(71,88,70,.16);border-radius:15px;background:#fff;cursor:pointer;font:inherit;transition:.18s ease}
-.audio-guide-voice-option:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 5px 14px rgba(35,45,35,.08)}
-.audio-guide-voice-option.is-active{border-color:#6f846d;box-shadow:0 0 0 2px rgba(111,132,109,.15)}
-.audio-guide-voice-option:disabled{opacity:.58;cursor:not-allowed}
-.audio-guide-voice-icon{font-size:22px}
-.audio-guide-voice-option b,.audio-guide-voice-option small{display:block}
-.audio-guide-voice-option b{font-size:14px;color:#344638}
-.audio-guide-voice-option small{margin-top:3px;font-size:12px;line-height:1.35;opacity:.68}
-.audio-guide-voice-option i{font-style:normal;font-size:11px;white-space:nowrap;opacity:.72}
-@media(max-width:680px){.audio-guide-voice-heading{display:block}.audio-guide-voice-heading span{display:block;margin-top:4px}.audio-guide-voice-options{grid-template-columns:1fr}}
+.audio-guide-voice-selector{margin:10px auto 30px;max-width:980px;padding:0 18px}
+.audio-guide-voice-selector-inner{display:flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid rgba(71,88,70,.16);border-radius:14px;background:rgba(248,247,242,.92);box-shadow:0 5px 16px rgba(35,45,35,.05)}
+.audio-guide-voice-selector label{font-size:13px;font-weight:600;color:#344638;white-space:nowrap}
+.audio-guide-voice-select{flex:1;min-width:0;padding:9px 34px 9px 11px;border:1px solid rgba(71,88,70,.2);border-radius:10px;background:#fff;color:#344638;font:inherit;font-size:14px}
+.audio-guide-voice-note{font-size:12px;opacity:.62;white-space:nowrap}
+.audio-guide-hall-divider{max-width:980px;margin:38px auto 24px;padding:0 18px}
+.audio-guide-hall-divider-inner{display:flex;align-items:center;gap:14px}
+.audio-guide-hall-divider::before,.audio-guide-hall-divider::after{content:'';height:2px;flex:1;background:rgba(71,88,70,.22);border-radius:2px}
+.audio-guide-hall-divider-title{padding:9px 16px;border:1px solid rgba(71,88,70,.2);border-radius:12px;background:#f8f7f2;color:#344638;font-size:18px;font-weight:700;letter-spacing:.02em;white-space:nowrap}
+@media(max-width:680px){.audio-guide-voice-selector-inner{display:block;padding:12px}.audio-guide-voice-selector label{display:block;margin-bottom:6px}.audio-guide-voice-note{display:block;margin-top:6px}.audio-guide-hall-divider{margin-top:30px}.audio-guide-hall-divider-title{font-size:16px;padding:8px 12px}}
 `;
   document.head.appendChild(style);
 }
 
-function inject(){
+function injectVoice(){
   if(document.querySelector('.audio-guide-voice-selector'))return;
-  const anchor=document.querySelector('.audio-guide-hero')||document.querySelector('.screen-audio');
+  const anchor=document.querySelector('.audio-guide-player')||document.querySelector('.audio-guide-hero')||document.querySelector('.screen-audio');
   if(!anchor)return;
   const wrap=document.createElement('section');
   wrap.className='audio-guide-voice-selector';
   wrap.setAttribute('aria-label','Выбор озвучки');
-  wrap.innerHTML=`<div class="audio-guide-voice-selector-inner">
-    <div class="audio-guide-voice-heading"><strong>Выберите озвучку</strong><span>Одна экскурсия — два варианта подачи</span></div>
-    <div class="audio-guide-voice-options">${versions.map(v=>{
-      const ok=available(v);
-      return `<button type="button" class="audio-guide-voice-option${v.id===selectedId?' is-active':''}" data-audio-voice="${v.id}" ${ok?'':'disabled'} aria-pressed="${v.id===selectedId?'true':'false'}">
-        <span class="audio-guide-voice-icon">${v.id==='alexey'?'🎙️':'✨'}</span>
-        <span><b>${v.title}</b><small>${ok?v.description:'Скоро будет доступна'}</small></span>
-        <i data-voice-label>${v.id===selectedId?'Выбрано':ok?'Слушать':'Скоро'}</i>
-      </button>`;
-    }).join('')}</div>
-  </div>`;
+  wrap.innerHTML=`<div class="audio-guide-voice-selector-inner"><label for="audio-guide-voice">Озвучка</label><select id="audio-guide-voice" class="audio-guide-voice-select" data-audio-voice-select aria-label="Выбор озвучки">${versions.map(v=>`<option value="${v.id}" ${v.id===selectedId?'selected':''} ${available(v)?'':'disabled'}>${v.id==='alexey'?'🎙️ ': '✨ '}${v.title}${available(v)?'':' — скоро'}</option>`).join('')}</select><span class="audio-guide-voice-note">Выбор сохраняется</span></div>`;
   anchor.parentNode.insertBefore(wrap,anchor.nextSibling);
-  wrap.addEventListener('click',event=>{
-    const button=event.target.closest('[data-audio-voice]');
-    if(!button||button.disabled)return;
-    applyVoice(button.dataset.audioVoice);
+  wrap.querySelector('select').addEventListener('change',e=>applyVoice(e.target.value));
+}
+
+function injectHallDividers(){
+  const tracks=[...document.querySelectorAll('[data-audio-track],[data-track-id],[data-audio-id]')];
+  if(!tracks.length)return;
+  const hallMarkers=new Map();
+  guide.tracks.forEach((track,index)=>{
+    const hall=track.hall||track.room||track.exposition?.hall;
+    if(hall&&!hallMarkers.has(hall))hallMarkers.set(hall,index);
+  });
+  if(hallMarkers.size<2)return;
+  [...hallMarkers.entries()].forEach(([hall,index])=>{
+    const target=tracks[index];
+    if(!target||target.previousElementSibling?.classList.contains('audio-guide-hall-divider'))return;
+    const divider=document.createElement('div');
+    divider.className='audio-guide-hall-divider';
+    divider.innerHTML=`<div class="audio-guide-hall-divider-inner"><span class="audio-guide-hall-divider-title">ЗАЛ ${hall}</span></div>`;
+    target.parentNode.insertBefore(divider,target);
   });
 }
 
-function init(){addStyles();applyVoice(selectedId);inject()}
+function init(){addStyles();applyVoice(selectedId);injectVoice();injectHallDividers()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
 else init();
 })();
