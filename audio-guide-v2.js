@@ -13,7 +13,7 @@ loadHomepageBrand();
 const loadVoiceSelector=()=>{
   if(document.querySelector('script[data-audioguide-voice-selector]'))return;
   const voice=document.createElement('script');
-  voice.src='audio-guide-voice-selector.js?v=2';
+  voice.src='audio-guide-voice-selector.js?v=3';
   voice.async=false;
   voice.dataset.audioguideVoiceSelector='1';
   document.head.appendChild(voice);
@@ -25,7 +25,7 @@ const loadCore=()=>{
     return;
   }
   const core=document.createElement('script');
-  core.src='audio-guide-v2-core.js?v=10';
+  core.src='audio-guide-v2-core.js?v=11';
   core.async=false;
   core.dataset.audioguideCore='1';
   core.addEventListener('load',loadVoiceSelector,{once:true});
