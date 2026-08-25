@@ -19,4 +19,24 @@ const init=()=>{
   if(!document.querySelector('style[data-audioguide-player-nav]')){const s=document.createElement('style');s.dataset.audioguidePlayerNav='1';s.textContent='.audio-guide-player-nav{width:100%;box-sizing:border-box;display:flex;gap:16px;justify-content:center;align-items:center;margin:14px auto 0;padding:0 8px}.audio-guide-player-nav button{box-sizing:border-box;width:46px;height:46px;min-width:46px;max-width:46px;padding:0;margin:0;border:1px solid #c8cec4;border-radius:50%;background:#f7f6f0;color:#344638;font-size:28px;font-weight:500;line-height:46px;text-align:center;display:block;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.08)}.audio-guide-player-nav button:active{transform:scale(.96)}.audio-guide-player-nav button:disabled{opacity:.35;cursor:default}.audio-guide-transcript-note{font-size:16px!important;line-height:1.65!important;margin-top:16px!important}.audio-guide-transcript-note p{margin:0 0 12px}';document.head.appendChild(s)}
 };
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();new MutationObserver(init).observe(document.body,{childList:true,subtree:true});
+
+// Robust resume fallback: when the sequential mode is paused, resume the exact current track
+// instead of restarting the sequence or losing the current position.
+document.addEventListener('click',event=>{
+  const feature=event.target.closest('.audio-guide-features .audio-guide-feature');
+  if(!feature||feature.dataset.sequencePaused!=='1')return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  const selected=document.querySelector('.audio-guide-track-card-v2.is-selected');
+  if(selected){
+    selected.click();
+    setTimeout(()=>document.querySelector('.audio-guide-player audio')?.play().catch(()=>{}),120);
+    return;
+  }
+  const start=document.querySelector('.audio-guide-start');
+  if(start&&!start.disabled){
+    start.click();
+    setTimeout(()=>document.querySelector('.audio-guide-player audio')?.play().catch(()=>{}),120);
+  }
+},true);
 })();
