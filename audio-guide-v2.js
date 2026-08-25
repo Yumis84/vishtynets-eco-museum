@@ -13,10 +13,20 @@ loadHomepageBrand();
 const loadVoiceSelector=()=>{
   if(document.querySelector('script[data-audioguide-voice-selector]'))return;
   const voice=document.createElement('script');
-  voice.src='audio-guide-voice-selector.js?v=3';
+  voice.src='audio-guide-voice-selector.js?v=4';
   voice.async=false;
   voice.dataset.audioguideVoiceSelector='1';
   document.head.appendChild(voice);
+  voice.addEventListener('load',loadRead,{once:true});
+};
+
+const loadRead=()=>{
+  if(document.querySelector('script[data-audioguide-read]'))return;
+  const read=document.createElement('script');
+  read.src='audio-guide-read.js?v=1';
+  read.async=false;
+  read.dataset.audioguideRead='1';
+  document.head.appendChild(read);
 };
 
 const loadCore=()=>{
@@ -25,7 +35,7 @@ const loadCore=()=>{
     return;
   }
   const core=document.createElement('script');
-  core.src='audio-guide-v2-core.js?v=11';
+  core.src='audio-guide-v2-core.js?v=12';
   core.async=false;
   core.dataset.audioguideCore='1';
   core.addEventListener('load',loadVoiceSelector,{once:true});
