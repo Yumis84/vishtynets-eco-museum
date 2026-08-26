@@ -1,13 +1,13 @@
 (()=>{
 'use strict';
 const V='30';
-const loadScript=(src,attr,next)=>{if(document.querySelector(`script[${attr}]`)){next?.();return}const s=document.createElement('script');s.src=src;s.async=false;s.setAttribute(attr,'1');s.addEventListener('load',()=>next?.(),{once:true});s.addEventListener('error',e=>{console.error('[AudioGuide] failed:',src,e);next?.()}, {once:true});document.head.appendChild(s)};
+const loadScript=(src,attr,next)=>{if(document.querySelector(`script[${attr}]`)){next?.();return}const s=document.createElement('script');s.src=src;s.async=false;s.setAttribute(attr,'1');s.addEventListener('load',()=>next?.(),{once:true});s.addEventListener('error',e=>{console.error('[AudioGuide] failed:',src,e);next?.()},{once:true});document.head.appendChild(s)};
 const loadHomepageBrand=next=>loadScript(`homepage-brand.js?v=${V}`,'data-homepage-brand',next);
 const loadData=next=>{if(window.VISHTYNETS_AUDIO_GUIDES?.museum){next();return}loadScript(`audio-guide-data.js?v=${V}`,'data-audioguide-data',()=>{if(window.VISHTYNETS_AUDIO_GUIDES?.museum)next();else console.error('[AudioGuide] data did not initialize')})};
-const loadContinue=next=>loadScript(`audio-guide-continue.js?v=2`,'data-audioguide-continue',next);
-const loadPlayerNav=next=>loadScript(`audio-guide-player-nav.js?v=10`,'data-audioguide-player-nav',next);
-const loadRead=next=>loadScript(`audio-guide-read.js?v=8`,'data-audioguide-read',()=>loadPlayerNav(next));
-const loadVoiceSelector=next=>loadScript(`audio-guide-voice-selector.js?v=7`,'data-audioguide-voice-selector',()=>loadRead(next));
-const loadCore=()=>loadScript(`audio-guide-v2-core.js?v=15`,'data-audioguide-core',loadVoiceSelector);
+const loadContinue=next=>loadScript('audio-guide-continue.js?v=2','data-audioguide-continue',next);
+const loadPlayerNav=next=>loadScript('audio-guide-player-nav.js?v=10','data-audioguide-player-nav',next);
+const loadRead=next=>loadScript('audio-guide-read.js?v=8','data-audioguide-read',()=>loadPlayerNav(next));
+const loadVoiceSelector=next=>loadScript('audio-guide-voice-selector.js?v=8','data-audioguide-voice-selector',()=>loadRead(next));
+const loadCore=()=>loadScript('audio-guide-v2-core.js?v=15','data-audioguide-core',loadVoiceSelector);
 loadHomepageBrand(()=>loadData(()=>loadContinue(loadCore)));
 })();
