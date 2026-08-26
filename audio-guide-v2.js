@@ -1,11 +1,15 @@
 (()=>{
 'use strict';
-const loadHomepageBrand=()=>{if(document.querySelector('script[data-homepage-brand]'))return;const brand=document.createElement('script');brand.src='homepage-brand.js?v=1';brand.async=false;brand.dataset.homepageBrand='1';document.head.appendChild(brand)};loadHomepageBrand();
-const loadContinue=()=>{if(document.querySelector('script[data-audioguide-continue]'))return;const s=document.createElement('script');s.src='audio-guide-continue.js?v=1';s.async=false;s.dataset.audioguideContinue='1';document.head.appendChild(s)};
-const loadPlayerNav=()=>{if(document.querySelector('script[data-audioguide-player-nav]'))return;const nav=document.createElement('script');nav.src='audio-guide-player-nav.js?v=8';nav.async=false;nav.dataset.audioguidePlayerNav='1';document.head.appendChild(nav)};
-const loadRead=()=>{if(document.querySelector('script[data-audioguide-read]'))return;const read=document.createElement('script');read.src='audio-guide-read.js?v=5';read.async=false;read.dataset.audioguideRead='1';read.addEventListener('load',loadPlayerNav,{once:true});document.head.appendChild(read)};
-const loadVoiceSelector=()=>{if(document.querySelector('script[data-audioguide-voice-selector]'))return;const voice=document.createElement('script');voice.src='audio-guide-voice-selector.js?v=6';voice.async=false;voice.dataset.audioguideVoiceSelector='1';voice.addEventListener('load',loadRead,{once:true});document.head.appendChild(voice)};
-const loadCore=()=>{loadContinue();if(document.querySelector('script[data-audioguide-core]')){loadVoiceSelector();return}const core=document.createElement('script');core.src='audio-guide-v2-core.js?v=14';core.async=false;core.dataset.audioguideCore='1';core.addEventListener('load',loadVoiceSelector,{once:true});document.head.appendChild(core)};
-if(window.__VISHTYNETS_AUDIO_SEQUENCE__){loadCore();return}
-const sequence=document.createElement('script');sequence.src='audio-guide-sequence.js?v=4';sequence.async=false;sequence.dataset.audioguideSequence='1';sequence.addEventListener('load',loadCore,{once:true});sequence.addEventListener('error',loadCore,{once:true});document.head.appendChild(sequence);
+const loadScript=(src,attr,next)=>{if(document.querySelector(`script[${attr}]`)){next?.();return}const s=document.createElement('script');s.src=src;s.async=false;s.setAttribute(attr,'1');s.addEventListener('load',()=>next?.(),{once:true});s.addEventListener('error',()=>next?.(),{once:true});document.head.appendChild(s)};
+const loadHomepageBrand=next=>loadScript('homepage-brand.js?v=1','data-homepage-brand',next);
+const loadData=next=>{if(window.VISHTYNETS_AUDIO_GUIDES?.museum){next();return}loadScript('audio-guide-data.js?v=2','data-audioguide-data',next)};
+const loadContinue=next=>loadScript('audio-guide-continue.js?v=1','data-audioguide-continue',next);
+const loadPlayerNav=next=>loadScript('audio-guide-player-nav.js?v=8','data-audioguide-player-nav',next);
+const loadRead=next=>loadScript('audio-guide-read.js?v=5','data-audioguide-read',()=>loadPlayerNav(next));
+const loadVoiceSelector=next=>loadScript('audio-guide-voice-selector.js?v=6','data-audioguide-voice-selector',()=>loadRead(next));
+const loadCore=()=>{
+ if(document.querySelector('script[data-audioguide-core]')){loadVoiceSelector();return}
+ loadScript('audio-guide-v2-core.js?v=14','data-audioguide-core',loadVoiceSelector);
+};
+loadHomepageBrand(()=>loadData(()=>loadContinue(loadCore)));
 })();
