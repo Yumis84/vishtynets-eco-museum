@@ -1,4 +1,8 @@
-/* Audioguide controls — museum green style */
-.audio-guide-track-play{background:#36513f!important;color:#fff!important;border:0!important;fill:#fff!important;stroke:#fff!important}.audio-guide-track-play svg,.audio-guide-track-play svg *{color:#fff!important;fill:#fff!important;stroke:#fff!important}
-.audio-guide-track-read{width:34px!important;height:34px!important;min-width:34px!important;padding:0!important;border:1.5px solid #222!important;border-radius:50%!important;background:transparent!important;color:#222!important;box-shadow:none!important;display:flex!important;align-items:center!important;justify-content:center!important}.audio-guide-track-read svg,.audio-guide-track-read svg *{width:16px!important;height:16px!important;color:#222!important;fill:none!important;stroke:#222!important;stroke-width:1.7!important}
+/* Audioguide controls — previous stable green style */
+.audio-guide-track-play{width:48px!important;height:48px!important;min-width:48px!important;border:0!important;border-radius:50%!important;display:flex!important;align-items:center!important;justify-content:center!important;background:#36513f!important;color:#fff!important;cursor:pointer!important}
+.audio-guide-track-play svg,.audio-guide-track-play svg *{color:#fff!important;fill:#fff!important;stroke:#fff!important}
+.audio-guide-track-read{width:42px!important;height:42px!important;min-width:42px!important;border:1px solid rgba(54,81,63,.28)!important;border-radius:50%!important;background:#faf7ef!important;color:#36513f!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important;cursor:pointer!important}
+.audio-guide-track-read svg,.audio-guide-track-read svg *{width:20px!important;height:20px!important;color:#36513f!important;fill:none!important;stroke:#36513f!important;stroke-width:1.8!important}
 .audio-guide-track-actions{display:flex!important;align-items:center!important;justify-content:flex-end!important}
+.audio-guide-track-progress{grid-column:1/-1!important;display:flex!important;align-items:center!important;gap:8px!important;width:100%!important;margin-top:2px!important}
+.audio-guide-track-progress input[type=range]{display:block!important;flex:1!important;width:100%!important;height:5px!important;margin:0!important;accent-color:#36513f!important;cursor:pointer!important}
