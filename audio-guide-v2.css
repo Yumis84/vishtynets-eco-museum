@@ -1,8 +1,37 @@
-/* Audioguide controls — previous stable green style */
-.audio-guide-track-play{width:48px!important;height:48px!important;min-width:48px!important;border:0!important;border-radius:50%!important;display:flex!important;align-items:center!important;justify-content:center!important;background:#36513f!important;color:#fff!important;cursor:pointer!important}
-.audio-guide-track-play svg,.audio-guide-track-play svg *{color:#fff!important;fill:#fff!important;stroke:#fff!important}
-.audio-guide-track-read{width:42px!important;height:42px!important;min-width:42px!important;border:1px solid rgba(54,81,63,.28)!important;border-radius:50%!important;background:#faf7ef!important;color:#36513f!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important;cursor:pointer!important}
-.audio-guide-track-read svg,.audio-guide-track-read svg *{width:20px!important;height:20px!important;color:#36513f!important;fill:none!important;stroke:#36513f!important;stroke-width:1.8!important}
-.audio-guide-track-actions{display:flex!important;align-items:center!important;justify-content:flex-end!important}
-.audio-guide-track-progress{grid-column:1/-1!important;display:flex!important;align-items:center!important;gap:8px!important;width:100%!important;margin-top:2px!important}
-.audio-guide-track-progress input[type=range]{display:block!important;flex:1!important;width:100%!important;height:5px!important;margin:0!important;accent-color:#36513f!important;cursor:pointer!important}
+/* Audioguide v2 — compact museum-style player and track list */
+.audio-guide-player.audio-guide-player-top{display:grid!important;grid-template-columns:52px minmax(0,1fr)!important;gap:12px!important;align-items:center!important;margin:14px 0 18px!important;padding:14px!important;border:1px solid #c9d2c6!important;border-radius:22px!important;background:linear-gradient(145deg,#f6f0e5,#e7ede5)!important;box-shadow:0 8px 22px rgba(54,81,63,.10)!important;opacity:1!important}
+.audio-guide-player-top .audio-guide-play{width:52px!important;height:52px!important;background:#36513f!important;color:#fff!important;border:0!important;border-radius:50%!important;display:flex!important;align-items:center!important;justify-content:center!important;box-shadow:0 5px 12px rgba(54,81,63,.18)!important}
+.audio-guide-player-top .audio-guide-play svg{width:23px!important;height:23px!important;stroke:#fff!important;fill:#fff!important;color:#fff!important}
+.audio-guide-player-top .audio-guide-player-info{min-width:0!important}
+.audio-guide-player-top .audio-guide-player-title{display:block!important;color:#34483b!important;font-size:15px!important;font-weight:850!important}
+.audio-guide-player-top .audio-guide-player-time{display:block!important;margin-top:3px!important;color:#777d74!important;font-size:10px!important}
+.audio-guide-player-top input[type=range]{grid-column:1/-1!important;width:100%!important;height:6px!important;margin:2px 0 0!important;accent-color:#36513f!important}
+
+.audio-guide-track-list{display:flex!important;flex-direction:column!important;gap:10px!important}
+.audio-guide-hall{margin-top:18px!important}
+.audio-guide-hall:first-child{margin-top:0!important}
+.audio-guide-hall-head{display:flex!important;align-items:flex-end!important;justify-content:space-between!important;gap:10px!important;margin:0 2px 8px!important;padding-bottom:7px!important;border-bottom:2px solid #b8c5b7!important}
+.audio-guide-hall-head span{display:block!important;color:#6f846d!important;font-size:9px!important;text-transform:uppercase!important;letter-spacing:.12em!important;font-weight:900!important}
+.audio-guide-hall-head strong{display:block!important;margin-top:2px!important;color:#34483b!important;font:600 21px/1.05 Georgia,"Times New Roman",serif!important}
+.audio-guide-hall-head small{color:#777d74!important;font-size:10px!important;font-weight:800!important}
+.audio-guide-hall-tracks{display:flex!important;flex-direction:column!important;gap:8px!important}
+.audio-guide-track-card-v2{display:grid!important;grid-template-columns:48px minmax(0,1fr) 42px!important;grid-template-rows:auto auto!important;column-gap:10px!important;row-gap:6px!important;align-items:center!important;padding:11px 12px!important;border:1px solid #d5cdbc!important;border-radius:17px!important;background:#fbf7ee!important;box-shadow:0 3px 10px rgba(54,81,63,.06)!important;transition:background .15s,border-color .15s,box-shadow .15s!important}
+.audio-guide-track-card-v2.is-selected{border-color:#8da08d!important;background:#eef3ec!important;box-shadow:0 5px 14px rgba(54,81,63,.10)!important}
+.audio-guide-track-play{grid-column:1!important;grid-row:1!important;width:48px!important;height:48px!important;min-width:48px!important;padding:0!important;border:0!important;border-radius:50%!important;background:#36513f!important;color:#fff!important;display:flex!important;align-items:center!important;justify-content:center!important;cursor:pointer!important;box-shadow:0 5px 12px rgba(54,81,63,.16)!important}
+.audio-guide-track-play svg{width:21px!important;height:21px!important;stroke:#fff!important;fill:#fff!important;color:#fff!important}
+.audio-guide-track-copy-v2{grid-column:2!important;grid-row:1!important;min-width:0!important;align-self:center!important}
+.audio-guide-track-copy-v2 strong{display:block!important;color:#34483b!important;font-size:14px!important;line-height:1.2!important}
+.audio-guide-track-copy-v2 p{margin:4px 0 0!important;color:#737970!important;font-size:10.5px!important;line-height:1.35!important}
+.audio-guide-track-actions{grid-column:3!important;grid-row:1!important;display:flex!important;align-items:center!important;justify-content:flex-end!important}
+.audio-guide-track-read{width:34px!important;height:34px!important;min-width:34px!important;padding:0!important;border:1px solid #222!important;border-radius:50%!important;background:transparent!important;color:#222!important;display:flex!important;align-items:center!important;justify-content:center!important;cursor:pointer!important;pointer-events:auto!important;position:relative!important;z-index:5!important}
+.audio-guide-track-read svg{width:16px!important;height:16px!important;stroke:#222!important;fill:none!important;color:#222!important;stroke-width:1.7!important;pointer-events:none!important}
+.audio-guide-track-progress{grid-column:1/-1!important;grid-row:2!important;display:flex!important;align-items:center!important;gap:8px!important;width:100%!important;margin:0!important}
+.audio-guide-track-progress input[type=range]{flex:1!important;width:100%!important;height:5px!important;margin:0!important;accent-color:#36513f!important;cursor:pointer!important}
+.audio-guide-track-time{color:#777d74!important;font-size:9px!important;white-space:nowrap!important;min-width:65px!important;text-align:right!important}
+.audio-guide-transcript-modal{position:fixed!important;inset:0!important;z-index:9999!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;padding:14px!important}
+.audio-guide-transcript-backdrop{position:absolute!important;inset:0!important;background:rgba(24,35,27,.55)!important}
+.audio-guide-transcript-panel{position:relative!important;z-index:2!important;width:min(100%,560px)!important;max-height:82vh!important;overflow:auto!important;padding:22px 18px 20px!important;border:1px solid #d4cbbb!important;border-radius:25px!important;background:#fbf7ee!important;box-shadow:0 24px 60px rgba(20,30,23,.22)!important}
+.audio-guide-transcript-close{position:absolute!important;right:12px!important;top:12px!important;width:36px!important;height:36px!important;border:0!important;border-radius:50%!important;background:#eee7da!important;color:#36513f!important;font-size:22px!important;cursor:pointer!important}
+.audio-guide-transcript-panel h1{margin:5px 42px 14px 0!important;color:#34483b!important;font:600 25px/1.08 Georgia,"Times New Roman",serif!important}
+.audio-guide-master-text{color:#4f5d52!important;font-size:13px!important;line-height:1.6!important}
+@media(max-width:420px){.audio-guide-track-card-v2{grid-template-columns:44px minmax(0,1fr) 38px!important;padding:10px!important}.audio-guide-track-play{width:44px!important;height:44px!important;min-width:44px!important}.audio-guide-track-read{width:32px!important;height:32px!important;min-width:32px!important}.audio-guide-track-copy-v2 strong{font-size:13px!important}.audio-guide-track-copy-v2 p{font-size:10px!important}.audio-guide-track-time{min-width:58px!important;font-size:8.5px!important}}
