@@ -155,7 +155,7 @@ function mapPin(content,guest=false){return L.divIcon({className:'',html:`<div c
 function renderMapMarkers(){
   if(!state.markerLayer)return;state.markerLayer.clearLayers();const q=($('#mapSearch')?.value||'').trim().toLowerCase();
   points.filter(mapPointMatches).filter(p=>!q||[p.name,p.shortDescription,p.category,...(p.categories||[])].join(' ').toLowerCase().includes(q)).forEach(p=>{const marker=L.marker([p.lat,p.lng],{icon:mapPin(categoryIcon(primaryCategory(p)))}).addTo(state.markerLayer);marker.on('click',()=>selectMapPoint(p))});
-  if(state.showGuests)state.guestHouses.filter(h=>Number.isFinite(h.lat)&&Number.isFinite(h.lng)).filter(h=>!q||[h.name,h.address,h.description].join(' ').toLowerCase().includes(q)).forEach(h=>{const marker=L.marker([h.lat,h.lng],{icon:mapPin('⌂',true)}).addTo(state.markerLayer);marker.on('click',()=>selectGuest(h))});
+  if(state.showGuests)state.guestHouses.filter(h=>Number.isFinite(h.lat)&&Number.isFinite(h.lng)).filter(h=>!q||[h.name,h.address,h.description].join(' ').toLowerCase().includes(q)).forEach(h=>{const marker=L.marker([h.lat,h.lng],{icon:mapPin('⌂',true)}).addTo(state.markerLayer);marker.on('click',()=>selectGuest(h)});
   if(state.selectedPoint)selectMapPoint(state.selectedPoint,false);
 }
 function selectMapPoint(p,fly=false){
@@ -192,4 +192,5 @@ function bind(){
 }
 
 renderHours();renderHome();renderExplore();renderArticles();bind();
+if(window.location.hash==='#map')showScreen('map',{remember:false});
 })();
