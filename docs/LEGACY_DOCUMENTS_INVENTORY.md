@@ -19,9 +19,9 @@ Purpose: track legacy museum publications/downloads without inventing file targe
 
 ## Legacy publication index requiring source capture
 
-`p0087.htm` — «Издания Виштынецкого экомузея и издания, подготовленные при участии сотрудников» — is the canonical legacy index for museum publications.
+The legacy publication index is titled «Издания Виштынецкого экомузея и издания, подготовленные при участии его сотрудников». The currently retrievable legacy page is the museum information/about page (`aMy---eto--sotrudniki--Kaliningradskogo--regional_nogo--obcshestvennogo--uchrezhdenija--Vishtyneckij.htm`), which confirms the publication section exists and also confirms the historical museum contact email `wystynez@bk.ru`. This does **not** by itself verify individual publication download targets.
 
-The current environment could not reliably retrieve the complete index/binary targets, so the following are **not** declared migrated or verified merely from discovery results. Exact targets must be recovered from the primary HTML before publication:
+The following are **not** declared migrated or verified merely from discovery results. Exact targets must be recovered from the primary HTML before publication:
 
 - publications about the heritage/history of Rominten / Romincka Forest;
 - Красная книга / regional natural heritage publications;
@@ -35,7 +35,7 @@ Do not create a generic «Downloads» page from an incomplete list. First recove
 
 ## Next actions
 
-1. Capture complete `p0087.htm` source when primary retrieval is available.
+1. Capture complete publication-index source when primary retrieval is available.
 2. Extract exact document targets and titles.
 3. Verify each target independently.
 4. Add only verified documents to the public site.
