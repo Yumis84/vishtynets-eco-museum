@@ -39,3 +39,6 @@
   .full-menu-nav button,.full-menu-nav a{grid-template-columns:42px minmax(0,1fr) 18px;gap:8px;padding:0 10px;font-size:16px}
   .full-menu-nav button>span:first-child,.full-menu-nav a>span:first-child{width:39px;height:39px}
 }
+
+/* v1.1 — home menu button aligned with internal pages */
+.home-head{justify-content:flex-end}
