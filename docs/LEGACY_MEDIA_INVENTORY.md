@@ -50,21 +50,29 @@ This file tracks the image / credit layer of migration from `www.wystynez.ru`.
 - Remaining image URLs and exact press-release/program targets are still recovery work.
 
 ### `p0108.htm` — встреча 26.09.2018, «Неизвестный Виштынец`
-- Public page `p0108.html` now exists in `main`.
+- Public page `p0108.html` exists in `main`.
 - Primary source verified: `https://wystynez.ru/p0108.htm`.
 - Source date: **26 September 2018**.
 - Page-level photo credit: **Юлия Алексеева, Александр Самсонкин**.
-- Exact source media URLs captured: **8**: `i1595.png`, `i1609.jpg`, `i1610.jpg`, `i1611.jpg`, `i1624.png`, `i1625.png`, `i1615.jpg`, `i1616.jpg`.
+- Exact source media URLs captured: **8**.
 - Individual photographer/caption assignments are intentionally not inferred.
 
+### `p0116.htm` — разведчики «Максим» / «Джек» и открытие мемориала
+- Public page `p0116.html` now exists in `main`.
+- Primary source verified: `https://wystynez.ru/p0116.htm`.
+- Source event date: **17 July 2020** for the memorial opening.
+- Page-level photo credit: **Татьяна Поломодова**; historical object photograph credit: **Айтель Ланге**.
+- `data/legacy-media-p0116.json` currently contains **no exact image URLs**; therefore no image URLs were invented during page migration.
+- The public page preserves the historical narrative, source references, memorial project context, participants and credits while explicitly marking the missing media extraction as pending.
+
 ## Totals
-- Verified source/detail pages represented publicly: **8**.
-- Exact legacy media URLs captured for these tracked pages: **at least 62**.
-- Pages with explicit page-level photo credits preserved: **8**.
+- Verified source/detail pages represented publicly: **9**.
+- Exact legacy media URLs captured for these tracked pages: **at least 62**; `p0116` adds none until exact URLs are recovered.
+- Pages with explicit page-level photo credits preserved: **9**.
 
 ## Next media / migration queue
 1. Remaining media URLs for `Prazdnik--SOSEDI----2018.htm`.
-2. `p0116.htm` — reconnaissance groups «Максим» / «Джек» and memorial opening.
+2. `p0116.htm` exact media extraction, if source HTML/binary access permits; do not invent URLs.
 3. `rominten.wystynez.ru` historical-site capture/relevance audit.
 4. Original maps / graphics with incomplete provenance.
 5. Media from `p33.htm`, `p92.htm`, `p31.htm` and other verified legacy pages.
