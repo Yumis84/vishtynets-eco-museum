@@ -19,8 +19,8 @@ Target repository: `Yumis84/vishtynets-eco-museum`
 |---|---|---|---|
 | `https://wystynez.ru/p31.htm` | Opening of travelling museum exposition, 2004 | `p31.html` | **PUBLIC** |
 | `https://wystynez.ru/p0088.htm` | `Каменные истории` | `kamennye-istorii` seed | **SOURCE-PRESERVING MIGRATION PENDING** |
-| `https://wystynez.ru/p84.htm` | Project `Виштынецкие сокровища гномов` | none | **INVENTORY ONLY** |
-| `https://wystynez.ru/p92.htm` | Educational programme `Виштынецкие сокровища гномов` | `p92.html` | **PUBLIC** |
+| `https://wystynez.ru/p84.htm` | Project `Виштынецкие сокровища гномов` | `MUSEUM_ARTICLES:gnome-treasures-project` via `museum-legacy-batch-10.js` | **PUBLIC REPRESENTATION EXISTS; NO DUPLICATE PAGE NEEDED** |
+| `https://wystynez.ru/p92.htm` | Educational programme `Виштынецкие сокровища гномов` | existing `MUSEUM_ARTICLES:gnome-treasures` | **PUBLIC REPRESENTATION EXISTS; AUDIT ONLY** |
 | `https://wystynez.ru/p0106.htm` | `Неизвестный Виштынец` | `unknown-vishtynets` seed + related pages | **PARTIAL / SOURCE MIGRATION PENDING** |
 | `https://wystynez.ru/p0117.htm` | `В гости к камню` project | `anatomy-stone` seed + related pages | **PARTIAL** |
 | `https://wystynez.ru/p0122.htm` | Results presentation / `Анатомия камня` | `p0122.html` | **PUBLIC** |
@@ -48,15 +48,16 @@ The current site already provides the archive index as structured **Хронол
 - `p0116.html`
 - `p31.html`
 - `p33.html`
-- `p92.html`
 
 **Do not recreate these files.** Further work is audit/provenance/media QA only.
 
 ## `p33` verification
 Primary source: `https://wystynez.ru/p33.htm`. The page covers the pastor's house and Kristijonas Donelaitis, the poem `Времена года` (1765–1775, translation by D. Brodsky), the 300th anniversary in 2014, the Donelaitis memorial museum in Chistye Prudy, and the 2014 celebration in Krasnolesye. Page-level photo credit: **Э. Барсуков, А. Соколов**. Exact legacy image URLs were not exposed by the current repository capture layer, so none were invented.
 
-## `p92` verification
-Primary source: `https://wystynez.ru/p92.htm`. The page describes the museum educational geology programme `Виштынецкие сокровища гномов`: route through Krasnolesye and surroundings, old quarry, stone-processing workshop, microscope work, stone keeper passport, programme duration 3.5 hours and historical group size 15–20. It records historical project/grant information and historical contact details. Illustration credits: Rien Poortvliet / Victoria Vetiver; photo credits: **Алексей Соколов, Владимир Драх, Ирина Ковардо**; text: **А. Соколов**. Exact legacy image URLs remain pending and were not invented.
+## `p92` / `p84` verification
+Primary source `p84.htm` describes the project creating the children's/family geology programme, the route to the old quarry, the gnome workshop, equipment, guide workbook and implementation stages. The current repository already contains this material as article `gnome-treasures-project` in `museum-legacy-batch-10.js`, with `legacyUrl` set to `p84.htm`, project period, partners, source notes and credits. Therefore **do not create `p84.html`**. The current app renders `MUSEUM_ARTICLES` in the public Articles reader, so this is a public representation rather than a batch-only inventory row. citeturn0search0turn171file0turn173file0
+
+Primary source `p92.htm` is also represented by the existing `gnome-treasures` article; historical operational conditions remain archival and must not be presented as current commercial terms. citeturn0search1turn171file0
 
 ## Media state
 - `p0117.htm`: 14 exact URLs
@@ -68,7 +69,7 @@ Primary source: `https://wystynez.ru/p92.htm`. The page describes the museum edu
 - `Prazdnik--SOSEDI----2018.htm`: representative URLs captured; full extraction pending
 - `p0116.htm`: 0 exact URLs currently captured
 - `p33.htm`: exact URLs pending
-- `p92.htm`: exact URLs pending
+- `p92.htm` / `p84.htm`: exact URLs pending
 
 ## Documents / PDFs
 - `p0122.htm` brochure: resolved and verified as 9-page PDF.
@@ -78,8 +79,8 @@ Primary source: `https://wystynez.ru/p92.htm`. The page describes the museum edu
 Direct capture remains unstable. Discovery/indexed references are clues only and are not canonical migration sources. Do not migrate historical text from them until the original source is captured or independently verified.
 
 ## Current backlog
-1. Recover exact media URLs for `p0116`, `Prazdnik--SOSEDI----2018`, `p33`, `p92` where source access permits.
-2. Source-preserving migration of `p0088.htm`, `p84.htm`, `p0106.htm` and other high-value legacy details — only after duplicate check.
+1. Recover exact media URLs for `p0116`, `Prazdnik--SOSEDI----2018`, `p33`, `p92/p84` where source access permits.
+2. Source-preserving migration of `p0088.htm`, `p0106.htm` and other high-value legacy details — only after duplicate check.
 3. Audit `rominten.wystynez.ru`.
 4. Complete PDF/document inventory.
 5. Dead-link / redirect audit.
