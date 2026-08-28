@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "legacyUrl": "https://www.wystynez.ru/p0108.htm",
+  "title": "Встреча 26.09.2018 — Проект «Неизвестный Виштынец»",
+  "captureStatus": "source_html_verified_media_urls",
+  "pagePhotoCredits": ["Юлия Алексеева", "Александр Самсонкин"],
+  "images": [
+    {"url":"https://wystynez.ru/sc-pic/i1595.png","context":"top/page graphic; same legacy asset family as project pages; exact role not visually confirmed","reachability":"cache_miss"},
+    {"url":"https://wystynez.ru/sc-pic/i1609.jpg","context":"image adjacent to project-support statement","reachability":"cache_miss"},
+    {"url":"https://wystynez.ru/sc-pic/i1610.jpg","context":"event photograph","reachability":"cache_miss"},
+    {"url":"https://wystynez.ru/sc-pic/i1611.jpg","context":"event photograph","reachability":"cache_miss"},
+    {"url":"https://wystynez.ru/sc-pic/i1624.png","context":"event/project graphic or photograph","reachability":"cache_miss"},
+    {"url":"https://wystynez.ru/sc-pic/i1625.png","context":"event/project graphic or photograph","reachability":"cache_miss"},
+    {"url":"https://wystynez.ru/sc-pic/i1615.jpg","context":"event photograph","reachability":"cache_miss"},
+    {"url":"https://wystynez.ru/sc-pic/i1616.jpg","context":"event photograph","reachability":"cache_miss"}
+  ],
+  "sourceNote": "All eight URLs were extracted from the source page's image links. Binary retrieval currently returns cache miss, so no visual caption or individual photographer assignment is inferred.",
+  "verifiedAt": "2026-08-28"
+}
