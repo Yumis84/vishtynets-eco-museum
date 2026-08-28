@@ -8,173 +8,25 @@ const categories=$('#articleCategories');
 const screen=$('.screen-articles');
 const reader=$('#articleReader');
 if(!articleList||!screen||!reader)return;
-
 const byId=id=>articles.find(a=>a.id===id);
 const I=()=>window.MuseumIcons;
 const icon=name=>I()?I().svg(name):'';
-
-function createOverview(){
-  if($('.articles-overview',screen))return;
-  const overview=document.createElement('div');
-  overview.className='articles-overview';
-  overview.innerHTML=`<div class="articles-overview-copy"><strong>Материалы музея</strong><small id="articlesCount">Цифровой архив и авторские публикации</small></div><span class="articles-overview-badge">${icon('archive')}Архив музея</span>`;
-  categories?.before(overview);
-}
-
-function metaItem(text,iconName,className=''){
-  const span=document.createElement('span');
-  if(className)span.className=className;
-  if(iconName&&I())span.insertAdjacentHTML('afterbegin',icon(iconName));
-  span.append(document.createTextNode(text));
-  return span;
-}
-
-function enrichCard(card){
-  if(card.querySelector('.article-card-meta'))return;
-  const a=byId(card.dataset.openArticle);
-  if(!a)return;
-  const copy=card.querySelector('.article-copy');
-  if(!copy)return;
-  const meta=document.createElement('span');
-  meta.className='article-card-meta';
-  if(a.date)meta.append(metaItem(a.date,'clock'));
-  if(a.author)meta.append(metaItem(a.author,'publication'));
-  if(a.archival)meta.append(metaItem('Архив','archive','archive-tag'));
-  if(meta.childNodes.length)copy.append(meta);
-}
-
-function updateCount(){
-  const n=$$('[data-open-article]',articleList).length;
-  const count=$('#articlesCount');
-  if(!count)return;
-  if(!n){count.textContent='По выбранному фильтру материалов нет';return;}
-  const ending=n%10===1&&n%100!==11?'материал':(n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?'материала':'материалов');
-  count.textContent=`${n} ${ending} в текущей выборке`;
-}
-
-function enrichCards(){
-  $$('[data-open-article]',articleList).forEach(enrichCard);
-  updateCount();
-}
-
-function currentReaderArticle(){
-  const title=$('.reader-title h1',reader)?.textContent?.trim();
-  if(!title)return null;
-  return articles.find(article=>article.title===title)||null;
-}
-
-function addLegacySourceLink(){
-  const article=currentReaderArticle();
-  const meta=$('.reader-meta',reader);
-  if(!article?.legacyUrl||!meta||meta.querySelector('.reader-legacy-source'))return;
-  const link=document.createElement('a');
-  link.className='reader-legacy-source';
-  link.href=article.legacyUrl;
-  link.target='_blank';
-  link.rel='noopener';
-  link.textContent='Оригинал на старом сайте ↗';
-  Object.assign(link.style,{display:'inline-flex',alignItems:'center',minHeight:'30px',padding:'0 9px',border:'1px solid #d6cebd',borderRadius:'999px',color:'#36513f',background:'#fbf7ee',textDecoration:'none',fontWeight:'800'});
-  meta.append(link);
-}
-
-function addReaderSwipeNote(){
-  const body=$('.reader-body',reader);
-  if(!body||$('.reader-swipe-note',body))return;
-  const note=document.createElement('div');
-  note.className='reader-swipe-note';
-  note.innerHTML=`${icon('arrow')}<span>Свайп влево/вправо — листать статьи · вниз сверху — закрыть</span>`;
-  body.append(note);
-}
-
-function enhanceReader(){
-  requestAnimationFrame(()=>{
-    addLegacySourceLink();
-    addReaderSwipeNote();
-  });
-}
-
-/* Фото: отдельный полноэкранный просмотр с галереей и touch-жестами. */
-let lightbox=null;
-let lightboxImages=[];
-let lightboxIndex=0;
-let touchStart=null;
-
-function ensureLightbox(){
-  if(lightbox)return lightbox;
-  lightbox=document.createElement('div');
-  lightbox.className='article-lightbox';
-  lightbox.setAttribute('aria-hidden','true');
-  lightbox.innerHTML=`<button class="article-lightbox-close" type="button" aria-label="Закрыть">×</button><button class="article-lightbox-prev" type="button" aria-label="Предыдущее фото">‹</button><figure><img alt=""><figcaption></figcaption></figure><button class="article-lightbox-next" type="button" aria-label="Следующее фото">›</button><div class="article-lightbox-count"></div>`;
-  document.body.appendChild(lightbox);
-  lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox()});
-  $('.article-lightbox-close',lightbox).onclick=closeLightbox;
-  $('.article-lightbox-prev',lightbox).onclick=()=>showLightboxImage(lightboxIndex-1);
-  $('.article-lightbox-next',lightbox).onclick=()=>showLightboxImage(lightboxIndex+1);
-  const img=$('img',lightbox.querySelector('figure'));
-  img.addEventListener('click',e=>e.stopPropagation());
-  lightbox.addEventListener('touchstart',e=>{if(e.touches.length===1)touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY,time:Date.now()}},{passive:true});
-  lightbox.addEventListener('touchend',e=>{
-    if(!touchStart||e.changedTouches.length!==1){touchStart=null;return}
-    const t=e.changedTouches[0],dx=t.clientX-touchStart.x,dy=t.clientY-touchStart.y;
-    touchStart=null;
-    if(Math.abs(dx)<38&&Math.abs(dy)<38)return;
-    if(Math.abs(dx)>=Math.abs(dy)){showLightboxImage(lightboxIndex+(dx<0?1:-1));}
-    else closeLightbox();
-  },{passive:true});
-  return lightbox;
-}
-
-function showLightboxImage(index){
-  if(!lightboxImages.length)return;
-  lightboxIndex=(index+lightboxImages.length)%lightboxImages.length;
-  const item=lightboxImages[lightboxIndex];
-  const img=$('figure img',lightbox),cap=$('figcaption',lightbox),count=$('.article-lightbox-count',lightbox);
-  img.src=item.src;img.alt=item.alt||'';cap.textContent=item.caption||'';count.textContent=`${lightboxIndex+1} / ${lightboxImages.length}`;
-  $('.article-lightbox-prev',lightbox).hidden=lightboxImages.length<2;
-  $('.article-lightbox-next',lightbox).hidden=lightboxImages.length<2;
-}
-
-function openLightbox(img){
-  const gallery=img.closest('.reader-gallery');
-  const source=gallery?$$('img',gallery):$$('.reader-gallery img',reader);
-  lightboxImages=source.map(x=>({src:x.currentSrc||x.src,alt:x.alt||'',caption:x.alt||''})).filter(x=>x.src);
-  lightboxIndex=Math.max(0,source.indexOf(img));
-  if(!lightboxImages.length)return;
-  ensureLightbox();
-  showLightboxImage(lightboxIndex);
-  lightbox.classList.add('is-open');
-  lightbox.setAttribute('aria-hidden','false');
-  document.body.classList.add('article-lightbox-open');
-}
-
-function closeLightbox(){
-  if(!lightbox)return;
-  lightbox.classList.remove('is-open');
-  lightbox.setAttribute('aria-hidden','true');
-  document.body.classList.remove('article-lightbox-open');
-}
-
-function installLightbox(){
-  reader.addEventListener('click',e=>{
-    const img=e.target.closest?.('.reader-gallery img');
-    if(img)openLightbox(img);
-  });
-  document.addEventListener('keydown',e=>{
-    if(!lightbox?.classList.contains('is-open'))return;
-    if(e.key==='Escape')closeLightbox();
-    else if(e.key==='ArrowLeft')showLightboxImage(lightboxIndex-1);
-    else if(e.key==='ArrowRight')showLightboxImage(lightboxIndex+1);
-  });
-}
-
-function init(){
-  createOverview();
-  enrichCards();
-  installLightbox();
-  new MutationObserver(enrichCards).observe(articleList,{childList:true});
-  new MutationObserver(enhanceReader).observe(reader,{childList:true,subtree:true});
-  enhanceReader();
-}
-
+function createOverview(){if($('.articles-overview',screen))return;const overview=document.createElement('div');overview.className='articles-overview';overview.innerHTML=`<div class="articles-overview-copy"><strong>Материалы музея</strong><small id="articlesCount">Цифровой архив и авторские публикации</small></div><span class="articles-overview-badge">${icon('archive')}Архив музея</span>`;categories?.before(overview)}
+function metaItem(text,iconName,className=''){const span=document.createElement('span');if(className)span.className=className;if(iconName&&I())span.insertAdjacentHTML('afterbegin',icon(iconName));span.append(document.createTextNode(text));return span}
+function enrichCard(card){if(card.querySelector('.article-card-meta'))return;const a=byId(card.dataset.openArticle);if(!a)return;const copy=card.querySelector('.article-copy');if(!copy)return;const meta=document.createElement('span');meta.className='article-card-meta';if(a.date)meta.append(metaItem(a.date,'clock'));if(a.author)meta.append(metaItem(a.author,'publication'));if(a.archival)meta.append(metaItem('Архив','archive','archive-tag'));if(meta.childNodes.length)copy.append(meta)}
+function updateCount(){const n=$$('[data-open-article]',articleList).length;const count=$('#articlesCount');if(!count)return;if(!n){count.textContent='По выбранному фильтру материалов нет';return}const ending=n%10===1&&n%100!==11?'материал':(n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?'материала':'материалов');count.textContent=`${n} ${ending} в текущей выборке`}
+function enrichCards(){$$('[data-open-article]',articleList).forEach(enrichCard);updateCount()}
+function currentReaderArticle(){const title=$('.reader-title h1',reader)?.textContent?.trim();if(!title)return null;return articles.find(article=>article.title===title)||null}
+function addLegacySourceLink(){const article=currentReaderArticle();const meta=$('.reader-meta',reader);if(!article?.legacyUrl||!meta||meta.querySelector('.reader-legacy-source'))return;const link=document.createElement('a');link.className='reader-legacy-source';link.href=article.legacyUrl;link.target='_blank';link.rel='noopener';link.textContent='Оригинал на старом сайте ↗';Object.assign(link.style,{display:'inline-flex',alignItems:'center',minHeight:'30px',padding:'0 9px',border:'1px solid #d6cebd',borderRadius:'999px',color:'#36513f',background:'#fbf7ee',textDecoration:'none',fontWeight:'800'});meta.append(link)}
+function addReaderSwipeNote(){const body=$('.reader-body',reader);if(!body||$('.reader-swipe-note',body))return;const note=document.createElement('div');note.className='reader-swipe-note';note.innerHTML=`${icon('arrow')}<span>Свайп влево/вправо — листать статьи · вниз сверху — закрыть</span>`;body.append(note)}
+function positionReaderGallery(){const body=$('.reader-body',reader);const gallery=$('.reader-gallery',body);if(!body||!gallery)return;const lead=$('.reader-lead',body);if(lead){if(lead.nextElementSibling!==gallery)lead.insertAdjacentElement('afterend',gallery)}else{const meta=$('.reader-meta',body);if(meta&&meta.nextElementSibling!==gallery)meta.insertAdjacentElement('afterend',gallery)}}
+function enhanceReader(){requestAnimationFrame(()=>{positionReaderGallery();addLegacySourceLink();addReaderSwipeNote()})}
+let lightbox=null,lightboxImages=[],lightboxIndex=0,touchStart=null;
+function ensureLightbox(){if(lightbox)return lightbox;lightbox=document.createElement('div');lightbox.className='article-lightbox';lightbox.setAttribute('aria-hidden','true');lightbox.innerHTML=`<button class="article-lightbox-close" type="button" aria-label="Закрыть">×</button><button class="article-lightbox-prev" type="button" aria-label="Предыдущее фото">‹</button><figure><img alt=""><figcaption></figcaption></figure><button class="article-lightbox-next" type="button" aria-label="Следующее фото">›</button><div class="article-lightbox-count"></div>`;document.body.appendChild(lightbox);lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox()});$('.article-lightbox-close',lightbox).onclick=closeLightbox;$('.article-lightbox-prev',lightbox).onclick=()=>showLightboxImage(lightboxIndex-1);$('.article-lightbox-next',lightbox).onclick=()=>showLightboxImage(lightboxIndex+1);const img=$('img',lightbox.querySelector('figure'));img.addEventListener('click',e=>e.stopPropagation());lightbox.addEventListener('touchstart',e=>{if(e.touches.length===1)touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY,time:Date.now()}},{passive:true});lightbox.addEventListener('touchend',e=>{if(!touchStart||e.changedTouches.length!==1){touchStart=null;return}const t=e.changedTouches[0],dx=t.clientX-touchStart.x,dy=t.clientY-touchStart.y;touchStart=null;if(Math.abs(dx)<38&&Math.abs(dy)<38)return;if(Math.abs(dx)>=Math.abs(dy))showLightboxImage(lightboxIndex+(dx<0?1:-1));else closeLightbox()},{passive:true});return lightbox}
+function showLightboxImage(index){if(!lightboxImages.length)return;lightboxIndex=(index+lightboxImages.length)%lightboxImages.length;const item=lightboxImages[lightboxIndex];const img=$('figure img',lightbox),cap=$('figcaption',lightbox),count=$('.article-lightbox-count',lightbox);img.src=item.src;img.alt=item.alt||'';cap.textContent=item.caption||'';count.textContent=`${lightboxIndex+1} / ${lightboxImages.length}`;$('.article-lightbox-prev',lightbox).hidden=lightboxImages.length<2;$('.article-lightbox-next',lightbox).hidden=lightboxImages.length<2}
+function openLightbox(img){const gallery=img.closest('.reader-gallery');const source=gallery?$$('img',gallery):$$('.reader-gallery img',reader);lightboxImages=source.map(x=>({src:x.currentSrc||x.src,alt:x.alt||'',caption:x.alt||''})).filter(x=>x.src);lightboxIndex=Math.max(0,source.indexOf(img));if(!lightboxImages.length)return;ensureLightbox();showLightboxImage(lightboxIndex);lightbox.classList.add('is-open');lightbox.setAttribute('aria-hidden','false');document.body.classList.add('article-lightbox-open')}
+function closeLightbox(){if(!lightbox)return;lightbox.classList.remove('is-open');lightbox.setAttribute('aria-hidden','true');document.body.classList.remove('article-lightbox-open')}
+function installLightbox(){reader.addEventListener('click',e=>{const img=e.target.closest?.('.reader-gallery img');if(img)openLightbox(img)});document.addEventListener('keydown',e=>{if(!lightbox?.classList.contains('is-open'))return;if(e.key==='Escape')closeLightbox();else if(e.key==='ArrowLeft')showLightboxImage(lightboxIndex-1);else if(e.key==='ArrowRight')showLightboxImage(lightboxIndex+1)})}
+function init(){createOverview();enrichCards();installLightbox();new MutationObserver(enrichCards).observe(articleList,{childList:true});new MutationObserver(enhanceReader).observe(reader,{childList:true,subtree:true});enhanceReader()}
 init();
 })();
