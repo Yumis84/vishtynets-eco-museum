@@ -58,24 +58,33 @@ This file tracks the image / credit layer of migration from `www.wystynez.ru`.
 - Individual photographer/caption assignments are intentionally not inferred.
 
 ### `p0116.htm` — разведчики «Максим» / «Джек» и открытие мемориала
-- Public page `p0116.html` now exists in `main`.
+- Public page `p0116.html` exists in `main`.
 - Primary source verified: `https://wystynez.ru/p0116.htm`.
 - Source event date: **17 July 2020** for the memorial opening.
 - Page-level photo credit: **Татьяна Поломодова**; historical object photograph credit: **Айтель Ланге**.
 - `data/legacy-media-p0116.json` currently contains **no exact image URLs**; therefore no image URLs were invented during page migration.
 - The public page preserves the historical narrative, source references, memorial project context, participants and credits while explicitly marking the missing media extraction as pending.
 
+### `p31.htm` — открытие передвижной экспозиции, 2004
+- Public page `p31.html` now exists in `main`.
+- Primary source verified: `https://wystynez.ru/p31.htm`.
+- Event date: **22 May 2004**, Museum of Kristijonas Donelaitis, Chistye Prudy.
+- Exact legacy media URLs captured: **12** and stored in `data/legacy-media-p31.json`.
+- Page-level photo credit: **В. Гусев, Э. Барсуков**.
+- No individual photographer assignment was inferred.
+- The page preserves the historical exposition story, 160 exhibits, partners, project support and acknowledgements; current visitor information is not inferred from the 2004 source.
+
 ## Totals
-- Verified source/detail pages represented publicly: **9**.
-- Exact legacy media URLs captured for these tracked pages: **at least 62**; `p0116` adds none until exact URLs are recovered.
-- Pages with explicit page-level photo credits preserved: **9**.
+- Verified source/detail pages represented publicly: **10**.
+- Exact legacy media URLs captured for these tracked pages: **at least 74**; `p0116` adds none until exact URLs are recovered.
+- Pages with explicit page-level photo credits preserved: **10**.
 
 ## Next media / migration queue
 1. Remaining media URLs for `Prazdnik--SOSEDI----2018.htm`.
 2. `p0116.htm` exact media extraction, if source HTML/binary access permits; do not invent URLs.
 3. `rominten.wystynez.ru` historical-site capture/relevance audit.
 4. Original maps / graphics with incomplete provenance.
-5. Media from `p33.htm`, `p92.htm`, `p31.htm` and other verified legacy pages.
+5. Media from `p33.htm`, `p92.htm` and other verified legacy pages.
 6. PDF/document inventory.
 7. Dead-link/redirect audit.
 8. Final KEEP/SKIP/DEFER matrix.
