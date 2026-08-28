@@ -28,9 +28,9 @@ Target repository: `Yumis84/vishtynets-eco-museum`
 | `https://wystynez.ru/p0120.htm` | `Легенда о камне` project result | `p0120.html` | **PUBLIC** |
 | `https://wystynez.ru/p48.htm` | Geographical context / Vishtynets Upland | `p48.html` | **PUBLIC** |
 | `https://wystynez.ru/p33.htm` | `Кристионас Донелайтис` | `p33.html` | **PUBLIC; media recovery pending** |
-| `https://wystynez.ru/Prazdnik--SOSEDI----2018.htm` | `Соседи` 2018 | `Prazdnik--SOSEDI----2018.html` | **PUBLIC; full source-gallery extraction pending** |
+| `https://wystynez.ru/Prazdnik--SOSEDI----2018.htm` | `Соседи` 2018 | `Prazdnik--SOSEDI----2018.html` | **PUBLIC; 42 exact source media URLs** |
 | `https://wystynez.ru/p0108.htm` | `Неизвестный Виштынец` meeting, 26.09.2018 | `p0108.html` | **PUBLIC; 8 exact media URLs** |
-| `https://wystynez.ru/p0116.htm` | Groups `Максим` / `Джек` and memorial opening | `p0116.html` | **PUBLIC; media recovery pending** |
+| `https://wystynez.ru/p0116.htm` | Groups `Максим` / `Джек` and memorial opening | `p0116.html` | **PUBLIC; 13 exact source media URLs** |
 
 ## Archive index
 
@@ -66,8 +66,8 @@ Primary source: `https://wystynez.ru/p0106.htm`. The source confirms the project
 - `p31.htm`: 12
 - `p0088.htm`: 8
 - `p0106.htm`: 10
-- `Prazdnik--SOSEDI----2018.htm`: representative URLs captured; full extraction pending
-- `p0116.htm`: 0 exact URLs currently captured
+- `Prazdnik--SOSEDI----2018.htm`: 42 exact URLs
+- `p0116.htm`: 13 exact URLs
 - `p33.htm`: exact URLs pending
 - `p92.htm` / `p84.htm`: exact URLs pending
 
@@ -78,11 +78,13 @@ Primary source: `https://wystynez.ru/p0106.htm`. The source confirms the project
 ## Historical `rominten.wystynez.ru`
 Direct capture remains unstable. Discovery/indexed references are clues only and are not canonical migration sources. Do not migrate historical text from them until the original source is captured or independently verified.
 
+Current web discovery confirms the main `wystynez.ru` still exposes historical Rominten/Romincka content through pages such as `p40.htm` (museum exposition) and `p0008.htm` (event archive), so these are preferred canonical sources where the dedicated `rominten.wystynez.ru` host is unavailable. The separate historical-host migration remains **DEFER** until direct source capture is possible.
+
 ## Current backlog
-1. Recover exact media URLs for `p0116`, `Prazdnik--SOSEDI----2018`, `p33`, `p92/p84` where source access permits.
-2. Audit `rominten.wystynez.ru` historical-site capture/relevance.
+1. Recover exact media URLs for `p33` and `p92/p84` where source access permits.
+2. Audit `rominten.wystynez.ru` historical-site capture/relevance; do not duplicate material already represented on `wystynez.ru`.
 3. Complete PDF/document inventory.
 4. Dead-link / redirect audit.
 5. Encoding / garbled-text audit.
 6. Final legacy URL → current representation → evidence matrix.
-7. Implement and QA article photo presentation: hero/top image + contextual galleries + fullscreen lightbox/swipe, without moving historical images where source placement is not known.
+7. Final mobile QA of article photo presentation: hero/top image + contextual galleries + fullscreen lightbox/swipe, without moving historical images where source placement is not known.
