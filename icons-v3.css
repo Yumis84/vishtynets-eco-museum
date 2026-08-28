@@ -92,11 +92,11 @@
 
 /* Полноэкранное меню */
 .full-menu-nav button,.full-menu-nav a{grid-template-columns:50px 1fr 20px;min-height:68px}
-.full-menu-nav button>span,.full-menu-nav a>span{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#e7eadf;color:#5e735e;font-size:21px}
-.full-menu-nav button>span .v3-svg-icon,.full-menu-nav a>span .v3-svg-icon{width:21px;height:21px}
-.full-menu-nav button:nth-child(2)>span{background:#e8dfcf;color:#806c4e}
-.full-menu-nav button:nth-child(3)>span{background:#dfe8e5;color:#527277}
-.full-menu-nav button:nth-child(5)>span{background:#dde6d8;color:#567059}
+.full-menu-nav button>span:first-child,.full-menu-nav a>span:first-child{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#e7eadf;color:#5e735e;font-size:21px}
+.full-menu-nav button>span:first-child .v3-svg-icon,.full-menu-nav a>span:first-child .v3-svg-icon{width:21px;height:21px}
+.full-menu-nav button:nth-child(2)>span:first-child{background:#e8dfcf;color:#806c4e}
+.full-menu-nav button:nth-child(3)>span:first-child{background:#dfe8e5;color:#527277}
+.full-menu-nav button:nth-child(5)>span:first-child{background:#dde6d8;color:#567059}
 .full-menu-nav b{display:grid;place-items:center}
 .full-menu-nav b .v3-svg-icon{width:18px;height:18px}
 .menu-footer>span .v3-svg-icon{width:27px;height:27px;margin:auto}
