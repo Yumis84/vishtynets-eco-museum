@@ -1,29 +1,22 @@
-# Legacy media inventory — first verified pass
+# Legacy media inventory — verified migration pass
 
 Updated: 2026-08-28
 
 This file tracks the image / credit layer of migration from `www.wystynez.ru`.
 
 ## Rules
+- Preserve exact legacy media URLs whenever extracted from the source page.
+- Page-level `Фото:` credits remain page-level unless the source explicitly assigns an individual image.
+- `cache_miss` means the URL was verified in source HTML but binary retrieval failed; it is not proof that the URL is dead.
+- A legacy batch/inventory row is never proof of public publication.
+- Before creating a public page, check the actual `main` repository for an existing representation.
 
-- Preserve the exact legacy media URL whenever it can be extracted from the source page.
-- A page-level line such as `Фото: ...` is stored as a **page-level credit**. It is not silently assigned as the individual photographer of every image unless the source explicitly makes that association.
-- Captions inferred only from nearby HTML order are marked as pending visual confirmation.
-- `cache_miss` means the legacy URL itself is verified from the source HTML, but the current crawler could not fetch the binary image. It does **not** mean the URL was invented or proven dead.
-- Decorative / partner / navigation graphics are kept distinct from content photographs where possible.
-- A migration batch/inventory row is not proof that a public page exists. Public publication must be verified against the actual product repository/site.
+## Verified public/detail materials
 
-## Machine-readable files
-
-- `data/legacy-media.json`
-- `data/legacy-media-batch-2.json`
-
-## Current captured media URLs
-
-### `p0117.htm` — Проект «В гости к камню»
+### `p0117.htm` — Проект «В гости к камню`
 - Exact media URLs captured: **14**.
 - Page-level photo credit: **А. Соколов**.
-- Exact interactive-map destination is verified as `https://wystynez.ru/p0121.htm` from the source-page link.
+- Interactive-map destination verified as `https://wystynez.ru/p0121.htm`; old implementation is not copied.
 
 ### `p38.htm` — «Птицы Красного леса»
 - Exact media URLs captured: **8**.
@@ -34,43 +27,47 @@ This file tracks the image / credit layer of migration from `www.wystynez.ru`.
 - Exact media URLs captured: **4**.
 - Page-level photo credit: **Юлия Алексеева**.
 
-### `p0125.htm` — «Соседи — 2023»
+### `p0125.htm` — «Соседи — 2023`
 - Exact media URLs captured: **20**.
 - Page-level photo credits: **Наталья Матусевичене, Юлия Алексеева, Ирина Ковардо**.
 - Related programme page: `https://wystynez.ru/p0126.htm`.
 
 ### `p48.htm` — Виштынецкая возвышенность на карте мира
-- Public page `p48.html` is present in `main`.
-- Historical image URLs and source attribution are preserved.
-- Old interactive mapping is intentionally not copied.
+- Public page `p48.html` exists in `main`.
+- Historical image URLs and source attribution preserved; old interactive mapping not copied.
 
-### `p0122.htm` — презентация результатов «В гости к камню»
-- Public page `p0122.html` is present in `main`.
-- Exact brochure target verified: `https://wystynez.ru/download/Broshjura-Valuny-Vishtyneckoj-vozvyshennosti.pdf`.
-- Brochure: 9-page PDF; cover: `https://wystynez.ru/sc-pic/i2211.jpg`.
-- Legacy page-level photo credit: **В. Лукошевичус, А. Володина, А. Соколов**.
-- Old interactive boulder-map implementation is not copied.
+### `p0122.htm` — результаты проекта «В гости к камню»
+- Public page `p0122.html` exists in `main`.
+- Exact brochure verified: `https://wystynez.ru/download/Broshjura-Valuny-Vishtyneckoj-vozvyshennosti.pdf` (9 pages).
+- Cover: `https://wystynez.ru/sc-pic/i2211.jpg`.
+- Page-level photo credit: **В. Лукошевичус, А. Володина, А. Соколов**.
 
 ### `Prazdnik--SOSEDI----2018.htm` — «Соседи» 2018
-- Public page `Prazdnik--SOSEDI----2018.html` is now present in `main`.
-- Primary source verified: 25 August 2018 event; more than 800 participants.
+- Public page `Prazdnik--SOSEDI----2018.html` exists in `main`.
+- Source verified: 25 August 2018; more than 800 participants.
 - Page-level photo credit: **Юлия Алексеева, Татьяна Поломодова, Амаль Самерханова, Светлана Никирина**.
-- Representative source media URLs verified: `https://wystynez.ru/sc-pic/i1549.jpg`, `https://wystynez.ru/sc-pic/i1542.jpg`.
-- The legacy page contains many additional image references; full image URL inventory remains a separate media-recovery task and is not claimed complete.
-- Legacy page references separate «Пресс-релиз и программа праздника» materials; exact target URLs remain unresolved and are not invented.
+- Representative exact media: `https://wystynez.ru/sc-pic/i1549.jpg`, `https://wystynez.ru/sc-pic/i1542.jpg`.
+- Remaining image URLs and exact press-release/program targets are still recovery work.
 
-## Totals in this pass
+### `p0108.htm` — встреча 26.09.2018, «Неизвестный Виштынец`
+- Public page `p0108.html` now exists in `main`.
+- Primary source verified: `https://wystynez.ru/p0108.htm`.
+- Source date: **26 September 2018**.
+- Page-level photo credit: **Юлия Алексеева, Александр Самсонкин**.
+- Exact source media URLs captured: **8**: `i1595.png`, `i1609.jpg`, `i1610.jpg`, `i1611.jpg`, `i1624.png`, `i1625.png`, `i1615.jpg`, `i1616.jpg`.
+- Individual photographer/caption assignments are intentionally not inferred.
 
-- Source pages with exact media URL extraction: **7**.
-- Exact legacy media URLs captured: **at least 54**.
-- Pages with preserved explicit page-level credits: **7**.
+## Totals
+- Verified source/detail pages represented publicly: **8**.
+- Exact legacy media URLs captured for these tracked pages: **at least 62**.
+- Pages with explicit page-level photo credits preserved: **8**.
 
-## Next media queue
-
-1. Extract remaining media URLs for `Prazdnik--SOSEDI----2018.htm`.
-2. Extract media URLs for `p0108.htm` — meeting for «Неизвестный Виштынец».
-3. Extract media URLs for `p0116.htm` — reconnaissance groups «Максим» / «Джек» and memorial opening.
-4. Extract original maps / graphics from already verified legacy pages where provenance is still incomplete.
-5. Extract media from `p33.htm`, `p92.htm`, `p31.htm` and other verified pages.
-6. Continue PDF/document inventory.
-7. Retry full capture of `p0121.htm` only for provenance/media inventory; do not copy its interactive implementation.
+## Next media / migration queue
+1. Remaining media URLs for `Prazdnik--SOSEDI----2018.htm`.
+2. `p0116.htm` — reconnaissance groups «Максим» / «Джек» and memorial opening.
+3. `rominten.wystynez.ru` historical-site capture/relevance audit.
+4. Original maps / graphics with incomplete provenance.
+5. Media from `p33.htm`, `p92.htm`, `p31.htm` and other verified legacy pages.
+6. PDF/document inventory.
+7. Dead-link/redirect audit.
+8. Final KEEP/SKIP/DEFER matrix.
