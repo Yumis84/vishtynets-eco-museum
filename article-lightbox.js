@@ -1,13 +1,11 @@
 (()=>{
 'use strict';
-const $=(s,r=document)=>r.querySelector(s);
-const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 let items=[];
 let index=0;
 let start=null;
 
 function ensure(){
-  if($('#articleLightbox'))return;
+  if(document.querySelector('#articleLightbox'))return;
   const el=document.createElement('div');
   el.id='articleLightbox';
   el.className='article-lightbox';
@@ -20,10 +18,8 @@ function ensure(){
   el.addEventListener('touchstart',e=>{if(e.touches.length===1)start={x:e.touches[0].clientX,y:e.touches[0].clientY};},{passive:true});
   el.addEventListener('touchend',e=>{if(!start||e.changedTouches.length!==1)return;const dx=e.changedTouches[0].clientX-start.x,dy=e.changedTouches[0].clientY-start.y;start=null;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.15)show(index+(dx<0?1:-1));else if(Math.abs(dy)>70&&Math.abs(dy)>Math.abs(dx)*1.1)close();},{passive:true});
 }
-function galleryFor(img){
-  const gallery=img.closest('.reader-gallery,.legacy-gallery');
-  return gallery?$$('img',gallery):[img];
-}
+function $(s,r=document){return r.querySelector(s)}
+function $$(s,r=document){return [...r.querySelectorAll(s)]}
 function show(n){
   if(!items.length)return;
   index=(n+items.length)%items.length;
@@ -34,11 +30,14 @@ function show(n){
   $('.article-lightbox-next',box).hidden=items.length<2;
 }
 function open(img){
-  ensure();items=galleryFor(img);index=items.indexOf(img);if(index<0)index=0;show(index);
+  ensure();
+  const gallery=img.closest('.legacy-gallery');
+  items=gallery?$$('img',gallery):[img];
+  index=items.indexOf(img);if(index<0)index=0;show(index);
   const box=$('#articleLightbox');box.classList.add('is-open');box.setAttribute('aria-hidden','false');document.body.classList.add('article-lightbox-open');
 }
 function close(){const box=$('#articleLightbox');if(!box)return;box.classList.remove('is-open');box.setAttribute('aria-hidden','true');document.body.classList.remove('article-lightbox-open');items=[];start=null;}
-document.addEventListener('click',e=>{const img=e.target.closest?.('.screen-article .reader-gallery img,.legacy-page .legacy-gallery img');if(!img)return;e.preventDefault();open(img);});
+/* reader-gallery is handled by articles-v3.js; this module owns legacy-gallery only. */
+document.addEventListener('click',e=>{const img=e.target.closest?.('.screen-article .legacy-gallery img,.legacy-page .legacy-gallery img');if(!img)return;e.preventDefault();open(img);});
 document.addEventListener('keydown',e=>{if(!$('#articleLightbox')?.classList.contains('is-open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(index-1);if(e.key==='ArrowRight')show(index+1);});
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ensure,{once:true});else ensure();
 })();
