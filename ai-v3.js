@@ -22,21 +22,82 @@ const addMessage=(role,text)=>{
   return item;
 };
 
-async function sendToAssistant(message,sessionId){
+function extractOutput(value){
+  if(typeof value==='string'&&value.trim())return value.trim();
+  if(Array.isArray(value))return extractOutput(value[0]);
+  if(value&&typeof value==='object'){
+    for(const key of ['output','text','content','message']){
+      if(typeof value[key]==='string'&&value[key].trim())return value[key].trim();
+    }
+    if(value.data)return extractOutput(value.data);
+  }
+  return '';
+}
+
+async function sendToAssistant(message,sessionId,onChunk){
   const controller=new AbortController();
-  const timeout=setTimeout(()=>controller.abort(),45000);
+  const timeout=setTimeout(()=>controller.abort(),60000);
   try{
     const response=await fetch(WEBHOOK_URL,{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{'Content-Type':'application/json','Accept':'application/json, text/event-stream, text/plain'},
       body:JSON.stringify({chatInput:message,sessionId}),
       signal:controller.signal
     });
     if(!response.ok)throw new Error(`HTTP ${response.status}`);
-    const data=await response.json();
-    const output=Array.isArray(data)?data[0]?.output:data?.output;
-    if(typeof output!=='string'||!output.trim())throw new Error('Некорректный ответ AI');
-    return output.trim();
+
+    const contentType=(response.headers.get('content-type')||'').toLowerCase();
+    if(contentType.includes('application/json')){
+      const data=await response.json();
+      const output=extractOutput(data);
+      if(!output)throw new Error('Некорректный ответ AI');
+      onChunk(output,true);
+      return output;
+    }
+
+    if(!response.body){
+      const text=await response.text();
+      const output=extractOutput(text);
+      if(!output)throw new Error('Пустой ответ AI');
+      onChunk(output,true);
+      return output;
+    }
+
+    const reader=response.body.getReader();
+    const decoder=new TextDecoder();
+    let buffer='';
+    let answer='';
+
+    const consume=raw=>{
+      buffer+=raw;
+      const lines=buffer.split(/\r?\n/);
+      buffer=lines.pop()||'';
+      for(let line of lines){
+        line=line.trim();
+        if(!line||line.startsWith(':'))continue;
+        if(line.startsWith('data:'))line=line.slice(5).trim();
+        if(!line)continue;
+        if(line==='[DONE]')continue;
+        let value=line;
+        try{value=JSON.parse(line)}catch(_){/* plain text chunk */}
+        const piece=extractOutput(value)||((typeof value==='string'&&value!=='[DONE]')?value:'');
+        if(piece){
+          answer+=piece;
+          onChunk(answer,false);
+        }
+      }
+    };
+
+    while(true){
+      const {value,done}=await reader.read();
+      if(done)break;
+      consume(decoder.decode(value,{stream:true}));
+    }
+    consume(decoder.decode());
+
+    if(!answer.trim())throw new Error('Пустой ответ AI');
+    onChunk(answer.trim(),true);
+    return answer.trim();
   }finally{clearTimeout(timeout)}
 }
 
@@ -82,13 +143,16 @@ function build(){
     addMessage('user',message);
     const typing=addMessage('assistant','Печатает…');
     try{
-      const answer=await sendToAssistant(message,getSessionId());
-      typing.textContent=answer;
+      await sendToAssistant(message,getSessionId(),text=>{
+        typing.textContent=text;
+        const list=card.querySelector('.ai-messages');
+        list.scrollTop=list.scrollHeight;
+      });
     }catch(error){
       console.error('Museum AI error',error);
       typing.textContent=error.name==='AbortError'
         ?'Ответ занимает слишком много времени. Попробуйте ещё раз.'
-        :'Не удалось получить ответ. Попробуйте ещё раз через несколько секунд.';
+        :'Не удалось получить ответ. Проверьте соединение и попробуйте ещё раз.';
     }finally{
       busy=false;input.disabled=false;submit.disabled=false;input.focus();
     }
