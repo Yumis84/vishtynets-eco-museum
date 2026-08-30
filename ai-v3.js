@@ -34,4 +34,12 @@ function build(){
  prompts.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>ask(b.textContent)));
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build,{once:true});else build();
+
+if(!document.querySelector('script[data-audioguide-loader]')){
+ const s=document.createElement('script');
+ s.src='audio-guide-v2.js?v=59';
+ s.setAttribute('data-audioguide-loader','1');
+ s.async=false;
+ document.body.appendChild(s);
+}
 })();
