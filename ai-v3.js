@@ -1,41 +1,14 @@
 (()=>{
 'use strict';
 const WEBHOOK_URL='https://n8n.xn----8sbalgvaeklgsbf4b.xn--p1ai/webhook/5ccfbe41-c897-4034-9b75-e986bb9d0fe0/chat';
-const SESSION_KEY='vishtynets_ai_session';
 const card=document.querySelector('.ai-card');
 if(!card)return;
-const getSessionId=()=>{let id=sessionStorage.getItem(SESSION_KEY);if(!id){id=crypto.randomUUID();sessionStorage.setItem(SESSION_KEY,id)}return id};
-const addMessage=(role,text)=>{const list=card.querySelector('.ai-messages');const item=document.createElement('div');item.className=`ai-message ai-message-${role}`;item.textContent=text;list.append(item);list.scrollTop=list.scrollHeight;return item};
-async function sendToAssistant(message,sessionId){
-  // application/x-www-form-urlencoded is a CORS-simple request and avoids the
-  // OPTIONS preflight caused by application/json on GitHub Pages.
-  const body=new URLSearchParams({action:'sendMessage',chatInput:message,sessionId});
-  const response=await fetch(WEBHOOK_URL,{method:'POST',body});
-  if(!response.ok)throw new Error(`HTTP ${response.status}`);
-  const raw=await response.text();
-  let data;try{data=JSON.parse(raw)}catch(e){throw new Error('Ответ n8n получен, но имеет неожиданный формат')}
-  let output='';
-  if(typeof data?.output==='string')output=data.output;
-  else if(Array.isArray(data)&&typeof data[0]?.output==='string')output=data[0].output;
-  else if(typeof data?.text==='string')output=data.text;
-  else if(typeof data?.response==='string')output=data.response;
-  if(!output.trim())throw new Error('В ответе n8n нет текста ответа');
-  return output.trim();
-}
-function build(){
-  const orb=card.querySelector('.ai-orb');if(orb)orb.innerHTML='✦';
-  ['.ai-preview-status','.ai-sources','.ai-status-note','.ai-coming-note'].forEach(s=>card.querySelector(s)?.remove());
-  const heading=card.querySelector('h2'),intro=card.querySelector(':scope > p');
-  if(heading)heading.textContent='Спросите о Роминтской пуще';
-  if(intro)intro.textContent='Помощник поможет найти места, статьи и маршруты.';
-  const messages=document.createElement('div');messages.className='ai-messages';messages.setAttribute('role','log');messages.setAttribute('aria-live','polite');card.append(messages);
-  addMessage('assistant','Здравствуйте! Я музейный помощник. Спросите о Роминтской пуще, музее, местах, статьях или маршрутах.');
-  const prompts=document.createElement('div');prompts.className='ai-prompts';prompts.innerHTML='<button type="button">Что посмотреть рядом с музеем?</button><button type="button">Расскажите о Роминтской пуще</button><button type="button">Какие есть интересные маршруты?</button><button type="button">Что есть в музейных статьях?</button>';card.append(prompts);
-  const form=document.createElement('form');form.className='ai-input';form.innerHTML='<input type="text" name="message" autocomplete="off" maxlength="1000" placeholder="Задайте вопрос…" aria-label="Вопрос AI-консультанту"><button type="submit" aria-label="Отправить">→</button>';card.append(form);
-  const input=form.querySelector('input'),submit=form.querySelector('button');let busy=false;
-  const ask=async message=>{message=String(message||'').trim();if(!message||busy)return;busy=true;input.disabled=true;submit.disabled=true;addMessage('user',message);const typing=addMessage('assistant','Печатает…');try{typing.textContent=await sendToAssistant(message,getSessionId())}catch(error){console.error('Museum AI error',error);typing.textContent='Не удалось получить ответ. Проверьте соединение и попробуйте ещё раз.'}finally{busy=false;input.disabled=false;submit.disabled=false;input.focus()}};
-  form.addEventListener('submit',e=>{e.preventDefault();const message=input.value;input.value='';ask(message)});
-  prompts.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>ask(b.textContent)));
-}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build,{once:true});else build();
+card.innerHTML='<div class="n8n-chat-test"><h2>AI-консультант</h2><p>Временный стандартный чат n8n для проверки подключения.</p><div id="n8n-chat"></div></div>';
+import('https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js').then(({createChat})=>{
+  createChat({webhookUrl:WEBHOOK_URL,target:'#n8n-chat',mode:'fullscreen',showWelcomeScreen:true,initialMessages:['Здравствуйте! Я музейный помощник. Задайте вопрос о Роминтской пуще, музее, местах или маршрутах.'],i18n:{en:{title:'Музейный помощник',subtitle:'Спросите о Роминтской пуще и Виштынецком экомузее.',footer:'',getStarted:'Новый диалог',inputPlaceholder:'Напишите вопрос…',closeButtonTooltip:'Закрыть чат'}}});
+}).catch(error=>{
+  console.error('n8n chat widget error',error);
+  const box=card.querySelector('.n8n-chat-test');
+  if(box)box.insertAdjacentHTML('beforeend','<p class="n8n-chat-error">Не удалось загрузить стандартный чат n8n.</p>');
+});
 })();
