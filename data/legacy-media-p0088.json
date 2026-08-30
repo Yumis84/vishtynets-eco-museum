@@ -1,0 +1,23 @@
+{
+  "legacyUrl": "https://wystynez.ru/p0088.htm",
+  "sourceStatus": "captured",
+  "metadataStatus": "captured",
+  "publicPage": "p0088.html",
+  "publicLinkStatus": "verified",
+  "capturedAt": "2026-08-28",
+  "media": [
+    {"url":"https://wystynez.ru/sc-pic/i1149.jpg","sourceRole":"page image","caption":"Каменный экспонат проекта «Каменные истории»"},
+    {"url":"https://wystynez.ru/sc-pic/i1150.jpg","sourceRole":"page image","caption":"Посетители у информационного стенда экспозиции"},
+    {"url":"https://wystynez.ru/sc-pic/i1151.jpg","sourceRole":"page image","caption":"Экспозиция «Каменные истории» на территории музея"},
+    {"url":"https://wystynez.ru/sc-pic/i1152.jpg","sourceRole":"page image","caption":"Камни экспозиции"},
+    {"url":"https://wystynez.ru/sc-pic/i1153.jpg","sourceRole":"page image","caption":"Выступление на открытии проекта"},
+    {"url":"https://wystynez.ru/sc-pic/i1154.jpg","sourceRole":"page image","caption":"Посетитель у стенда экспозиции"},
+    {"url":"https://wystynez.ru/sc-pic/i1155.png","sourceRole":"page image","caption":"Выступление на празднике открытия"},
+    {"url":"https://wystynez.ru/sc-pic/i1156.png","sourceRole":"page image","caption":"Участники открытия рядом с экспозицией"}
+  ],
+  "notes": [
+    "Exact image targets were obtained from the primary p0088.htm page.",
+    "Captions are conservative descriptions based on the source page and visible image content; no photographer credit was inferred for individual images.",
+    "The legacy page contains a further link to a stone-focused page; its exact target was not migrated here because it was not required to establish p0088 publication."
+  ]
+}

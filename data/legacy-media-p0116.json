@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "legacyUrl": "https://www.wystynez.ru/p0116.htm",
+  "title": "Группы разведчиков «Максим» / «Джек» и открытие мемориала",
+  "captureStatus": "source_html_verified_media_urls_extracted",
+  "pagePhotoCredits": ["Татьяна Поломодова"],
+  "historicalPhotoCredits": ["Айтель Ланге"],
+  "images": [
+    {"url":"https://wystynez.ru/sc-pic/i2141.jpg","sourceOrder":1},
+    {"url":"https://wystynez.ru/sc-pic/i2142.jpg","sourceOrder":2},
+    {"url":"https://wystynez.ru/sc-pic/i2143.jpg","sourceOrder":3},
+    {"url":"https://wystynez.ru/sc-pic/i2144.jpg","sourceOrder":4},
+    {"url":"https://wystynez.ru/sc-pic/i2145.jpg","sourceOrder":5},
+    {"url":"https://wystynez.ru/sc-pic/i2146.jpg","sourceOrder":6},
+    {"url":"https://wystynez.ru/sc-pic/i2147.jpg","sourceOrder":7},
+    {"url":"https://wystynez.ru/sc-pic/i2148.jpg","sourceOrder":8},
+    {"url":"https://wystynez.ru/sc-pic/i2149.jpg","sourceOrder":9},
+    {"url":"https://wystynez.ru/sc-pic/i2150.jpg","sourceOrder":10},
+    {"url":"https://wystynez.ru/sc-pic/i2151.jpg","sourceOrder":11},
+    {"url":"https://wystynez.ru/sc-pic/i2152.png","sourceOrder":12},
+    {"url":"https://wystynez.ru/sc-pic/i2153.jpg","sourceOrder":13}
+  ],
+  "sourceNote": "Exact image URLs extracted from the verified legacy HTML. Image binaries were not required for URL provenance; captions are preserved only where the source page explicitly provides them.",
+  "verifiedAt": "2026-08-28"
+}

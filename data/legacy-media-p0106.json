@@ -1,0 +1,22 @@
+{
+  "legacyUrl": "https://wystynez.ru/p0106.htm",
+  "status": "verified_source_media",
+  "capturedAt": "2026-08-28",
+  "media": [
+    {"url":"https://wystynez.ru/sc-pic/i1595.png","role":"grant-logo"},
+    {"url":"https://wystynez.ru/sc-pic/i1596.jpg","role":"hero-lake"},
+    {"url":"https://wystynez.ru/sc-pic/i1597.jpg","role":"museum-interior"},
+    {"url":"https://wystynez.ru/sc-pic/i1598.jpg","role":"landscape-view"},
+    {"url":"https://wystynez.ru/sc-pic/i1599.jpg","role":"postcard"},
+    {"url":"https://wystynez.ru/sc-pic/i1601.jpg","role":"project-meeting-outdoors"},
+    {"url":"https://wystynez.ru/sc-pic/i1602.jpg","role":"interactive-table"},
+    {"url":"https://wystynez.ru/sc-pic/i1603.jpg","role":"partner-logo"},
+    {"url":"https://wystynez.ru/sc-pic/i1604.png","role":"partner-logo"},
+    {"url":"https://wystynez.ru/sc-pic/i1695.jpg","role":"project-information-meeting"}
+  ],
+  "notes": [
+    "URLs were obtained from the primary legacy page links.",
+    "Logo/partner graphics are tracked separately from content photographs.",
+    "Image placement in the public page is not evidence of the original DOM position."
+  ]
+}

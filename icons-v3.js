@@ -2,69 +2,12 @@
 'use strict';
 const NS='http://www.w3.org/2000/svg';
 const paths={
-  home:'<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-6h5v6"/>',
-  leaf:'<path d="M20 4.5C12.5 3.8 6.2 7 4.5 13.2c-1 3.7 1.4 6.6 4.9 5.9 5.8-1.2 9.3-7 10.6-14.6Z"/><path d="M5.3 18.8c2.9-4.4 6.5-7.5 11.2-10"/>',
-  map:'<path d="m3.5 6.5 5-2.5 7 2.5 5-2.5v13.5l-5 2.5-7-2.5-5 2.5Z"/><path d="M8.5 4v13.5M15.5 6.5V20"/>',
-  pin:'<path d="M20 10c0 5.3-8 11-8 11s-8-5.7-8-11a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
-  book:'<path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H11v17H7.5A3.5 3.5 0 0 0 4 22Z"/><path d="M20 5.5A3.5 3.5 0 0 0 16.5 2H13v17h3.5A3.5 3.5 0 0 1 20 22Z"/>',
-  spark:'<path d="m12 3 1.4 4.1L17.5 8.5l-4.1 1.4L12 14l-1.4-4.1-4.1-1.4 4.1-1.4Z"/><path d="m18.5 14 .8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/><path d="m5 15 .7 1.8 1.8.7-1.8.7L5 20l-.7-1.8-1.8-.7 1.8-.7Z"/>',
-  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>',
-  route:'<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h3a3 3 0 0 0 3-3v-6a3 3 0 0 1 3-3"/>',
-  search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>',
-  menu:'<path d="M5 7h14M5 12h14M5 17h14"/>',
-  filter:'<path d="M4 6h16M7 12h10M10 18h4"/>',
-  layers:'<path d="m12 3 9 5-9 5-9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/>',
-  locate:'<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 2V5M12 19v3M2 12h3M19 12h3"/>',
-  heart:'<path d="M20.8 5.8a5.5 5.5 0 0 0-7.8 0L12 6.8l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 22l8.8-8.4a5.5 5.5 0 0 0 0-7.8Z"/>',
-  stone:'<path d="M5.5 18.5 4 12l4-7 7-1 5 6-1.5 8-6.5 2Z"/><path d="m8 5 4 5 7-1M4 12l8-2 .5 10"/>',
-  history:'<path d="M4 12a8 8 0 1 0 2.3-5.7L4 8.5"/><path d="M4 4v4.5h4.5M12 7v5l3 2"/>',
-  culture:'<path d="M6 20h12M8 17h8M9 17V9l3-4 3 4v8"/><path d="M10.5 11h3"/>',
-  archive:'<path d="M4 7h16v13H4Z"/><path d="M3 4h18v3H3ZM9 11h6"/>',
-  museum:'<path d="m3 9 9-5 9 5"/><path d="M5 10v9M9.5 10v9M14.5 10v9M19 10v9M3 20h18"/>',
-  visitor:'<circle cx="12" cy="7" r="3"/><path d="M6.5 21v-2.5A5.5 5.5 0 0 1 12 13a5.5 5.5 0 0 1 5.5 5.5V21"/>',
-  exhibition:'<rect x="4" y="4" width="16" height="16" rx="2"/><path d="m7 16 3.5-4 2.5 2.5 2-2 2 3.5M8 8h.01"/>',
-  education:'<path d="m3 9 9-5 9 5-9 5Z"/><path d="M7 12v4c2.7 2 7.3 2 10 0v-4M21 9v6"/>',
-  project:'<path d="M12 21V10"/><path d="M12 14c-4.5 0-7-2.3-7-6 4.5 0 7 2.3 7 6ZM12 11c0-4.4 2.5-7 7-7 0 4.4-2.5 7-7 7Z"/>',
-  publication:'<path d="M6 3h9l4 4v14H6Z"/><path d="M15 3v5h5M9 12h7M9 16h7"/>',
-  bed:'<path d="M3 19v-8M21 19v-5a3 3 0 0 0-3-3H8a3 3 0 0 0-3 3v5M3 16h18"/><path d="M7 11V8h4a3 3 0 0 1 3 3"/>',
-  contact:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/>',
-  chevron:'<path d="m9 5 7 7-7 7"/>',
-  arrow:'<path d="M5 12h14M14 7l5 5-5 5"/>',
-  back:'<path d="M19 12H5M10 7l-5 5 5 5"/>',
-  close:'<path d="M6 6l12 12M18 6 6 18"/>',
-  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>'
-};
-function svg(name,cls=''){
-  const body=paths[name]||paths.info;
-  return `<svg class="v3-svg-icon${cls?' '+cls:''}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
-}
+  home:'<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-6h5v6"/>',leaf:'<path d="M20 4.5C12.5 3.8 6.2 7 4.5 13.2c-1 3.7 1.4 6.6 4.9 5.9 5.8-1.2 9.3-7 10.6-14.6Z"/><path d="M5.3 18.8c2.9-4.4 6.5-7.5 11.2-10"/>',map:'<path d="m3.5 6.5 5-2.5 7 2.5 5-2.5v13.5l-5 2.5-7-2.5-3 1.5Z"/><path d="M8.5 4v13.5M15.5 6.5V20"/>',pin:'<path d="M20 10c0 5.3-8 11-8 11s-8-5.7-8-11a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',book:'<path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H11v17H7.5A3.5 3.5 0 0 0 4 22Z"/><path d="M20 5.5A3.5 3.5 0 0 0 16.5 2H13v17h3.5A3.5 3.5 0 0 1 20 22Z"/>',spark:'<path d="m12 3 1.4 4.1L17.5 8.5l-4.1 1.4L12 14l-1.4-4.1-4.1-1.4 4.1-1.4Z"/><path d="m18.5 14 .8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/><path d="m5 15 .7 1.8 1.8.7-1.8.7L5 20l-.7-1.8-1.8-.7 1.8-.7Z"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>',route:'<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h3a3 3 0 0 0 3-3v-6a3 3 0 0 1 3-3"/>',search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>',menu:'<path d="M5 7h14M5 12h14M5 17h14"/>',filter:'<path d="M4 6h16M7 12h10M10 18h4"/>',layers:'<path d="m12 3 9 5-9 5-9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/>',locate:'<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 2V5M12 19v3M2 12h3M19 12h3"/>',heart:'<path d="M20.8 5.8a5.5 5.5 0 0 0-7.8 0L12 6.8l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 22l8.8-8.4a5.5 5.5 0 0 0 0-7.8Z"/>',stone:'<path d="M5.5 18.5 4 12l4-7 7-1 5 6-1.5 8-6.5 2Z"/><path d="m8 5 4 5 7-1M4 12l8-2 .5 10"/>',history:'<path d="M4 12a8 8 0 1 0 2.3-5.7L4 8.5"/><path d="M4 4v4.5h4.5M12 7v5l3 2"/>',culture:'<path d="M6 20h12M8 17h8M9 17V9l3-4 3 4v8"/><path d="M10.5 11h3"/>',archive:'<path d="M4 7h16v13H4Z"/><path d="M3 4h18v3H3ZM9 11h6"/>',museum:'<path d="m3 9 9-5 9 5"/><path d="M5 10v9M9.5 10v9M14.5 10v9M19 10v9M3 20h18"/>',visitor:'<circle cx="12" cy="7" r="3"/><path d="M6.5 21v-2.5A5.5 5.5 0 0 1 12 13a5.5 5.5 0 0 1 5.5 5.5V21"/>',exhibition:'<rect x="4" y="4" width="16" height="16" rx="2"/><path d="m7 16 3.5-4 2.5 2.5 2-2 2 3.5M8 8h.01"/>',education:'<path d="m3 9 9-5 9 5-9 5Z"/><path d="M7 12v4c2.7 2 7.3 2 10 0v-4M21 9v6"/>',project:'<path d="M12 21V10"/><path d="M12 14c-4.5 0-7-2.3-7-6 4.5 0 7 2.3 7 6ZM12 11c0-4.4 2.5-7 7-7 0 4.4-2.5 7-7 7Z"/>',publication:'<path d="M6 3h9l4 4v14H6Z"/><path d="M15 3v5h5M9 12h7M9 16h7"/>',bed:'<path d="M3 19v-8M21 19v-5a3 3 0 0 0-3-3H8a3 3 0 0 0-3 3v5M3 16h18"/><path d="M7 11V8h4a3 3 0 0 1 3 3"/>',contact:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/>',chevron:'<path d="m9 5 7 7-7 7"/>',arrow:'<path d="M5 12h14M14 7l5 5-5 5"/>',back:'<path d="M19 12H5M10 7l-5 5 5 5"/>',close:'<path d="M6 6l12 12M18 6 6 18"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>'};
+function svg(name,cls=''){const body=paths[name]||paths.info;return `<svg class="v3-svg-icon${cls?' '+cls:''}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`}
 window.MuseumIcons={svg};
-const exact={
-  '⌂':'home','⌁':'leaf','⌖':'pin','▤':'book','✦':'spark','◷':'clock','⌕':'search','☰':'menu','☷':'filter','⌘':'layers','◎':'locate','♡':'heart','♥':'heart','●':'stone','▥':'history','♙':'visitor','◉':'exhibition','◌':'contact','×':'close','→':'arrow','›':'chevron','↗':'arrow','✉':'contact'
-};
-function replaceExact(el,name){if(!el||el.dataset.iconized)return;el.innerHTML=svg(name);el.dataset.iconized='1';}
-function replaceTextIcon(el){
-  if(!el||el.dataset.iconized)return;
-  const t=(el.textContent||'').trim();
-  if(exact[t])replaceExact(el,exact[t]);
-}
-function semanticPass(root=document){
-  const qs=(sel,name)=>root.querySelectorAll?.(sel).forEach(el=>replaceExact(el,name));
-  qs('.entry-explore .entry-icon','leaf');qs('.entry-map .entry-icon','map');qs('.entry-articles .entry-icon','book');
-  qs('.topic-nature>span','leaf');qs('.topic-history>span','history');qs('.topic-stone>span','stone');qs('.topic-culture>span','culture');
-  qs('.archive-ornament','archive');qs('.visit-line:first-child>span','clock');qs('.visit-line:nth-child(2)>span','pin');
-  qs('.ai-orb','spark');qs('.hero-menu','menu');qs('.round-menu:not(.hero-menu)','menu');
-  qs('#locateButton','locate');
-  qs('.bottom-nav [data-nav="home"] span','home');qs('.bottom-nav [data-nav="explore"] span','leaf');qs('.bottom-nav [data-nav="map"] span','map');qs('.bottom-nav [data-nav="articles"] span','book');qs('.bottom-nav [data-nav="ai"] span','spark');
-  qs('.full-menu-nav [data-menu-section="about"]>span','museum');qs('.full-menu-nav [data-menu-section="visit"]>span','visitor');qs('.full-menu-nav [data-menu-section="exhibitions"]>span','exhibition');qs('.full-menu-nav [data-menu-section="education"]>span','education');qs('.full-menu-nav [data-menu-section="projects"]>span','project');qs('.full-menu-nav [data-menu-section="publications"]>span','publication');qs('.full-menu-nav [data-menu-section="chronology"]>span','history');qs('.full-menu-nav a[href*="guest-house"]>span','bed');qs('.full-menu-nav [data-menu-section="contacts"]>span','contact');
-  qs('.menu-close','close');
-  root.querySelectorAll?.('.search-box>span').forEach(el=>replaceExact(el,'search'));
-  root.querySelectorAll?.('.entry-card>b,.full-menu-nav b').forEach(el=>replaceExact(el,'chevron'));
-  root.querySelectorAll?.('span,button,b').forEach(replaceTextIcon);
-}
-semanticPass(document);
-const obs=new MutationObserver(list=>{
-  for(const m of list){for(const node of m.addedNodes){if(node.nodeType!==1)continue;semanticPass(node);replaceTextIcon(node);}}
-});
-obs.observe(document.body,{childList:true,subtree:true});
+const exact={'⌂':'home','⌁':'leaf','⌖':'pin','▤':'book','✦':'spark','◷':'clock','⌕':'search','☰':'menu','☷':'filter','⌘':'layers','◎':'locate','♡':'heart','♥':'heart','●':'stone','▥':'history','♙':'visitor','◉':'exhibition','◌':'contact','×':'close','→':'arrow','›':'chevron','↗':'arrow','✉':'contact'};
+function replaceExact(el,name){if(!el||el.dataset.iconized)return;el.innerHTML=svg(name);el.dataset.iconized='1'}
+function replaceTextIcon(el){if(!el||el.dataset.iconized)return;const t=(el.textContent||'').trim();if(exact[t])replaceExact(el,exact[t])}
+function semanticPass(root=document){const qs=(sel,name)=>root.querySelectorAll?.(sel).forEach(el=>replaceExact(el,name));qs('.entry-explore .entry-icon','leaf');qs('.entry-map .entry-icon','map');qs('.entry-articles .entry-icon','book');qs('.topic-nature>span','leaf');qs('.topic-history>span','history');qs('.topic-stone>span','stone');qs('.topic-culture>span','culture');qs('.archive-ornament','archive');qs('.visit-line:first-child>span','clock');qs('.visit-line:nth-child(2)>span','pin');qs('.ai-orb','spark');qs('.hero-menu','menu');qs('.round-menu:not(.hero-menu)','menu');qs('#locateButton','locate');qs('.bottom-nav [data-nav="home"] span','home');qs('.bottom-nav [data-nav="explore"] span','leaf');qs('.bottom-nav [data-nav="map"] span','map');qs('.bottom-nav [data-nav="articles"] span','book');qs('.bottom-nav [data-nav="ai"] span','spark');qs('.full-menu-nav [data-menu-section="about"]>span:first-child','museum');qs('.full-menu-nav [data-menu-section="visit"]>span:first-child','visitor');qs('.full-menu-nav [data-menu-section="exhibitions"]>span:first-child','exhibition');qs('.full-menu-nav [data-menu-section="education"]>span:first-child','education');qs('.full-menu-nav [data-menu-section="projects"]>span:first-child','project');qs('.full-menu-nav [data-menu-section="publications"]>span:first-child','publication');qs('.full-menu-nav [data-menu-section="chronology"]>span:first-child','history');qs('.full-menu-nav a[href*="guest-house"]>span:first-child','bed');qs('.full-menu-nav [data-menu-section="contacts"]>span:first-child','contact');qs('.menu-close','close');root.querySelectorAll?.('.search-box>span').forEach(el=>replaceExact(el,'search'));root.querySelectorAll?.('.entry-card>b,.full-menu-nav b').forEach(el=>replaceExact(el,'chevron'));root.querySelectorAll?.('span,button,b').forEach(replaceTextIcon)}
+semanticPass(document);const obs=new MutationObserver(list=>{for(const m of list){for(const node of m.addedNodes){if(node.nodeType!==1)continue;semanticPass(node);replaceTextIcon(node)}}});obs.observe(document.body,{childList:true,subtree:true});
 })();
