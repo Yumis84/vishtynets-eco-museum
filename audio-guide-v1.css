@@ -62,10 +62,11 @@
 .audio-track-copy p{margin:5px 0 0;font-size:11.5px}
 .audio-track-copy small{display:block;margin-top:6px;color:#777d74;font-size:10px;font-weight:800}
 
-.audio-access-modal{position:fixed;inset:0;z-index:140;display:none;align-items:flex-end;justify-content:center;padding:14px}
+/* Оплата аудиогида: модальное окно строго по центру экрана */
+.audio-access-modal{position:fixed;inset:0;z-index:140;display:none;align-items:center;justify-content:center;padding:20px;box-sizing:border-box}
 .audio-access-modal.is-open{display:flex}
 .audio-access-backdrop{position:absolute;inset:0;background:rgba(24,35,27,.58)}
-.audio-access-card{position:relative;z-index:1;width:min(100%,520px);padding:22px 18px 18px;border:1px solid #d4cbbb;border-radius:26px;background:#fbf7ee;box-shadow:0 24px 60px rgba(20,30,23,.22)}
+.audio-access-card{position:relative;z-index:1;width:min(100%,520px);max-height:calc(100dvh - 40px);overflow:auto;padding:22px 18px 18px;border:1px solid #d4cbbb;border-radius:26px;background:#fbf7ee;box-shadow:0 24px 60px rgba(20,30,23,.22)}
 .audio-access-close{position:absolute;right:12px;top:12px;width:38px;height:38px;border:0;border-radius:50%;background:#eee7da;color:#4c5d50;font-size:23px;line-height:1}
 .audio-access-card h2{margin:5px 44px 0 0;font:600 28px/1.05 Georgia,"Times New Roman",serif;color:var(--forest-deep)}
 .audio-access-card p{margin:11px 0 15px;color:#687169;font-size:13px;line-height:1.5}
