@@ -23,23 +23,27 @@ const addMessage=(role,text)=>{
 };
 
 async function sendToAssistant(message,sessionId){
-  const response=await fetch(WEBHOOK_URL,{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({chatInput:message,sessionId})
-  });
-  if(!response.ok)throw new Error(`HTTP ${response.status}`);
-  const data=await response.json();
-  if(typeof data.output!=='string')throw new Error('Некорректный ответ AI');
-  return data.output;
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),45000);
+  try{
+    const response=await fetch(WEBHOOK_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chatInput:message,sessionId}),
+      signal:controller.signal
+    });
+    if(!response.ok)throw new Error(`HTTP ${response.status}`);
+    const data=await response.json();
+    const output=Array.isArray(data)?data[0]?.output:data?.output;
+    if(typeof output!=='string'||!output.trim())throw new Error('Некорректный ответ AI');
+    return output.trim();
+  }finally{clearTimeout(timeout)}
 }
 
 function build(){
   const orb=card.querySelector('.ai-orb');
   if(orb)orb.innerHTML='✦';
-
-  const oldStatus=card.querySelector('.ai-preview-status');
-  oldStatus?.remove();
+  card.querySelector('.ai-preview-status')?.remove();
   card.querySelector('.ai-sources')?.remove();
   card.querySelector('.ai-status-note')?.remove();
   card.querySelector('.ai-coming-note')?.remove();
@@ -82,13 +86,15 @@ function build(){
       typing.textContent=answer;
     }catch(error){
       console.error('Museum AI error',error);
-      typing.textContent='Не удалось получить ответ. Попробуйте ещё раз через несколько секунд.';
+      typing.textContent=error.name==='AbortError'
+        ?'Ответ занимает слишком много времени. Попробуйте ещё раз.'
+        :'Не удалось получить ответ. Попробуйте ещё раз через несколько секунд.';
     }finally{
       busy=false;input.disabled=false;submit.disabled=false;input.focus();
     }
   };
 
-  form.addEventListener('submit',event=>{event.preventDefault();ask(input.value);input.value=''});
+  form.addEventListener('submit',event=>{event.preventDefault();const message=input.value;input.value='';ask(message)});
   prompts.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>ask(button.textContent)));
 }
 
