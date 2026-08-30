@@ -2,23 +2,25 @@
 'use strict';
 const WEBHOOK_URL='https://n8n.xn----8sbalgvaeklgsbf4b.xn--p1ai/webhook/5ccfbe41-c897-4034-9b75-e986bb9d0fe0/chat';
 const SESSION_KEY='vishtynets_ai_session';
-const card=document.querySelector('.ai-card');
-if(!card)return;
-const getSessionId=()=>{let id=sessionStorage.getItem(SESSION_KEY);if(!id){id=crypto.randomUUID();sessionStorage.setItem(SESSION_KEY,id)}return id};
-const addMessage=(role,text)=>{const list=card.querySelector('.ai-messages');const item=document.createElement('div');item.className=`ai-message ai-message-${role}`;item.textContent=text;list.append(item);list.scrollTop=list.scrollHeight;return item};
-async function sendToAssistant(message,sessionId){
- const response=await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({action:'sendMessage',chatInput:message,sessionId})});
- if(!response.ok)throw new Error(`HTTP ${response.status}`);
- const raw=await response.text();
- let data;try{data=JSON.parse(raw)}catch(e){
+function init(){
+ const card=document.querySelector('.ai-card');
+ if(!card||card.dataset.aiInitialized==='1')return;
+ card.dataset.aiInitialized='1';
+ card.hidden=false;
+ card.style.display='block';
+ const getSessionId=()=>{let id=sessionStorage.getItem(SESSION_KEY);if(!id){id=(crypto?.randomUUID?.()||`ai-${Date.now()}-${Math.random().toString(36).slice(2)}`);sessionStorage.setItem(SESSION_KEY,id)}return id};
+ const addMessage=(role,text)=>{const list=card.querySelector('.ai-messages');if(!list)return null;const item=document.createElement('div');item.className=`ai-message ai-message-${role}`;item.textContent=text;list.append(item);list.scrollTop=list.scrollHeight;return item};
+ async function sendToAssistant(message,sessionId){
+  const response=await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({action:'sendMessage',chatInput:message,sessionId})});
+  if(!response.ok)throw new Error(`HTTP ${response.status}`);
+  const raw=await response.text();
+  let data;try{data=JSON.parse(raw)}catch(e){
    let output='';for(const line of raw.split(/\n+/)){try{const j=JSON.parse(line);if(j.content)output+=j.content;else if(j.output)output+=j.output}catch(_){} }
-   if(output.trim())return output.trim();
-   throw new Error('Ответ не JSON');
+   if(output.trim())return output.trim();throw new Error('Ответ не JSON');
+  }
+  const output=(typeof data?.output==='string'?data.output:typeof data?.text==='string'?data.text:typeof data?.response==='string'?data.response:Array.isArray(data)?data[0]?.output:'')||'';
+  if(!output.trim())throw new Error('В ответе n8n нет текста');return output.trim();
  }
- const output=(typeof data?.output==='string'?data.output:typeof data?.text==='string'?data.text:typeof data?.response==='string'?data.response:Array.isArray(data)?data[0]?.output:'')||'';
- if(!output.trim())throw new Error('В ответе n8n нет текста');return output.trim();
-}
-function build(){
  const orb=card.querySelector('.ai-orb');if(orb)orb.innerHTML='✦';
  ['.ai-preview-status','.ai-sources','.ai-status-note','.ai-coming-note'].forEach(s=>card.querySelector(s)?.remove());
  const heading=card.querySelector('h2'),intro=card.querySelector(':scope > p');
@@ -33,5 +35,5 @@ function build(){
  form.addEventListener('submit',e=>{e.preventDefault();const message=input.value;input.value='';ask(message)});
  prompts.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>ask(b.textContent)));
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build,{once:true});else build();
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
