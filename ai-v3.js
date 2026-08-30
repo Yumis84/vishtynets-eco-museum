@@ -26,11 +26,15 @@ async function sendToAssistant(message,sessionId){
   const response=await fetch(WEBHOOK_URL,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({chatInput:message,sessionId})
+    body:JSON.stringify({action:'sendMessage',chatInput:message,sessionId})
   });
   if(!response.ok)throw new Error(`HTTP ${response.status}`);
   const data=await response.json();
-  const output=typeof data?.output==='string'?data.output.trim():'';
+  let output='';
+  if(typeof data?.output==='string')output=data.output;
+  else if(Array.isArray(data)&&typeof data[0]?.output==='string')output=data[0].output;
+  else if(typeof data?.text==='string')output=data.text;
+  output=output.trim();
   if(!output)throw new Error('Некорректный ответ AI');
   return output;
 }
