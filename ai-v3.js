@@ -7,7 +7,7 @@ function init(){
  if(!card||card.dataset.aiInitialized==='1')return;
  card.dataset.aiInitialized='1';
  card.hidden=false;
- card.style.display='block';
+ card.style.display='flex';
  const getSessionId=()=>{let id=sessionStorage.getItem(SESSION_KEY);if(!id){id=(crypto?.randomUUID?.()||`ai-${Date.now()}-${Math.random().toString(36).slice(2)}`);sessionStorage.setItem(SESSION_KEY,id)}return id};
  const addMessage=(role,text)=>{const list=card.querySelector('.ai-messages');if(!list)return null;const item=document.createElement('div');item.className=`ai-message ai-message-${role}`;item.textContent=text;list.append(item);list.scrollTop=list.scrollHeight;return item};
  async function sendToAssistant(message,sessionId){
