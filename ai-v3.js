@@ -8,6 +8,7 @@ function init(){
  card.dataset.aiInitialized='1';
  card.hidden=false;
  card.style.display='flex';
+ const screen=card.closest('.screen-ai');
  const getSessionId=()=>{let id=sessionStorage.getItem(SESSION_KEY);if(!id){id=(crypto?.randomUUID?.()||`ai-${Date.now()}-${Math.random().toString(36).slice(2)}`);sessionStorage.setItem(SESSION_KEY,id)}return id};
  const addMessage=(role,text)=>{const list=card.querySelector('.ai-messages');if(!list)return null;const item=document.createElement('div');item.className=`ai-message ai-message-${role}`;item.textContent=text;list.append(item);list.scrollTop=list.scrollHeight;return item};
  async function sendToAssistant(message,sessionId){
@@ -26,6 +27,15 @@ function init(){
  const heading=card.querySelector('h2'),intro=card.querySelector(':scope > p');
  if(heading)heading.textContent='Спросите о Роминтской пуще';
  if(intro)intro.textContent='Помощник поможет найти места, статьи и маршруты.';
+ if(screen&&!screen.querySelector('.ai-header')){
+  const header=document.createElement('header');
+  header.className='ai-header';
+  header.innerHTML='<button class="ai-close" data-nav="home" type="button" aria-label="Закрыть AI-консультант">×</button><div class="ai-header-copy"><span class="eyebrow">Музейный помощник</span><h1>AI-консультант</h1></div>';
+  if(heading)header.querySelector('.ai-header-copy').append(heading);
+  if(intro)header.querySelector('.ai-header-copy').append(intro);
+  screen.insertBefore(header,card);
+ }
+ if(orb)orb.remove();
  const messages=document.createElement('div');messages.className='ai-messages';messages.setAttribute('role','log');messages.setAttribute('aria-live','polite');card.append(messages);
  addMessage('assistant','Здравствуйте! Я музейный помощник. Спросите о Роминтской пуще, музее, местах, статьях или маршрутах.');
  const prompts=document.createElement('div');prompts.className='ai-prompts';prompts.innerHTML='<button type="button">Что посмотреть рядом с музеем?</button><button type="button">Расскажите о Роминтской пуще</button><button type="button">Какие есть интересные маршруты?</button><button type="button">Что есть в музейных статьях?</button>';card.append(prompts);
