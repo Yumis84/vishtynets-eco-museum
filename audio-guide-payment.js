@@ -10,7 +10,7 @@ const future=modal.querySelector('.audio-access-future');const pay=future?.query
 if(future){future.querySelectorAll('button').forEach((b,i)=>{if(i>0)b.remove()})}
 const title=modal.querySelector('#audioAccessTitle');if(title)title.textContent='Доступ к аудиогиду';
 const p=modal.querySelector('.audio-access-card p');if(p)p.textContent='Откройте все аудиодорожки экскурсии по Виштынецкому экомузею. После оплаты доступ предоставляется на 24 часа. Регистрация не требуется.';
-const small=modal.querySelector('small');if(small)small.innerHTML='Цифровой доступ. После оплаты доступ предоставляется автоматически.<br><a href="payment-terms.html" target="_blank" rel="noopener">Условия оплаты и оферта</a>';
+const small=modal.querySelector('small');if(small)small.innerHTML='Цифровой доступ. После оплаты доступ предоставляется автоматически.<br><a href="payment-terms.html" target="_blank" rel="noopener">Условия оплаты и оферта</a><br><br><span>Продавец: Терехов Д. С. · ИНН 392201415702<br>Краснолесье, ул. Школьная, 5А<br>yumis@ya.ru</span>';
 return true}
 async function init(){await finishPayment();for(let i=0;i<30;i++){if(wire())break;await sleep(250)}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
