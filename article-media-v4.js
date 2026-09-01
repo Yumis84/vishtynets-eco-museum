@@ -8,23 +8,35 @@
     'i1438.jpg','i1410.jpg','i2282.jpg','i2283.jpg','i2284.jpg','i1528.jpg',
     'i1411.jpg','i1444.jpg','i1445.jpg','i1446.jpg','i1412.jpg','i1449.jpg',
     'i2280.jpg','i1413.jpg','i1453.jpg','i1454.jpg','i2281.jpg'
-  ].map(name=>({
-    src:`https://www.wystynez.ru/sc-pic/${name}`,
-    caption:null,
-    credit:'Александр Матвеев, Алексей Соколов, Эдуард Барсуков'
-  }));
+  ].map(name=>({src:`https://www.wystynez.ru/sc-pic/${name}`,caption:null,credit:'Александр Матвеев, Алексей Соколов, Эдуард Барсуков'}));
+
+  const lakePhotos = [
+    'i0188.jpg','i0192.jpg','i0197.jpg','i0198.jpg','i0199.jpg','i0200.jpg',
+    'i0201.jpg','i0202.jpg','i0208.jpg','i0206.jpg','i0204.jpg','i0203.jpg','i0207.jpg'
+  ].map(name=>({src:`https://www.wystynez.ru/sc-pic/${name}`,caption:null,credit:'А. Соколов'}));
 
   function enrichData(){
     const articles=window.MUSEUM_ARTICLES||[];
     const forest=articles.find(a=>a.id==='forest-village');
-    if(!forest)return;
-    forest.hero=forestPhotos[0].src;
-    forest.images=forestPhotos;
-    forest.sourceMediaStatus='29_confirmed_jpg_photos_connected_from_39_exact_legacy_media_urls';
-    forest.sourceMediaInventoryFile='data/legacy-media-batch-5.json';
-    forest.sourceMediaCount=39;
-    forest.photoCredits=['Александр Матвеев','Алексей Соколов','Эдуард Барсуков'];
-    forest.mediaDisplayPolicy='Display all 29 confirmed JPG photographs. Keep the 10 PNG legacy assets out of the article gallery until their visual role is independently confirmed.';
+    if(forest){
+      forest.hero=forestPhotos[0].src;
+      forest.images=forestPhotos;
+      forest.sourceMediaStatus='29_confirmed_jpg_photos_connected_from_39_exact_legacy_media_urls';
+      forest.sourceMediaInventoryFile='data/legacy-media-batch-5.json';
+      forest.sourceMediaCount=39;
+      forest.photoCredits=['Александр Матвеев','Алексей Соколов','Эдуард Барсуков'];
+      forest.mediaDisplayPolicy='Display all 29 confirmed JPG photographs. Keep the 10 PNG legacy assets out of the article gallery until their visual role is independently confirmed.';
+    }
+    const lake=articles.find(a=>a.id==='vishtynets-lake');
+    if(lake){
+      lake.hero=lakePhotos[0].src;
+      lake.images=lakePhotos;
+      lake.photoCredits=['А. Соколов'];
+      lake.sourceMediaStatus='13_confirmed_jpg_photos_connected_from_15_exact_legacy_media_urls';
+      lake.sourceMediaInventoryFile='data/legacy-media-batch-6.json';
+      lake.sourceMediaCount=15;
+      lake.mediaDisplayPolicy='Display the 13 confirmed JPG photographs. Keep the 2 PNG legacy assets out until their visual role is independently confirmed.';
+    }
   }
 
   function installLightbox(){
