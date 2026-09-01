@@ -99,6 +99,10 @@ function init(){
   new MutationObserver(enrichCards).observe(articleList,{childList:true});
   new MutationObserver(enhanceReader).observe(reader,{childList:true,subtree:true});
   enhanceReader();
+  const mediaScript=document.createElement('script');
+  mediaScript.src='article-media-v4.js?v=1';
+  mediaScript.async=false;
+  document.head.appendChild(mediaScript);
 }
 
 init();
