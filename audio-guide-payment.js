@@ -11,6 +11,7 @@ if(future){future.querySelectorAll('button').forEach((b,i)=>{if(i>0)b.remove()})
 const title=modal.querySelector('#audioAccessTitle');if(title)title.textContent='Доступ к аудиогиду';
 const p=modal.querySelector('.audio-access-card p');if(p)p.textContent='Откройте все аудиодорожки экскурсии по Виштынецкому экомузею. После оплаты доступ предоставляется на 24 часа. Регистрация не требуется.';
 const small=modal.querySelector('small');if(small)small.innerHTML='Цифровой доступ. После оплаты доступ предоставляется автоматически.<br><a href="payment-terms.html" target="_blank" rel="noopener">Условия оплаты и оферта</a><br><br><span>Продавец: Терехов Д. С. · ИНН 392201415702<br>Краснолесье, ул. Школьная, 5А<br>yumis@ya.ru</span>';
+const styleId='audio-payment-button-style';if(!document.getElementById(styleId)){const style=document.createElement('style');style.id=styleId;style.textContent='.audio-access-future button[data-yookassa="1"]{background:#3f8f55!important;border:1px solid #347847!important;color:#fff!important;font-weight:900!important;box-shadow:0 5px 14px rgba(63,143,85,.22)!important}.audio-access-future button[data-yookassa="1"]:active{transform:scale(.985)}';document.head.appendChild(style)}
 return true}
 async function init(){await finishPayment();for(let i=0;i<30;i++){if(wire())break;await sleep(250)}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
