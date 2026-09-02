@@ -1,6 +1,6 @@
-# Legacy media inventory — first verified pass
+# Legacy media inventory — verified migration pass
 
-Updated: 2026-08-19
+Updated: 2026-09-02
 
 This file tracks the image / credit layer of migration from `www.wystynez.ru`.
 
@@ -16,6 +16,10 @@ This file tracks the image / credit layer of migration from `www.wystynez.ru`.
 
 - `data/legacy-media.json`
 - `data/legacy-media-batch-2.json`
+- `data/legacy-media-batch-3.json` / `data/legacy-media-context-batch-3.json`
+- `data/legacy-media-batch-4.json`
+- `data/legacy-media-batch-5.json`
+- `docs/MEDIA_CAPTURE_2026-09-02.md`
 
 ## Current captured media URLs
 
@@ -28,39 +32,59 @@ This file tracks the image / credit layer of migration from `www.wystynez.ru`.
 - Direct capture of `p0121.htm` still returns a cache miss.
 - The results page `p0122.htm` explicitly exposes an anchor «Скачать брошюру», but the linked download target is not exposed by the current search/crawl layer, so the exact brochure URL remains unresolved.
 
-### `p38.htm` — «Птицы Красного леса»
+### `p38.htm` — «Птицы Красного леса`
 
 - Exact media URLs captured: **8**.
 - Author: **Игорь Шелякин**.
 - Page-level image credit: **Cliparts, Dinamite SoftWare Group, 2003**.
-- Source text provides nearby labels for `Серая цапля`, `Удод`, `Выпь`, `Малый подорлик`; likely image/caption associations are stored as pending final visual confirmation.
-- Four likely content images have now been connected to the migrated article gallery while retaining the page-level credit wording.
+- Nearby labels include `Серая цапля`, `Удод`, `Выпь`, `Малый подорлик`; image/caption associations remain subject to visual confirmation.
 
 ### `p0109.htm` — «Неизвестный Виштынец» / opening 2019
 
 - Exact media URLs captured: **4**.
 - Page-level photo credit: **Юлия Алексеева**.
-- `i1711.jpg` is adjacent to the explicit source caption `Центральный экспонат новой экспозиции - макет озера Виштынецкое` and is a strong candidate for the migrated article hero image.
+- `i1711.jpg` is adjacent to the explicit source caption about the central lake model and is a strong hero-image candidate.
 
-### `p0125.htm` — «Соседи — 2023»
+### `p0125.htm` — «Соседи — 2023`
 
-- Exact media URLs captured: **20** (page graphics + event photographs).
+- Exact media URLs captured: **20**.
 - Page-level photo credits: **Наталья Матусевичене, Юлия Алексеева, Ирина Ковардо**.
-- Seventeen JPG event-gallery images are now connected to the migrated article; individual photographer assignment remains intentionally blank because the legacy page gives only the collective page-level credit.
-- The source also exposes a separate programme page: `https://wystynez.ru/p0126.htm`. This should be preserved as a related legacy page / programme asset rather than silently merged away.
+- Seventeen JPG event-gallery images are connected to the migrated article; individual photographer assignment remains blank because the source gives only collective page-level credit.
+- Related programme page: `https://wystynez.ru/p0126.htm`.
 
-## Totals in this pass
+### `p0108.htm` — «Неизвестный Виштынец», meeting 26 September 2018
 
-- Source pages with exact media URL extraction: **4**.
-- Exact legacy media URLs captured: **46**.
-- Pages with preserved explicit page-level credits: **4**.
+- Exact media URLs captured: **8**.
+- Page-level credits: **Юлия Алексеева, Александр Самсонкин**.
+- All 8 exact `sc-pic` URLs are recorded in `docs/MEDIA_CAPTURE_2026-09-02.md`.
 
-## Next media queue
+### `p0116.htm` — reconnaissance groups «Максим» / «Джек`
 
-1. Extract media URLs for `p0108.htm` — meeting for «Неизвестный Виштынец» (page credit: Юлия Алексеева, Александр Самсонкин).
-2. Extract media URLs for `p0116.htm` — reconnaissance groups «Максим» / «Джек» and memorial opening (opening-event credit: Татьяна Поломодова; historical photo credit Айтель Ланге explicitly appears in source text).
-3. Extract media URLs for `Prazdnik--SOSEDI----2018.htm` (page credits already known from the legacy page).
-4. Extract original maps / graphics from `p48.htm` while preserving source attribution to the Geographic Atlas of Kaliningrad Region (2002) and the Google materials cited on the old page.
-5. Extract media from `p33.htm` (Донелайтис), `p92.htm` (Виштынецкие сокровища гномов), `p31.htm` (travelling exposition) and other verified pages.
-6. Resolve the exact brochure download target on `p0122.htm`.
-7. Retry full capture of `p0121.htm`.
+- Exact media URLs captured: **13**.
+- Page-level credit: **Татьяна Поломодова**.
+- Explicit historical image credit: **Айтель Ланге** for the Reichsjagerhof image context.
+- Exact URLs are recorded in `docs/MEDIA_CAPTURE_2026-09-02.md`.
+
+### `p0092.htm` — project «Лесная деревня`
+
+- Exact media URLs captured: **5**.
+- The page itself exposes project images and related graphics; no individual photographer assignment is inferred where the source does not provide one.
+
+### `p48.htm` — geographic/map page
+
+- Exact media URLs captured: **11**.
+- Source attribution preserved: Google materials and *Географический атлас Калининградской области* (Kaliningrad, 2002).
+- The map graphics are historical/source material and must not be silently re-authored.
+
+## 2026-09-02 capture result
+
+This pass added **37 exact legacy media URLs** across four previously queued pages (`p0108`, `p0116`, `p0092`, `p48`). The URLs were extracted from the legacy HTML image anchors. The crawler returned cache misses for the binary files, so the URLs are preserved as verified provenance rather than marked dead.
+
+## Remaining media blockers
+
+1. `p92.htm` — «Виштынецкие сокровища гномов»: indexed text is available, but the current crawl path returns unsupported media type before exposing image anchors.
+2. `p33.htm` — Кристионас Донелайтис: direct crawl remains unstable.
+3. `p31.htm` — travelling exposition: direct crawl currently has a Unicode decoding error.
+4. `Prazdnik--SOSEDI----2018.htm`: page-level credits and contexts are verified, exact media URLs remain pending.
+5. `p0121.htm`: dedicated interactive boulder-map page is verified as a legacy target but direct capture remains unavailable.
+6. `p0122.htm`: brochure anchor is verified, exact download target remains unresolved.
