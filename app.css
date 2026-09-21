@@ -314,3 +314,7 @@ img{display:block;max-width:100%}
 .menu-detail-content{width:min(100%,720px);margin:0 auto;padding:20px 18px 32px}
 .menu-detail-content>p{color:#626a63;line-height:1.6}
 .menu-detail-content .btn-light{min-height:58px;border-radius:16px;padding:10px 14px}
+
+/* Keep the menu affordance in the same right-hand position on submenu pages. */
+.menu-detail-header{grid-template-columns:minmax(0,1fr) 46px}
+.menu-detail-menu{justify-self:end}
