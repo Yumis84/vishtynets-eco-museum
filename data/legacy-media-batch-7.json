@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-21",
+  "purpose": "Exact legacy media URLs recovered from source-page image anchors for p0108.htm and p0116.htm.",
+  "creditPolicy": "Preserve page-level credits at page level. Only the Reichsjaegerhof image has an explicit individual credit in the source text.",
+  "pages": [
+    {
+      "legacyUrl": "https://wystynez.ru/p0108.htm",
+      "title": "Встреча по проекту «Неизвестный Виштынец» — 26 сентября 2018",
+      "captureStatus": "page_text_credits_and_exact_media_urls_verified",
+      "pagePhotoCredits": ["Юлия Алексеева", "Александр Самсонкин"],
+      "images": [
+        "https://wystynez.ru/sc-pic/i1595.png",
+        "https://wystynez.ru/sc-pic/i1609.jpg",
+        "https://wystynez.ru/sc-pic/i1610.jpg",
+        "https://wystynez.ru/sc-pic/i1611.jpg",
+        "https://wystynez.ru/sc-pic/i1624.png",
+        "https://wystynez.ru/sc-pic/i1625.png",
+        "https://wystynez.ru/sc-pic/i1615.jpg",
+        "https://wystynez.ru/sc-pic/i1616.jpg"
+      ],
+      "knownContexts": [
+        "организационная встреча в Виштынецком экомузее",
+        "будущая смотровая площадка над долиной истоков реки Синей",
+        "участники и партнёры проекта «Неизвестный Виштынец или по дороге к чуду»"
+      ],
+      "reachability": "Exact image targets recovered from source anchors; binary crawler returned cache miss during verification."
+    },
+    {
+      "legacyUrl": "https://wystynez.ru/p0116.htm",
+      "title": "Разведчики в Роминтской пуще в годы Великой Отечественной войны",
+      "captureStatus": "page_text_captions_credits_and_exact_media_urls_verified",
+      "pagePhotoCredits": ["Татьяна Поломодова"],
+      "explicitImageCredits": [
+        {
+          "url": "https://wystynez.ru/sc-pic/i2143.jpg",
+          "credit": "Айтель Ланге",
+          "context": "Объект разведки — государственный охотничий двор Рейхсягерхоф; мебель из кабинета Г. Геринга подготовлена к вывозу, октябрь 1944"
+        }
+      ],
+      "images": [
+        "https://wystynez.ru/sc-pic/i2141.jpg",
+        "https://wystynez.ru/sc-pic/i2142.jpg",
+        "https://wystynez.ru/sc-pic/i2143.jpg",
+        "https://wystynez.ru/sc-pic/i2144.jpg",
+        "https://wystynez.ru/sc-pic/i2145.jpg",
+        "https://wystynez.ru/sc-pic/i2146.jpg",
+        "https://wystynez.ru/sc-pic/i2147.jpg",
+        "https://wystynez.ru/sc-pic/i2148.jpg",
+        "https://wystynez.ru/sc-pic/i2149.jpg",
+        "https://wystynez.ru/sc-pic/i2150.jpg",
+        "https://wystynez.ru/sc-pic/i2151.jpg",
+        "https://wystynez.ru/sc-pic/i2152.png",
+        "https://wystynez.ru/sc-pic/i2153.jpg"
+      ],
+      "verifiedCaptionContexts": [
+        "разведчики группы «Максим»: С. Ф. Шарапов, В. И. Максимов, Н. И. Дергачёв",
+        "подготовка радистки для разведгрупп",
+        "государственный охотничий двор Рейхсягерхоф, октябрь 1944",
+        "И. И. Мельников, позывной «Крот»",
+        "открытие памятного камня 17 июля 2020",
+        "памятный камень и информационный стенд"
+      ],
+      "reachability": "Exact image targets recovered from source anchors; most binary fetches returned cache miss and i2152.png returned an unexpected HTTP status. URLs are preserved as provenance, not claimed as currently reachable."
+    }
+  ]
+}
