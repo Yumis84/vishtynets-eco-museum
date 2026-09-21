@@ -15,6 +15,38 @@
     'i0201.jpg','i0202.jpg','i0208.jpg','i0206.jpg','i0204.jpg','i0203.jpg','i0207.jpg'
   ].map(name=>({src:`https://www.wystynez.ru/sc-pic/${name}`,caption:null,credit:'А. Соколов'}));
 
+
+  const pageMedia=(names,credit)=>names.map(name=>({src:`https://www.wystynez.ru/sc-pic/${name}`,caption:null,credit}));
+
+  const recoveredArticleMedia = {
+    'unknown-vishtynets-meeting-2018': {
+      files:['i1609.jpg','i1610.jpg','i1611.jpg','i1615.jpg','i1616.jpg'],
+      credit:'Фото на странице: Юлия Алексеева, Александр Самсонкин',
+      inventory:'data/legacy-media-batch-7.json'
+    },
+    'scouts-maxim-jack': {
+      files:['i2141.jpg','i2142.jpg','i2143.jpg','i2144.jpg','i2145.jpg','i2146.jpg','i2147.jpg','i2148.jpg','i2149.jpg','i2150.jpg','i2151.jpg','i2153.jpg'],
+      credit:'Фото на странице: Татьяна Поломодова; исторические изображения имеют отдельное происхождение',
+      inventory:'data/legacy-media-batch-7.json',
+      itemCredits:{'i2143.jpg':'Айтель Ланге'}
+    },
+    'neighbors-2018': {
+      files:['i1549.jpg','i1550.jpg','i1551.jpg','i1552.jpg','i1553.jpg','i1554.jpg','i1555.jpg','i1556.jpg','i1557.jpg','i1558.jpg','i1559.jpg','i1560.jpg','i1561.jpg','i1562.jpg','i1563.jpg','i1564.jpg','i1569.jpg','i1565.jpg','i1566.jpg','i1570.jpg','i1567.jpg','i1568.jpg','i1571.jpg','i1572.jpg','i1573.jpg','i1574.jpg','i1575.jpg','i1576.jpg','i1577.jpg','i1578.jpg','i1579.jpg','i1580.jpg','i1581.jpg','i1582.jpg','i1583.jpg','i1584.jpg','i1585.jpg','i1542.jpg','i1587.jpg','i1588.jpg','i1589.jpg'],
+      credit:'Фото на странице: Юлия Алексеева, Татьяна Поломодова, Амаль Самерханова, Светлана Никирина',
+      inventory:'data/legacy-media-batch-8.json'
+    },
+    'donelaitis': {
+      files:['i0037.jpg','i0039.jpg','i0041.jpg','i0043.jpg','i0045.jpg','i0047.jpg','i0049.jpg','i0051.jpg','i0053.jpg','i0055.jpg','i0057.jpg','i0059.jpg','i0061.jpg','i0063.jpg'],
+      credit:'Фото на странице: Э. Барсуков, А. Соколов',
+      inventory:'data/legacy-media-batch-10.json'
+    },
+    'travelling-exposition-opening-2004': {
+      files:['i0010.jpg','i0012.jpg','i0014.jpg','i0016.jpg','i0018.jpg','i0020.jpg','i0022.jpg','i0024.jpg','i0026.jpg','i0028.jpg','i0030.jpg','i0032.jpg','i0034.jpg'],
+      credit:'Фото на странице: В. Гусев, Э. Барсуков',
+      inventory:'data/legacy-media-batch-12.json'
+    }
+  };
+
   function enrichData(){
     const articles=window.MUSEUM_ARTICLES||[];
     const forest=articles.find(a=>a.id==='forest-village');
@@ -32,6 +64,21 @@
       lake.sourceMediaInventoryFile='data/legacy-media-batch-6.json'; lake.sourceMediaCount=15;
       lake.mediaDisplayPolicy='Display the 13 confirmed JPG photographs. Keep the 2 PNG legacy assets out until their visual role is independently confirmed.';
     }
+
+    Object.entries(recoveredArticleMedia).forEach(([id,set])=>{
+      const article=articles.find(a=>a.id===id); if(!article)return;
+      const items=pageMedia(set.files,set.credit).map(item=>{
+        const name=item.src.split('/').pop();
+        if(set.itemCredits?.[name])item.credit=set.itemCredits[name];
+        return item;
+      });
+      article.hero=items[0]?.src||article.hero;
+      article.images=items;
+      article.sourceMediaInventoryFile=set.inventory;
+      article.sourceMediaCount=items.length;
+      article.sourceMediaStatus='confirmed_jpg_source_media_connected';
+      article.mediaDisplayPolicy='Only confirmed JPG source media are connected here. Mixed PNG/graphic assets remain excluded until visual classification.';
+    });
   }
 
   function installLightbox(){
@@ -64,7 +111,7 @@
       const article=target.closest('.screen-article'); if(!article?.classList.contains('is-active'))return;
       e.preventDefault(); image.src=target.currentSrc||target.src; image.alt=target.alt||'';
       const data=(window.MUSEUM_ARTICLES||[]).find(a=>a.title===article.querySelector('.reader-title h1')?.textContent?.trim());
-      const item=data?.images?.find(i=>i.src===target.src); credit.textContent=item?.credit||data?.photoCredits?.join(', ')||'';
+      const item=data?.images?.find(i=>i.src===target.src); credit.textContent=item ? (item.credit||'') : (data?.photoCredits?.join(', ')||'');
       box.classList.add('is-open'); box.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
     });
   }
