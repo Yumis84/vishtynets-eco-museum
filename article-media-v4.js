@@ -43,6 +43,51 @@
       status:'verified_mixed_archival_media_connected',
       policy:'Historical maps, source graphics, landscape imagery and satellite material are preserved as source-order archival media. Attribution belongs to the source page, not to a modern map provider.'
     },
+    'museum-for-teachers': {
+      files:['i1216.jpg','i1217.jpg','i1201.jpg','i1202.jpg','i1204.jpg','i1203.jpg','i1218.jpg','i1205.jpg','i1206.jpg','i1207.jpg','i1208.jpg','i1210.jpg','i1211.jpg','i1209.jpg','i1212.jpg','i1000.jpg','i1213.jpg','i1215.jpg','i1214.jpg'],
+      credit:'Фото на странице: Ольга Юсько, Алексей Соколов',inventory:'falke0039/wystynez:p0086.htm',status:'verified_jpg_content_media_from_preserved_html'
+    },
+    'kamennye-istorii': {
+      files:['i1149.jpg','i1150.jpg','i1151.jpg','i1152.jpg','i1153.jpg','i1154.jpg'],
+      credit:null,inventory:'falke0039/wystynez:p0088.htm',status:'verified_jpg_content_media_from_preserved_html'
+    },
+    'forest-village-neighbors-2017': {
+      files:['i1272.jpg','i1378.jpg','i1459.jpg','i1380.jpg','i1460.jpg','i1461.jpg','i1385.jpg','i1382.jpg','i1462.jpg','i1463.jpg','i1465.jpg'],
+      credit:'Фото на странице: Александр Матвеев, Алексей Соколов',inventory:'falke0039/wystynez:p0099.htm',status:'verified_jpg_content_media_from_preserved_html',
+      policy:'i0909/i0910 are known SiteCraft divider graphics and are excluded.'
+    },
+    'unknown-vishtynets': {
+      files:['i1596.jpg','i1597.jpg','i1695.jpg','i1601.jpg','i1591.jpg','i1602.jpg','i1598.jpg','i1599.jpg','i1603.jpg'],
+      credit:null,inventory:'falke0039/wystynez:p0106.htm',status:'verified_jpg_content_media_from_preserved_html'
+    },
+    'neighbors-2023-program': {
+      files:['i2351.jpg','i2339.jpg','i2354.jpg'],credit:'Фото на странице: Юлия Алексеева',inventory:'falke0039/wystynez:p0126.htm',status:'verified_jpg_content_media_from_preserved_html'
+    },
+    'neighbors-2024': {
+      files:['i2391.jpg','i2392.jpg'],credit:null,inventory:'falke0039/wystynez:p0130.htm',status:'verified_jpg_content_media_from_preserved_html'
+    },
+    'nature-complexes-book': {
+      files:['i0932.jpg','i0933.jpg','i0934.jpg','i0935.jpg','i0936.jpg','i0937.jpg','i0938.jpg','i0939.jpg','i0940.jpg','i0941.jpg'],credit:null,inventory:'falke0039/wystynez:p104.htm',status:'verified_jpg_content_media_from_preserved_html',
+      policy:'i0909/i0910 are known SiteCraft divider graphics and are excluded.'
+    },
+    'museum-exposition': {
+      files:['i0350.jpg','i0987.jpg','i1057.jpg','i0988.jpg','i0989.jpg','i0991.jpg','i0993.jpg','i0994.jpg','i0995.jpg','i0151.jpg','i0996.jpg','i0997.jpg'],credit:null,inventory:'falke0039/wystynez:p40.htm',status:'verified_jpg_content_media_from_preserved_html'
+    },
+    'nature-monuments': {
+      files:['i0101.jpg','i0382.jpg'],credit:null,inventory:'falke0039/wystynez:p44.htm',status:'verified_jpg_content_media_from_preserved_html'
+    },
+    'red-forest-churches': {
+      files:['i0502.jpg','i0503.jpg','i0506.jpg','i0509.jpg','i0510.jpg'],credit:null,inventory:'falke0039/wystynez:p55.htm',status:'verified_jpg_content_media_from_preserved_html'
+    },
+    'rominta-legends': {
+      files:['i0525.jpg'],credit:null,inventory:'falke0039/wystynez:p59.htm',status:'verified_jpg_content_media_from_preserved_html'
+    },
+    'gnome-treasures-project': {
+      files:['i0648.jpg','i0663.jpg','i0665.jpg','i0666.jpg','i0667.jpg','i0668.jpg'],credit:'Фото на странице: А. Соколов',inventory:'falke0039/wystynez:p84.htm',status:'verified_jpg_content_media_from_preserved_html'
+    },
+    'museum-services-legacy': {
+      files:['i1467.jpg','i1469.jpg','i0763.jpg','i0762.jpg','i1418.jpg','i1222.jpg','i1517.jpg','i1474.jpg','i1476.jpg','i1518.jpg','i1478.jpg','i1516.jpg','i1480.jpg'],credit:'Фото на странице: Ю. Алексеева, А. Соколов',inventory:'falke0039/wystynez:p95.htm',status:'verified_jpg_content_media_from_preserved_html'
+    },
     'neighbors-2016': {
       files:['i1279.jpg','i1292.jpg','i1285.jpg','i1286.jpg','i1293.jpg','i1287.jpg','i1288.jpg','i1294.jpg','i1295.jpg','i1289.jpg','i1296.jpg','i1297.jpg','i1298.jpg','i1299.jpg','i1300.jpg','i1182.jpg'],
       credit:'Фото на странице: Юлия Алексеева',
