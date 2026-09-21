@@ -43,6 +43,11 @@
       status:'verified_mixed_archival_media_connected',
       policy:'Historical maps, source graphics, landscape imagery and satellite material are preserved as source-order archival media. Attribution belongs to the source page, not to a modern map provider.'
     },
+    'living-shield-action-2003': {files:['i0167.jpg','i0168.jpg','i0169.jpg','i0170.jpg','i0171.jpg'],credit:null,inventory:'falke0039/wystynez:p16.htm',status:'verified_jpg_content_media_from_preserved_html'},
+    'childrens-summer-camp-2003': {files:['i0172.jpg','i0173.jpg','i0174.jpg','i0175.jpg','i0176.jpg'],credit:null,inventory:'falke0039/wystynez:p21.htm',status:'verified_jpg_content_media_from_preserved_html'},
+    'scientific-expedition-2003': {files:['i0181.jpg','i0182.jpg','i0183.jpg','i0184.jpg','i0185.jpg'],credit:null,inventory:'falke0039/wystynez:p23.htm',status:'verified_jpg_content_media_from_preserved_html'},
+    'old-settlers-chistye-prudy-2004': {files:['i0255.jpg','i0257.jpg','i0258.jpg','i0259.jpg'],credit:null,inventory:'falke0039/wystynez:p29.htm',status:'verified_jpg_content_media_from_preserved_html'},
+    'nko-social-projects-exhibition-2003': {files:['i0051.jpg','i0052.jpg','i1108.jpg','i0054.jpg','i1109.jpg'],credit:null,inventory:'falke0039/wystynez:p9.htm',status:'verified_jpg_content_media_from_preserved_html'},
     'museum-for-teachers': {
       files:['i1216.jpg','i1217.jpg','i1201.jpg','i1202.jpg','i1204.jpg','i1203.jpg','i1218.jpg','i1205.jpg','i1206.jpg','i1207.jpg','i1208.jpg','i1210.jpg','i1211.jpg','i1209.jpg','i1212.jpg','i1000.jpg','i1213.jpg','i1215.jpg','i1214.jpg'],
       credit:'Фото на странице: Ольга Юсько, Алексей Соколов',inventory:'falke0039/wystynez:p0086.htm',status:'verified_jpg_content_media_from_preserved_html'
