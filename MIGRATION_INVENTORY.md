@@ -1,6 +1,6 @@
 # Legacy migration inventory
 
-Status: **ACTIVE / first verified pass**  
+Status: **ACTIVE / reconciled runtime migration; recovery + public QA remain**  
 Last updated: 2026-09-21  
 Target repository: `Yumis84/vishtynets-eco-museum`
 
@@ -182,16 +182,16 @@ Priority order:
 
 ## Current completion assessment
 
-- Legacy site discovery: **in progress**
-- Main navigation: **mostly discovered**
-- Event archive: **entry page verified; detail crawl incomplete**
-- Projects: **major recent projects identified; detail crawl incomplete**
-- Images: **partial**
-- PDFs/downloads: **incomplete**
-- `rominten.wystynez.ru`: **incomplete / access unstable**
+- Legacy site discovery: **substantially reconciled; unresolved historical/download targets remain**
+- Main navigation: **discovered and represented where source evidence is sufficient**
+- Event archive: **structured records loaded into runtime through verified batches 2–71; further source reconciliation only for genuinely absent events**
+- Projects: **major verified projects represented in runtime; mixed/unresolved assets tracked separately**
+- Images: **exact-media provenance captured for the audited high-value pages; verified galleries connected conservatively**
+- PDFs/downloads: **incomplete — exact legacy targets remain a recovery queue**
+- `rominten.wystynez.ru`: **DEFER / primary-source access unstable**
 - Dead-link / redirect audit: **not complete**
 - Encoding/garbled-text audit: **not complete**
-- Final migration plan: **not yet complete**
+- Final migration plan: **defined in `docs/LEGACY_MIGRATION_FINAL_MATRIX.md`**
 
 
 ## Reconciliation checkpoint — 2026-09-21
@@ -219,3 +219,26 @@ Before creating any new legacy batch, search all existing batches and menu/artic
 6. Consolidate recovery/status duplication only after preserving provenance; do not delete batches 62–71 casually.
 
 This checkpoint supersedes stale individual migration-state labels above where current repository evidence conflicts with them.
+
+
+## Runtime activation checkpoint — 2026-09-21
+
+The source batch files through `museum-legacy-batch-71.js` are now active in the public-site data runtime through four ordered runtime bundles and a canonical duplicate-reconciliation layer.
+
+Verified data-layer evaluation after activation:
+- 173 article records;
+- 8 POI records;
+- zero duplicate article IDs after reconciliation.
+
+The earlier backlog item “convert `p0008.htm` event archive into structured event records” is therefore no longer an untouched task. Continue only by reconciling the legacy archive against the runtime and adding genuinely absent events.
+
+The image inventory is likewise no longer an untouched task. Exact source media have been captured for the audited high-value pages and conservative public mappings have been added. See `docs/LEGACY_MEDIA_INVENTORY.md` and `docs/LEGACY_MIGRATION_FINAL_MATRIX.md`.
+
+### Remaining completion gates
+
+1. Recover or explicitly close unresolved legacy document/download targets, especially `p0121` / `p0122`.
+2. Recover `rominten.wystynez.ru` only from primary or reliable archived evidence.
+3. Keep `p92` mixed media deferred until visual classification is possible.
+4. Complete dead-link/redirect and encoding/garbled-text audits.
+5. Perform public/mobile browser QA of the deployed archive and galleries.
+6. Re-verify any legacy visitor-facing operational information before presenting it as current.
