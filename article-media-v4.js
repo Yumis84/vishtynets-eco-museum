@@ -19,6 +19,16 @@
   const pageMedia=(names,credit)=>names.map(name=>({src:`https://www.wystynez.ru/sc-pic/${name}`,caption:null,credit}));
 
   const recoveredArticleMedia = {
+    'unknown-vishtynets-opening-2019': {
+      files:['i1711.jpg'],
+      credit:'Фото на странице: Юлия Алексеева',
+      inventory:'data/legacy-media-batch-2.json'
+    },
+    'neighbors-2023': {
+      files:['i2335.jpg','i2360.jpg','i2361.jpg','i2362.jpg','i2363.jpg','i2364.jpg','i2365.jpg','i2366.jpg','i2367.jpg','i2368.jpg','i2369.jpg','i2378.jpg','i2371.jpg','i2372.jpg','i2373.jpg','i2374.jpg','i2375.jpg','i2376.jpg'],
+      credit:'Фото на странице: Наталья Матусевичене, Юлия Алексеева, Ирина Ковардо',
+      inventory:'data/legacy-media-batch-2.json'
+    },
     'unknown-vishtynets-meeting-2018': {
       files:['i1609.jpg','i1610.jpg','i1611.jpg','i1615.jpg','i1616.jpg'],
       credit:'Фото на странице: Юлия Алексеева, Александр Самсонкин',
