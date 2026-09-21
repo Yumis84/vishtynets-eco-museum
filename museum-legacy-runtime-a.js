@@ -12,7 +12,7 @@
   add({
     id:'birds-red-forest',slug:'birds-red-forest',title:'Птицы Красного леса',category:'Природа',subcategory:'Животный мир',legacyUrl:'https://www.wystynez.ru/p38.htm',date:null,author:'Игорь Шелякин',
     deck:'Музейный материал о птицах Виштынецкой возвышенности, разнообразии их местообитаний и природоохранной ценности Красного леса.',
-    hero:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0317.png',
+    hero:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0318.png',
     images:[
       {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0318.png',caption:'Серая цапля',credit:'Cliparts, Dinamite SoftWare Group, 2003 — общий фотокредит исходной страницы'},
       {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0320.png',caption:'Удод',credit:'Cliparts, Dinamite SoftWare Group, 2003 — общий фотокредит исходной страницы'},
@@ -379,8 +379,8 @@
     legacyUrl:'https://www.wystynez.ru/p29.htm',date:'февраль 2004',author:null,archival:true,
     hero:null,images:[],relatedPoiIds:[],
     deck:'Встреча старожилов — первых переселенцев посёлка Чистые Пруды, зафиксированная в архиве событий музея.',
-    content:[{type:'paragraph',text:'Архив Виштынецкого экомузея фиксирует встречу старожилов — первых переселенцев — в посёлке Чистые Пруды Нестеровского района в феврале 2004 года. Архив ведёт на отдельную страницу p29.htm; полный текст этой страницы в текущем проходе получить не удалось.'}],
-    migrationStatus:'dedicated_url_verified_content_pending',sourceScope:'archive_title_date_plus_verified_link',legacyPageCaptureStatus:'cache_miss'
+    content:[{type:'paragraph',text:"Уважаемые старожилы и ветераны труда посёлка Чистые Пруды, общественное учреждение «Виштынецкий эколого-исторический музей» приглашало вас на вечер встречи 22 февраля 2004 года в здании пасторского домика музея Кристионаса Донелайтиса."},{type:'paragraph',text:"Страница обращалась к памяти первых послевоенных жителей: воспоминания об их труде, радостях и невзгодах со временем стираются, но без прошлого нет будущего, а каждое воспоминание и каждый предмет, хранящий память прошлого, становятся частью общей истории."},{type:'paragraph',text:"Сотрудники музея приглашали старожилов вместе со своими воспоминаниями прожить этот февральский вечер."},{type:'gallery'}],
+    migrationStatus:'source_body_restored_from_preserved_archive',sourceScope:'archive_title_date_plus_verified_link',legacyPageCaptureStatus:'preserved_archive_available'
   });
 
   add({
