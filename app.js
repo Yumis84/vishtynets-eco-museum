@@ -141,7 +141,7 @@ function menuSection(type){
     chronology:['Хронология','<p>Архив событий музея будет перенесён в хронологию: небольшие события — карточками, крупные авторские материалы — отдельными статьями.</p>'],
     contacts:['Контакты',`<p><strong>${esc(info.shortName||'Виштынецкий экомузей')}</strong></p><p>${esc(info.address||'Краснолесье, ул. Школьная, 5А')}</p><p><a href="tel:+79062126823">+7 (906) 212-68-23</a><br><a href="mailto:${esc(info.email||'wystynez@bk.ru')}">${esc(info.email||'wystynez@bk.ru')}</a></p><p><a href="${esc(info.vk||'https://vk.com/public63127132')}" target="_blank" rel="noopener">ВКонтакте ↗</a></p>`]
   };
-  const item=maps[type]||['Раздел','<p>Материалы готовятся.</p>'];closeMenu();showSheet(`<span class="eyebrow">Виштынецкий экомузей</span><h2>${item[0]}</h2>${item[1]}`)
+  const item=maps[type]||['Раздел','<p>Материалы готовятся.</p>'];showSheet(`<span class="eyebrow">Виштынецкий экомузей</span><h2>${item[0]}</h2>${item[1]}`)
 }
 function listArticles(filter){const list=articles.filter(filter).slice(0,12);return list.length?`<div>${list.map(a=>`<button data-sheet-article="${esc(a.id)}" class="btn-light" style="width:100%;margin:4px 0;text-align:left">${esc(a.title)}</button>`).join('')}</div>`:'<p>Материалы будут добавлены после полного разбора старого сайта.</p>'}
 
