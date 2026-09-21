@@ -3,7 +3,7 @@
   'use strict';
 
   const forestPhotos = [
-    'i1423.jpg','i1405.jpg','i1466.jpg','i1426.jpg','i1428.jpg','i1407.jpg',
+    'i1272.jpg','i1423.jpg','i1405.jpg','i1466.jpg','i1426.jpg','i1428.jpg','i1407.jpg',
     'i1430.jpg','i1432.jpg','i1433.jpg','i1409.jpg','i1435.jpg','i1436.jpg',
     'i1438.jpg','i1410.jpg','i2282.jpg','i2283.jpg','i2284.jpg','i1528.jpg',
     'i1411.jpg','i1444.jpg','i1445.jpg','i1446.jpg','i1412.jpg','i1449.jpg',
@@ -19,7 +19,7 @@
   const pageMedia=(names,credit)=>names.map(name=>({src:`https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/${name}`,caption:null,credit}));
 
   const museumMailPhotos=['i0911.jpg','i0912.jpg','i0913.jpg','i0914.jpg','i0915.jpg','i0916.jpg','i0917.jpg','i0918.jpg','i0919.jpg','i0920.jpg','i0921.jpg','i0922.jpg','i0923.jpg','i0924.jpg','i0925.jpg','i0926.jpg','i0927.jpg','i0928.jpg','i0929.jpg','i0930.jpg'].map(name=>({src:`https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/${name}`,caption:null,credit:'Фото на странице: Э. Барсуков'}));
-  const gnomeProgramMedia=['i0743.jpg','i0744.jpg','i0745.jpg','i0746.jpg','i0747.jpg','i0748.jpg','i0749.jpg','i0750.jpg','i0751.jpg','i0752.jpg','i0753.jpg','i0754.jpg','i0755.jpg','i0756.jpg','i0757.jpg','i0758.jpg','i0759.jpg','i0760.jpg','i0761.jpg','i0762.jpg'].map(name=>({src:`https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/${name}`,caption:null,credit:null}));
+  const gnomeProgramMedia=['i0743.jpg','i0744.jpg','i0745.jpg','i0746.jpg','i0747.jpg','i0748.jpg','i0749.jpg','i0750.jpg','i0751.jpg','i0752.jpg','i0753.jpg','i0661.jpg'].map(name=>({src:`https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/${name}`,caption:null,credit:null}));
 
   const recoveredArticleMedia = {
     'anatomy-stone': {
@@ -42,6 +42,12 @@
       inventory:'data/legacy-media-batch-9.json',
       status:'verified_mixed_archival_media_connected',
       policy:'Historical maps, source graphics, landscape imagery and satellite material are preserved as source-order archival media. Attribution belongs to the source page, not to a modern map provider.'
+    },
+    'neighbors-2016': {
+      files:['i1279.jpg','i1292.jpg','i1285.jpg','i1286.jpg','i1293.jpg','i1287.jpg','i1288.jpg','i1294.jpg','i1295.jpg','i1289.jpg','i1296.jpg','i1297.jpg','i1298.jpg','i1299.jpg','i1300.jpg','i1182.jpg'],
+      credit:'Фото на странице: Юлия Алексеева',
+      inventory:'falke0039/wystynez:p0093.htm',
+      status:'verified_jpg_content_media_from_preserved_html'
     },
     'unknown-vishtynets-opening-2019': {
       files:['i1711.jpg'],
@@ -70,12 +76,12 @@
       inventory:'data/legacy-media-batch-8.json'
     },
     'donelaitis': {
-      files:['i0037.jpg','i0039.jpg','i0041.jpg','i0043.jpg','i0045.jpg','i0047.jpg','i0049.jpg','i0051.jpg','i0053.jpg','i0055.jpg','i0057.jpg','i0059.jpg','i0061.jpg','i0063.jpg'],
+      files:['i0290.jpg','i0292.jpg','i0293.jpg','i0294.jpg','i0296.jpg','i0297.jpg','i0298.jpg','i0299.jpg','i0300.jpg','i0303.jpg','i0304.jpg','i0305.jpg','i0306.jpg'],
       credit:'Фото на странице: Э. Барсуков, А. Соколов',
       inventory:'data/legacy-media-batch-10.json'
     },
     'travelling-exposition-2004': {
-      files:['i0010.jpg','i0012.jpg','i0014.jpg','i0016.jpg','i0018.jpg','i0020.jpg','i0022.jpg','i0024.jpg','i0026.jpg','i0028.jpg','i0030.jpg','i0032.jpg','i0034.jpg'],
+      files:['i0349.jpg','i0985.jpg','i0278.jpg','i0986.jpg'],
       credit:'Фото на странице: В. Гусев, Э. Барсуков',
       inventory:'data/legacy-media-batch-12.json'
     }
@@ -86,10 +92,10 @@
     const forest=articles.find(a=>a.id==='forest-village');
     if(forest){
       forest.hero=forestPhotos[0].src; forest.images=forestPhotos;
-      forest.sourceMediaStatus='29_confirmed_jpg_photos_connected_from_39_exact_legacy_media_urls';
-      forest.sourceMediaInventoryFile='data/legacy-media-batch-5.json'; forest.sourceMediaCount=39;
+      forest.sourceMediaStatus='30_jpg_content_images_verified_from_preserved_p0090_html';
+      forest.sourceMediaInventoryFile='data/legacy-media-batch-5.json'; forest.sourceMediaCount=30;
       forest.photoCredits=['Александр Матвеев','Алексей Соколов','Эдуард Барсуков'];
-      forest.mediaDisplayPolicy='Display all 29 confirmed JPG photographs. Keep the 10 PNG legacy assets out of the article gallery until their visual role is independently confirmed.';
+      forest.mediaDisplayPolicy='Display all 30 JPG content images referenced by preserved p0090.htm. SiteCraft/support PNG assets remain excluded.';
     }
     const museumMail=articles.find(a=>a.id==='museum-mail');
   if(museumMail){
