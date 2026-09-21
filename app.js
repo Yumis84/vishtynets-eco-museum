@@ -24,7 +24,15 @@ function imageForPoint(p){
   if((p?.categories||[]).includes('Музей'))return FALLBACK_MUSEUM;
   return FALLBACK_FOREST;
 }
-function imageForArticle(a){return a?.hero||a?.images?.[0]?.src||FALLBACK_FOREST}
+function articleFallbackImage(a){
+  const key=[a?.category,a?.subcategory,a?.title].filter(Boolean).join(' ').toLowerCase();
+  if(/музей|экспозиц|выстав/.test(key))return FALLBACK_MUSEUM;
+  if(/публикац|книг|буклет|издан/.test(key))return 'https://www.wystynez.ru/sc-pic/i0433.png';
+  if(/кам|валун|геолог/.test(key))return 'https://www.wystynez.ru/sc-pic/i2157.jpg';
+  if(/сосед|праздник|событ|проект/.test(key))return 'https://www.wystynez.ru/sc-pic/i2335.jpg';
+  return FALLBACK_FOREST;
+}
+function imageForArticle(a){return a?.hero||a?.images?.[0]?.src||articleFallbackImage(a)}
 function categoryIcon(label){return ({'Природа':'⌁','История':'▥','Камни':'●','Валуны':'●','Мосты':'⌁','Культура':'✦','Музей':'⌂','Архитектура':'⌂','Публикации':'▤','Проекты':'◇','Все':'☷'}[label]||'⌖')}
 function primaryCategory(p){const cats=p?.categories||[];return cats[0]||p?.category||'Место'}
 function haversine(lat1,lng1,lat2,lng2){
