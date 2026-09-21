@@ -297,3 +297,6 @@ img{display:block;max-width:100%}
   .home-section-head h2,.home-section h2,.home-story-intro h2{font-size:22px}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+/* Home menu control: keep the primary menu action on the right even when the brand is omitted. */
+.home-head .hero-menu{margin-left:auto}
