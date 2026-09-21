@@ -202,6 +202,7 @@ function bind(){
   $('#mapFilterButton').onclick=()=>showSheet('<span class="eyebrow">Карта</span><h2>Фильтры</h2><p>Выберите категорию прямо над картой. На карте показываются только места с проверенными координатами. Непроверенные точки не публикуются как маркеры.</p>');
   $('#mapLayersButton').onclick=async()=>{state.showGuests=!state.showGuests;if(state.showGuests)await loadGuestHouses();renderMapCategories();renderMapMarkers()};
   $('#menuDetailBack').onclick=()=>showScreen('menu',{remember:false});
+  $('#menuDetailContent').addEventListener('click',e=>{const b=e.target.closest('[data-sheet-article]');if(b)openArticle(b.dataset.sheetArticle)});
   $('#sheetClose').onclick=closeSheet;$('#infoSheet').onclick=e=>{if(e.target.id==='infoSheet')closeSheet()};
   $('#sheetContent').addEventListener('click',e=>{const b=e.target.closest('[data-sheet-article]');if(b){closeSheet();openArticle(b.dataset.sheetArticle)}});
 }
