@@ -8,20 +8,27 @@
     'i1438.jpg','i1410.jpg','i2282.jpg','i2283.jpg','i2284.jpg','i1528.jpg',
     'i1411.jpg','i1444.jpg','i1445.jpg','i1446.jpg','i1412.jpg','i1449.jpg',
     'i2280.jpg','i1413.jpg','i1453.jpg','i1454.jpg','i2281.jpg'
-  ].map(name=>({src:`https://www.wystynez.ru/sc-pic/${name}`,caption:null,credit:'Александр Матвеев, Алексей Соколов, Эдуард Барсуков'}));
+  ].map(name=>({src:`https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/${name}`,caption:null,credit:'Александр Матвеев, Алексей Соколов, Эдуард Барсуков'}));
 
   const lakePhotos = [
     'i0188.jpg','i0192.jpg','i0197.jpg','i0198.jpg','i0199.jpg','i0200.jpg',
     'i0201.jpg','i0202.jpg','i0208.jpg','i0206.jpg','i0204.jpg','i0203.jpg','i0207.jpg'
-  ].map(name=>({src:`https://www.wystynez.ru/sc-pic/${name}`,caption:null,credit:'А. Соколов'}));
+  ].map(name=>({src:`https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/${name}`,caption:null,credit:'А. Соколов'}));
 
 
-  const pageMedia=(names,credit)=>names.map(name=>({src:`https://www.wystynez.ru/sc-pic/${name}`,caption:null,credit}));
+  const pageMedia=(names,credit)=>names.map(name=>({src:`https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/${name}`,caption:null,credit}));
 
-  const museumMailPhotos=['i0911.jpg','i0912.jpg','i0913.jpg','i0914.jpg','i0915.jpg','i0916.jpg','i0917.jpg','i0918.jpg','i0919.jpg','i0920.jpg','i0921.jpg','i0922.jpg','i0923.jpg','i0924.jpg','i0925.jpg','i0926.jpg','i0927.jpg','i0928.jpg','i0929.jpg','i0930.jpg','i0909.jpg'].map(name=>({src:`https://www.wystynez.ru/sc-pic/${name}`,caption:null,credit:'Фото на странице: Э. Барсуков'}));
-  const gnomeProgramMedia=['i0743.jpg','i0744.jpg','i0745.jpg','i0746.jpg','i0747.jpg','i0748.jpg','i0749.jpg','i0750.jpg','i0751.jpg','i0752.jpg','i0753.jpg','i0754.jpg','i0755.jpg','i0756.jpg','i0757.jpg','i0758.jpg','i0759.jpg','i0760.jpg','i0761.jpg','i0762.jpg'].map(name=>({src:`https://www.wystynez.ru/sc-pic/${name}`,caption:null,credit:null}));
+  const museumMailPhotos=['i0911.jpg','i0912.jpg','i0913.jpg','i0914.jpg','i0915.jpg','i0916.jpg','i0917.jpg','i0918.jpg','i0919.jpg','i0920.jpg','i0921.jpg','i0922.jpg','i0923.jpg','i0924.jpg','i0925.jpg','i0926.jpg','i0927.jpg','i0928.jpg','i0929.jpg','i0930.jpg'].map(name=>({src:`https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/${name}`,caption:null,credit:'Фото на странице: Э. Барсуков'}));
+  const gnomeProgramMedia=['i0743.jpg','i0744.jpg','i0745.jpg','i0746.jpg','i0747.jpg','i0748.jpg','i0749.jpg','i0750.jpg','i0751.jpg','i0752.jpg','i0753.jpg','i0754.jpg','i0755.jpg','i0756.jpg','i0757.jpg','i0758.jpg','i0759.jpg','i0760.jpg','i0761.jpg','i0762.jpg'].map(name=>({src:`https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/${name}`,caption:null,credit:null}));
 
   const recoveredArticleMedia = {
+    'anatomy-stone': {
+      files:['i2217.jpg','i2218.jpg','i2219.jpg','i2220.jpg','i2221.jpg','i2222.jpg','i2223.jpg','i2224.jpg','i2225.jpg','i2226.jpg','i2227.jpg','i2228.jpg','i2229.jpg','i2230.jpg','i2231.jpg','i2232.jpg','i2233.jpg','i2234.jpg','i2235.jpg','i2236.jpg','i2237.jpg','i2238.jpg','i2239.jpg','i2240.jpg','i2241.jpg','i2242.jpg','i2243.jpg','i2244.jpg','i2245.jpg','i2246.jpg','i2247.jpg','i2248.jpg','i2211.jpg','i2208.jpg'],
+      credit:'Фото на странице: В. Лукошевичус, А. Володина, А. Соколов',
+      inventory:'falke0039/wystynez:p0122.htm',
+      status:'verified_content_media_from_preserved_html',
+      policy:'31-image source slideshow plus three content images used alongside the exposition, brochure/map and project sections. SiteCraft navigation/support PNGs are excluded.'
+    },
     'v-gosti-k-kamnyu': {
       files:['i2157.jpg','i2158.jpg','i2159.jpg','i2167.jpg','i2208.jpg','i2165.jpg','i2193.jpg'],
       credit:'Фото на странице: А. Соколов',
@@ -100,7 +107,7 @@
     museumMail.migrationStatus='full_from_preserved_archive';
     museumMail.archiveSource={repository:'falke0039/wystynez',path:'p103.htm'};
   }
-    if(museumMail){museumMail.hero=museumMailPhotos[20].src;museumMail.images=museumMailPhotos;museumMail.photoCredits=['Э. Барсуков'];museumMail.sourceMediaInventoryFile='data/legacy-media-batch-4.json';museumMail.sourceMediaCount=museumMailPhotos.length}
+    if(museumMail){museumMail.hero=museumMailPhotos[3].src;museumMail.images=museumMailPhotos;museumMail.photoCredits=['Э. Барсуков'];museumMail.sourceMediaInventoryFile='data/legacy-media-batch-4.json';museumMail.sourceMediaCount=museumMailPhotos.length}
     const gnomeProgram=articles.find(a=>a.id==='gnome-treasures');
     if(gnomeProgram){gnomeProgram.hero=gnomeProgramMedia[0].src;gnomeProgram.images=gnomeProgramMedia;gnomeProgram.photoCredits=['Алексей Соколов','Владимир Драх','Ирина Ковардо'];gnomeProgram.illustrationCredits=['Rien Poortvliet','Виктория Ветивер'];gnomeProgram.sourceMediaInventoryFile='data/legacy-media-batch-11.json';gnomeProgram.sourceMediaCount=gnomeProgramMedia.length;gnomeProgram.mediaDisplayPolicy='Preserve the complete verified source-page media sequence. The source mixes photographs, illustrations, workbook pages and a route scheme; photography and illustration credits remain separate at page level.'}
     const lake=articles.find(a=>a.id==='vishtynets-lake');
