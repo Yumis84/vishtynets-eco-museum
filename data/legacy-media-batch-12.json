@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-21",
+  "purpose": "Exact legacy media URLs and provenance recovered from p31.htm (travelling exhibition opening, 2004).",
+  "pages": [
+    {
+      "legacyUrl": "https://wystynez.ru/p31.htm",
+      "title": "Открытие передвижной экспозиции Виштынецкого экомузея",
+      "eventDate": "2004-05-22",
+      "captureStatus": "page_text_counts_credits_and_exact_media_urls_verified",
+      "pagePhotoCredits": ["В. Гусев", "Э. Барсуков"],
+      "creditPolicy": "The source gives collective page-level photo credits. Preserve them at page/gallery level; do not infer image-by-image authorship.",
+      "images": [
+        "https://wystynez.ru/sc-pic/i0010.jpg",
+        "https://wystynez.ru/sc-pic/i0012.jpg",
+        "https://wystynez.ru/sc-pic/i0014.jpg",
+        "https://wystynez.ru/sc-pic/i0016.jpg",
+        "https://wystynez.ru/sc-pic/i0018.jpg",
+        "https://wystynez.ru/sc-pic/i0020.jpg",
+        "https://wystynez.ru/sc-pic/i0022.jpg",
+        "https://wystynez.ru/sc-pic/i0024.jpg",
+        "https://wystynez.ru/sc-pic/i0026.jpg",
+        "https://wystynez.ru/sc-pic/i0028.jpg",
+        "https://wystynez.ru/sc-pic/i0030.jpg",
+        "https://wystynez.ru/sc-pic/i0032.jpg",
+        "https://wystynez.ru/sc-pic/i0034.jpg"
+      ],
+      "verifiedContexts": [
+        "открытие 22 мая 2004 года в мемориальном музее Кристионаса Донелайтиса",
+        "фрагменты передвижной экспозиции",
+        "первые посетители и церемония открытия",
+        "хоровое выступление коллектива «Ладо»",
+        "исторические и природные экспонаты",
+        "окаменелости, минералы и горные породы",
+        "предметы труда и бытовая утварь XIX века"
+      ],
+      "verifiedCounts": {
+        "historicalAndNaturalExhibits": 160,
+        "artPhotographsApprox": 100
+      },
+      "reachability": "Exact image targets recovered from source-page image anchors. Binary crawler returned cache miss during verification; URLs are preserved as provenance, not claimed as currently reachable."
+    }
+  ]
+}
