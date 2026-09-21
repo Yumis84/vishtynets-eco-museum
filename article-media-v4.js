@@ -19,6 +19,13 @@
   const pageMedia=(names,credit)=>names.map(name=>({src:`https://www.wystynez.ru/sc-pic/${name}`,caption:null,credit}));
 
   const recoveredArticleMedia = {
+    'v-gosti-k-kamnyu': {
+      files:['i2157.jpg','i2158.jpg','i2159.jpg','i2167.jpg','i2208.jpg','i2165.jpg','i2193.jpg'],
+      credit:'Фото на странице: А. Соколов',
+      inventory:'data/legacy-media.json',
+      status:'confirmed_project_photo_media_connected',
+      policy:'Only source-page JPGs with project/photo context are connected. Mineral illustration i2160, map-adjacent i2162/i2214, contest-adjacent i2196 and PNG partner/support graphics remain excluded pending stronger role verification.'
+    },
     'vishtynets-upland-map-world': {
       files:['i0433.png','i0435.png','i0437.png','i0139.jpg','i0438.png','i0439.png','i0441.jpg','i0442.png','i0443.png'],
       credit:null,
