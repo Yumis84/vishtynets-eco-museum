@@ -223,7 +223,7 @@
       {type:'paragraph',text:'Информационные стенды рассказывают о происхождении камней, их переносе ледником, формировании рельефа Виштынецкой возвышенности и разнообразии использования камня человеком. Посетители также могут самостоятельно определить поднятый с земли камень и узнать его название.'},
       {type:'paragraph',text:'Проект продолжил серию инициатив музея, направленных на популяризацию природного и историко-культурного наследия Роминтской пущи.'}
     ],
-    migrationStatus:'verified_legacy_summary',sourceScope:'dedicated_primary_page',
+    migrationStatus:'source_verified_against_preserved_archive',sourceScope:'dedicated_primary_page',
     sourceNotes:['Legacy page says the exposition opened 26 September 2015.','Current availability must be verified separately before publishing visitor rules or opening status.']
   });
 
@@ -244,7 +244,7 @@
       {type:'paragraph',text:'Алексей Соколов — руководитель проекта; Эдуард Барсуков — соруководитель; Александр Самсонкин — консультант по экологическому просвещению; Юлия Алексеева — фотограф и дизайнер; Мария Омельяненко — бухгалтер.'},
       {type:'paragraph',text:'Общий бюджет проекта — 1 187 808 рублей; грант Фонда президентских грантов — 1 045 808 рублей. Эти суммы относятся к историческому проекту и не являются текущими финансовыми данными музея.'}
     ],
-    migrationStatus:'verified_legacy_summary',sourceScope:'dedicated_primary_page',
+    migrationStatus:'source_verified_against_preserved_archive',sourceScope:'dedicated_primary_page',
     sourceNotes:['Primary source p0106.htm verified.','Related detailed event pages p0108.htm and p0109.htm should be migrated separately.']
   });
 
@@ -263,7 +263,7 @@
       {type:'paragraph',text:'В проекте участвовали Алексей Соколов, Эдуард Барсуков, Татьяна Колесник, Роза Ткаченко и Надежда Чесна. Общий бюджет составлял 1 250 019 рублей, из них грант — 1 025 019 рублей и софинансирование — 225 000 рублей. Финансовые данные являются историческими.'},
       {type:'paragraph',text:'В результате проекта появились экспозиция «Анатомия камня», брошюра о валунах и интерактивная карта каменных объектов.'}
     ],
-    migrationStatus:'verified_legacy_summary',sourceScope:'dedicated_primary_page',
+    migrationStatus:'source_verified_against_preserved_archive',sourceScope:'dedicated_primary_page',
     sourceNotes:['Primary source p0117.htm verified.','Project media and exact brochure/map URLs require separate asset migration.','Photo credit on source: А. Соколов.']
   });
 
@@ -282,8 +282,8 @@
       {type:'paragraph',text:'На открытии были отмечены участники конкурса «Легенда о камне», а также состоялась поездка к одному из малоизвестных валунов и к месту утраченного каменного памятника природы.'},
       {type:'paragraph',text:'Фото: В. Лукошевичус, А. Володина, А. Соколов.'}
     ],
-    migrationStatus:'verified_legacy_summary',sourceScope:'dedicated_primary_page',
-    sourceNotes:['Primary source p0122.htm verified.','The source contains a brochure download and interactive map link; exact targets still require asset/link capture.']
+    migrationStatus:'source_verified_against_preserved_archive',sourceScope:'dedicated_primary_page',
+    sourceNotes:['Primary source p0122.htm verified.','Brochure and interactive-map targets were recovered from the preserved archive; see the canonical p0122/p0121 resource records.']
   });
 
   add({
@@ -299,7 +299,7 @@
       {type:'paragraph',text:'В конкурсе участвовали школьники Краснолесья и ученики «Школы будущего» из Большого Исаково.'},
       {type:'paragraph',text:'Среди отмеченных работ: Артём Мальцев — «Великан и речка»; Валерия Коншу — «Легенда о гигантском камне силы»; Алина Иванова — сказка «Камушек» и стих «Камень»; Ирина Сушева — «Легенда о валуне южнее озера Мариново»; Елизавета Пилипенко — «Камень, исполняющий желания»; Эдуард Новосёлов — «Оттепель от ледникового периода»; Эмилия Корнакова — «Древний валун ледникового периода»; Карина Собина — «Священный Валун-источник жизни»; Андрей Захаренко — «Легенда о камне».'}
     ],
-    migrationStatus:'verified_legacy_summary',sourceScope:'dedicated_primary_page'
+    migrationStatus:'source_verified_against_preserved_archive',sourceScope:'dedicated_primary_page'
   });
 
   const museum=points.find(p=>p.id==='poi_museum');

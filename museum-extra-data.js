@@ -54,7 +54,7 @@
       content:[
         {type:'paragraph',text:'Страница объединяет два главных природных памятника территории — Виштынецкое озеро и реку Красную — и описывает их природную ценность.'},
         {type:'paragraph',text:'Особое внимание уделено лесным берегам Красной, родникам, редким растениям, звериным тропам и роли реки в водной системе Виштынецкой возвышенности.'}
-      ],migrationStatus:'verified_legacy_summary'
+      ],migrationStatus:'source_verified_against_preserved_archive'
     },
     {
       id:'rominta-legends',slug:'rominta-legends',title:'Легенды Роминтской пущи и Виштынецкого озера',category:'Культура',subcategory:'Легенды',legacyUrl:'https://www.wystynez.ru/p59.htm',date:null,author:null,
@@ -66,7 +66,7 @@
         {type:'heading',text:'Затонувший колокол'},
         {type:'paragraph',text:'Вторая легенда рассказывает о церковном колоколе, который зимой провалился под лёд Виштынецкого озера по дороге в Виштитес. В предании его звон связывается с опасностью на озере.'},
         {type:'paragraph',text:'На старой странице указан источник: сборник восточнопрусских легенд, изданный во Франкфурте-на-Майне и Берлине в 1987 году.'}
-      ],migrationStatus:'verified_legacy_summary'
+      ],migrationStatus:'source_verified_against_preserved_archive'
     },
     {
       id:'red-forest-churches',slug:'red-forest-churches',title:'Кирхи Красного леса и окрестностей',category:'История',subcategory:'Архитектура',legacyUrl:'https://www.wystynez.ru/p55.htm',date:null,author:null,
@@ -79,7 +79,7 @@
         {type:'paragraph',text:'Отдельный раздел посвящён кирхе, связанной с Кристионасом Донелайтисом, её разрушению и последующей реставрации под мемориальный музей.'},
         {type:'heading',text:'Калинино и Невское'},
         {type:'paragraph',text:'Статья также рассказывает о кирхах Mehlkehmen и Pillueponen, их архитектурных особенностях, органах, колоколах и состоянии после войны.'}
-      ],migrationStatus:'verified_legacy_summary'
+      ],migrationStatus:'source_verified_against_preserved_archive'
     },
     {
       id:'nature-complexes-book',slug:'nature-complexes-book',title:'Природа Калининградской области. Ключевые природные комплексы',category:'Публикации',subcategory:'Книги музея',legacyUrl:'https://www.wystynez.ru/p104.htm',date:'2014',author:null,
@@ -89,7 +89,7 @@
         {type:'paragraph',text:'28 ноября 2014 года в Музее Мирового океана была представлена книга о ключевых природных комплексах Калининградской области.'},
         {type:'paragraph',text:'Виштынецкий эколого-исторический музей выступал партнёром проекта, а сотрудники музея подготовили раздел о Роминтской пуще, объединив литературные материалы и собственные исследования.'},
         {type:'paragraph',text:'Издание задумывалось как просветительский материал о ценности природных комплексов и необходимости сохранять места обитания растений и животных.'}
-      ],migrationStatus:'verified_legacy_summary'
+      ],migrationStatus:'source_verified_against_preserved_archive'
     },
 
     // Legacy structural pages migrated as verified summaries. Original URLs remain attached.
@@ -100,7 +100,7 @@
         {type:'paragraph',text:'Основная музейная экспозиция знакомит посетителей с природой, историей и культурными особенностями Роминтской пущи, Виштынецкой возвышенности и Виштынецкого озера.'},
         {type:'paragraph',text:'Старая страница отдельно отмечает, что музейная экспозиция существует как в здании музея, так и под открытым небом; в 2015 году на территории музея открылись «Каменные истории».'},
         {type:'paragraph',text:'Режим работы, указанный на исходной странице, сохраняется только как архивное свидетельство и не используется здесь как автоматически актуальная информация.'}
-      ],migrationStatus:'verified_legacy_summary'
+      ],migrationStatus:'source_verified_against_preserved_archive'
     },
     {
       id:'travelling-exposition-2004',slug:'travelling-exposition-2004',title:'Передвижная экспозиция Виштынецкого экомузея',category:'Музей',subcategory:'Экспозиции',legacyUrl:'https://www.wystynez.ru/p31.htm',date:'22 мая 2004',author:null,
@@ -110,7 +110,7 @@
         {type:'paragraph',text:'Экспозиция рассказывала о происхождении ландшафтов Виштынецкой возвышенности, природе, истории, культуре, труде и повседневной жизни людей этой территории.'},
         {type:'paragraph',text:'В экспозиции было представлено 160 исторических и природных экспонатов и около сотни художественных фотографий. Исходная страница подробно перечисляет партнёров проекта и благодарности.'},
         {type:'paragraph',text:'Фото на исходной странице: В. Гусев, Э. Барсуков.'}
-      ],migrationStatus:'verified_legacy_summary',photoCredits:['В. Гусев','Э. Барсуков']
+      ],migrationStatus:'source_verified_against_preserved_archive',photoCredits:['В. Гусев','Э. Барсуков']
     },
     {
       id:'gnome-treasures',slug:'gnome-treasures',title:'Виштынецкие сокровища гномов',category:'Музей',subcategory:'Образовательные программы',legacyUrl:'https://www.wystynez.ru/p92.htm',date:null,author:'А. Соколов',
@@ -120,7 +120,7 @@
         {type:'paragraph',text:'Участники исследуют, как камень использовался человеком, получают «паспорт хранителя камня» и проходят маршрут к условным сокровищам гномов.'},
         {type:'paragraph',text:'На исходной странице программа связана с грантовым проектом «Меняющийся музей в меняющемся мире». Там же сохранены сведения об авторах иллюстраций и фотографий.'},
         {type:'paragraph',text:'Фото: Алексей Соколов, Владимир Драх, Ирина Ковардо. Текст: А. Соколов.'}
-      ],migrationStatus:'verified_legacy_summary',photoCredits:['Алексей Соколов','Владимир Драх','Ирина Ковардо']
+      ],migrationStatus:'source_verified_against_preserved_archive',photoCredits:['Алексей Соколов','Владимир Драх','Ирина Ковардо']
     },
     {
       id:'museum-for-teachers',slug:'museum-for-teachers',title:'Музей — педагогам и детским группам',category:'Музей',subcategory:'Образовательные программы',legacyUrl:'https://www.wystynez.ru/p0086.htm',date:null,author:null,
@@ -129,7 +129,7 @@
         {type:'paragraph',text:'Страница обращена к педагогам и группам с детьми и собирает музейные программы, прогулки и варианты познавательных экспедиций по Краснолесью и Роминтской пуще.'},
         {type:'paragraph',text:'Среди предложений — экскурсия по музейной экспозиции, прогулка к истокам реки Синей, поездка к железнодорожному мосту в Токаревке и программа «Виштынецкие сокровища гномов».'},
         {type:'paragraph',text:'Исходная страница также содержит пример многодневной экспедиции. Старые организационные условия не считаются действующими без современной проверки.'}
-      ],migrationStatus:'verified_legacy_summary'
+      ],migrationStatus:'source_verified_against_preserved_archive'
     },
     {
       id:'museum-publications-index',slug:'museum-publications-index',title:'Издания музея и его сотрудников',category:'Публикации',subcategory:'Каталог изданий',legacyUrl:'https://www.wystynez.ru/p0087.htm',date:null,author:null,
@@ -148,7 +148,7 @@
         {type:'paragraph',text:'На ней перечислены «Виштынецкие сокровища гномов», «В гостях у музея», «Страна, где рождаются реки», «Цвета Красного леса», занятие «Знакомьтесь: растения!» и мастерская «Свеча своими руками».'},
         {type:'paragraph',text:'Цены, размеры групп, режим работы и другие оперативные условия на исходной странице относятся к legacy-версии и в новом сайте не публикуются как актуальные без повторной проверки.'},
         {type:'paragraph',text:'На исходной странице указаны фото Ю. Алексеевой и А. Соколова.'}
-      ],migrationStatus:'verified_legacy_summary',photoCredits:['Ю. Алексеева','А. Соколов'],legacyOperationalDataStatus:'archive_only'
+      ],migrationStatus:'source_verified_against_preserved_archive',photoCredits:['Ю. Алексеева','А. Соколов'],legacyOperationalDataStatus:'archive_only'
     }
   );
 
