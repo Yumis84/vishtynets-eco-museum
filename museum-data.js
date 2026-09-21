@@ -16,7 +16,7 @@ window.MUSEUM_POINTS=[
     id:'poi_museum',slug:'vishtynets-eco-museum',name:'Виштынецкий экомузей',category:'Музей',categories:['Музей','Культура','История'],
     lat:54.394535,lng:22.374779,address:'пос. Краснолесье, ул. Школьная, 5А',
     shortDescription:'Музейно-информационный центр Роминтской пущи и Виштынецкой возвышенности.',
-    articleIds:['about-museum','kamennye-istorii','museum-mail'],photos:['https://www.wystynez.ru/sc-pic/i1665.jpg'],photoCredits:[],
+    articleIds:['about-museum','kamennye-istorii','museum-mail'],photos:['https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1665.jpg'],photoCredits:[],
     sourceUrls:['https://visit-kaliningrad.ru/entertainment/culture/museums/wystynez-eco-museum/'],coordinateStatus:'pending_final_verification',status:'active'
   },
   {
@@ -44,7 +44,7 @@ window.MUSEUM_ARTICLES=[
   {
     id:'about-museum',slug:'about-museum',title:'О Виштынецком экомузее',category:'Музей',subcategory:'О музее',legacyUrl:'https://www.wystynez.ru/',date:'2001 — настоящее время',author:null,
     deck:'Музей возник по инициативе группы друзей и постепенно вырос из передвижной фотовыставки в музейно-информационный центр Роминтской пущи.',
-    hero:'https://www.wystynez.ru/sc-pic/i1665.jpg',images:[],relatedPoiIds:['poi_museum'],archival:false,
+    hero:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1665.jpg',images:[],relatedPoiIds:['poi_museum'],archival:false,
     content:[
       {type:'paragraph',text:'Калининградское региональное общественное учреждение «Виштынецкий эколого-исторический музей» возникло в 2001 году по инициативе группы друзей и единомышленников.'},
       {type:'paragraph',text:'Первые выставки создавались на общественных началах. Первая фотовыставка начала путешествовать по музеям Калининградской области примерно с 2002 года и постепенно превратилась в музейную экспозицию.'},
@@ -63,12 +63,12 @@ window.MUSEUM_ARTICLES=[
   },
   {
     id:'museum-mail',slug:'museum-mail',title:'Музейная почта',category:'Проекты',subcategory:'Музейная почта',legacyUrl:'https://www.wystynez.ru/p103.htm',date:'2014',author:null,
-    deck:'История музейных открыток и возможности отправить привет из Роминтской пущи.',hero:'https://www.wystynez.ru/sc-pic/i0911.jpg',
+    deck:'История музейных открыток и возможности отправить привет из Роминтской пущи.',hero:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0911.jpg',
     images:[
-      {src:'https://www.wystynez.ru/sc-pic/i0911.jpg',caption:null,credit:'Э. Барсуков'},
-      {src:'https://www.wystynez.ru/sc-pic/i0912.jpg',caption:null,credit:'Э. Барсуков'},
-      {src:'https://www.wystynez.ru/sc-pic/i0913.jpg',caption:null,credit:'Э. Барсуков'},
-      {src:'https://www.wystynez.ru/sc-pic/i0914.jpg',caption:null,credit:'Э. Барсуков'}
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0911.jpg',caption:null,credit:'Э. Барсуков'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0912.jpg',caption:null,credit:'Э. Барсуков'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0913.jpg',caption:null,credit:'Э. Барсуков'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0914.jpg',caption:null,credit:'Э. Барсуков'}
     ],relatedPoiIds:['poi_museum','poi_tokarevka_bridge'],archival:true,
     content:[
       {type:'paragraph',text:'«Музейная почта» — отдельное направление Виштынецкого экомузея. Посетитель может выбрать музейную открытку и отправить привет из Роминтской пущи.'},
@@ -79,11 +79,11 @@ window.MUSEUM_ARTICLES=[
   },
   {
     id:'forest-village',slug:'forest-village',title:'Лесная деревня',category:'Туризм',subcategory:'Местные предложения',legacyUrl:'https://www.wystynez.ru/p0090.htm',date:'2016–2017',author:null,
-    deck:'Местные жители, маршруты и жизнь Роминтской пущи: Краснолесье, истоки Синей, Токаревский мост и мастерские.',hero:'https://www.wystynez.ru/sc-pic/i1423.jpg',
+    deck:'Местные жители, маршруты и жизнь Роминтской пущи: Краснолесье, истоки Синей, Токаревский мост и мастерские.',hero:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1423.jpg',
     images:[
-      {src:'https://www.wystynez.ru/sc-pic/i1423.jpg',caption:null,credit:'Александр Матвеев, Алексей Соколов, Эдуард Барсуков'},
-      {src:'https://www.wystynez.ru/sc-pic/i1405.jpg',caption:null,credit:'Александр Матвеев, Алексей Соколов, Эдуард Барсуков'},
-      {src:'https://www.wystynez.ru/sc-pic/i1430.jpg',caption:null,credit:'Александр Матвеев, Алексей Соколов, Эдуард Барсуков'}
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1423.jpg',caption:null,credit:'Александр Матвеев, Алексей Соколов, Эдуард Барсуков'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1405.jpg',caption:null,credit:'Александр Матвеев, Алексей Соколов, Эдуард Барсуков'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1430.jpg',caption:null,credit:'Александр Матвеев, Алексей Соколов, Эдуард Барсуков'}
     ],relatedPoiIds:['poi_tokarevka_bridge','poi_sinyaya_sources'],archival:true,
     content:[
       {type:'paragraph',text:'«Лесная деревня» связана с местными жителями и жизнью Роминтской пущи. Проект объединяет прогулки, экскурсии, мастерские и знакомство с местной культурой.'},
