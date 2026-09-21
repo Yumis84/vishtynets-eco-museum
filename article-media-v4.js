@@ -50,7 +50,7 @@
       credit:'Фото на странице: Э. Барсуков, А. Соколов',
       inventory:'data/legacy-media-batch-10.json'
     },
-    'travelling-exposition-opening-2004': {
+    'travelling-exposition-2004': {
       files:['i0010.jpg','i0012.jpg','i0014.jpg','i0016.jpg','i0018.jpg','i0020.jpg','i0022.jpg','i0024.jpg','i0026.jpg','i0028.jpg','i0030.jpg','i0032.jpg','i0034.jpg'],
       credit:'Фото на странице: В. Гусев, Э. Барсуков',
       inventory:'data/legacy-media-batch-12.json'
