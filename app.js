@@ -141,7 +141,12 @@ function menuSection(type){
     chronology:['Хронология','<p>Архив событий музея будет перенесён в хронологию: небольшие события — карточками, крупные авторские материалы — отдельными статьями.</p>'],
     contacts:['Контакты',`<p><strong>${esc(info.shortName||'Виштынецкий экомузей')}</strong></p><p>${esc(info.address||'Краснолесье, ул. Школьная, 5А')}</p><p><a href="tel:+79062126823">+7 (906) 212-68-23</a><br><a href="mailto:${esc(info.email||'wystynez@bk.ru')}">${esc(info.email||'wystynez@bk.ru')}</a></p><p><a href="${esc(info.vk||'https://vk.com/public63127132')}" target="_blank" rel="noopener">ВКонтакте ↗</a></p>`]
   };
-  const item=maps[type]||['Раздел','<p>Материалы готовятся.</p>'];showSheet(`<span class="eyebrow">Виштынецкий экомузей</span><h2>${item[0]}</h2>${item[1]}`)
+  const item=maps[type]||['Раздел','<p>Материалы готовятся.</p>'];
+  const compactSections=new Set(['about','visit','contacts']);
+  if(compactSections.has(type)){showSheet(`<span class="eyebrow">Виштынецкий экомузей</span><h2>${item[0]}</h2>${item[1]}`);return}
+  $('#menuDetailTitle').textContent=item[0];
+  $('#menuDetailContent').innerHTML=item[1];
+  showScreen('menu-detail',{remember:false});
 }
 function listArticles(filter){const list=articles.filter(filter).slice(0,12);return list.length?`<div>${list.map(a=>`<button data-sheet-article="${esc(a.id)}" class="btn-light" style="width:100%;margin:4px 0;text-align:left">${esc(a.title)}</button>`).join('')}</div>`:'<p>Материалы будут добавлены после полного разбора старого сайта.</p>'}
 
@@ -196,6 +201,7 @@ function bind(){
   $('#locateButton').onclick=()=>{if(!navigator.geolocation||!state.map)return;navigator.geolocation.getCurrentPosition(pos=>{const ll=[pos.coords.latitude,pos.coords.longitude];if(state.userMarker)state.userMarker.remove();state.userMarker=L.marker(ll,{icon:L.divIcon({className:'',html:'<div class="user-dot"></div>',iconSize:[15,15],iconAnchor:[7,7]})}).addTo(state.map);state.map.flyTo(ll,15)},()=>{}, {enableHighAccuracy:true,timeout:8000})};
   $('#mapFilterButton').onclick=()=>showSheet('<span class="eyebrow">Карта</span><h2>Фильтры</h2><p>Выберите категорию прямо над картой. На карте показываются только места с проверенными координатами. Непроверенные точки не публикуются как маркеры.</p>');
   $('#mapLayersButton').onclick=async()=>{state.showGuests=!state.showGuests;if(state.showGuests)await loadGuestHouses();renderMapCategories();renderMapMarkers()};
+  $('#menuDetailBack').onclick=()=>showScreen('menu',{remember:false});
   $('#sheetClose').onclick=closeSheet;$('#infoSheet').onclick=e=>{if(e.target.id==='infoSheet')closeSheet()};
   $('#sheetContent').addEventListener('click',e=>{const b=e.target.closest('[data-sheet-article]');if(b){closeSheet();openArticle(b.dataset.sheetArticle)}});
 }
