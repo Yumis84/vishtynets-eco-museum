@@ -1,6 +1,6 @@
 # Legacy media inventory — first verified pass
 
-Updated: 2026-08-19
+Updated: 2026-09-21
 
 This file tracks the image / credit layer of migration from `www.wystynez.ru`.
 
@@ -16,6 +16,8 @@ This file tracks the image / credit layer of migration from `www.wystynez.ru`.
 
 - `data/legacy-media.json`
 - `data/legacy-media-batch-2.json`
+- `data/legacy-media-batch-4.json` … `data/legacy-media-batch-12.json`
+- `data/legacy-media-context-batch-3.json` — contextual/credit records where exact media URLs were not yet available at capture time
 
 ## Current captured media URLs
 
@@ -64,3 +66,31 @@ This file tracks the image / credit layer of migration from `www.wystynez.ru`.
 5. Extract media from `p33.htm` (Донелайтис), `p92.htm` (Виштынецкие сокровища гномов), `p31.htm` (travelling exposition) and other verified pages.
 6. Resolve the exact brochure download target on `p0122.htm`.
 7. Retry full capture of `p0121.htm`.
+
+
+## Reconciliation — 2026-09-21
+
+The media queue above was created before later recovery passes. Current `main` now contains exact-media inventories through `data/legacy-media-batch-12.json`.
+
+Newly verified exact-media captures since the first pass:
+
+- `p103.htm` — 21 exact media URLs; page credit Э. Барсуков.
+- `p0090.htm` — 39 exact media URLs; collective credits Александр Матвеев, Алексей Соколов, Эдуард Барсуков.
+- `p24.htm` — 15 exact media URLs; page credit А. Соколов.
+- `p0108.htm` — 8 exact media URLs; collective credits Юлия Алексеева, Александр Самсонкин.
+- `p0116.htm` — 13 exact media URLs; page credit Татьяна Поломодова; one explicit historical-image credit Айтель Ланге.
+- `Prazdnik--SOSEDI----2018.htm` — 41 exact media URLs; collective page credits preserved.
+- `p48.htm` — 9 exact map/graphic media URLs; original Google / «Географический атлас Калининградской области», 2002 attribution preserved.
+- `p33.htm` — 14 exact media URLs; page credits Э. Барсуков, А. Соколов.
+- `p92.htm` — 20 exact media URLs; photography credits kept separate from Rien Poortvliet / Виктория Ветивер illustration credits.
+- `p31.htm` — 13 exact media URLs; page credits В. Гусев, Э. Барсуков.
+
+Across the exact-media inventory files currently tracked, **239 exact legacy media URLs across 14 source pages** have been preserved. This is a provenance count, not a claim that all 239 binaries are currently reachable or already rendered on the public site.
+
+### Next media phase
+
+1. Reconcile exact-media inventories against `article-media-v4.js` and the actual public article registry.
+2. Separate `captured` from `publicly displayed`; do not treat an inventory record as proof of public migration.
+3. Visually classify mixed PNG/JPG assets before gallery use where the legacy page does not make their role explicit.
+4. Continue exact-media extraction only for source pages that still lack it.
+5. Keep unresolved `p0121` map data and the `p0122` brochure target in the recovery queue; do not invent replacements.
