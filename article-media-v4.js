@@ -18,6 +18,9 @@
 
   const pageMedia=(names,credit)=>names.map(name=>({src:`https://www.wystynez.ru/sc-pic/${name}`,caption:null,credit}));
 
+  const museumMailPhotos=['i0911.jpg','i0912.jpg','i0913.jpg','i0914.jpg','i0915.jpg','i0916.jpg','i0917.jpg','i0918.jpg','i0919.jpg','i0920.jpg','i0921.jpg','i0922.jpg','i0923.jpg','i0924.jpg','i0925.jpg','i0926.jpg','i0927.jpg','i0928.jpg','i0929.jpg','i0930.jpg','i0909.jpg'].map(name=>({src:`https://www.wystynez.ru/sc-pic/${name}`,caption:null,credit:'Фото на странице: Э. Барсуков'}));
+  const gnomeProgramMedia=['i0743.jpg','i0744.jpg','i0745.jpg','i0746.jpg','i0747.jpg','i0748.jpg','i0749.jpg','i0750.jpg','i0751.jpg','i0752.jpg','i0753.jpg','i0754.jpg','i0755.jpg','i0756.jpg','i0757.jpg','i0758.jpg','i0759.jpg','i0760.jpg','i0761.jpg','i0762.jpg'].map(name=>({src:`https://www.wystynez.ru/sc-pic/${name}`,caption:null,credit:null}));
+
   const recoveredArticleMedia = {
     'v-gosti-k-kamnyu': {
       files:['i2157.jpg','i2158.jpg','i2159.jpg','i2167.jpg','i2208.jpg','i2165.jpg','i2193.jpg'],
@@ -81,6 +84,10 @@
       forest.photoCredits=['Александр Матвеев','Алексей Соколов','Эдуард Барсуков'];
       forest.mediaDisplayPolicy='Display all 29 confirmed JPG photographs. Keep the 10 PNG legacy assets out of the article gallery until their visual role is independently confirmed.';
     }
+    const museumMail=articles.find(a=>a.id==='museum-mail');
+    if(museumMail){museumMail.hero=museumMailPhotos[0].src;museumMail.images=museumMailPhotos;museumMail.photoCredits=['Э. Барсуков'];museumMail.sourceMediaInventoryFile='data/legacy-media-batch-4.json';museumMail.sourceMediaCount=museumMailPhotos.length}
+    const gnomeProgram=articles.find(a=>a.id==='gnome-treasures');
+    if(gnomeProgram){gnomeProgram.hero=gnomeProgramMedia[0].src;gnomeProgram.images=gnomeProgramMedia;gnomeProgram.photoCredits=['Алексей Соколов','Владимир Драх','Ирина Ковардо'];gnomeProgram.illustrationCredits=['Rien Poortvliet','Виктория Ветивер'];gnomeProgram.sourceMediaInventoryFile='data/legacy-media-batch-11.json';gnomeProgram.sourceMediaCount=gnomeProgramMedia.length;gnomeProgram.mediaDisplayPolicy='Preserve the complete verified source-page media sequence. The source mixes photographs, illustrations, workbook pages and a route scheme; photography and illustration credits remain separate at page level.'}
     const lake=articles.find(a=>a.id==='vishtynets-lake');
     if(lake){
       lake.hero=lakePhotos[0].src; lake.images=lakePhotos; lake.photoCredits=['А. Соколов'];
