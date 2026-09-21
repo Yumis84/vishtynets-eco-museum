@@ -1,7 +1,7 @@
 # Legacy migration inventory
 
 Status: **ACTIVE / first verified pass**  
-Last updated: 2026-08-18  
+Last updated: 2026-09-21  
 Target repository: `Yumis84/vishtynets-eco-museum`
 
 This file tracks material that must be preserved, verified and intentionally migrated from the legacy museum web properties. It is an inventory, not permission to rewrite or silently discard source material.
@@ -192,3 +192,30 @@ Priority order:
 - Dead-link / redirect audit: **not complete**
 - Encoding/garbled-text audit: **not complete**
 - Final migration plan: **not yet complete**
+
+
+## Reconciliation checkpoint — 2026-09-21
+
+A fresh comparison against current `main` shows that this inventory's older per-page statuses no longer describe the implementation completely. The repository now contains legacy migration batches through `museum-legacy-batch-71.js`.
+
+Verified during this reconciliation:
+
+- the archive range 2002–2012 is substantially represented in existing batches; spot checks include the 2003 «Живой щит» action, 2004 expedition/photo plein air, 2005 «Перекрёсток памяти», 2006 «Дети, школа, лес» and «Привет из Роминтен», 2007 volunteer/Lomonosov records, 2009 «Путешествие в Краснолесье», 2010 «Звёзды над Краснолесьем», and 2011 «Тени старого леса»;
+- `p84.htm` / «Виштынецкие сокровища гномов» is already source-preservingly represented by `gnome-treasures-project` in batch 10 and linked to later 2013/2014 archive events;
+- `p0116.htm` / «Памяти разведгруппы „Максим“» is already represented in batch 38;
+- batches 62–71 contain multiple recovery/status records around the same 2021 boulder-map/brochure resources. They must be treated as a recovery trail, not as evidence of ten separate content items.
+
+### Current migration rule after reconciliation
+
+Before creating any new legacy batch, search all existing batches and menu/article registrations for the source URL, title, and semantic equivalent. Do not create another record merely because this older inventory still says `INVENTORY ONLY`, `RE-FETCH REQUIRED`, or `not yet represented`.
+
+### Current high-value unresolved targets
+
+1. Recover the actual file/href for the 2021 boulder brochure linked from `p0122.htm`.
+2. Recover the final target/dataset behind the interactive boulder map `p0121.htm`.
+3. Continue direct capture of `rominten.wystynez.ru` historical material.
+4. Complete image → source page → caption/credit provenance.
+5. Continue archive reconciliation against `p0008.htm`, creating records only for genuinely absent events.
+6. Consolidate recovery/status duplication only after preserving provenance; do not delete batches 62–71 casually.
+
+This checkpoint supersedes stale individual migration-state labels above where current repository evidence conflicts with them.
