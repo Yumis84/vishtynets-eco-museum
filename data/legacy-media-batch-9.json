@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-21",
+  "purpose": "Exact legacy media URLs and source attribution recovered from p48.htm.",
+  "pages": [
+    {
+      "legacyUrl": "https://wystynez.ru/p48.htm",
+      "title": "Виштынецкая возвышенность на карте мира",
+      "sourceCopyright": "© КРОУ «Виштынецкий экомузей» 2006",
+      "captureStatus": "page_text_source_attribution_and_exact_content_media_urls_verified",
+      "sourceAttribution": [
+        "материалы сайта www.google.com",
+        "Географический атлас Калининградской области — Калининград, 2002"
+      ],
+      "images": [
+        "https://wystynez.ru/sc-pic/i0433.png",
+        "https://wystynez.ru/sc-pic/i0435.png",
+        "https://wystynez.ru/sc-pic/i0437.png",
+        "https://wystynez.ru/sc-pic/i0139.jpg",
+        "https://wystynez.ru/sc-pic/i0438.png",
+        "https://wystynez.ru/sc-pic/i0439.png",
+        "https://wystynez.ru/sc-pic/i0441.jpg",
+        "https://wystynez.ru/sc-pic/i0442.png",
+        "https://wystynez.ru/sc-pic/i0443.png"
+      ],
+      "verifiedContexts": [
+        "положение Виштынецкой возвышенности в Европе",
+        "Россия / Калининградская область / Литва / Польша",
+        "музейно-информационный центр Виштынецкого экомузея в Краснолесье",
+        "холмы Виштынецкой возвышенности",
+        "физическая карта юго-восточной части Калининградской области",
+        "космический снимок единого лесного массива Роминтер Хайде",
+        "озеро Виштынецкое"
+      ],
+      "sourceFacts": {
+        "vishtynetsUplandMaxHeightM": 242.0,
+        "suvalkaiUplandMaxHeightM": 309.0
+      },
+      "reachability": "All nine exact content-media targets were recovered from source-page image anchors. Binary crawler returned cache miss for each during this pass; URLs are preserved as provenance and are not claimed as currently reachable.",
+      "migrationPolicy": "Do not replace historical source attribution with modern map-provider attribution. If modern interactive maps are later added, keep them separate from these archived source graphics."
+    }
+  ]
+}
