@@ -12,12 +12,12 @@
   add({
     id:'birds-red-forest',slug:'birds-red-forest',title:'Птицы Красного леса',category:'Природа',subcategory:'Животный мир',legacyUrl:'https://www.wystynez.ru/p38.htm',date:null,author:'Игорь Шелякин',
     deck:'Музейный материал о птицах Виштынецкой возвышенности, разнообразии их местообитаний и природоохранной ценности Красного леса.',
-    hero:'https://wystynez.ru/sc-pic/i0317.png',
+    hero:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0317.png',
     images:[
-      {src:'https://wystynez.ru/sc-pic/i0318.png',caption:'Серая цапля',credit:'Cliparts, Dinamite SoftWare Group, 2003 — общий фотокредит исходной страницы'},
-      {src:'https://wystynez.ru/sc-pic/i0320.png',caption:'Удод',credit:'Cliparts, Dinamite SoftWare Group, 2003 — общий фотокредит исходной страницы'},
-      {src:'https://wystynez.ru/sc-pic/i0321.png',caption:'Выпь',credit:'Cliparts, Dinamite SoftWare Group, 2003 — общий фотокредит исходной страницы'},
-      {src:'https://wystynez.ru/sc-pic/i1238.jpg',caption:'Малый подорлик',credit:'Cliparts, Dinamite SoftWare Group, 2003 — общий фотокредит исходной страницы'}
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0318.png',caption:'Серая цапля',credit:'Cliparts, Dinamite SoftWare Group, 2003 — общий фотокредит исходной страницы'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0320.png',caption:'Удод',credit:'Cliparts, Dinamite SoftWare Group, 2003 — общий фотокредит исходной страницы'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0321.png',caption:'Выпь',credit:'Cliparts, Dinamite SoftWare Group, 2003 — общий фотокредит исходной страницы'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1238.jpg',caption:'Малый подорлик',credit:'Cliparts, Dinamite SoftWare Group, 2003 — общий фотокредит исходной страницы'}
     ],relatedPoiIds:['poi_vishtynets_lake'],archival:true,
     content:[
       {type:'paragraph',text:'Материал рассказывает о птицах Виштынецкой возвышенности и Красного леса как о важной части природного облика территории.'},
@@ -66,25 +66,25 @@
   add({
     id:'neighbors-2023',slug:'neighbors-2023',title:'Соседи — 2023 и «Вкусы Виштынецкой возвышенности»',category:'Культура',subcategory:'Праздники и местные сообщества',legacyUrl:'https://www.wystynez.ru/p0125.htm',date:'5 августа 2023',author:null,
     deck:'Возвращение праздника «Соседи» в Краснолесье и мастерская местной кухни «Вкусы Виштынецкой возвышенности».',
-    hero:'https://wystynez.ru/sc-pic/i2335.jpg',
+    hero:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2335.jpg',
     images:[
-      {src:'https://wystynez.ru/sc-pic/i2360.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2361.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2362.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2363.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2364.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2365.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2366.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2367.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2368.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2369.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2378.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2371.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2372.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2373.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2374.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2375.jpg',caption:null,credit:null},
-      {src:'https://wystynez.ru/sc-pic/i2376.jpg',caption:null,credit:null}
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2360.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2361.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2362.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2363.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2364.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2365.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2366.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2367.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2368.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2369.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2378.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2371.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2372.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2373.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2374.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2375.jpg',caption:null,credit:null},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2376.jpg',caption:null,credit:null}
     ],relatedPoiIds:['poi_museum'],archival:true,
     content:[
       {type:'paragraph',text:'5 августа 2023 года в Краснолесье после трёхлетнего перерыва снова состоялся праздник «Соседи», который музей проводил в предыдущие годы как праздник гостеприимства и общения людей, живущих рядом и любящих эту территорию.'},
@@ -389,8 +389,8 @@
     legacyUrl:'https://www.wystynez.ru/p21.htm',date:'август 2003',author:null,archival:true,
     hero:null,images:[],relatedPoiIds:['poi_museum'],
     deck:'Ранняя образовательная деятельность Виштынецкого экомузея — детский летний лагерь в августе 2003 года.',
-    content:[{type:'paragraph',text:'Архив музея фиксирует детский летний лагерь в августе 2003 года и ведёт на отдельную страницу p21.htm. Полный текст страницы пока недоступен, поэтому в новой записи сохранены только подтверждённые архивом название, дата и исходный URL.'}],
-    migrationStatus:'dedicated_url_verified_content_pending',sourceScope:'archive_title_date_plus_verified_link',legacyPageCaptureStatus:'cache_miss'
+    content:[{type:'paragraph',text:"Походы, интересные рассказы, занятия творчеством, купание в ледниковых озёрах и заключительный костёр долго помнили дети, побывавшие в летнем детском лагере на природе, организованном Виштынецким музеем и экоцентром «Роминта». Для многих городских детей знакомство с многозвёздным небом, деревьями-великанами, огромными валунами и прозрачными озёрами стало открытием другого мира — мира живой природы."},{type:'gallery'}],
+    migrationStatus:'source_body_restored_from_preserved_archive',sourceScope:'archive_title_date_plus_verified_link',legacyPageCaptureStatus:'preserved_archive_available'
   });
 
   add({
@@ -399,8 +399,8 @@
     legacyUrl:'https://www.wystynez.ru/p23.htm',date:'июль 2003',author:null,archival:true,
     hero:null,images:[],relatedPoiIds:[],
     deck:'Научная экспедиция Виштынецкого экомузея, отмеченная в архиве событий за июль 2003 года.',
-    content:[{type:'paragraph',text:'Архив событий музея фиксирует научную экспедицию в июле 2003 года и связывает её с отдельной страницей p23.htm. Содержимое этой страницы пока не удалось захватить, поэтому дополнительные детали не добавлялись.'}],
-    migrationStatus:'dedicated_url_verified_content_pending',sourceScope:'archive_title_date_plus_verified_link',legacyPageCaptureStatus:'cache_miss'
+    content:[{type:'paragraph',text:"В июле 2003 года состоялась совместная научная экспедиция Виштынецкого экомузея и Калининградского государственного университета. Вместе с сотрудниками музея студенты проходили учебную практику по геоботанике, изучая многообразие растительных сообществ Виштынецкой возвышенности. Результаты экспедиции должны были пополнить фонды музея наряду с другими материалами совместной работы."},{type:'gallery'}],
+    migrationStatus:'source_body_restored_from_preserved_archive',sourceScope:'archive_title_date_plus_verified_link',legacyPageCaptureStatus:'preserved_archive_available'
   });
 
   add({
@@ -409,8 +409,8 @@
     legacyUrl:'https://www.wystynez.ru/p16.htm',date:'июль 2003',author:null,archival:true,
     hero:null,images:[],relatedPoiIds:[],
     deck:'Экологическая акция «Живой щит», отмеченная в музейном архиве событий за июль 2003 года.',
-    content:[{type:'paragraph',text:'Архив Виштынецкого экомузея фиксирует акцию «Живой щит» в июле 2003 года и ведёт на отдельную страницу p16.htm. Полный текст страницы пока не получен; запись не содержит неподтверждённых деталей.'}],
-    migrationStatus:'dedicated_url_verified_content_pending',sourceScope:'archive_title_date_plus_verified_link',legacyPageCaptureStatus:'cache_miss'
+    content:[{type:'paragraph',text:"Что привлекает Вас на озере? Что вы сделаете со своим мусором? Согласились бы вы убрать чужой мусор? Такие вопросы задали местные дети 12 июля всем собравшимся отдохнуть на озере Виштынецком."},{type:'paragraph',text:"Неожиданная встреча ждала многих людей, собравшихся 12 июля в День рыбака отдохнуть на озере Виштынецком. Экологический центр «РОМИНТА» совместно с Калининской сельской библиотекой при участии Нестеровского лесхоза организовали акцию «Живой щит», в которой приняли участие школьники посёлка Калинино и ближних деревень. На дороге к озеру дети развернули яркие плакаты, призывающие отдыхающих бережно относиться к природе."},{type:'paragraph',text:"Пассажиры автомобилей, останавливающихся на пограничном посту посёлка Ягодное, стали первыми обладателями символических билетов посетителей памятника природы. Получив билет, отдыхающие могли узнать об уникальности озера и правилах сохранения его чистоты; участники акции также предлагали пакеты для мусора."},{type:'paragraph',text:"Организаторы благодарили рекламную группу «Кармел» и рекламно-полиграфическую фирму «Джи-Эс» за безвозмездную помощь при подготовке акции."},{type:'gallery'}],
+    migrationStatus:'source_body_restored_from_preserved_archive',sourceScope:'archive_title_date_plus_verified_link',legacyPageCaptureStatus:'preserved_archive_available'
   });
 
   add({
@@ -419,8 +419,8 @@
     legacyUrl:'https://www.wystynez.ru/p9.htm',date:'май 2003',author:null,archival:true,
     hero:null,images:[],relatedPoiIds:['poi_museum'],
     deck:'Участие Виштынецкого экомузея в выставке социальных услуг и проектов некоммерческих организаций.',
-    content:[{type:'paragraph',text:'Архив музея фиксирует участие в выставке социальных услуг и проектов некоммерческих организаций в мае 2003 года и связывает событие с отдельной страницей p9.htm. Детальный текст страницы в текущем проходе недоступен.'}],
-    migrationStatus:'dedicated_url_verified_content_pending',sourceScope:'archive_title_date_plus_verified_link',legacyPageCaptureStatus:'cache_miss'
+    content:[{type:'paragraph',text:"В конце мая в Калининграде впервые прошла выставка социальных услуг и проектов некоммерческих организаций, организованная Центром поддержки общественных инициатив и Общественной палатой Калининградской области при содействии администрации области. В ней участвовало более шестидесяти организаций."},{type:'paragraph',text:"Нестеровский район представляла общественная организация «Экологический центр РОМИНТА». Большой интерес вызвала её экспозиция и природная лотерея, в которой среди символических выигрышей были «запах цветов дикого луга», «высокое синее небо» и «свежесть летнего утра»."},{type:'paragraph',text:"Экоцентр представил проекты «Летний лагерь на природе», «Пост экологического мониторинга», «Детская фотостудия» и проект Виштынецкого эколого-исторического музея."},{type:'gallery'}],
+    migrationStatus:'source_body_restored_from_preserved_archive',sourceScope:'archive_title_date_plus_verified_link',legacyPageCaptureStatus:'preserved_archive_available'
   });
 
   const museum=points.find(point=>point.id==='poi_museum');
@@ -700,19 +700,19 @@
 
   const unknown2019=byId('unknown-vishtynets-opening-2019');
   if(unknown2019){
-    unknown2019.hero='https://wystynez.ru/sc-pic/i1711.jpg';
+    unknown2019.hero='https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1711.jpg';
     unknown2019.sourceMediaInventory='data/legacy-media-batch-2.json';
   }
 
   const stoneProject=byId('visit-the-stone-project');
   if(stoneProject){
-    stoneProject.hero='https://wystynez.ru/sc-pic/i2157.jpg';
+    stoneProject.hero='https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2157.jpg';
     stoneProject.images=[
-      {src:'https://wystynez.ru/sc-pic/i2158.jpg',caption:'Валун у горы Дозор — контекст исходной страницы; точная привязка подписи требует визуальной проверки',credit:'А. Соколов — общий фотокредит исходной страницы'},
-      {src:'https://wystynez.ru/sc-pic/i2159.jpg',caption:null,credit:'А. Соколов — общий фотокредит исходной страницы'},
-      {src:'https://wystynez.ru/sc-pic/i2160.jpg',caption:'Полевой шпат — контекст исходной страницы; точная привязка подписи требует визуальной проверки',credit:'А. Соколов — общий фотокредит исходной страницы'},
-      {src:'https://wystynez.ru/sc-pic/i2167.jpg',caption:'Экспедиционный материал — контекст исходной страницы',credit:'А. Соколов — общий фотокредит исходной страницы'},
-      {src:'https://wystynez.ru/sc-pic/i2162.jpg',caption:'Интерактивная карта валунов — контекст исходной страницы',credit:'А. Соколов — общий фотокредит исходной страницы'}
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2158.jpg',caption:'Валун у горы Дозор — контекст исходной страницы; точная привязка подписи требует визуальной проверки',credit:'А. Соколов — общий фотокредит исходной страницы'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2159.jpg',caption:null,credit:'А. Соколов — общий фотокредит исходной страницы'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2160.jpg',caption:'Полевой шпат — контекст исходной страницы; точная привязка подписи требует визуальной проверки',credit:'А. Соколов — общий фотокредит исходной страницы'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2167.jpg',caption:'Экспедиционный материал — контекст исходной страницы',credit:'А. Соколов — общий фотокредит исходной страницы'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2162.jpg',caption:'Интерактивная карта валунов — контекст исходной страницы',credit:'А. Соколов — общий фотокредит исходной страницы'}
     ];
     if(!(stoneProject.content||[]).some(block=>block.type==='gallery'))stoneProject.content.push({type:'gallery'});
     stoneProject.sourceMediaInventory='data/legacy-media.json';
@@ -1312,13 +1312,13 @@
   mail.date='24 октября 2014';
   mail.author=null;
   mail.deck='Проект и выставка о почтовой открытке как послании во времени: новые открытки Роминтской пущи, музейный почтовый ящик, штемпель и коллекция исторических открыток.';
-  mail.hero='https://wystynez.ru/sc-pic/i0911.jpg';
+  mail.hero='https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0911.jpg';
   mail.photoCredits=['Э. Барсуков'];
   mail.images=[
     'i0911','i0912','i0913','i0914','i0915','i0916','i0917','i0918','i0919','i0920',
     'i0921','i0922','i0923','i0924','i0925','i0926','i0927','i0928','i0929','i0930','i0909'
   ].map(id=>({
-    src:`https://wystynez.ru/sc-pic/${id}.jpg`,
+    src:`https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/${id}.jpg`,
     caption:null,
     credit:'Э. Барсуков',
     creditScope:'page_level_credit',
