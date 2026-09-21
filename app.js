@@ -52,10 +52,13 @@ function closeMenu(){showScreen(state.previous||'home',{remember:false})}
 
 function renderHours(){
   const now=new Date(),monday=now.getDay()===1,month=now.getMonth()+1,winter=month>=11||month<=3;
-  $('#todayHours').textContent=monday?'Выходной':winter?'10:00–17:00':'10:00–18:00';
-  $('#todaySeason').textContent=monday?'Понедельник — музей закрыт':winter?'Ноябрь–март':'Апрель–октябрь';
-  $('#todayOpen').textContent=monday?'Закрыто':'Открыто';
-  $('#todayOpen').closest('.open-dot').classList.toggle('is-closed',monday);
+  const hours=info.openingHours||{};
+  const seasonal=winter?hours.winter:hours.summer;
+  const seasonalTime=String(seasonal||'').match(/\b\d{1,2}:\d{2}\s*[–-]\s*\d{1,2}:\d{2}\b/)?.[0]||null;
+  $('#todayHours').textContent=monday?(hours.closed||'Выходной'):(seasonalTime||'Часы работы уточняются');
+  $('#todaySeason').textContent=monday?(hours.closed||'Сегодня музей закрыт'):(seasonal||'Проверьте часы работы перед поездкой');
+  $('#todayOpen').textContent=monday?'Закрыто':seasonalTime?'Открыто':'Уточнить';
+  $('#todayOpen').closest('.open-dot').classList.toggle('is-closed',monday||!seasonalTime);
 }
 
 function renderHome(){
