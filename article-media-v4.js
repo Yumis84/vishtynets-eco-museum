@@ -85,7 +85,7 @@
       forest.mediaDisplayPolicy='Display all 29 confirmed JPG photographs. Keep the 10 PNG legacy assets out of the article gallery until their visual role is independently confirmed.';
     }
     const museumMail=articles.find(a=>a.id==='museum-mail');
-    if(museumMail){museumMail.hero=museumMailPhotos[0].src;museumMail.images=museumMailPhotos;museumMail.photoCredits=['Э. Барсуков'];museumMail.sourceMediaInventoryFile='data/legacy-media-batch-4.json';museumMail.sourceMediaCount=museumMailPhotos.length}
+    if(museumMail){museumMail.hero=museumMailPhotos[20].src;museumMail.images=museumMailPhotos;museumMail.photoCredits=['Э. Барсуков'];museumMail.sourceMediaInventoryFile='data/legacy-media-batch-4.json';museumMail.sourceMediaCount=museumMailPhotos.length}
     const gnomeProgram=articles.find(a=>a.id==='gnome-treasures');
     if(gnomeProgram){gnomeProgram.hero=gnomeProgramMedia[0].src;gnomeProgram.images=gnomeProgramMedia;gnomeProgram.photoCredits=['Алексей Соколов','Владимир Драх','Ирина Ковардо'];gnomeProgram.illustrationCredits=['Rien Poortvliet','Виктория Ветивер'];gnomeProgram.sourceMediaInventoryFile='data/legacy-media-batch-11.json';gnomeProgram.sourceMediaCount=gnomeProgramMedia.length;gnomeProgram.mediaDisplayPolicy='Preserve the complete verified source-page media sequence. The source mixes photographs, illustrations, workbook pages and a route scheme; photography and illustration credits remain separate at page level.'}
     const lake=articles.find(a=>a.id==='vishtynets-lake');

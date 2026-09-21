@@ -131,9 +131,10 @@ function openArticle(id){
     return `<p>${esc(block.text||'')}</p>`;
   }).join('');
   $('#articleReader').innerHTML=`<div class="reader-hero"><img src="${esc(imageForArticle(a))}" alt="" onerror="this.style.display='none'"><div class="reader-title"><span>${esc(a.category||'Архив музея')}</span><h1>${esc(a.title)}</h1></div></div><div class="reader-body"><div class="reader-meta">${a.date?`<span>◷ ${esc(a.date)}</span>`:''}${a.author?`<span>Автор: ${esc(a.author)}</span>`:''}${a.archival?'<span>Оригинал из архива музея</span>':''}</div>${a.deck?`<div class="reader-lead">${esc(a.deck)}</div>`:''}${blocks}${related.length?`<div class="reader-map-link"><h3>Рядом на карте</h3><p>${related.map(p=>esc(p.name)).join(' · ')}</p><button id="readerMapButton" type="button">Показать на карте</button></div>`:''}</div>`;
-  $('#articleFavorite').textContent=isFav('article:'+id)?'♥':'♡';
-  $('#articleFavorite').onclick=()=>{toggleFav('article:'+id);const active=isFav('article:'+id);$('#articleFavorite').textContent=active?'♥':'♡';$('#articleFavorite').setAttribute('aria-label',active?'Убрать из избранного':'Добавить в избранное');if(state.articleFavoritesOnly)renderArticles()};
-  $('#articleFavorite').setAttribute('aria-label',isFav('article:'+id)?'Убрать из избранного':'Добавить в избранное');
+  const articleFav=$('#articleFavorite');
+  const syncArticleFavorite=()=>{const active=isFav('article:'+id);articleFav.textContent=active?'♥':'♡';articleFav.classList.toggle('is-active',active);articleFav.setAttribute('aria-pressed',String(active));articleFav.setAttribute('aria-label',active?'Убрать из избранного':'Добавить в избранное')};
+  syncArticleFavorite();
+  articleFav.onclick=()=>{toggleFav('article:'+id);syncArticleFavorite();if(state.articleFavoritesOnly)renderArticles()};
   $('#readerMapButton')?.addEventListener('click',()=>{const p=related.find(x=>Number.isFinite(x.lat)&&Number.isFinite(x.lng));if(!p)return;state.selectedPoint=p;showScreen('map');setTimeout(()=>selectMapPoint(p,true),250)});
   showScreen('article',{remember:false});
 }
