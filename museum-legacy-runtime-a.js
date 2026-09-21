@@ -124,7 +124,7 @@
       {type:'paragraph',text:'Для площадки выбрали окраину Краснолесья над долиной истоков реки Синей. Исходная страница описывает перепады высот более 50 метров, вид на лесистые холмы, заболоченную низину и русло реки.'},
       {type:'paragraph',text:'На исходной странице перечислены представители органов власти, природного парка, экологических организаций и другие участники встречи. Фото: Юлия Алексеева, Александр Самсонкин.'}
     ],
-    migrationStatus:'verified_legacy_summary',photoCredits:['Юлия Алексеева','Александр Самсонкин'],
+    migrationStatus:'source_verified_against_preserved_archive',photoCredits:['Юлия Алексеева','Александр Самсонкин'],
     sourceNotes:['Проект поддержан Фондом президентских грантов в 2018 году']
   });
 
@@ -142,7 +142,7 @@
       {type:'paragraph',text:'В тот же день открылась фотовыставка «Неизвестный Виштынец» Юлии Алексеевой и были представлены новые почтовые открытки об озере Виштынецком для музейной почты.'},
       {type:'paragraph',text:'Исходная страница сохраняет подробную программу дня и список партнёров проекта. Фото: Юлия Алексеева.'}
     ],
-    migrationStatus:'verified_legacy_summary',photoCredits:['Юлия Алексеева'],
+    migrationStatus:'source_verified_against_preserved_archive',photoCredits:['Юлия Алексеева'],
     partners:['Министерство природных ресурсов и экологии Калининградской области','Отдел культуры Администрации МО «Нестеровский район»','КРОО «Экоцентр «РОМИНТА»»','АУ КО «Экологический центр «ЕКАТ-Калининград»']
   });
 
@@ -158,7 +158,7 @@
       {type:'paragraph',text:'Материалы для карты собирались во время экспедиций с участием школьников, учёных и местных жителей. Экспозиция должна была показать полированные спилы валунов вместе с образцами минералов из музейной коллекции.'},
       {type:'paragraph',text:'Исходная страница содержит новости проекта, ссылки на презентацию результатов, интерактивную карту и конкурс «Легенда о камне». Фото: А. Соколов.'}
     ],
-    migrationStatus:'verified_legacy_summary',photoCredits:['А. Соколов'],
+    migrationStatus:'source_verified_against_preserved_archive',photoCredits:['А. Соколов'],
     projectPeriod:{start:'2020-09-01',end:'2021-05-31'},
     funding:{totalRub:1250019,grantRub:1025019,cofinancingRub:225000,source:'Фонд президентских грантов'},
     team:[
@@ -184,7 +184,7 @@
       {type:'paragraph',text:'Исходная страница сохраняет имена участников и названия их работ, включая «Великан и речка», «Легенду о гигантском камне силы», «Камушек», «Легенду о валуне южнее озера Мариново», «Камень, исполняющий желания» и другие работы.'},
       {type:'paragraph',text:'Партнёрами конкурса названы МБОУ СОШ «Школа будущего» и Отдел культуры администрации МО «Нестеровский городской округ».'}
     ],
-    migrationStatus:'verified_legacy_summary'
+    migrationStatus:'source_verified_against_preserved_archive'
   });
 
   add({
@@ -200,10 +200,10 @@
       {type:'paragraph',text:'На мероприятии также наградили участников конкурса «Легенда о камне» и организовали выезд к одному из малоизвестных валунов природного парка.'},
       {type:'paragraph',text:'Исходная страница содержит большой список благодарностей участникам и партнёрам проекта. Фото: В. Лукошевичус, А. Володина, А. Соколов.'}
     ],
-    migrationStatus:'verified_legacy_summary',photoCredits:['В. Лукошевичус','А. Володина','А. Соколов'],
+    migrationStatus:'source_verified_against_preserved_archive',photoCredits:['В. Лукошевичус','А. Володина','А. Соколов'],
     relatedLegacyUrls:['https://www.wystynez.ru/p0117.htm','https://www.wystynez.ru/p0121.htm','https://www.wystynez.ru/p0120.htm'],
-    downloadableDocuments:[{title:'Брошюра о валунах Виштынецкой возвышенности',url:null,status:'exact_url_pending_capture'}],
-    linkedInteractiveMap:{legacyUrl:'https://www.wystynez.ru/p0121.htm',status:'page_link_verified_content_capture_pending'}
+    downloadableDocuments:[{title:'Брошюра «Валуны Виштынецкой возвышенности»',archivePath:'download/Broshjura-Valuny-Vishtyneckoj-vozvyshennosti.pdf',repository:'falke0039/wystynez',status:'recovered_from_preserved_archive'}],
+    linkedInteractiveMap:{legacyUrl:'https://www.wystynez.ru/p0121.htm',url:'https://www.google.com/maps/d/u/0/viewer?hl=ru&ll=54.41516393380444%2C22.34829347721981&z=11&mid=10pcjwH-4wl6fJo-Ocn9RXQnanoVhMCeq',status:'recovered_from_preserved_archive'}
   });
 
   const museum=points.find(point=>point.id==='poi_museum');
@@ -679,10 +679,12 @@
     deck:'Отдельная страница ежегодного праздника «Соседи — 2024», ссылка на которую сохранена на главной странице старого сайта.',
     hero:null,images:[],relatedPoiIds:['poi_museum'],
     content:[
-      {type:'paragraph',text:'Главная страница старого сайта Виштынецкого экомузея прямо сообщает, что 3 августа 2024 года в посёлке Краснолесье состоится ежегодный праздник «Соседи — 2024», и ведёт на отдельную страницу p0130.htm.'},
-      {type:'paragraph',text:'Полный текст отдельной страницы пока не удалось получить: прямой переход подтверждает URL, но текущий захват возвращает cache miss. Поэтому дополнительные детали не добавляются до восстановления первоисточника.'}
+      {type:'paragraph',text:'3 августа 2024 года в Краснолесье был анонсирован праздник «Соседи» — праздник гостеприимства и дружеского общения людей, живущих рядом и влюблённых в свою землю.'},
+      {type:'paragraph',text:'На территории Виштынецкого экомузея планировались ремесленные и творческие мастерские, ярмарка местных продуктов и отдельная площадка проекта «Вкусы Виштынецкой возвышенности»; концерт народных коллективов — в доме культуры посёлка.'},
+      {type:'paragraph',text:'Организаторами выступали Виштынецкий эколого-исторический музей совместно с Краснолесенским домом культуры, проектом «Вкусы Виштынецкой возвышенности» и Краснолесенской сельской библиотекой при партнёрской поддержке муниципального управления культуры, молодёжной политики и туризма.'},
+      {type:'gallery'}
     ],
-    migrationStatus:'dedicated_url_verified_content_pending',sourceScope:'homepage_link_and_title_date_only'
+    migrationStatus:'source_body_restored_from_preserved_archive',sourceScope:'falke0039/wystynez:p0130.htm'
   });
 
   // Enrich previously migrated records only with facts/media now verified from their primary legacy pages.
