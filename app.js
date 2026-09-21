@@ -126,7 +126,7 @@ function openArticle(id){
   const blocks=(a.content||[]).map(block=>{
     if(block.type==='heading')return `<h2>${esc(block.text)}</h2>`;
     if(block.type==='gallery'){
-      const imgs=(a.images||[]).slice(0,6);return imgs.length?`<div class="reader-gallery">${imgs.map(i=>`<img src="${esc(i.src)}" alt="${esc(i.caption||'')}">`).join('')}</div>`:'';
+      const imgs=(a.images||[]);return imgs.length?`<div class="reader-gallery">${imgs.map(i=>`<img src="${esc(i.src)}" alt="${esc(i.caption||'')}">`).join('')}</div>`:'';
     }
     return `<p>${esc(block.text||'')}</p>`;
   }).join('');
