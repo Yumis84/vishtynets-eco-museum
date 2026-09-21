@@ -43,6 +43,12 @@
       status:'verified_mixed_archival_media_connected',
       policy:'Historical maps, source graphics, landscape imagery and satellite material are preserved as source-order archival media. Attribution belongs to the source page, not to a modern map provider.'
     },
+    'birds-red-forest': {
+      files:['i0318.png','i0192.jpg','i0195.png','i1237.png','i0320.png','i0321.png','i1238.jpg'],
+      credit:'Фото/иллюстрации: Cliparts, Dinamite SoftWare Group, 2003',
+      inventory:'falke0039/wystynez:p38.htm',status:'verified_mixed_content_media_from_preserved_html',
+      policy:'i0317.png is excluded as page/support artwork; remaining source images are preserved as mixed bird illustrations/photos.'
+    },
     'living-shield-action-2003': {files:['i0167.jpg','i0168.jpg','i0169.jpg','i0170.jpg','i0171.jpg'],credit:null,inventory:'falke0039/wystynez:p16.htm',status:'verified_jpg_content_media_from_preserved_html'},
     'childrens-summer-camp-2003': {files:['i0172.jpg','i0173.jpg','i0174.jpg','i0175.jpg','i0176.jpg'],credit:null,inventory:'falke0039/wystynez:p21.htm',status:'verified_jpg_content_media_from_preserved_html'},
     'scientific-expedition-2003': {files:['i0181.jpg','i0182.jpg','i0183.jpg','i0184.jpg','i0185.jpg'],credit:null,inventory:'falke0039/wystynez:p23.htm',status:'verified_jpg_content_media_from_preserved_html'},
