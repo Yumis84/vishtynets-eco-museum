@@ -51,14 +51,20 @@ function openMenu(){state.previous=state.screen==='menu'?'home':state.screen;sho
 function closeMenu(){showScreen(state.previous||'home',{remember:false})}
 
 function renderHours(){
-  const now=new Date(),monday=now.getDay()===1,month=now.getMonth()+1,winter=month>=11||month<=3;
+  const parts=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Kaliningrad',weekday:'short',month:'numeric',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date()).filter(p=>p.type!=='literal').map(p=>[p.type,p.value]));
+  const monday=parts.weekday==='Mon',month=Number(parts.month),winter=month>=11||month<=3;
   const hours=info.openingHours||{};
   const seasonal=winter?hours.winter:hours.summer;
-  const seasonalTime=String(seasonal||'').match(/\b\d{1,2}:\d{2}\s*[–-]\s*\d{1,2}:\d{2}\b/)?.[0]||null;
+  const match=String(seasonal||'').match(/(\d{1,2}):(\d{2})\s*[–-]\s*(\d{1,2}):(\d{2})/);
+  const seasonalTime=match?.[0]||null;
+  const nowMinutes=Number(parts.hour)*60+Number(parts.minute);
+  const openMinutes=match?Number(match[1])*60+Number(match[2]):null;
+  const closeMinutes=match?Number(match[3])*60+Number(match[4]):null;
+  const isOpen=!monday&&match&&nowMinutes>=openMinutes&&nowMinutes<closeMinutes;
   $('#todayHours').textContent=monday?(hours.closed||'Выходной'):(seasonalTime||'Часы работы уточняются');
   $('#todaySeason').textContent=monday?(hours.closed||'Сегодня музей закрыт'):(seasonal||'Проверьте часы работы перед поездкой');
-  $('#todayOpen').textContent=monday?'Закрыто':seasonalTime?'Открыто':'Уточнить';
-  $('#todayOpen').closest('.open-dot').classList.toggle('is-closed',monday||!seasonalTime);
+  $('#todayOpen').textContent=monday?'Закрыто':!match?'Уточнить':isOpen?'Открыто':'Закрыто';
+  $('#todayOpen').closest('.open-dot').classList.toggle('is-closed',!isOpen);
 }
 
 function renderHome(){
