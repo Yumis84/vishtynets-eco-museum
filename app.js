@@ -10,7 +10,7 @@ const pointById=id=>points.find(p=>p.id===id);
 const articleById=id=>articles.find(a=>a.id===id);
 const FAVORITES_KEY='vishtynets_v2_favorites';
 const favorites=new Set(JSON.parse(localStorage.getItem(FAVORITES_KEY)||'[]'));
-const state={screen:'home',previous:'home',exploreCategory:'Все',articleCategory:'Все',mapCategory:'Все',showGuests:false,map:null,markerLayer:null,userMarker:null,guestHouses:[],selectedPoint:null};
+const state={screen:'home',previous:'home',exploreCategory:'Все',articleCategory:'Все',articleFavoritesOnly:false,mapCategory:'Все',showGuests:false,map:null,markerLayer:null,userMarker:null,guestHouses:[],selectedPoint:null};
 const FALLBACK_FOREST='https://www.wystynez.ru/sc-pic/i1423.jpg';
 const FALLBACK_MUSEUM='https://www.wystynez.ru/sc-pic/i1665.jpg';
 
@@ -104,9 +104,10 @@ function renderArticles(){
   const q=($('#articleSearch')?.value||'').trim().toLowerCase();
   $('#articleCategories').innerHTML=ARTICLE_CATEGORIES.map(c=>`<button class="${state.articleCategory===c?'is-active':''}" data-article-category="${esc(c)}" type="button">${esc(c)}</button>`).join('');
   $$('[data-article-category]').forEach(b=>b.onclick=()=>{state.articleCategory=b.dataset.articleCategory;renderArticles()});
-  const list=articles.filter(a=>state.articleCategory==='Все'||a.category===state.articleCategory).filter(a=>!q||[a.title,a.deck,a.category,a.subcategory,...(a.content||[]).map(x=>x.text||'')].join(' ').toLowerCase().includes(q));
+  const list=articles.filter(a=>!state.articleFavoritesOnly||isFav('article:'+a.id)).filter(a=>state.articleCategory==='Все'||a.category===state.articleCategory).filter(a=>!q||[a.title,a.deck,a.category,a.subcategory,...(a.content||[]).map(x=>x.text||'')].join(' ').toLowerCase().includes(q));
   $('#articleList').innerHTML=list.length?list.map(a=>`<button class="article-card" data-open-article="${esc(a.id)}" type="button" style="text-align:left;padding:0"><span class="article-media"><img src="${esc(imageForArticle(a))}" alt="" loading="lazy" onerror="this.style.display='none'"></span><span class="article-copy"><span>${esc(a.category||'Архив музея')}${a.subcategory?' · '+esc(a.subcategory):''}</span><h3>${esc(a.title)}</h3><p>${esc(a.deck||'')}</p></span></button>`).join(''):'<div class="surface-card" style="padding:18px;color:#6f756e">Ничего не найдено.</div>';
-  $$('[data-open-article]').forEach(b=>b.onclick=()=>openArticle(b.dataset.openArticle));
+  $('[data-open-article]').forEach(b=>b.onclick=()=>openArticle(b.dataset.openArticle));
+  const favButton=$('#articleFavoritesToggle');if(favButton){favButton.classList.toggle('is-active',state.articleFavoritesOnly);favButton.textContent=state.articleFavoritesOnly?'♥ Избранное':'♡ Избранное'}
 }
 
 function openPlace(id){
@@ -131,7 +132,8 @@ function openArticle(id){
   }).join('');
   $('#articleReader').innerHTML=`<div class="reader-hero"><img src="${esc(imageForArticle(a))}" alt="" onerror="this.style.display='none'"><div class="reader-title"><span>${esc(a.category||'Архив музея')}</span><h1>${esc(a.title)}</h1></div></div><div class="reader-body"><div class="reader-meta">${a.date?`<span>◷ ${esc(a.date)}</span>`:''}${a.author?`<span>Автор: ${esc(a.author)}</span>`:''}${a.archival?'<span>Оригинал из архива музея</span>':''}</div>${a.deck?`<div class="reader-lead">${esc(a.deck)}</div>`:''}${blocks}${related.length?`<div class="reader-map-link"><h3>Рядом на карте</h3><p>${related.map(p=>esc(p.name)).join(' · ')}</p><button id="readerMapButton" type="button">Показать на карте</button></div>`:''}</div>`;
   $('#articleFavorite').textContent=isFav('article:'+id)?'♥':'♡';
-  $('#articleFavorite').onclick=()=>{toggleFav('article:'+id);$('#articleFavorite').textContent=isFav('article:'+id)?'♥':'♡'};
+  $('#articleFavorite').onclick=()=>{toggleFav('article:'+id);const active=isFav('article:'+id);$('#articleFavorite').textContent=active?'♥':'♡';$('#articleFavorite').setAttribute('aria-label',active?'Убрать из избранного':'Добавить в избранное');if(state.articleFavoritesOnly)renderArticles()};
+  $('#articleFavorite').setAttribute('aria-label',isFav('article:'+id)?'Убрать из избранного':'Добавить в избранное');
   $('#readerMapButton')?.addEventListener('click',()=>{const p=related.find(x=>Number.isFinite(x.lat)&&Number.isFinite(x.lng));if(!p)return;state.selectedPoint=p;showScreen('map');setTimeout(()=>selectMapPoint(p,true),250)});
   showScreen('article',{remember:false});
 }
@@ -204,6 +206,7 @@ function bind(){
   $('#exploreSearch').addEventListener('input',renderExplore);
   $('#articleSearch').addEventListener('input',renderArticles);
   $('#mapSearch').addEventListener('input',renderMapMarkers);
+  $('#articleFavoritesToggle').onclick=()=>{state.articleFavoritesOnly=!state.articleFavoritesOnly;renderArticles()};
   $('#favoritesToggle').onclick=()=>{const only=$('#favoritesToggle').classList.toggle('is-active');$('#favoritesToggle').textContent=only?'♥ Избранное':'♡ Избранное';if(only){const q=$('#exploreSearch').value;$('#exploreSearch').value='';const rows=points.filter(p=>isFav(p.id));$('#exploreList').innerHTML=rows.map(p=>`<article class="place-row" data-open-place="${esc(p.id)}"><div class="place-row-media"><img src="${esc(imageForPoint(p))}" alt=""></div><div class="place-row-copy"><span class="place-type">${esc(primaryCategory(p))}</span><h3>${esc(p.name)}</h3><p>${esc(p.shortDescription||'')}</p></div></article>`).join('')||'<div class="surface-card" style="padding:18px;color:#6f756e">Избранных мест пока нет.</div>';$$('[data-open-place]').forEach(r=>r.onclick=()=>openPlace(r.dataset.openPlace));$('#favoritesToggle').dataset.oldQuery=q}else renderExplore()};
   $('#routeMuseum').onclick=()=>window.open('https://yandex.ru/maps/?rtext=~54.394535,22.374779&rtt=auto','_blank','noopener');
   $('#locateButton').onclick=()=>{if(!navigator.geolocation||!state.map)return;navigator.geolocation.getCurrentPosition(pos=>{const ll=[pos.coords.latitude,pos.coords.longitude];if(state.userMarker)state.userMarker.remove();state.userMarker=L.marker(ll,{icon:L.divIcon({className:'',html:'<div class="user-dot"></div>',iconSize:[15,15],iconAnchor:[7,7]})}).addTo(state.map);state.map.flyTo(ll,15)},()=>{}, {enableHighAccuracy:true,timeout:8000})};
