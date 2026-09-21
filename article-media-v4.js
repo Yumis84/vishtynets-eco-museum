@@ -19,6 +19,13 @@
   const pageMedia=(names,credit)=>names.map(name=>({src:`https://www.wystynez.ru/sc-pic/${name}`,caption:null,credit}));
 
   const recoveredArticleMedia = {
+    'vishtynets-upland-map-world': {
+      files:['i0433.png','i0435.png','i0437.png','i0139.jpg','i0438.png','i0439.png','i0441.jpg','i0442.png','i0443.png'],
+      credit:null,
+      inventory:'data/legacy-media-batch-9.json',
+      status:'verified_mixed_archival_media_connected',
+      policy:'Historical maps, source graphics, landscape imagery and satellite material are preserved as source-order archival media. Attribution belongs to the source page, not to a modern map provider.'
+    },
     'unknown-vishtynets-opening-2019': {
       files:['i1711.jpg'],
       credit:'Фото на странице: Юлия Алексеева',
@@ -86,8 +93,8 @@
       article.images=items;
       article.sourceMediaInventoryFile=set.inventory;
       article.sourceMediaCount=items.length;
-      article.sourceMediaStatus='confirmed_jpg_source_media_connected';
-      article.mediaDisplayPolicy='Only confirmed JPG source media are connected here. Mixed PNG/graphic assets remain excluded until visual classification.';
+      article.sourceMediaStatus=set.status||'confirmed_jpg_source_media_connected';
+      article.mediaDisplayPolicy=set.policy||'Only confirmed JPG source media are connected here. Mixed PNG/graphic assets remain excluded until visual classification.';
     });
   }
 
