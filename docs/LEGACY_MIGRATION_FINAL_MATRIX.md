@@ -43,3 +43,19 @@ Legacy migration can be called content-complete when:
 3. mixed media has either been classified or explicitly left deferred;
 4. public/mobile QA confirms the deployed archive and galleries work;
 5. no legacy operational datum is presented as current without re-verification.
+
+
+## Closeout checkpoint — 2026-09-21
+
+Repository-level runtime/link/encoding audit is complete; see `docs/RUNTIME_LINK_ENCODING_AUDIT_2026-09-21.md`.
+
+Additional verified change:
+- visitor opening-hours UI now reads the canonical `MUSEUM_INFO.openingHours` configuration instead of maintaining a second hard-coded seasonal schedule in `app.js`.
+
+A fresh attempt to open both the custom domain and the GitHub Pages URL from the current external fetch environment still failed at the fetch/tool boundary. Therefore public/mobile QA is deliberately **not** marked complete.
+
+At this checkpoint, the remaining migration blockers are external-evidence/live-QA gates rather than unprocessed repository batches:
+1. exact unresolved legacy document/map targets;
+2. primary/reliable recovery of `rominten.wystynez.ru`;
+3. p92 mixed-media visual classification;
+4. deployed public/mobile browser QA.
