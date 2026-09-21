@@ -318,3 +318,11 @@ img{display:block;max-width:100%}
 /* Keep the menu affordance in the same right-hand position on submenu pages. */
 .menu-detail-header{grid-template-columns:minmax(0,1fr) 46px}
 .menu-detail-menu{justify-self:end}
+
+/* Article reader controls: same compact visual language as the rest of the site. */
+.reader-top{height:calc(58px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 16px 0;gap:12px}
+.reader-top .reader-back{min-height:42px;padding:0 4px;border:0;background:transparent;font-size:14px;font-weight:800}
+.reader-top .reader-actions{display:flex;align-items:center;gap:8px}
+.reader-top .reader-action{width:42px;height:42px;display:grid;place-items:center;padding:0;border:1px solid var(--line);border-radius:50%;background:var(--paper-strong);color:var(--forest-deep);font-size:20px;font-weight:500;line-height:1;box-shadow:0 3px 12px rgba(42,54,44,.05)}
+.reader-top .reader-menu-button{font-size:18px}
+.reader-top .reader-favorite.is-active{background:#edf1e8;border-color:#aab9a3;color:var(--forest)}
