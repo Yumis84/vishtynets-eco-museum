@@ -106,7 +106,7 @@ function renderArticles(){
   $$('[data-article-category]').forEach(b=>b.onclick=()=>{state.articleCategory=b.dataset.articleCategory;renderArticles()});
   const list=articles.filter(a=>!state.articleFavoritesOnly||isFav('article:'+a.id)).filter(a=>state.articleCategory==='Все'||a.category===state.articleCategory).filter(a=>!q||[a.title,a.deck,a.category,a.subcategory,...(a.content||[]).map(x=>x.text||'')].join(' ').toLowerCase().includes(q));
   $('#articleList').innerHTML=list.length?list.map(a=>`<button class="article-card" data-open-article="${esc(a.id)}" type="button" style="text-align:left;padding:0"><span class="article-media"><img src="${esc(imageForArticle(a))}" alt="" loading="lazy" onerror="this.style.display='none'"></span><span class="article-copy"><span>${esc(a.category||'Архив музея')}${a.subcategory?' · '+esc(a.subcategory):''}</span><h3>${esc(a.title)}</h3><p>${esc(a.deck||'')}</p></span></button>`).join(''):'<div class="surface-card" style="padding:18px;color:#6f756e">Ничего не найдено.</div>';
-  $('[data-open-article]').forEach(b=>b.onclick=()=>openArticle(b.dataset.openArticle));
+  $$('[data-open-article]').forEach(b=>b.onclick=()=>openArticle(b.dataset.openArticle));
   const favButton=$('#articleFavoritesToggle');if(favButton){favButton.classList.toggle('is-active',state.articleFavoritesOnly);favButton.textContent=state.articleFavoritesOnly?'♥ Избранное':'♡ Избранное'}
 }
 
