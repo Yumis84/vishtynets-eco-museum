@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-21",
+  "purpose": "Exact legacy media URLs and provenance recovered from p33.htm (Kristijonas Donelaitis).",
+  "pages": [
+    {
+      "legacyUrl": "https://wystynez.ru/p33.htm",
+      "title": "Кристионас Донелайтис",
+      "sourceCopyright": "© КРОУ «Виштынецкий экомузей» 2004",
+      "captureStatus": "page_text_visual_context_credits_and_exact_media_urls_verified",
+      "pagePhotoCredits": ["Э. Барсуков", "А. Соколов"],
+      "creditPolicy": "The source gives page-level photo credits. Preserve them collectively and do not infer image-by-image authorship.",
+      "images": [
+        "https://wystynez.ru/sc-pic/i0037.jpg",
+        "https://wystynez.ru/sc-pic/i0039.jpg",
+        "https://wystynez.ru/sc-pic/i0041.jpg",
+        "https://wystynez.ru/sc-pic/i0043.jpg",
+        "https://wystynez.ru/sc-pic/i0045.jpg",
+        "https://wystynez.ru/sc-pic/i0047.jpg",
+        "https://wystynez.ru/sc-pic/i0049.jpg",
+        "https://wystynez.ru/sc-pic/i0051.jpg",
+        "https://wystynez.ru/sc-pic/i0053.jpg",
+        "https://wystynez.ru/sc-pic/i0055.jpg",
+        "https://wystynez.ru/sc-pic/i0057.jpg",
+        "https://wystynez.ru/sc-pic/i0059.jpg",
+        "https://wystynez.ru/sc-pic/i0061.jpg",
+        "https://wystynez.ru/sc-pic/i0063.jpg"
+      ],
+      "verifiedContexts": [
+        "пасторский дом",
+        "Кристионас Донелайтис",
+        "поэма «Времена года»: «Радости весны», «Летние труды», «Блага осени», «Зимние заботы»",
+        "мемориальный музей Кристионаса Донелайтиса в Чистых Прудах",
+        "празднование 300-летнего юбилея Кристионаса Донелайтиса в Краснолесье, 2014"
+      ],
+      "reachability": "Exact image targets recovered from source-page image anchors. Binary crawler returned cache miss during verification; URLs are retained as source provenance, not claimed as currently reachable."
+    }
+  ]
+}
