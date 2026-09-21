@@ -11,8 +11,8 @@ const articleById=id=>articles.find(a=>a.id===id);
 const FAVORITES_KEY='vishtynets_v2_favorites';
 const favorites=new Set(JSON.parse(localStorage.getItem(FAVORITES_KEY)||'[]'));
 const state={screen:'home',previous:'home',exploreCategory:'Все',articleCategory:'Все',articleFavoritesOnly:false,mapCategory:'Все',showGuests:false,map:null,markerLayer:null,userMarker:null,guestHouses:[],selectedPoint:null};
-const FALLBACK_FOREST='https://www.wystynez.ru/sc-pic/i1423.jpg';
-const FALLBACK_MUSEUM='https://www.wystynez.ru/sc-pic/i1665.jpg';
+const FALLBACK_FOREST='https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1423.jpg';
+const FALLBACK_MUSEUM='https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1665.jpg';
 
 function saveFavorites(){localStorage.setItem(FAVORITES_KEY,JSON.stringify([...favorites]))}
 function isFav(id){return favorites.has(id)}
@@ -27,9 +27,9 @@ function imageForPoint(p){
 function articleFallbackImage(a){
   const key=[a?.category,a?.subcategory,a?.title].filter(Boolean).join(' ').toLowerCase();
   if(/музей|экспозиц|выстав/.test(key))return FALLBACK_MUSEUM;
-  if(/публикац|книг|буклет|издан/.test(key))return 'https://www.wystynez.ru/sc-pic/i0433.png';
-  if(/кам|валун|геолог/.test(key))return 'https://www.wystynez.ru/sc-pic/i2157.jpg';
-  if(/сосед|праздник|событ|проект/.test(key))return 'https://www.wystynez.ru/sc-pic/i2335.jpg';
+  if(/публикац|книг|буклет|издан/.test(key))return 'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0433.png';
+  if(/кам|валун|геолог/.test(key))return 'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2157.jpg';
+  if(/сосед|праздник|событ|проект/.test(key))return 'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2335.jpg';
   return FALLBACK_FOREST;
 }
 function imageForArticle(a){return a?.hero||a?.images?.[0]?.src||articleFallbackImage(a)}
