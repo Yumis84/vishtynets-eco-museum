@@ -8,13 +8,13 @@
   mail.date='24 октября 2014';
   mail.author=null;
   mail.deck='Проект и выставка о почтовой открытке как послании во времени: новые открытки Роминтской пущи, музейный почтовый ящик, штемпель и коллекция исторических открыток.';
-  mail.hero='https://wystynez.ru/sc-pic/i0911.jpg';
+  mail.hero='https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0914.jpg';
   mail.photoCredits=['Э. Барсуков'];
   mail.images=[
     'i0911','i0912','i0913','i0914','i0915','i0916','i0917','i0918','i0919','i0920',
-    'i0921','i0922','i0923','i0924','i0925','i0926','i0927','i0928','i0929','i0930','i0909'
+    'i0921','i0922','i0923','i0924','i0925','i0926','i0927','i0928','i0929','i0930'
   ].map(id=>({
-    src:`https://wystynez.ru/sc-pic/${id}.jpg`,
+    src:`https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/${id}.jpg`,
     caption:null,
     credit:'Э. Барсуков',
     creditScope:'page_level_credit',
@@ -30,7 +30,7 @@
     {type:'gallery'},
     {type:'paragraph',text:'Фото на исходной странице: Э. Барсуков.'}
   ];
-  mail.migrationStatus='verified_legacy_summary';
+  mail.migrationStatus='source_verified_against_preserved_archive';
   mail.sourceScope='dedicated_primary_page';
   mail.projectRecognition='Победитель регионального конкурса проектов социально ориентированных общественных организаций на предоставление субсидии, 2014.';
   mail.projectOutputs={
@@ -43,8 +43,9 @@
   mail.historicalCollectionSource='архив Виштынецкого экомузея и личное собрание Славы Тарасевич (Польша)';
   mail.sourceMediaInventory={
     legacyUrl:'https://wystynez.ru/p103.htm',
-    exactImageUrlCount:21,
-    range:'i0911.jpg–i0930.jpg + i0909.jpg',
-    binaryReachability:'crawler_cache_miss_during_inventory'
+    contentPhotoCount:20,
+    range:'i0911.jpg–i0930.jpg',
+    excludedSupportGraphics:['i0909.jpg','i0910.jpg'],
+    preservedArchive:'falke0039/wystynez:p103.htm'
   };
 })();

@@ -21,7 +21,7 @@
       {type:'paragraph',text:'Программа также включала авторскую экскурсию по экспозиции музея, концерт «Поющие поколения», путешествие к родникам и истокам реки Синей с Александром Дорошкиным и вечерний кинопоказ в Краснолесенском доме культуры.'},
       {type:'paragraph',text:'Указанные на legacy-странице суммы добровольных взносов, контакты и организационные условия являются архивными и не считаются актуальными без современной проверки.'}
     ],
-    migrationStatus:'verified_legacy_summary',legacyOperationalDataStatus:'archive_only',
+    migrationStatus:'source_verified_against_preserved_archive',legacyOperationalDataStatus:'archive_only',
     relatedLegacyUrls:['https://www.wystynez.ru/p0125.htm']
   });
 
@@ -32,10 +32,12 @@
     deck:'Отдельная страница ежегодного праздника «Соседи — 2024», ссылка на которую сохранена на главной странице старого сайта.',
     hero:null,images:[],relatedPoiIds:['poi_museum'],
     content:[
-      {type:'paragraph',text:'Главная страница старого сайта Виштынецкого экомузея прямо сообщает, что 3 августа 2024 года в посёлке Краснолесье состоится ежегодный праздник «Соседи — 2024», и ведёт на отдельную страницу p0130.htm.'},
-      {type:'paragraph',text:'Полный текст отдельной страницы пока не удалось получить: прямой переход подтверждает URL, но текущий захват возвращает cache miss. Поэтому дополнительные детали не добавляются до восстановления первоисточника.'}
+      {type:'paragraph',text:'3 августа 2024 года в Краснолесье был анонсирован праздник «Соседи» — праздник гостеприимства и дружеского общения людей, живущих рядом и влюблённых в свою землю.'},
+      {type:'paragraph',text:'На территории Виштынецкого экомузея планировались ремесленные и творческие мастерские, ярмарка местных продуктов и отдельная площадка проекта «Вкусы Виштынецкой возвышенности»; концерт народных коллективов — в доме культуры посёлка.'},
+      {type:'paragraph',text:'Организаторами выступали Виштынецкий эколого-исторический музей совместно с Краснолесенским домом культуры, проектом «Вкусы Виштынецкой возвышенности» и Краснолесенской сельской библиотекой при партнёрской поддержке муниципального управления культуры, молодёжной политики и туризма.'},
+      {type:'gallery'}
     ],
-    migrationStatus:'dedicated_url_verified_content_pending',sourceScope:'homepage_link_and_title_date_only'
+    migrationStatus:'source_body_restored_from_preserved_archive',sourceScope:'falke0039/wystynez:p0130.htm'
   });
 
   // Enrich previously migrated records only with facts/media now verified from their primary legacy pages.
@@ -53,24 +55,24 @@
 
   const unknown2019=byId('unknown-vishtynets-opening-2019');
   if(unknown2019){
-    unknown2019.hero='https://wystynez.ru/sc-pic/i1711.jpg';
+    unknown2019.hero='https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1711.jpg';
     unknown2019.sourceMediaInventory='data/legacy-media-batch-2.json';
   }
 
   const stoneProject=byId('visit-the-stone-project');
   if(stoneProject){
-    stoneProject.hero='https://wystynez.ru/sc-pic/i2157.jpg';
+    stoneProject.hero='https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2157.jpg';
     stoneProject.images=[
-      {src:'https://wystynez.ru/sc-pic/i2158.jpg',caption:'Валун у горы Дозор — контекст исходной страницы; точная привязка подписи требует визуальной проверки',credit:'А. Соколов — общий фотокредит исходной страницы'},
-      {src:'https://wystynez.ru/sc-pic/i2159.jpg',caption:null,credit:'А. Соколов — общий фотокредит исходной страницы'},
-      {src:'https://wystynez.ru/sc-pic/i2160.jpg',caption:'Полевой шпат — контекст исходной страницы; точная привязка подписи требует визуальной проверки',credit:'А. Соколов — общий фотокредит исходной страницы'},
-      {src:'https://wystynez.ru/sc-pic/i2167.jpg',caption:'Экспедиционный материал — контекст исходной страницы',credit:'А. Соколов — общий фотокредит исходной страницы'},
-      {src:'https://wystynez.ru/sc-pic/i2162.jpg',caption:'Интерактивная карта валунов — контекст исходной страницы',credit:'А. Соколов — общий фотокредит исходной страницы'}
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2158.jpg',caption:'Валун у горы Дозор — контекст исходной страницы; точная привязка подписи требует визуальной проверки',credit:'А. Соколов — общий фотокредит исходной страницы'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2159.jpg',caption:null,credit:'А. Соколов — общий фотокредит исходной страницы'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2160.jpg',caption:'Полевой шпат — контекст исходной страницы; точная привязка подписи требует визуальной проверки',credit:'А. Соколов — общий фотокредит исходной страницы'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2167.jpg',caption:'Экспедиционный материал — контекст исходной страницы',credit:'А. Соколов — общий фотокредит исходной страницы'},
+      {src:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2162.jpg',caption:'Интерактивная карта валунов — контекст исходной страницы',credit:'А. Соколов — общий фотокредит исходной страницы'}
     ];
     if(!(stoneProject.content||[]).some(block=>block.type==='gallery'))stoneProject.content.push({type:'gallery'});
     stoneProject.sourceMediaInventory='data/legacy-media.json';
-    stoneProject.linkedInteractiveMap={legacyUrl:'https://www.wystynez.ru/p0121.htm',status:'dedicated_url_verified_content_capture_pending'};
-    stoneProject.downloadableDocuments=[{title:'Брошюра о валунах Виштынецкой возвышенности',url:null,status:'download_anchor_verified_exact_url_pending'}];
+    stoneProject.linkedInteractiveMap={legacyUrl:'https://www.wystynez.ru/p0121.htm',url:'https://www.google.com/maps/d/u/0/viewer?hl=ru&ll=54.41516393380444%2C22.34829347721981&z=11&mid=10pcjwH-4wl6fJo-Ocn9RXQnanoVhMCeq',status:'recovered_from_preserved_archive'};
+    stoneProject.downloadableDocuments=[{title:'Брошюра «Валуны Виштынецкой возвышенности»',archivePath:'download/Broshjura-Valuny-Vishtyneckoj-vozvyshennosti.pdf',repository:'falke0039/wystynez',status:'recovered_from_preserved_archive'}];
   }
 
   const museum=points.find(point=>point.id==='poi_museum');

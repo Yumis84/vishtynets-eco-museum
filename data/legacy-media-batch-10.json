@@ -1,39 +1,34 @@
 {
-  "schemaVersion": 1,
-  "updatedAt": "2026-09-21",
-  "purpose": "Exact legacy media URLs and provenance recovered from p33.htm (Kristijonas Donelaitis).",
+  "schemaVersion": 2,
+  "updatedAt": "2026-09-22",
+  "canonicalArchive": "falke0039/wystynez",
   "pages": [
     {
-      "legacyUrl": "https://wystynez.ru/p33.htm",
+      "legacyUrl": "https://www.wystynez.ru/p33.htm",
+      "sourceArchivePath": "p33.htm",
       "title": "Кристионас Донелайтис",
-      "sourceCopyright": "© КРОУ «Виштынецкий экомузей» 2004",
-      "captureStatus": "page_text_visual_context_credits_and_exact_media_urls_verified",
-      "pagePhotoCredits": ["Э. Барсуков", "А. Соколов"],
-      "creditPolicy": "The source gives page-level photo credits. Preserve them collectively and do not infer image-by-image authorship.",
-      "images": [
-        "https://wystynez.ru/sc-pic/i0037.jpg",
-        "https://wystynez.ru/sc-pic/i0039.jpg",
-        "https://wystynez.ru/sc-pic/i0041.jpg",
-        "https://wystynez.ru/sc-pic/i0043.jpg",
-        "https://wystynez.ru/sc-pic/i0045.jpg",
-        "https://wystynez.ru/sc-pic/i0047.jpg",
-        "https://wystynez.ru/sc-pic/i0049.jpg",
-        "https://wystynez.ru/sc-pic/i0051.jpg",
-        "https://wystynez.ru/sc-pic/i0053.jpg",
-        "https://wystynez.ru/sc-pic/i0055.jpg",
-        "https://wystynez.ru/sc-pic/i0057.jpg",
-        "https://wystynez.ru/sc-pic/i0059.jpg",
-        "https://wystynez.ru/sc-pic/i0061.jpg",
-        "https://wystynez.ru/sc-pic/i0063.jpg"
+      "captureStatus": "direct_preserved_html_reconciled",
+      "pagePhotoCredits": [
+        "Э. Барсуков",
+        "А. Соколов"
       ],
-      "verifiedContexts": [
-        "пасторский дом",
-        "Кристионас Донелайтис",
-        "поэма «Времена года»: «Радости весны», «Летние труды», «Блага осени», «Зимние заботы»",
-        "мемориальный музей Кристионаса Донелайтиса в Чистых Прудах",
-        "празднование 300-летнего юбилея Кристионаса Донелайтиса в Краснолесье, 2014"
+      "contentImages": [
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0290.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0292.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0293.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0294.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0296.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0297.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0298.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0299.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0300.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0303.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0304.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0305.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0306.jpg"
       ],
-      "reachability": "Exact image targets recovered from source-page image anchors. Binary crawler returned cache miss during verification; URLs are retained as source provenance, not claimed as currently reachable."
+      "excludedSupportGraphics": [],
+      "note": "Direct JPG content set from preserved p33 HTML; previous i0037–i0063 inference was incorrect."
     }
   ]
 }

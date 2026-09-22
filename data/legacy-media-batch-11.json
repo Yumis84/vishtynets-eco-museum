@@ -1,51 +1,34 @@
 {
-  "schemaVersion": 1,
-  "updatedAt": "2026-09-21",
-  "purpose": "Exact legacy media URLs and credit scopes recovered from p92.htm («Виштынецкие сокровища гномов»).",
+  "schemaVersion": 2,
+  "updatedAt": "2026-09-22",
+  "canonicalArchive": "falke0039/wystynez",
   "pages": [
     {
-      "legacyUrl": "https://wystynez.ru/p92.htm",
-      "title": "Виштынецкие сокровища гномов — образовательная программа",
-      "captureStatus": "page_text_visual_roles_credits_and_exact_media_urls_verified",
-      "pagePhotoCredits": ["Алексей Соколов", "Владимир Драх", "Ирина Ковардо"],
-      "illustrationCredits": [
-        "Rien Poortvliet — цветной рисунок из книги «Skrzaty», Warszawa, 1990",
-        "Виктория Ветивер — чёрно-белые рисунки и страницы путеводителя программы, 2012"
+      "legacyUrl": "https://www.wystynez.ru/p92.htm",
+      "sourceArchivePath": "p92.htm",
+      "title": "Виштынецкие сокровища гномов",
+      "captureStatus": "direct_preserved_html_reconciled",
+      "pagePhotoCredits": [
+        "Алексей Соколов",
+        "Владимир Драх",
+        "Ирина Ковардо"
       ],
-      "creditPolicy": "Keep photography and illustration credits separate. Do not assign an individual photographer to a specific photograph unless the legacy source explicitly does so; do not relabel illustrations as photographs.",
-      "images": [
-        "https://wystynez.ru/sc-pic/i0743.jpg",
-        "https://wystynez.ru/sc-pic/i0744.jpg",
-        "https://wystynez.ru/sc-pic/i0745.jpg",
-        "https://wystynez.ru/sc-pic/i0746.jpg",
-        "https://wystynez.ru/sc-pic/i0747.jpg",
-        "https://wystynez.ru/sc-pic/i0748.jpg",
-        "https://wystynez.ru/sc-pic/i0749.jpg",
-        "https://wystynez.ru/sc-pic/i0750.jpg",
-        "https://wystynez.ru/sc-pic/i0751.jpg",
-        "https://wystynez.ru/sc-pic/i0752.jpg",
-        "https://wystynez.ru/sc-pic/i0753.jpg",
-        "https://wystynez.ru/sc-pic/i0754.jpg",
-        "https://wystynez.ru/sc-pic/i0755.jpg",
-        "https://wystynez.ru/sc-pic/i0756.jpg",
-        "https://wystynez.ru/sc-pic/i0757.jpg",
-        "https://wystynez.ru/sc-pic/i0758.jpg",
-        "https://wystynez.ru/sc-pic/i0759.jpg",
-        "https://wystynez.ru/sc-pic/i0760.jpg",
-        "https://wystynez.ru/sc-pic/i0761.jpg",
-        "https://wystynez.ru/sc-pic/i0762.jpg"
+      "contentImages": [
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0743.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0744.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0745.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0746.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0747.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0748.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0749.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0750.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0751.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0752.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0753.jpg",
+        "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0661.jpg"
       ],
-      "verifiedContexts": [
-        "путешествие по Краснолесью и его окрестностям",
-        "рабочая тетрадь / путеводитель участника",
-        "поиск камня в старом карьере",
-        "мастерская гномов по обработке камня",
-        "наблюдение каменного шлифа под микроскопом",
-        "паспорт хранителя камня",
-        "схема проезда к музею"
-      ],
-      "reachability": "Exact image targets recovered from source-page image anchors. Binary crawler returned cache miss during verification; URLs are preserved as provenance, not claimed as currently reachable.",
-      "migrationPolicy": "Before displaying an extracted file in a gallery, visually classify it as photograph, illustration, guide/workbook page, map/scheme, or decorative graphic so the appropriate source credit is retained."
+      "excludedSupportGraphics": [],
+      "note": "Direct JPG set from preserved p92 HTML. PNG material remains mixed illustration/workbook/map content and requires semantic classification; photography and illustration credits must remain separate."
     }
   ]
 }
