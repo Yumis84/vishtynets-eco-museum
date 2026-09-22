@@ -71,8 +71,8 @@
     ];
     if(!(stoneProject.content||[]).some(block=>block.type==='gallery'))stoneProject.content.push({type:'gallery'});
     stoneProject.sourceMediaInventory='data/legacy-media.json';
-    stoneProject.linkedInteractiveMap={legacyUrl:'https://www.wystynez.ru/p0121.htm',status:'dedicated_url_verified_content_capture_pending'};
-    stoneProject.downloadableDocuments=[{title:'Брошюра о валунах Виштынецкой возвышенности',url:null,status:'download_anchor_verified_exact_url_pending'}];
+    stoneProject.linkedInteractiveMap={legacyUrl:'https://www.wystynez.ru/p0121.htm',url:'https://www.google.com/maps/d/u/0/viewer?hl=ru&ll=54.41516393380444%2C22.34829347721981&z=11&mid=10pcjwH-4wl6fJo-Ocn9RXQnanoVhMCeq',status:'recovered_from_preserved_archive'};
+    stoneProject.downloadableDocuments=[{title:'Брошюра «Валуны Виштынецкой возвышенности»',archivePath:'download/Broshjura-Valuny-Vishtyneckoj-vozvyshennosti.pdf',repository:'falke0039/wystynez',status:'recovered_from_preserved_archive'}];
   }
 
   const museum=points.find(point=>point.id==='poi_museum');
