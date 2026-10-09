@@ -1,0 +1,18 @@
+{
+  "generated": "2026-10-09",
+  "donor_html_pages": 130,
+  "rows_including_runtime_only": 268,
+  "source_type_counts": {
+    "article": 124,
+    "navigation": 6,
+    "runtime-only": 138
+  },
+  "status_counts": {
+    "ARCHIVE-ONLY": 231,
+    "SKIP": 3,
+    "PARTIAL": 34
+  },
+  "restored_priority_pages": 11,
+  "runtime_articles": 173,
+  "rules": "FULL is intentionally zero until public/mobile QA and exact source-media parity are verified; PARTIAL includes restored text pending final gates."
+}

@@ -1,0 +1,773 @@
+{
+  "schemaVersion": 1,
+  "sourceRepository": "falke0039/wystynez",
+  "sourceCommit": "ba42a20180cc475e176c8b98606568580b754171",
+  "articles": [
+    {
+      "id": "museum-mail",
+      "sourcePage": "p103.htm",
+      "hero": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0914.jpg",
+      "images": [
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0911.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0912.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0913.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0914.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0915.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0916.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0917.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0918.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0919.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0920.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0921.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0922.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0923.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0924.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0925.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0926.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0927.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0928.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0929.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0930.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Э. Барсуков"
+        }
+      ],
+      "excluded": [],
+      "sourceMediaStatus": "existing_verified_mapping",
+      "coverSelection": "intentional_nonfirst_source_photo:p103.htm:i0914.jpg"
+    },
+    {
+      "id": "anatomy-stone",
+      "sourcePage": "p0122.htm",
+      "hero": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2217.jpg",
+      "images": [
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2217.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2218.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2219.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2220.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2221.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2222.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2223.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2224.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2225.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2226.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2227.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2228.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2229.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2230.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2231.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2232.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2233.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2234.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2235.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2236.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2237.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2238.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2239.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2240.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2241.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2242.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2243.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2244.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2245.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2246.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2247.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2248.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2211.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2208.jpg",
+          "caption": null,
+          "credit": "Фото на странице: В. Лукошевичус, А. Володина, А. Соколов"
+        }
+      ],
+      "excluded": [],
+      "sourceMediaStatus": "verified_content_media_from_preserved_html"
+    },
+    {
+      "id": "v-gosti-k-kamnyu",
+      "sourcePage": "p0117.htm",
+      "hero": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2157.jpg",
+      "images": [
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2157.jpg",
+          "caption": null,
+          "credit": "Фото на странице: А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2158.jpg",
+          "caption": null,
+          "credit": "Фото на странице: А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2159.jpg",
+          "caption": null,
+          "credit": "Фото на странице: А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2167.jpg",
+          "caption": null,
+          "credit": "Фото на странице: А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2208.jpg",
+          "caption": null,
+          "credit": "Фото на странице: А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2165.jpg",
+          "caption": null,
+          "credit": "Фото на странице: А. Соколов"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2193.jpg",
+          "caption": null,
+          "credit": "Фото на странице: А. Соколов"
+        }
+      ],
+      "excluded": [],
+      "sourceMediaStatus": "confirmed_project_photo_media_connected"
+    },
+    {
+      "id": "unknown-vishtynets",
+      "sourcePage": "p0106.htm",
+      "hero": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1596.jpg",
+      "images": [
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1596.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1597.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1695.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1601.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1591.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1602.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1598.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1599.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1603.jpg",
+          "caption": null,
+          "credit": null
+        }
+      ],
+      "excluded": [],
+      "sourceMediaStatus": "verified_jpg_content_media_from_preserved_html"
+    },
+    {
+      "id": "unknown-vishtynets-meeting-2018",
+      "sourcePage": "p0108.htm",
+      "hero": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1609.jpg",
+      "images": [
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1609.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Юлия Алексеева, Александр Самсонкин"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1610.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Юлия Алексеева, Александр Самсонкин"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1611.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Юлия Алексеева, Александр Самсонкин"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1615.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Юлия Алексеева, Александр Самсонкин"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1616.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Юлия Алексеева, Александр Самсонкин"
+        }
+      ],
+      "excluded": [],
+      "sourceMediaStatus": "confirmed_jpg_source_media_connected"
+    },
+    {
+      "id": "unknown-vishtynets-opening-2019",
+      "sourcePage": "p0109.htm",
+      "hero": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1711.jpg",
+      "images": [
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1711.jpg",
+          "caption": null,
+          "credit": "Фото на странице: Юлия Алексеева"
+        }
+      ],
+      "excluded": [],
+      "sourceMediaStatus": "confirmed_jpg_source_media_connected"
+    },
+    {
+      "id": "birds-red-forest",
+      "sourcePage": "p38.htm",
+      "hero": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0318.png",
+      "images": [
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0318.png",
+          "caption": null,
+          "credit": "Фото/иллюстрации: Cliparts, Dinamite SoftWare Group, 2003"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0192.jpg",
+          "caption": null,
+          "credit": "Фото/иллюстрации: Cliparts, Dinamite SoftWare Group, 2003"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0195.png",
+          "caption": null,
+          "credit": "Фото/иллюстрации: Cliparts, Dinamite SoftWare Group, 2003"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1237.png",
+          "caption": null,
+          "credit": "Фото/иллюстрации: Cliparts, Dinamite SoftWare Group, 2003"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0320.png",
+          "caption": null,
+          "credit": "Фото/иллюстрации: Cliparts, Dinamite SoftWare Group, 2003"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0321.png",
+          "caption": null,
+          "credit": "Фото/иллюстрации: Cliparts, Dinamite SoftWare Group, 2003"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1238.jpg",
+          "caption": null,
+          "credit": "Фото/иллюстрации: Cliparts, Dinamite SoftWare Group, 2003"
+        }
+      ],
+      "excluded": [],
+      "sourceMediaStatus": "verified_mixed_content_media_from_preserved_html"
+    },
+    {
+      "id": "gnome-treasures",
+      "sourcePage": "p92.htm",
+      "hero": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0743.jpg",
+      "images": [
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0743.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0744.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0745.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0746.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0747.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0748.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0749.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0750.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0751.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0752.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0753.jpg",
+          "caption": null,
+          "credit": null
+        }
+      ],
+      "excluded": [
+        {
+          "file": "i0661.jpg",
+          "reason": "906x2 SiteCraft separator; not editorial content"
+        }
+      ],
+      "sourceMediaStatus": "credits_and_visual_roles_verified_exact_urls_pending"
+    },
+    {
+      "id": "legend-of-stone-contest",
+      "sourcePage": "p0120.htm",
+      "hero": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2190.jpg",
+      "images": [
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2190.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2191.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2198.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2200.jpg",
+          "caption": null,
+          "credit": null
+        }
+      ],
+      "excluded": [
+        {
+          "file": "i2197.png",
+          "reason": "SiteCraft banner/support graphic"
+        },
+        {
+          "file": "i1595.png",
+          "reason": "partner/logo support graphic"
+        }
+      ],
+      "sourceMediaStatus": "direct_source_html_media_reconciled",
+      "mediaDisplayPolicy": "Four editorial contest-result images in source order; banner/logo support assets are excluded."
+    },
+    {
+      "id": "museum-publications-index",
+      "sourcePage": "p0087.htm",
+      "hero": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0221.jpg",
+      "images": [
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0221.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1003.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1004.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1005.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1006.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1007.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1008.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1009.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1010.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1011.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1012.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1013.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1015.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1017.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1019.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1021.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1023.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1025.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1027.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1049.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1029.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1031.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1033.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1035.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1037.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1039.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1041.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1043.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1045.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1047.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1050.jpg",
+          "caption": null,
+          "credit": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1051.jpg",
+          "caption": null,
+          "credit": null
+        }
+      ],
+      "excluded": [
+        {
+          "file": "i1059.png",
+          "reason": "SiteCraft/support graphic"
+        },
+        {
+          "file": "i1060.png",
+          "reason": "SiteCraft/support graphic"
+        }
+      ],
+      "sourceMediaStatus": "direct_source_html_media_reconciled",
+      "mediaDisplayPolicy": "Preserve the publication catalogue cover/thumbnail sequence from p0087. These are publication/document images, not photographs; PNG support graphics are excluded."
+    }
+  ]
+}

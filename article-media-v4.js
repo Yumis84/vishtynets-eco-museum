@@ -154,21 +154,6 @@
       forest.mediaDisplayPolicy='Display all 30 JPG content images referenced by preserved p0090.htm. SiteCraft/support PNG assets remain excluded.';
     }
     const museumMail=articles.find(a=>a.id==='museum-mail');
-  if(museumMail){
-    museumMail.content=[
-      {type:'paragraph',text:'24 октября 2014 г. в Виштынецком эколого-историческом музее открылась выставка «Музейная почта».'},
-      {type:'paragraph',text:'Почтовая открытка стала главной героиней этого события. Именно с ней в дальний путь отправляют люди краткое послание о том месте, где довелось побывать, о своих впечатлениях, желая поделиться ими с близкими и друзьями. Отправленные когда-то открытки порой становятся посланниками не только в пространстве, но и во времени.'},
-      {type:'paragraph',text:'С каким интересом мы разглядываем и читаем открытки столетней давности. Эти краткие и красивые послания о самом важном и интересном были одновременно простыми почтовыми отправлениями, доступными каждому, открытыми для всех.'},
-      {type:'paragraph',text:'Сейчас в эпоху электронной связи отправление и получение открыток само по себе становится музейным действом. Мы соприкасаемся с историей, вручную подписывая открытку и опуская её в почтовый ящик. И где-то, порой на другом конце света, пройдя через руки сотен людей, она находит адресата. Почти настоящее чудо! А давно ли Вы отправляли открытку?'},
-      {type:'paragraph',text:'Такая возможность появилась у посетителей Виштынецкого экомузея.'},
-      {type:'paragraph',text:'В рамках проекта «Музейная почта», победившего в конкурсе проектов социально ориентированных общественных организаций для предоставления субсидии из бюджета Калининградской области в 2014 году, музей издал десять открыток с изображением объектов историко-культурного наследия Роминтской пущи. Было создано пространство почты с почтовым ящиком, стеллажом для открыток и местом, где их можно подписать. Также изготовили стенд об исторических и природных достопримечательностях Роминтской пущи. В выставочном зале были представлены репродукции старых открыток конца XIX — начала XX веков из архива музея и личного собрания Славы Тарасевич (Польша).'},
-      {type:'paragraph',text:'24 октября посетители музея стали участниками торжественного открытия выставки «Музейная почта», заключительного мероприятия одноимённого проекта. Среди гостей были жители Краснолесья, калининградцы и представители других музеев Калининграда и области. В торжественной части участвовали начальник отдела культуры Нестеровского района Ирина Николаевна Опрышко и глава Чистопрудненского сельского поселения Ирина Анатольевна Конашенкова. Тысячу открыток, изданных по проекту, планировалось отправить из музея бесплатно. В первые дни работы выставки было отправлено более 300 открыток.'},
-      {type:'gallery'},
-      {type:'paragraph',text:'Участников мероприятия также ждала экскурсия на высокий железнодорожный мост в посёлке Токаревка. Ему была посвящена одна из новых открыток, как и другим памятным объектам истории Роминтской пущи.'}
-    ];
-    museumMail.migrationStatus='full_from_preserved_archive';
-    museumMail.archiveSource={repository:'falke0039/wystynez',path:'p103.htm'};
-  }
     if(museumMail){museumMail.hero=museumMailPhotos[3].src;museumMail.images=museumMailPhotos;museumMail.photoCredits=['Э. Барсуков'];museumMail.sourceMediaInventoryFile='data/legacy-media-batch-4.json';museumMail.sourceMediaCount=museumMailPhotos.length}
     const gnomeProgram=articles.find(a=>a.id==='gnome-treasures');
     if(gnomeProgram){gnomeProgram.hero=gnomeProgramMedia[0].src;gnomeProgram.images=gnomeProgramMedia;gnomeProgram.photoCredits=['Алексей Соколов','Владимир Драх','Ирина Ковардо'];gnomeProgram.illustrationCredits=['Rien Poortvliet','Виктория Ветивер'];gnomeProgram.sourceMediaInventoryFile='data/legacy-media-batch-11.json';gnomeProgram.sourceMediaCount=gnomeProgramMedia.length;gnomeProgram.mediaDisplayPolicy='Preserve the complete verified source-page media sequence. The source mixes photographs, illustrations, workbook pages and a route scheme; photography and illustration credits remain separate at page level.'}
@@ -194,6 +179,14 @@
       article.sourceMediaStatus=set.status||'confirmed_jpg_source_media_connected';
       article.mediaDisplayPolicy=set.policy||'Only confirmed JPG source media are connected here. Mixed PNG/graphic assets remain excluded until visual classification.';
     });
+    // Avoid a repeated cover between two distinct legacy pages. Both images are
+    // verified members of the p0099 source set; only the cover choice changes,
+    // while the source-order gallery remains intact.
+    const neighbors2017=articles.find(a=>a.id==='forest-village-neighbors-2017');
+    if(neighbors2017?.images?.some(image=>/\/i1378\.jpg$/.test(image.src))) {
+      neighbors2017.hero=neighbors2017.images.find(image=>/\/i1378\.jpg$/.test(image.src)).src;
+      neighbors2017.coverSelection='distinct_verified_source_image:p0099.htm:i1378.jpg';
+    }
   }
 
   function installLightbox(){
@@ -211,7 +204,7 @@
       .reader-lightbox-v4 .lb-prev{left:10px}.reader-lightbox-v4 .lb-next{right:10px}
       .reader-lightbox-v4 .reader-lightbox-count{position:absolute;top:max(20px,env(safe-area-inset-top));left:18px;color:#fff;font:13px/1.2 sans-serif}
       .reader-lightbox-v4 .reader-lightbox-credit{position:absolute;left:18px;right:18px;bottom:max(12px,env(safe-area-inset-bottom));color:rgba(255,255,255,.78);font:12px/1.4 sans-serif;text-align:center}
-      .reader-legacy-source{display:none!important}.screen-article .reader-gallery{overflow:visible}
+      .screen-article .reader-gallery{overflow:visible}
     `;
     document.head.appendChild(style);
     const box=document.createElement('div'); box.id='articleLightboxV4'; box.className='reader-lightbox-v4';box.setAttribute('aria-hidden','true');
@@ -242,7 +235,7 @@
     reader.querySelectorAll('.reader-meta span').forEach(span=>{if(/Оригинал из архива музея|Полный текст страницы пока не получен|служебн/i.test(span.textContent||''))span.remove()});
   }
   function init(){
-    enrichData(); installLightbox();
+    enrichData(); window.applyMuseumLegacyRestorations?.(); installLightbox();
     const reader=document.getElementById('articleReader');
     if(reader)new MutationObserver(hideMigrationMeta).observe(reader,{childList:true,subtree:true});
     hideMigrationMeta();
