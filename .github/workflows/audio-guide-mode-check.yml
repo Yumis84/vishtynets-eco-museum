@@ -1,0 +1,38 @@
+name: Audio guide mode regression
+
+on:
+  pull_request:
+    paths:
+      - 'audio-guide-*.js'
+      - 'index.html'
+      - 'scripts/check-audio-guide-mode.cjs'
+      - '.github/workflows/audio-guide-mode-check.yml'
+  push:
+    branches:
+      - feature/audio-guide-open-tracks
+    paths:
+      - 'audio-guide-*.js'
+      - 'index.html'
+      - 'scripts/check-audio-guide-mode.cjs'
+      - '.github/workflows/audio-guide-mode-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify-free-mode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax
+        run: |
+          node --check audio-guide-data.js
+          node --check audio-guide-v2-core.js
+          node --check audio-guide-v2.js
+          node --check audio-guide-payment.js
+          node --check scripts/check-audio-guide-mode.cjs
+      - name: Access regression
+        run: node scripts/check-audio-guide-mode.cjs open
