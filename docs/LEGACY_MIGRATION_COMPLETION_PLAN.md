@@ -49,7 +49,13 @@ Checkpoint: 2026-10-09. Branch: `feature/legacy-migration-completion`. **Audit i
 - [x] Read previous migration and stale-status audits.
 - [x] Confirmed preserved donor repository and recovered PDF evidence.
 - [x] Created isolated feature branch.
-- [ ] Complete page-by-page source/runtime reconciliation.
-- [ ] Restore missing article bodies and media.
-- [ ] Run automated tests and deployed mobile QA.
+- [x] Complete first page-by-page source/runtime reconciliation; machine matrix is `docs/legacy-migration-matrix.csv` (130 donor HTML rows plus runtime-only rows).
+- [x] Restore source-faithful bodies for the first 11 priority pages and retain verified/pinned media mappings without copying donor binaries.
+- [ ] Run deployed public/mobile QA (NOT RUN: no installed browser executable in this environment).
 - [ ] Final verified counts and closeout.
+
+## 2026-10-09 execution checkpoint
+
+The first restoration batch is integrated into the existing runtime through `museum-legacy-restored.js`, generated from the two JSON artifacts under `data/`. It patches canonical records only and appends p0121 to `anatomy-stone`; it does not create a duplicate map article. The runtime still evaluates to 173 reconciled article records.
+
+Current matrix classification is deliberately conservative: FULL 0, PARTIAL 34, ARCHIVE-ONLY 231, SKIP 3 across 268 reconciled rows. These are row classifications, not a percentage of articles; runtime-only rows are tracked separately from the 130 donor HTML pages.
