@@ -9,6 +9,7 @@
 | JavaScript syntax | PASS | `app.js`, `article-media-v4.js`, `articles-v3.js`, `museum-legacy-restored.js`, build/export scripts with `node --check` |
 | Local script references in `index.html` | PASS | all non-remote script files exist |
 | Runtime bundle evaluation in stub DOM | PASS | 173 reconciled article records; restoration patches applied to canonical IDs; no duplicate article IDs |
+| Archival cover safety rule | PASS | archival records without a verified legacy image now render no cover; thematic fallback art is not used as historical evidence |
 | Donor text extraction and Unicode replacement check | PASS | priority extraction report; pinned donor commit `ba42a20180cc475e176c8b98606568580b754171` |
 
 ## Not run / blockers

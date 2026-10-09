@@ -12,3 +12,7 @@ The preserved donor contains **130 HTML rows**; the matrix adds **138 runtime-on
 `FULL` is intentionally zero at this checkpoint: source text restoration and repository mappings are implemented, but final source-media parity and public desktop/mobile rendering have not yet been verified.
 
 The matrix records exact source byte hashes, titles, source image/document counts, runtime block/media counts, source paths and next actions. `rominten.wystynez.ru` remains a separate DEFER workstream because the live host currently mirrors the main site response for the tested root and cannot be treated as reliable historical evidence.
+
+## Cover safety
+
+The runtime has 35 verified article covers with 35 unique URLs. Archival records without a verified source image no longer receive a thematic fallback cover; they render without a photo until the original page media is recovered and mapped.

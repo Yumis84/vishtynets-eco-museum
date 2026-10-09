@@ -32,7 +32,13 @@ function articleFallbackImage(a){
   if(/сосед|праздник|событ|проект/.test(key))return 'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i2335.jpg';
   return FALLBACK_FOREST;
 }
-function imageForArticle(a){return a?.hero||a?.images?.[0]?.src||articleFallbackImage(a)}
+function imageForArticle(a){
+  if(a?.hero||a?.images?.[0]?.src)return a.hero||a.images[0].src;
+  // Never put a thematic/generic image on an archival record: it would
+  // falsely imply that the photo belongs to the legacy source page.
+  if(a?.archival||a?.legacyUrl)return '';
+  return articleFallbackImage(a);
+}
 function categoryIcon(label){return ({'Природа':'⌁','История':'▥','Камни':'●','Валуны':'●','Мосты':'⌁','Культура':'✦','Музей':'⌂','Архитектура':'⌂','Публикации':'▤','Проекты':'◇','Все':'☷'}[label]||'⌖')}
 function primaryCategory(p){const cats=p?.categories||[];return cats[0]||p?.category||'Место'}
 function haversine(lat1,lng1,lat2,lng2){
@@ -105,7 +111,7 @@ function renderArticles(){
   $('#articleCategories').innerHTML=ARTICLE_CATEGORIES.map(c=>`<button class="${state.articleCategory===c?'is-active':''}" data-article-category="${esc(c)}" type="button">${esc(c)}</button>`).join('');
   $$('[data-article-category]').forEach(b=>b.onclick=()=>{state.articleCategory=b.dataset.articleCategory;renderArticles()});
   const list=articles.filter(a=>!state.articleFavoritesOnly||isFav('article:'+a.id)).filter(a=>state.articleCategory==='Все'||a.category===state.articleCategory).filter(a=>!q||[a.title,a.deck,a.category,a.subcategory,...(a.content||[]).map(x=>x.text||'')].join(' ').toLowerCase().includes(q));
-  $('#articleList').innerHTML=list.length?list.map(a=>`<button class="article-card" data-open-article="${esc(a.id)}" type="button" style="text-align:left;padding:0"><span class="article-media"><img src="${esc(imageForArticle(a))}" alt="" loading="lazy" onerror="this.style.display='none'"></span><span class="article-copy"><span>${esc(a.category||'Архив музея')}${a.subcategory?' · '+esc(a.subcategory):''}</span><h3>${esc(a.title)}</h3><p>${esc(a.deck||'')}</p></span></button>`).join(''):'<div class="surface-card" style="padding:18px;color:#6f756e">Ничего не найдено.</div>';
+  $('#articleList').innerHTML=list.length?list.map(a=>{const image=imageForArticle(a);return `<button class="article-card" data-open-article="${esc(a.id)}" type="button" style="text-align:left;padding:0"><span class="article-media">${image?`<img src="${esc(image)}" alt="" loading="lazy" onerror="this.style.display='none'">`:''}</span><span class="article-copy"><span>${esc(a.category||'Архив музея')}${a.subcategory?' · '+esc(a.subcategory):''}</span><h3>${esc(a.title)}</h3><p>${esc(a.deck||'')}</p></span></button>`}).join(''):'<div class="surface-card" style="padding:18px;color:#6f756e">Ничего не найдено.</div>';
   $$('[data-open-article]').forEach(b=>b.onclick=()=>openArticle(b.dataset.openArticle));
   const favButton=$('#articleFavoritesToggle');if(favButton){favButton.classList.toggle('is-active',state.articleFavoritesOnly);favButton.textContent=state.articleFavoritesOnly?'♥ Избранное':'♡ Избранное'}
 }
@@ -141,7 +147,8 @@ function openArticle(id){
     return `<p>${sourceText(block)}</p>`;
   }).join('');
   const links=(a.sourceLinks||[]).filter(link=>link.href).map(link=>`<li><a href="${esc(link.href)}" target="_blank" rel="noopener noreferrer">${esc(link.text||link.originalHref||'Источник')}</a></li>`).join('');
-  $('#articleReader').innerHTML=`<div class="reader-hero"><img src="${esc(imageForArticle(a))}" alt="" onerror="this.style.display='none'"><div class="reader-title"><span>${esc(a.category||'Архив музея')}</span><h1>${esc(a.title)}</h1></div></div><div class="reader-body"><div class="reader-meta">${a.date?`<span>◷ ${esc(a.date)}</span>`:''}${a.author?`<span>Автор: ${esc(a.author)}</span>`:''}${a.archival?'<span>Оригинал из архива музея</span>':''}</div>${a.archiveSources?'<p class="reader-archive-notice">Исторический материал. Указанные в оригинале условия посещения, цены и контакты могут быть неактуальны.</p>':''}${a.deck?`<div class="reader-lead">${esc(a.deck)}</div>`:''}${blocks}${links?`<section class="reader-source-links"><h3>Источники и материалы оригинальной страницы</h3><ul>${links}</ul></section>`:''}${related.length?`<div class="reader-map-link"><h3>Рядом на карте</h3><p>${related.map(p=>esc(p.name)).join(' · ')}</p><button id="readerMapButton" type="button">Показать на карте</button></div>`:''}</div>`;
+  const hero=imageForArticle(a);
+  $('#articleReader').innerHTML=`<div class="reader-hero">${hero?`<img src="${esc(hero)}" alt="" onerror="this.style.display='none'">`:''}<div class="reader-title"><span>${esc(a.category||'Архив музея')}</span><h1>${esc(a.title)}</h1></div></div><div class="reader-body"><div class="reader-meta">${a.date?`<span>◷ ${esc(a.date)}</span>`:''}${a.author?`<span>Автор: ${esc(a.author)}</span>`:''}${a.archival?'<span>Оригинал из архива музея</span>':''}</div>${a.archiveSources?'<p class="reader-archive-notice">Исторический материал. Указанные в оригинале условия посещения, цены и контакты могут быть неактуальны.</p>':''}${a.deck?`<div class="reader-lead">${esc(a.deck)}</div>`:''}${blocks}${links?`<section class="reader-source-links"><h3>Источники и материалы оригинальной страницы</h3><ul>${links}</ul></section>`:''}${related.length?`<div class="reader-map-link"><h3>Рядом на карте</h3><p>${related.map(p=>esc(p.name)).join(' · ')}</p><button id="readerMapButton" type="button">Показать на карте</button></div>`:''}</div>`;
   const articleFav=$('#articleFavorite');
   const syncArticleFavorite=()=>{const active=isFav('article:'+id);articleFav.textContent=active?'♥':'♡';articleFav.classList.toggle('is-active',active);articleFav.setAttribute('aria-pressed',String(active));articleFav.setAttribute('aria-label',active?'Убрать из избранного':'Добавить в избранное')};
   syncArticleFavorite();
