@@ -63,3 +63,9 @@ Current matrix classification is deliberately conservative: FULL 0, PARTIAL 34, 
 ## Donor enumeration checkpoint — 2026-10-09
 
 The pinned preserved donor tree `ba42a20180cc475e176c8b98606568580b754171` contains 1,930 tree entries, 130 HTML files, and 1,749 JPG/JPEG/PNG/GIF/WEBP files. All 130 HTML paths, blob SHA values and source sizes were recorded in `docs/legacy-donor-source-inventory.csv`. Inventory rows are deliberately `UNREVIEWED`; they do **not** claim text/media parity. Verified directly that `p38.htm` has source title «Птицы», and `p103.htm` has source title «Музейная почта».
+
+## Owner acceptance clarification — full original text and matching imagery (2026-10-09)
+
+The owner requires every article to reproduce **all recoverable original text** and **only the original editorial images from that same legacy page**, in original contextual order with available captions and credits. Do not use unrelated thematic stock/fallback covers or AI-generated historical filler. Short runtime cards must be classified as original short notices, archive index teasers, or incomplete transcriptions before calling them articles.
+
+Next implementation batch: for each remaining dedicated donor HTML page, inspect the full source body and image references; reconcile source-to-runtime by canonical source path; identify and exclude only demonstrable layout/support assets; restore missing text, captions, images, PDF/map links and source provenance. Record per-file decisions and actual source/runtime counts in the machine-readable matrix. Verify rendering and link availability, then mark FULL only when all acceptance gates pass. Keep production/main/DNS/audio guide/booking untouched and PR #70 draft until owner approval.
