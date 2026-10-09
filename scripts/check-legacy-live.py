@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Read-only HTTP evidence; lxml required. No production changes."""
-import concurrent.futures, datetime, hashlib, json, pathlib, re, sys, urllib.request, urllib.error
+import concurrent.futures, datetime, hashlib, json, pathlib, re, sys, urllib.request, urllib.error, urllib.parse
 from lxml import html
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
