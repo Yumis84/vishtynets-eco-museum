@@ -218,6 +218,7 @@ const patches=[
       }
     ],
     "hero": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0914.jpg",
+    "coverSelection": "intentional_nonfirst_source_photo:p103.htm:i0914.jpg",
     "sourceMediaCount": 20,
     "deck": ""
   },
@@ -744,6 +745,9 @@ const patches=[
         "type": "paragraph",
         "text": "21 апреля 2021 г.",
         "sourceLine": 354
+      },
+      {
+        "type": "gallery"
       }
     ],
     "archiveSources": [
@@ -772,7 +776,30 @@ const patches=[
         "imageOnly": true
       }
     ],
-    "sourceMediaCount": 0,
+    "images": [
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2190.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2191.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2198.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2200.jpg",
+        "caption": null,
+        "credit": null
+      }
+    ],
+    "hero": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i2190.jpg",
+    "sourceMediaCount": 4,
     "deck": ""
   },
   {
@@ -1967,6 +1994,9 @@ const patches=[
         "type": "paragraph",
         "text": "2015 г.",
         "sourceLine": 765
+      },
+      {
+        "type": "gallery"
       }
     ],
     "archiveSources": [
@@ -2184,7 +2214,170 @@ const patches=[
         "imageOnly": true
       }
     ],
-    "sourceMediaCount": 0,
+    "images": [
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0221.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1003.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1004.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1005.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1006.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1007.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1008.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1009.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1010.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1011.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1012.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1013.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1015.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1017.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1019.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1021.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1023.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1025.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1027.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1049.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1029.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1031.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1033.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1035.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1037.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1039.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1041.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1043.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1045.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1047.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1050.jpg",
+        "caption": null,
+        "credit": null
+      },
+      {
+        "src": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i1051.jpg",
+        "caption": null,
+        "credit": null
+      }
+    ],
+    "hero": "https://raw.githubusercontent.com/falke0039/wystynez/ba42a20180cc475e176c8b98606568580b754171/sc-pic/i0221.jpg",
+    "sourceMediaCount": 32,
     "deck": ""
   },
   {

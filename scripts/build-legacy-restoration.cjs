@@ -10,12 +10,14 @@ for(const entry of text.articles){
   patch.content.push(...entry.content.filter(b=>b.type!=='gallery'));
   patch.archiveSources.push({repository:text.sourceRepository,commit:text.sourceCommit,path:entry.sourcePage,sha256:entry.sourceSha256});
   patch.sourceLinks=[...(patch.sourceLinks||[]),...(entry.sourceLinks||[])];
+  if(entry.coverSelection)patch.coverSelection=entry.coverSelection;
   patches.set(entry.id,patch);
 }
 for(const entry of media.articles){
   const patch=patches.get(entry.id); if(!patch)throw Error('Unknown restored article '+entry.id);
   patch.images=[...(patch.images||[]),...entry.images].filter((image,i,all)=>all.findIndex(x=>x.src===image.src)===i);
   if(!patch.hero&&entry.hero)patch.hero=entry.hero;
+  if(entry.coverSelection)patch.coverSelection=entry.coverSelection;
 }
 for(const patch of patches.values()){
   if(patch.images?.length)patch.content.push({type:'gallery'});
