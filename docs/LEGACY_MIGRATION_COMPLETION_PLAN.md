@@ -23,7 +23,7 @@ Checkpoint: 2026-10-09. Branch: `feature/legacy-migration-completion`. **Audit i
 | p92 | 20 mixed-media assets linked; roles not classified | DEFER media classification | Inspect binaries and establish per-image attribution; do not guess |
 | rominten.wystynez.ru | Primary pages not reliably recovered | DEFER | Locate reliable preserved source |
 | p0087 | Publication catalogue, some exact targets unresolved | PARTIAL | Match downloadable documents to preserved archive |
-| p38 | Not established in this checkpoint | UNVERIFIED | Verify actual legacy filename and runtime representation before editing |
+| p38 | Confirmed donor file `p38.htm` has HTML title «Птицы» | PARTIAL (runtime mapping unverified) | Match runtime article and preserve full body/media |
 
 **Important:** classifications above are conservative work-queue labels, not a completed page-by-page inventory. Do not compute a completion percentage from them.
 
@@ -59,3 +59,7 @@ Checkpoint: 2026-10-09. Branch: `feature/legacy-migration-completion`. **Audit i
 The first restoration batch is integrated into the existing runtime through `museum-legacy-restored.js`, generated from the two JSON artifacts under `data/`. It patches canonical records only and appends p0121 to `anatomy-stone`; it does not create a duplicate map article. The runtime still evaluates to 173 reconciled article records.
 
 Current matrix classification is deliberately conservative: FULL 0, PARTIAL 34, ARCHIVE-ONLY 231, SKIP 3 across 268 reconciled rows. These are row classifications, not a percentage of articles; runtime-only rows are tracked separately from the 130 donor HTML pages.
+
+## Donor enumeration checkpoint — 2026-10-09
+
+The pinned preserved donor tree `ba42a20180cc475e176c8b98606568580b754171` contains 1,930 tree entries, 130 HTML files, and 1,749 JPG/JPEG/PNG/GIF/WEBP files. All 130 HTML paths, blob SHA values and source sizes were recorded in `docs/legacy-donor-source-inventory.csv`. Inventory rows are deliberately `UNREVIEWED`; they do **not** claim text/media parity. Verified directly that `p38.htm` has source title «Птицы», and `p103.htm` has source title «Музейная почта».
