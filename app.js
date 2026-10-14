@@ -173,14 +173,14 @@ async function ensureMap(){
 const MAP_CATEGORIES=['Все','Природа','История','Камни','Мосты','Музей','Гостевые дома'];
 function renderMapCategories(){
   $('#mapCategories').innerHTML=MAP_CATEGORIES.map(c=>`<button class="${(c==='Гостевые дома'?state.showGuests:state.mapCategory===c)?'is-active':''}" data-map-category="${c}" type="button">${c}</button>`).join('');
-  $$('[data-map-category]').forEach(b=>b.onclick=async()=>{const c=b.dataset.mapCategory;if(c==='Гостевые дома'){state.showGuests=!state.showGuests;if(state.showGuests)await loadGuestHouses()}else state.mapCategory=c;renderMapCategories();renderMapMarkers()});
+  $$('[data-map-category]').forEach(b=>b.onclick=async()=>{const c=b.dataset.mapCategory;if(c==='Гостевые дома'){state.showGuests=!state.showGuests;if(state.showGuests){await loadGuestHouses();if(state.showGuests)state.map.fitBounds(state.guestHouses.map(h=>[h.lat,h.lng]),{padding:[45,70],maxZoom:14})}else $('#mapCard').innerHTML=''}else state.mapCategory=c;renderMapCategories();renderMapMarkers()});
 }
 function mapPointMatches(p){return Number.isFinite(p.lat)&&Number.isFinite(p.lng)&&(p.articleIds||[]).length&&pointMatchesCategory(p,state.mapCategory)}
 function mapPin(content,guest=false){return L.divIcon({className:'',html:`<div class="${guest?'guest-pin':'poi-pin'}"><span>${content}</span></div>`,iconSize:[34,34],iconAnchor:[17,33]})}
 function renderMapMarkers(){
   if(!state.markerLayer)return;state.markerLayer.clearLayers();const q=($('#mapSearch')?.value||'').trim().toLowerCase();
   points.filter(mapPointMatches).filter(p=>!q||[p.name,p.shortDescription,p.category,...(p.categories||[])].join(' ').toLowerCase().includes(q)).forEach(p=>{const marker=L.marker([p.lat,p.lng],{icon:mapPin(categoryIcon(primaryCategory(p)))}).addTo(state.markerLayer);marker.on('click',()=>selectMapPoint(p))});
-  if(state.showGuests)state.guestHouses.filter(h=>Number.isFinite(h.lat)&&Number.isFinite(h.lng)).filter(h=>!q||[h.name,h.address,h.description].join(' ').toLowerCase().includes(q)).forEach(h=>{const marker=L.marker([h.lat,h.lng],{icon:mapPin('⌂',true)}).addTo(state.markerLayer);marker.on('click',()=>selectGuest(h))});
+  if(state.showGuests)state.guestHouses.filter(h=>Number.isFinite(h.lat)&&Number.isFinite(h.lng)).filter(h=>!q||[h.name,h.address,h.description].join(' ').toLowerCase().includes(q)).forEach(h=>{const marker=L.marker([h.lat,h.lng],{icon:mapPin('⌂',true)}).addTo(state.markerLayer);marker.getElement().dataset.guestId=h.id;marker.bindTooltip(h.name);marker.on('click',()=>selectGuest(h))});
   if(state.selectedPoint)selectMapPoint(state.selectedPoint,false);
 }
 function selectMapPoint(p,fly=false){
@@ -190,27 +190,90 @@ function selectMapPoint(p,fly=false){
   $('[data-map-article]')?.addEventListener('click',e=>openArticle(e.currentTarget.dataset.mapArticle));
 }
 function selectGuest(h){
-  $('#mapCard').innerHTML=`<article class="map-place-card"><div class="map-place-photo">${state.guestPhotos[h.id]?`<img src="${esc(state.guestPhotos[h.id])}" alt="" loading="lazy" onerror="this.style.display=\'none\'">`:"⌂"}</div><div class="map-place-copy"><span class="eyebrow">Гостевой дом</span><h3>${esc(h.name)}</h3><p>${esc(h.address||h.description||'')}</p><div class="map-place-actions"><button id="openGuestCatalog" type="button">Подробнее</button><a href="https://yandex.ru/maps/?rtext=~${h.lat},${h.lng}&rtt=auto" target="_blank" rel="noopener">Маршрут</a></div></div></article>`;
+  state.selectedPoint=null;
+  $('#mapCard').innerHTML=`<article class="map-place-card"><div class="map-place-photo">${state.guestPhotos[h.id]?`<img src="${esc(state.guestPhotos[h.id])}" alt="" onerror="this.parentElement.textContent=\'Фото недоступно\'">`:"⌂"}</div><div class="map-place-copy"><span class="eyebrow">Гостевой дом</span><h3>${esc(h.name)}</h3><p>${esc(h.address||h.description||'')}</p><div class="map-place-actions"><button id="openGuestCatalog" type="button">Подробнее</button><a href="https://yandex.ru/maps/?rtext=~${h.lat},${h.lng}&rtt=auto" target="_blank" rel="noopener">Маршрут</a></div></div></article>`;
   $('#openGuestCatalog').onclick=()=>window.open('https://yumis84.github.io/guest-house-map/?house='+encodeURIComponent(h.id),'_blank','noopener');
+}
+// Read only static literal data from the existing catalog; never execute remote code.
+function parseGuestLiteral(text){
+  const tokens=text.match(/"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?|[A-Za-z_$][\w$]*|[{}\[\],:]|\s+|./gs)||[];
+  const parts=[];
+  for(let i=0;i<tokens.length;i++){
+    const token=tokens[i];
+    if(/^\s+$/.test(token))continue;
+    if(token[0]==='"'){parts.push(JSON.stringify(JSON.parse(token)));continue}
+    if(token[0]==="'"){
+      let value='';
+      for(let j=1;j<token.length-1;j++){
+        if(token[j]!=='\\'){value+=token[j];continue}
+        const c=token[++j];
+        if(c==="'"){value+="'";continue}
+        if(c==='u'){
+          const hex=token.slice(j+1,j+5);
+          if(!/^[0-9a-f]{4}$/i.test(hex))throw Error('Invalid string escape');
+          value+=String.fromCharCode(parseInt(hex,16));j+=4;
+        }else{
+          const escapes={'"':'"','\\':'\\','/':'/',b:'\b',f:'\f',n:'\n',r:'\r',t:'\t'};
+          if(!Object.hasOwn(escapes,c))throw Error('Invalid string escape');
+          value+=escapes[c];
+        }
+      }
+      parts.push(JSON.stringify(value));continue;
+    }
+    if(/^[A-Za-z_$]/.test(token)){
+      const next=tokens.slice(i+1).find(t=>!/^\s+$/.test(t));
+      if(next===':')parts.push(JSON.stringify(token));
+      else if(['true','false','null'].includes(token))parts.push(token);
+      else throw Error('Non-literal catalog value');
+    }else parts.push(token);
+  }
+  return JSON.parse(parts.filter((t,i)=>t!==','||!['}',']'].includes(parts[i+1])).join(''));
 }
 async function loadGuestHouses(){
   if(state.guestHouses.length)return;
+  const base='https://raw.githubusercontent.com/Yumis84/guest-house-map/main/';
+  const read=async file=>{
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),10000);
+    try{
+      const response=await fetch(base+file,{cache:'no-store',signal:controller.signal});
+      if(!response.ok)throw Error('Guest source unavailable');
+      return await response.text();
+    }finally{clearTimeout(timer)}
+  };
   try{
-    const base='https://raw.githubusercontent.com/Yumis84/guest-house-map/main/';
-    const [data,photos]=await Promise.all([
-      fetch(base+'guest-houses.js',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('catalog');return r.text()}),
-      fetch(base+'guest-photos-v4.js',{cache:'no-store'}).then(r=>r.ok?r.text():'').catch(()=>'')
-    ]);
-    const match=data.match(/window\.GUEST_HOUSES\s*=\s*(\[[\s\S]*\]);/);
-    if(!match)throw Error('catalog format');
-    state.guestHouses=Function('"use strict";return ('+match[1]+')')().filter(h=>h.active!==false&&!h.parentId);
-    for(const h of state.guestHouses){
-      const start=photos.indexOf(h.id+':');
-      if(start<0)continue;
-      const image=photos.slice(start).match(/images:\s*\[\s*['"]([^'"]+)['"]/);
-      if(image)state.guestPhotos[h.id]='https://yumis84.github.io/guest-house-map/'+image[1];
+    const [data,photos]=await Promise.all([read('guest-houses.js'),read('guest-photos-v4.js').catch(()=>'')]);
+    const match=data.match(/window\.GUEST_HOUSES\s*=\s*(\[[\s\S]*?\]);/);
+    if(!match)throw Error('Catalog format');
+    const houses=parseGuestLiteral(match[1]);
+    if(!Array.isArray(houses))throw Error('Catalog type');
+    const parents=houses.filter(h=>h&&h.active!==false&&!h.parentId);
+    const ids=new Set();
+    for(const h of parents){
+      if(!/^house_\d+$/.test(h.id)||ids.has(h.id)||typeof h.name!=='string'||!h.name.trim()||
+        !Number.isFinite(h.lat)||Math.abs(h.lat)>90||!Number.isFinite(h.lng)||Math.abs(h.lng)>180)throw Error('Invalid guest house');
+      ids.add(h.id);
     }
-  }catch(e){state.showGuests=false}
+    if(!parents.length)throw Error('Empty catalog');
+    let sources={};
+    try{
+      const match=photos.match(/const\s+SOURCES\s*=\s*({[\s\S]*?});/);
+      if(match)sources=parseGuestLiteral(match[1]);
+    }catch(e){/* A photo failure must not remove usable house markers. */}
+    state.guestPhotos={};
+    for(const h of parents){
+      const path=sources?.[h.id]?.images?.[0];
+      if(typeof path!=='string')continue;
+      const url=new URL(path,'https://yumis84.github.io/guest-house-map/');
+      if(url.origin==='https://yumis84.github.io'&&url.pathname.startsWith('/guest-house-map/assets/'))state.guestPhotos[h.id]=url.href;
+    }
+    state.guestHouses=parents;
+    if($('#mapCard [data-guest-error]'))$('#mapCard').innerHTML='';
+  }catch(e){
+    state.showGuests=false;
+    state.selectedPoint=null;
+    $('#mapCard').innerHTML='<div class="surface-card" data-guest-error role="status" style="padding:18px">Не удалось загрузить гостевые дома. Попробуйте включить слой ещё раз. Музейные места остаются доступны.</div>';
+  }
 }
 
 function bind(){
