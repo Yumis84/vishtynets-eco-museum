@@ -195,7 +195,22 @@ function selectGuest(h){
 }
 async function loadGuestHouses(){
   if(state.guestHouses.length)return;
-  try{const text=await fetch('https://raw.githubusercontent.com/Yumis84/guest-house-map/main/guest-houses.js',{cache:'no-store'}).then(r=>r.text());const m=text.match(/window\.GUEST_HOUSES\s*=\s*(\[[\s\S]*?\]);/);if(m)state.guestHouses=Function('"use strict";return ('+m[1]+')')().filter(h=>h.active!==false&&!h.parentId);const photos=await fetch('https://raw.githubusercontent.com/Yumis84/guest-house-map/main/guest-photos-v4.js',{cache:'no-store'}).then(r=>r.ok?r.text():'').catch(()=>'');for(const h of state.guestHouses){const escaped=h.id.replace(/[.*+?^${}()|[\]\\]/g,'\\if(m)state.guestHouses=Function('"use strict";return ('+m[1]+')')().filter(h=>h.active!==false)');const block=photos.match(new RegExp(escaped+':\\s*\\{[\\s\\S]*?images:\\s*\\[\\s*[\\\'\\\"]([^\\\'\\\"]+)'));if(block)state.guestPhotos[h.id]='https://yumis84.github.io/guest-house-map/'+block[1]}}catch(e){state.showGuests=false}
+  try{
+    const base='https://raw.githubusercontent.com/Yumis84/guest-house-map/main/';
+    const [data,photos]=await Promise.all([
+      fetch(base+'guest-houses.js',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('catalog');return r.text()}),
+      fetch(base+'guest-photos-v4.js',{cache:'no-store'}).then(r=>r.ok?r.text():'').catch(()=>'')
+    ]);
+    const match=data.match(/window\.GUEST_HOUSES\s*=\s*(\[[\s\S]*?\]);/);
+    if(!match)throw Error('catalog format');
+    state.guestHouses=Function('"use strict";return ('+match[1]+')')().filter(h=>h.active!==false&&!h.parentId);
+    for(const h of state.guestHouses){
+      const start=photos.indexOf(h.id+':');
+      if(start<0)continue;
+      const image=photos.slice(start).match(/images:\s*\[\s*['"]([^'"]+)['"]/);
+      if(image)state.guestPhotos[h.id]='https://yumis84.github.io/guest-house-map/'+image[1];
+    }
+  }catch(e){state.showGuests=false}
 }
 
 function bind(){
