@@ -136,15 +136,7 @@ function installCardGesture(){
 
 function observeMapUi(){
   new MutationObserver(()=>requestAnimationFrame(()=>enhanceCategoryChips())).observe(categories,{childList:true,subtree:false});
-  new MutationObserver(()=>{
-    const card=cardWrap.querySelector('.map-place-card');
-    if(!card)return;
-    const guest=card.querySelector('.map-place-copy .eyebrow')?.textContent?.trim()==='Гостевой дом';
-    if(guest){
-      const photo=card.querySelector('.map-place-photo');
-      if(photo&&!photo.querySelector('.v3-svg-icon'))photo.innerHTML=svg('bed');
-    }
-  }).observe(cardWrap,{childList:true,subtree:true});
+
 }
 
 function init(){
