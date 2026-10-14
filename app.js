@@ -201,7 +201,7 @@ async function loadGuestHouses(){
       fetch(base+'guest-houses.js',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('catalog');return r.text()}),
       fetch(base+'guest-photos-v4.js',{cache:'no-store'}).then(r=>r.ok?r.text():'').catch(()=>'')
     ]);
-    const match=data.match(/window\.GUEST_HOUSES\s*=\s*(\[[\s\S]*?\]);/);
+    const match=data.match(/window\.GUEST_HOUSES\s*=\s*(\[[\s\S]*\]);/);
     if(!match)throw Error('catalog format');
     state.guestHouses=Function('"use strict";return ('+match[1]+')')().filter(h=>h.active!==false&&!h.parentId);
     for(const h of state.guestHouses){
