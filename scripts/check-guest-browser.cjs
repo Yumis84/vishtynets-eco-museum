@@ -51,6 +51,7 @@ async function source(file){const r=await fetch(base+file);assert.ok(r.ok);retur
         assert.equal(await route.getAttribute('target'),'_blank');
         assert.match(await route.getAttribute('rel'),/noopener/);
         assert.equal(await route.isVisible(),true);
+        await route.click({trial:true}); // Verify that map controls do not cover the action.
         const bounds=await page.locator('#mapCard .map-place-card').boundingBox();
         assert.ok(bounds.x>=0&&bounds.x+bounds.width<=viewport.width+1,'Card fits screen');
         await page.screenshot({path:`${artifacts}/map-${viewport.width}-${h.id}.png`});

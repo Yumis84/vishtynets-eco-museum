@@ -4,6 +4,7 @@ on:
     paths:
       - 'app.js'
       - 'map-v3.js'
+      - 'map-v3.css'
       - 'scripts/check-guest-browser.cjs'
       - 'index.html'
       - '.github/workflows/guest-map-browser.yml'

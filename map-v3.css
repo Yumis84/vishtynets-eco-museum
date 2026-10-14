@@ -83,3 +83,5 @@
   .screen-map .map-place-copy h3{font-size:18px}
   .screen-map .map-place-copy p{font-size:12px}
 }
+/* Keep zoom controls clear of the property card and its route button. */
+.screen-map:has(#mapCard .map-place-card) .leaflet-control-zoom{margin-bottom:250px!important}
