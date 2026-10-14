@@ -33,7 +33,7 @@ jobs:
                 const errors=[];
                 page.on('pageerror',e=>errors.push(e.message));
                 await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
-                await page.locator('[data-nav="map"]').click();
+                await page.locator('#bottomNav [data-nav="map"]').click();
                 await page.locator('[data-map-category="Гостевые дома"]').waitFor({timeout:25000});
                 await page.locator('[data-map-category="Гостевые дома"]').click();
                 await page.locator('.guest-pin').first().waitFor({timeout:25000});
