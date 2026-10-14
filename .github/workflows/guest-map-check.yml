@@ -1,0 +1,42 @@
+name: Guest map integration check
+on:
+  pull_request:
+    paths:
+      - 'app.js'
+      - 'map-v3.js'
+      - '.github/workflows/guest-map-check.yml'
+  workflow_dispatch:
+jobs:
+  guest-map:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: JavaScript syntax
+        run: |
+          node --check app.js
+          node --check map-v3.js
+      - name: Verify guest catalog and photo sources
+        shell: bash
+        run: |
+          curl -fsSL --retry 3 https://raw.githubusercontent.com/Yumis84/guest-house-map/main/guest-houses.js -o /tmp/guest-houses.js
+          curl -fsSL --retry 3 https://raw.githubusercontent.com/Yumis84/guest-house-map/main/guest-photos-v4.js -o /tmp/guest-photos-v4.js
+          node <<'NODE'
+          const fs=require('fs');
+          const vm=require('vm');
+          const data=fs.readFileSync('/tmp/guest-houses.js','utf8');
+          const photos=fs.readFileSync('/tmp/guest-photos-v4.js','utf8');
+          const app=fs.readFileSync('app.js','utf8');
+          const match=data.match(/window\.GUEST_HOUSES\s*=\s*(\[[\s\S]*\]);/);
+          if(!match)throw Error('Guest catalog format changed');
+          const houses=vm.runInNewContext('('+match[1]+')').filter(h=>h.active!==false&&!h.parentId);
+          if(!houses.length)throw Error('No active parent properties');
+          if(!app.includes('!h.parentId')||!app.includes('state.guestPhotos[h.id]?'))throw Error('Map integration missing');
+          for(const h of houses){
+            if(!Number.isFinite(h.lat)||!Number.isFinite(h.lng))throw Error('Invalid coordinates: '+h.id);
+            const start=photos.indexOf(h.id+':');
+            const image=start<0?null:photos.slice(start).match(/images:\s*\[\s*['"]([^'"]+)['"]/);
+            if(!image)throw Error('Missing cover photo: '+h.id);
+            console.log(h.id, image[1]);
+          }
+          console.log('PASS:',houses.length,'parent properties with photos');
+          NODE
