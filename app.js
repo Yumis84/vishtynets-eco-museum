@@ -191,7 +191,7 @@ function selectMapPoint(p,fly=false){
 }
 function selectGuest(h){
   $('#mapCard').innerHTML=`<article class="map-place-card"><div class="map-place-photo">${state.guestPhotos[h.id]?`<img src="${esc(state.guestPhotos[h.id])}" alt="" loading="lazy" onerror="this.style.display=\'none\'">`:"⌂"}</div><div class="map-place-copy"><span class="eyebrow">Гостевой дом</span><h3>${esc(h.name)}</h3><p>${esc(h.address||h.description||'')}</p><div class="map-place-actions"><button id="openGuestCatalog" type="button">Подробнее</button><a href="https://yandex.ru/maps/?rtext=~${h.lat},${h.lng}&rtt=auto" target="_blank" rel="noopener">Маршрут</a></div></div></article>`;
-  $('#openGuestCatalog').onclick=()=>window.open('https://yumis84.github.io/guest-house-map/','_blank','noopener');
+  $('#openGuestCatalog').onclick=()=>window.open('https://yumis84.github.io/guest-house-map/?house='+encodeURIComponent(h.id),'_blank','noopener');
 }
 async function loadGuestHouses(){
   if(state.guestHouses.length)return;
