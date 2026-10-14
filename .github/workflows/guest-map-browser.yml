@@ -57,7 +57,7 @@ jobs:
                     try{el.click()}finally{window.open=original}
                     return url;
                   });
-                  if(!target || !/^https:\\/\\/yumis84\\.github\\.io\\/guest-house-map\\/\\?house=house_\\d+$/.test(target))
+                  if(!target || !target.startsWith('https://yumis84.github.io/guest-house-map/?house=house_') || !/^house_[0-9]+$/.test(new URL(target).searchParams.get('house')||''))
                     throw Error('Incorrect house detail link: '+target);
                   console.log('PASS',viewport.width,'house',i+1,'photo and direct link:',target);
                 }
