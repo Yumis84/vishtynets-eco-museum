@@ -1,0 +1,58 @@
+name: Guest map browser smoke
+on:
+  pull_request:
+    paths:
+      - 'app.js'
+      - 'index.html'
+      - '.github/workflows/guest-map-browser.yml'
+  workflow_dispatch:
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Run local preview and browser checks
+        shell: bash
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/museum-preview.log 2>&1 &
+          node <<'NODE'
+          const {chromium}=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            try{
+              for(const viewport of [{width:390,height:844},{width:1366,height:900}]){
+                const page=await browser.newPage({viewport,deviceScaleFactor:1});
+                const errors=[];
+                page.on('pageerror',e=>errors.push(e.message));
+                await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
+                await page.locator('[data-nav="map"]').click();
+                await page.locator('[data-map-category="Гостевые дома"]').waitFor({timeout:25000});
+                await page.locator('[data-map-category="Гостевые дома"]').click();
+                await page.locator('.guest-pin').first().waitFor({timeout:25000});
+                const count=await page.locator('.guest-pin').count();
+                if(count!==7)throw Error('Expected 7 guest pins, got '+count);
+                await page.locator('.guest-pin').first().click();
+                await page.locator('#mapCard .map-place-photo img').waitFor({timeout:15000});
+                const image=page.locator('#mapCard .map-place-photo img');
+                await image.evaluate(img=>new Promise((resolve,reject)=>{
+                  if(img.complete)return img.naturalWidth>0?resolve():reject(Error('Image failed'));
+                  img.addEventListener('load',()=>resolve(),{once:true});
+                  img.addEventListener('error',()=>reject(Error('Image failed')),{once:true});
+                }));
+                await page.locator('#openGuestCatalog').waitFor();
+                await page.screenshot({path:'/tmp/guest-map-'+viewport.width+'.png'});
+                if(errors.length)console.log('Page errors:',errors);
+                console.log('PASS',viewport.width,'guest pins:',count,'photo loaded');
+                await page.close();
+              }
+            }finally{await browser.close()}
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
