@@ -35,10 +35,20 @@ function enhanceCategoryChips(root=categories){
     const icon=button.querySelector('.v3-svg-icon');
     if(icon){icon.style.width='16px';icon.style.height='16px';icon.style.display='inline-block';icon.style.verticalAlign='-3px';icon.style.marginRight='6px'}
   });
-  layersButton.classList.toggle('is-layer-active',activeGuestLayer());
+  syncPanelButtons();
 }
 
+function syncPanelButtons(){
+  const open=sheet.classList.contains('is-open')&&sheet.classList.contains('map-control-sheet');
+  for(const [button,panel] of [[filterButton,'filters'],[layersButton,'layers']]){
+    const active=open&&sheet.dataset.mapPanel===panel;
+    button.classList.toggle('is-panel-open',active);
+    button.classList.remove('is-layer-active');
+    button.setAttribute('aria-expanded',String(active));
+  }
+}
 function openSheet(title,intro,html){
+  sheet.dataset.mapPanel=title==='Слои'?'layers':'filters';
   sheet.classList.remove('is-place-detail','is-route-detail');
   sheet.classList.add('is-open','map-control-sheet');
   sheet.setAttribute('aria-hidden','false');
@@ -49,9 +59,9 @@ function openFilterSheet(){
   const buttons=$$('[data-map-category]',categories).filter(b=>b.dataset.mapCategory!=='Гостевые дома');
   const html=`<div class="map-filter-sheet-grid">${buttons.map(b=>{
     const label=b.dataset.mapCategory;
-    return `<button class="${b.classList.contains('is-active')?'is-active':''}" data-map-sheet-category="${label}" type="button">${svg(iconName(label))}<span>${label}</span></button>`;
+    return `<button aria-pressed="${b.getAttribute('aria-pressed')}" class="${b.classList.contains('is-active')?'is-active':''}" data-map-sheet-category="${label}" type="button">${svg(iconName(label))}<span>${label}</span></button>`;
   }).join('')}</div>`;
-  openSheet('Фильтры','Показываем только музейные места с проверенными координатами. Выберите тему карты.',html);
+  openSheet('Фильтры','Показываем только музейные места с проверенными координатами. Повторное нажатие снимает категорию. Гостевые дома включаются отдельно в слоях.',html);
   $$('[data-map-sheet-category]',content).forEach(button=>button.addEventListener('click',()=>{
     const target=categories.querySelector(`[data-map-category="${CSS.escape(button.dataset.mapSheetCategory)}"]`);
     target?.click();
@@ -61,16 +71,17 @@ function openFilterSheet(){
 
 function layerMarkup(){
   const guests=activeGuestLayer();
+  const museum=categories.dataset.museumVisible!=='false';
   return `<div class="map-layer-list">
     <div class="map-layer-row">
       <span class="map-layer-icon">${svg('museum')}</span>
       <span><strong>Музейные места</strong><small>Проверенные точки природы, истории и культуры</small></span>
-      <button class="map-layer-switch is-active" type="button" aria-label="Музейные места включены" disabled></button>
+      <button class="map-layer-switch ${museum?'is-active':''}" id="mapMuseumLayerSwitch" type="button" aria-label="Музейные места" aria-pressed="${museum}"></button>
     </div>
     <div class="map-layer-row">
       <span class="map-layer-icon">${svg('bed')}</span>
       <span><strong>Гостевые дома</strong><small>Данные загружаются из отдельного актуального сервиса</small></span>
-      <button class="map-layer-switch ${guests?'is-active':''}" id="mapGuestLayerSwitch" type="button" aria-pressed="${guests}"></button>
+      <button class="map-layer-switch ${guests?'is-active':''}" id="mapGuestLayerSwitch" type="button" aria-label="Гостевые дома" aria-pressed="${guests}"></button>
     </div>
     <div class="map-layer-row">
       <span class="map-layer-icon">${svg('route')}</span>
@@ -82,14 +93,22 @@ function layerMarkup(){
 
 function openLayersSheet(){
   openSheet('Слои','Включайте дополнительные данные поверх основной музейной карты.',layerMarkup());
+  const museumToggle=$('#mapMuseumLayerSwitch',content);
+  museumToggle.addEventListener('click',()=>{
+    categories.dispatchEvent(new Event('map-museum-layer-toggle'));
+    const on=categories.dataset.museumVisible!=='false';
+    museumToggle.classList.toggle('is-active',on);
+    museumToggle.setAttribute('aria-pressed',String(on));
+  });
   const toggle=$('#mapGuestLayerSwitch',content);
   toggle?.addEventListener('click',async()=>{
     const chip=categories.querySelector('[data-map-category="Гостевые дома"]');
-    await chip?.onclick();
+    toggle.disabled=true;
+    try{await chip?.onclick()}finally{toggle.disabled=false}
     const on=activeGuestLayer();
     toggle.classList.toggle('is-active',on);
     toggle.setAttribute('aria-pressed',String(on));
-    layersButton.classList.toggle('is-layer-active',on);
+    syncPanelButtons();
   });
 }
 
@@ -135,6 +154,7 @@ function installCardGesture(){
 
 function observeMapUi(){
   new MutationObserver(()=>requestAnimationFrame(()=>enhanceCategoryChips())).observe(categories,{childList:true,subtree:false});
+  new MutationObserver(syncPanelButtons).observe(sheet,{attributes:true,attributeFilter:['class','data-map-panel']});
 
 }
 

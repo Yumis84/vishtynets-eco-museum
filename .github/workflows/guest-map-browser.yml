@@ -6,6 +6,7 @@ on:
       - 'map-v3.js'
       - 'map-v3.css'
       - 'scripts/check-guest-browser.cjs'
+      - 'scripts/check-map-filters.cjs'
       - 'index.html'
       - '.github/workflows/guest-map-browser.yml'
   workflow_dispatch:
@@ -29,6 +30,7 @@ jobs:
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/museum-preview.log 2>&1 &
           node scripts/check-guest-browser.cjs
+          node scripts/check-map-filters.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

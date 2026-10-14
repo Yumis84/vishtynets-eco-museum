@@ -10,7 +10,7 @@ const pointById=id=>points.find(p=>p.id===id);
 const articleById=id=>articles.find(a=>a.id===id);
 const FAVORITES_KEY='vishtynets_v2_favorites';
 const favorites=new Set(JSON.parse(localStorage.getItem(FAVORITES_KEY)||'[]'));
-const state={screen:'home',previous:'home',exploreCategory:'Все',articleCategory:'Все',articleFavoritesOnly:false,mapCategory:'Все',showGuests:false,map:null,markerLayer:null,userMarker:null,guestHouses:[],guestPhotos:{},selectedPoint:null};
+const state={screen:'home',previous:'home',exploreCategory:'Все',articleCategory:'Все',articleFavoritesOnly:false,mapCategory:'Все',showGuests:false,showMuseum:true,selectedGuest:null,map:null,markerLayer:null,userMarker:null,guestHouses:[],guestPhotos:{},selectedPoint:null};
 const FALLBACK_FOREST='https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1423.jpg';
 const FALLBACK_MUSEUM='https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1665.jpg';
 
@@ -172,25 +172,62 @@ async function ensureMap(){
 }
 const MAP_CATEGORIES=['Все','Природа','История','Камни','Мосты','Музей','Гостевые дома'];
 function renderMapCategories(){
-  $('#mapCategories').innerHTML=MAP_CATEGORIES.map(c=>`<button class="${(c==='Гостевые дома'?state.showGuests:state.mapCategory===c)?'is-active':''}" data-map-category="${c}" type="button">${c}</button>`).join('');
-  $$('[data-map-category]').forEach(b=>b.onclick=async()=>{const c=b.dataset.mapCategory;if(c==='Гостевые дома'){state.showGuests=!state.showGuests;if(state.showGuests){await loadGuestHouses();if(state.showGuests)state.map.fitBounds(state.guestHouses.map(h=>[h.lat,h.lng]),{padding:[45,70],maxZoom:14})}else $('#mapCard').innerHTML=''}else state.mapCategory=c;renderMapCategories();renderMapMarkers()});
+  $('#mapCategories').dataset.museumVisible=String(state.showMuseum);
+  $('#mapCategories').innerHTML=MAP_CATEGORIES.map(c=>{
+    const active=c==='Гостевые дома'?state.showGuests:state.showMuseum&&state.mapCategory===c;
+    return `<button class="${active?'is-active':''}" aria-pressed="${active}" data-map-category="${c}" type="button">${c}</button>`;
+  }).join('');
+  $$('[data-map-category]').forEach(b=>b.onclick=async()=>{
+    const c=b.dataset.mapCategory;
+    state.selectedPoint=null;state.selectedGuest=null;$('#mapCard').innerHTML='';
+    if(c==='Гостевые дома'){
+      state.showGuests=!state.showGuests;
+      if(state.showGuests){
+        b.disabled=true;
+        await loadGuestHouses();
+        if(state.showGuests)state.map.fitBounds(state.guestHouses.map(h=>[h.lat,h.lng]),{padding:[45,70],maxZoom:14});
+      }
+    }else{
+      state.mapCategory=state.showMuseum&&state.mapCategory===c?'Все':c;
+      state.showMuseum=true;
+    }
+    renderMapCategories();renderMapMarkers();
+  });
 }
 function mapPointMatches(p){return Number.isFinite(p.lat)&&Number.isFinite(p.lng)&&(p.articleIds||[]).length&&pointMatchesCategory(p,state.mapCategory)}
 function mapPin(content,guest=false){return L.divIcon({className:'',html:`<div class="${guest?'guest-pin':'poi-pin'}"><span>${content}</span></div>`,iconSize:[34,34],iconAnchor:[17,33]})}
 function renderMapMarkers(){
-  if(!state.markerLayer)return;state.markerLayer.clearLayers();const q=($('#mapSearch')?.value||'').trim().toLowerCase();
-  points.filter(mapPointMatches).filter(p=>!q||[p.name,p.shortDescription,p.category,...(p.categories||[])].join(' ').toLowerCase().includes(q)).forEach(p=>{const marker=L.marker([p.lat,p.lng],{icon:mapPin(categoryIcon(primaryCategory(p)))}).addTo(state.markerLayer);marker.on('click',()=>selectMapPoint(p))});
-  if(state.showGuests)state.guestHouses.filter(h=>Number.isFinite(h.lat)&&Number.isFinite(h.lng)).filter(h=>!q||[h.name,h.address,h.description].join(' ').toLowerCase().includes(q)).forEach(h=>{const marker=L.marker([h.lat,h.lng],{icon:mapPin('⌂',true)}).addTo(state.markerLayer);marker.getElement().dataset.guestId=h.id;marker.bindTooltip(esc(h.name));marker.on('click',()=>selectGuest(h))});
+  if(!state.markerLayer)return;
+  state.markerLayer.clearLayers();
+  const q=($('#mapSearch')?.value||'').trim().toLowerCase();
+  const museum=state.showMuseum?points.filter(mapPointMatches).filter(p=>!q||[p.name,p.shortDescription,p.category,...(p.categories||[])].join(' ').toLowerCase().includes(q)):[];
+  const guests=state.showGuests?state.guestHouses.filter(h=>Number.isFinite(h.lat)&&Number.isFinite(h.lng)).filter(h=>!q||[h.name,h.address,h.description].join(' ').toLowerCase().includes(q)):[];
+  museum.forEach(p=>{
+    const category=state.mapCategory==='Все'?primaryCategory(p):state.mapCategory;
+    const marker=L.marker([p.lat,p.lng],{icon:mapPin(categoryIcon(category)),title:p.name}).addTo(state.markerLayer);
+    marker.getElement().dataset.pointId=p.id;marker.getElement().dataset.pointCategory=category;
+    marker.bindTooltip(esc(p.name));marker.on('click',()=>selectMapPoint(p));
+  });
+  guests.forEach(h=>{
+    const marker=L.marker([h.lat,h.lng],{icon:mapPin('⌂',true),title:h.name}).addTo(state.markerLayer);
+    marker.getElement().dataset.guestId=h.id;marker.bindTooltip(esc(h.name));marker.on('click',()=>selectGuest(h));
+  });
+  if(state.selectedPoint&&!museum.some(p=>p.id===state.selectedPoint.id))state.selectedPoint=null;
+  if(state.selectedGuest&&!guests.some(h=>h.id===state.selectedGuest))state.selectedGuest=null;
   if(state.selectedPoint)selectMapPoint(state.selectedPoint,false);
+  else if(state.selectedGuest)selectGuest(guests.find(h=>h.id===state.selectedGuest));
+  else if(!$('#mapCard [data-guest-error]')){
+    $('#mapCard').innerHTML=museum.length||guests.length?'':'<div class="surface-card" data-map-empty role="status" style="padding:18px">Нет мест по выбранным условиям. Измените поиск, категорию или включите слой.</div>';
+  }
 }
 function selectMapPoint(p,fly=false){
-  if(!p||!Number.isFinite(p.lat)||!state.map)return;state.selectedPoint=p;if(fly)state.map.flyTo([p.lat,p.lng],15);
+  if(!p||!Number.isFinite(p.lat)||!state.map)return;state.selectedGuest=null;state.selectedPoint=p;if(fly)state.map.flyTo([p.lat,p.lng],15);
   const related=(p.articleIds||[]).map(articleById).filter(Boolean);
   $('#mapCard').innerHTML=`<article class="map-place-card"><div class="map-place-photo"><img src="${esc(imageForPoint(p))}" alt="" onerror="this.style.display='none'"></div><div class="map-place-copy"><span class="eyebrow">${esc(primaryCategory(p))}</span><h3>${esc(p.name)}</h3><p>${esc(p.shortDescription||'')}</p><div class="map-place-actions">${related.length?`<button data-map-article="${esc(related[0].id)}" type="button">Статья</button>`:''}<a href="https://yandex.ru/maps/?rtext=~${p.lat},${p.lng}&rtt=auto" target="_blank" rel="noopener">Маршрут</a></div></div></article>`;
   $('[data-map-article]')?.addEventListener('click',e=>openArticle(e.currentTarget.dataset.mapArticle));
 }
 function selectGuest(h){
-  state.selectedPoint=null;
+  state.selectedPoint=null;state.selectedGuest=h.id;
   $('#mapCard').innerHTML=`<article class="map-place-card"><div class="map-place-photo">${state.guestPhotos[h.id]?`<img src="${esc(state.guestPhotos[h.id])}" alt="" onerror="this.parentElement.textContent=\'Фото недоступно\'">`:"⌂"}</div><div class="map-place-copy"><span class="eyebrow">Гостевой дом</span><h3>${esc(h.name)}</h3><p>${esc(h.address||h.description||'')}</p><div class="map-place-actions"><button id="openGuestCatalog" type="button">Подробнее</button><a href="https://yandex.ru/maps/?rtext=~${h.lat},${h.lng}&rtt=auto" target="_blank" rel="noopener">Маршрут</a></div></div></article>`;
   $('#openGuestCatalog').onclick=()=>window.open('https://yumis84.github.io/guest-house-map/?house='+encodeURIComponent(h.id),'_blank','noopener');
 }
@@ -286,6 +323,11 @@ function bind(){
   $('#exploreSearch').addEventListener('input',renderExplore);
   $('#articleSearch').addEventListener('input',renderArticles);
   $('#mapSearch').addEventListener('input',renderMapMarkers);
+  $('#mapCategories').addEventListener('map-museum-layer-toggle',()=>{
+    state.showMuseum=!state.showMuseum;
+    if(!state.showMuseum)state.selectedPoint=null;
+    renderMapCategories();renderMapMarkers();
+  });
   $('#articleFavoritesToggle').onclick=()=>{state.articleFavoritesOnly=!state.articleFavoritesOnly;renderArticles()};
   $('#favoritesToggle').onclick=()=>{const only=$('#favoritesToggle').classList.toggle('is-active');$('#favoritesToggle').textContent=only?'♥ Избранное':'♡ Избранное';if(only){const q=$('#exploreSearch').value;$('#exploreSearch').value='';const rows=points.filter(p=>isFav(p.id));$('#exploreList').innerHTML=rows.map(p=>`<article class="place-row" data-open-place="${esc(p.id)}"><div class="place-row-media"><img src="${esc(imageForPoint(p))}" alt=""></div><div class="place-row-copy"><span class="place-type">${esc(primaryCategory(p))}</span><h3>${esc(p.name)}</h3><p>${esc(p.shortDescription||'')}</p></div></article>`).join('')||'<div class="surface-card" style="padding:18px;color:#6f756e">Избранных мест пока нет.</div>';$$('[data-open-place]').forEach(r=>r.onclick=()=>openPlace(r.dataset.openPlace));$('#favoritesToggle').dataset.oldQuery=q}else renderExplore()};
   $('#routeMuseum').onclick=()=>window.open('https://yandex.ru/maps/?rtext=~54.394535,22.374779&rtt=auto','_blank','noopener');
