@@ -10,7 +10,7 @@ const pointById=id=>points.find(p=>p.id===id);
 const articleById=id=>articles.find(a=>a.id===id);
 const FAVORITES_KEY='vishtynets_v2_favorites';
 const favorites=new Set(JSON.parse(localStorage.getItem(FAVORITES_KEY)||'[]'));
-const state={screen:'home',previous:'home',exploreCategory:'Все',articleCategory:'Все',articleFavoritesOnly:false,mapCategory:'Все',showGuests:false,map:null,markerLayer:null,userMarker:null,guestHouses:[],selectedPoint:null};
+const state={screen:'home',previous:'home',exploreCategory:'Все',articleCategory:'Все',articleFavoritesOnly:false,mapCategory:'Все',showGuests:false,map:null,markerLayer:null,userMarker:null,guestHouses:[],guestPhotos:{},selectedPoint:null};
 const FALLBACK_FOREST='https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1423.jpg';
 const FALLBACK_MUSEUM='https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1665.jpg';
 
@@ -195,7 +195,7 @@ function selectGuest(h){
 }
 async function loadGuestHouses(){
   if(state.guestHouses.length)return;
-  try{const text=await fetch('https://raw.githubusercontent.com/Yumis84/guest-house-map/main/guest-houses.js',{cache:'no-store'}).then(r=>r.text());const m=text.match(/window\.GUEST_HOUSES\s*=\s*(\[[\s\S]*?\]);/);if(m)state.guestHouses=Function('"use strict";return ('+m[1]+')')().filter(h=>h.active!==false)}catch(e){state.showGuests=false}
+  try{const text=await fetch('https://raw.githubusercontent.com/Yumis84/guest-house-map/main/guest-houses.js',{cache:'no-store'}).then(r=>r.text());const m=text.match(/window\.GUEST_HOUSES\s*=\s*(\[[\s\S]*?\]);/);if(m)state.guestHouses=Function('"use strict";return ('+m[1]+')')().filter(h=>h.active!==false&&!h.parentId);const photos=await fetch('https://raw.githubusercontent.com/Yumis84/guest-house-map/main/guest-photos-v4.js',{cache:'no-store'}).then(r=>r.ok?r.text():'').catch(()=>'');for(const h of state.guestHouses){const escaped=h.id.replace(/[.*+?^${}()|[\]\\]/g,'\\if(m)state.guestHouses=Function('"use strict";return ('+m[1]+')')().filter(h=>h.active!==false)');const block=photos.match(new RegExp(escaped+':\\s*\\{[\\s\\S]*?images:\\s*\\[\\s*[\\\'\\\"]([^\\\'\\\"]+)'));if(block)state.guestPhotos[h.id]='https://yumis84.github.io/guest-house-map/'+block[1]}}catch(e){state.showGuests=false}
 }
 
 function bind(){
