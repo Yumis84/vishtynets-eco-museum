@@ -39,18 +39,31 @@ jobs:
                 await page.locator('.guest-pin').first().waitFor({timeout:25000});
                 const count=await page.locator('.guest-pin').count();
                 if(count!==7)throw Error('Expected 7 guest pins, got '+count);
-                await page.locator('.guest-pin').first().click();
-                await page.locator('#mapCard .map-place-photo img').waitFor({timeout:15000});
-                const image=page.locator('#mapCard .map-place-photo img');
-                await image.evaluate(img=>new Promise((resolve,reject)=>{
-                  if(img.complete)return img.naturalWidth>0?resolve():reject(Error('Image failed'));
-                  img.addEventListener('load',()=>resolve(),{once:true});
-                  img.addEventListener('error',()=>reject(Error('Image failed')),{once:true});
-                }));
-                await page.locator('#openGuestCatalog').waitFor();
+                for(let i=0;i<count;i++){
+                  await page.locator('.guest-pin').nth(i).click({force:true});
+                  const image=page.locator('#mapCard .map-place-photo img');
+                  await image.waitFor({timeout:15000});
+                  await image.evaluate(img=>new Promise((resolve,reject)=>{
+                    if(img.complete)return img.naturalWidth>0?resolve():reject(Error('Image failed'));
+                    img.addEventListener('load',()=>resolve(),{once:true});
+                    img.addEventListener('error',()=>reject(Error('Image failed')),{once:true});
+                  }));
+                  const catalog=page.locator('#openGuestCatalog');
+                  await catalog.waitFor();
+                  const target=await catalog.evaluate(el=>{
+                    const original=window.open;
+                    let url=null;
+                    window.open=(u)=>{url=u;};
+                    try{el.click()}finally{window.open=original}
+                    return url;
+                  });
+                  if(!target || !/^https:\\/\\/yumis84\\.github\\.io\\/guest-house-map\\/\\?house=house_\\d+$/.test(target))
+                    throw Error('Incorrect house detail link: '+target);
+                  console.log('PASS',viewport.width,'house',i+1,'photo and direct link:',target);
+                }
                 await page.screenshot({path:'/tmp/guest-map-'+viewport.width+'.png'});
                 if(errors.length)console.log('Page errors:',errors);
-                console.log('PASS',viewport.width,'guest pins:',count,'photo loaded');
+                console.log('PASS',viewport.width,'guest pins:',count,'all 7 photos and links verified');
                 await page.close();
               }
             }finally{await browser.close()}
