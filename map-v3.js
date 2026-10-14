@@ -85,8 +85,7 @@ function openLayersSheet(){
   const toggle=$('#mapGuestLayerSwitch',content);
   toggle?.addEventListener('click',async()=>{
     const chip=categories.querySelector('[data-map-category="Гостевые дома"]');
-    chip?.click();
-    await new Promise(resolve=>setTimeout(resolve,40));
+    await chip?.onclick();
     const on=activeGuestLayer();
     toggle.classList.toggle('is-active',on);
     toggle.setAttribute('aria-pressed',String(on));

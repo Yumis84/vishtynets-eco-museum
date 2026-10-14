@@ -180,7 +180,7 @@ function mapPin(content,guest=false){return L.divIcon({className:'',html:`<div c
 function renderMapMarkers(){
   if(!state.markerLayer)return;state.markerLayer.clearLayers();const q=($('#mapSearch')?.value||'').trim().toLowerCase();
   points.filter(mapPointMatches).filter(p=>!q||[p.name,p.shortDescription,p.category,...(p.categories||[])].join(' ').toLowerCase().includes(q)).forEach(p=>{const marker=L.marker([p.lat,p.lng],{icon:mapPin(categoryIcon(primaryCategory(p)))}).addTo(state.markerLayer);marker.on('click',()=>selectMapPoint(p))});
-  if(state.showGuests)state.guestHouses.filter(h=>Number.isFinite(h.lat)&&Number.isFinite(h.lng)).filter(h=>!q||[h.name,h.address,h.description].join(' ').toLowerCase().includes(q)).forEach(h=>{const marker=L.marker([h.lat,h.lng],{icon:mapPin('⌂',true)}).addTo(state.markerLayer);marker.getElement().dataset.guestId=h.id;marker.bindTooltip(h.name);marker.on('click',()=>selectGuest(h))});
+  if(state.showGuests)state.guestHouses.filter(h=>Number.isFinite(h.lat)&&Number.isFinite(h.lng)).filter(h=>!q||[h.name,h.address,h.description].join(' ').toLowerCase().includes(q)).forEach(h=>{const marker=L.marker([h.lat,h.lng],{icon:mapPin('⌂',true)}).addTo(state.markerLayer);marker.getElement().dataset.guestId=h.id;marker.bindTooltip(esc(h.name));marker.on('click',()=>selectGuest(h))});
   if(state.selectedPoint)selectMapPoint(state.selectedPoint,false);
 }
 function selectMapPoint(p,fly=false){
@@ -264,7 +264,8 @@ async function loadGuestHouses(){
     for(const h of parents){
       const path=sources?.[h.id]?.images?.[0];
       if(typeof path!=='string')continue;
-      const url=new URL(path,'https://yumis84.github.io/guest-house-map/');
+      let url;
+      try{url=new URL(path,'https://yumis84.github.io/guest-house-map/')}catch(e){continue}
       if(url.origin==='https://yumis84.github.io'&&url.pathname.startsWith('/guest-house-map/assets/'))state.guestPhotos[h.id]=url.href;
     }
     state.guestHouses=parents;
