@@ -1,0 +1,38 @@
+name: Guest map browser smoke
+on:
+  pull_request:
+    paths:
+      - 'app.js'
+      - 'map-v3.js'
+      - 'map-v3.css'
+      - 'scripts/check-guest-browser.cjs'
+      - 'scripts/check-map-filters.cjs'
+      - 'index.html'
+      - '.github/workflows/guest-map-browser.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Run local preview and browser checks
+        shell: bash
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/museum-preview.log 2>&1 &
+          node scripts/check-guest-browser.cjs
+          node scripts/check-map-filters.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: guest-map-screenshots
+          path: /tmp/guest-map-artifacts
