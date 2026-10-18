@@ -32,7 +32,8 @@ jobs:
               await page.goto('http://127.0.0.1:8765/wall.html');
               const canvas=page.locator('#canvas');
               if(await canvas.evaluate(el=>el.width===0||el.height===0))throw Error('empty canvas');
-              if(await page.locator('[data-c]').count()!==7)throw Error('expected seven colors');
+              if(await page.locator('[data-c]').count()!==9)throw Error('expected nine colors');
+              if(await page.locator('[data-g]').count()!==0)throw Error('demo GIF controls still present');
               if(await page.locator('[data-s]').count()!==5)throw Error('expected five brush sizes');
               if(await page.locator('#brushOpacity').count()!==1)throw Error('opacity control missing');
               await canvas.evaluate(el=>{const ctx=el.getContext('2d');ctx.fillStyle='#ff0000';ctx.fillRect(10,10,10,10)});
