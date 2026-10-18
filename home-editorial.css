@@ -56,3 +56,14 @@
 .screen-home #wallChampion:before{width:120px;height:120px}
 .screen-home #wallChampion:after{width:125px;height:125px}
 }
+
+/* Location-specific editorial placeholders: never misrepresent a generic photo as a landmark. */
+.screen-home .recommend-card.no-photo .recommend-fallback{z-index:1;display:block;inset:0;position:absolute}
+.screen-home .recommend-theme-lake .recommend-fallback{background:radial-gradient(ellipse at 70% 12%,#f3d49a 0 12%,transparent 13%),linear-gradient(180deg,#789d9d 0%,#c0d3bd 47%,#618d92 48%,#356477 100%)}
+.screen-home .recommend-theme-bridge .recommend-fallback{background:linear-gradient(145deg,#b9c4b0,#5c806c 60%,#354f48)}
+.screen-home .recommend-theme-stone .recommend-fallback{background:radial-gradient(ellipse at 57% 65%,#9ca39a 0 20%,transparent 21%),linear-gradient(135deg,#a5b89c,#56755c 70%,#354d40)}
+.screen-home .recommend-theme-church .recommend-fallback{background:linear-gradient(135deg,#c7b999,#977c64 55%,#504e43)}
+.screen-home .recommend-theme-nature .recommend-fallback{background:linear-gradient(145deg,#a6b49a,#516952)}
+.screen-home .recommend-theme-symbol{position:absolute;top:17%;left:50%;transform:translateX(-50%);font:normal clamp(60px,9vw,125px)/1 Georgia,serif;color:#fff9;opacity:.72}
+.screen-home .recommend-card.no-photo:after{background:linear-gradient(180deg,transparent 20%,#152b21bd 100%)}
+.screen-home .recommend-card.no-photo .recommend-copy{z-index:3}
