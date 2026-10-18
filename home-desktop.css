@@ -67,3 +67,61 @@
  .screen-home .entry-copy strong{font-size:16px}
 }
 @media(prefers-reduced-motion:reduce){.screen-home .entry-card{scroll-behavior:auto}}
+
+/* Desktop refinement v2: consistent surfaces, keyboard focus and responsive grid. */
+@media(min-width:1024px){
+  .screen-home{--desktop-edge:clamp(24px,4.5vw,76px)}
+  .screen-home .warm-hero{min-height:clamp(670px,82svh,860px)}
+  .screen-home .warm-hero-art{filter:saturate(.94) contrast(1.03)}
+  .screen-home .home-head{position:relative;z-index:4;padding-inline:var(--desktop-edge)}
+  .screen-home .desktop-home-brand{white-space:nowrap}
+  .screen-home .desktop-home-nav button{transition:background .18s,border-color .18s;border-radius:4px 4px 0 0}
+  .screen-home .desktop-home-nav button:hover{background:#ffffff16}
+  .screen-home .desktop-home-nav button:focus-visible,
+  .screen-home .desktop-home-brand:focus-visible,
+  .screen-home .entry-card:focus-visible,
+  .screen-home .recommend-card:focus-visible,
+  .screen-home .topic-preview-grid button:focus-visible{outline:3px solid #f6db9b;outline-offset:4px}
+  .screen-home .warm-hero-copy{padding-inline:var(--desktop-edge);padding-bottom:clamp(32px,4vw,55px)}
+  .screen-home .warm-hero-copy h1{font-size:clamp(60px,5.5vw,88px);max-width:14ch}
+  .screen-home .home-entry-grid{padding-inline:var(--desktop-edge);padding-bottom:clamp(36px,4vw,58px)}
+  .screen-home .entry-card{transition:transform .18s,box-shadow .18s,border-color .18s;box-shadow:0 9px 30px #18291d30}
+  .screen-home .entry-card:hover{transform:translateY(-4px);box-shadow:0 15px 36px #18291d42;border-color:#f8ebd0}
+  .screen-home .entry-card>b{font-size:23px}
+  .screen-home .home-paper{padding-top:clamp(40px,5vw,74px)}
+  .screen-home .home-paper>section{margin-bottom:clamp(44px,5vw,75px)}
+  .screen-home .home-section-head .eyebrow{font-size:11px;letter-spacing:.16em}
+  .screen-home .home-section-head h2{margin-top:10px}
+  .screen-home .home-visit{position:relative;overflow:hidden;background:radial-gradient(circle at 95% 0%,#dce4d1 0%,transparent 33%),linear-gradient(130deg,#fcf8ef,#f2ebdc)}
+  .screen-home .home-visit:after{content:"";position:absolute;pointer-events:none;right:-50px;bottom:-100px;width:300px;height:300px;background:url("assets/wall-botanical.svg") center/contain no-repeat;opacity:.08;transform:rotate(-30deg)}
+  .screen-home .home-visit .visit-buttons{position:relative;z-index:1;max-width:360px;justify-self:stretch;width:100%}
+  .screen-home .home-visit .visit-line{padding:14px 0}
+  .screen-home .recommend-card{transition:transform .2s,box-shadow .2s;box-shadow:0 10px 25px #253a2c1c}
+  .screen-home .recommend-card:hover{transform:translateY(-4px);box-shadow:0 17px 33px #253a2c30}
+  .screen-home .recommend-card::after{inset:18% 0 0;background:linear-gradient(transparent 10%,#152b21df)}
+  .screen-home .topic-preview-grid button{transition:transform .2s,box-shadow .2s}
+  .screen-home .topic-preview-grid button:hover{transform:translateY(-4px);box-shadow:0 14px 30px #253a2c20}
+  .screen-home .home-story-intro{position:relative;overflow:hidden;background:linear-gradient(115deg,#f9f4e9,#ebe6d7);box-shadow:0 12px 30px #293d2d10}
+  .screen-home #wallChampion{box-shadow:0 18px 45px #332e2417}
+  .screen-home #wallChampion .wall-feature-title{max-width:13ch}
+  .screen-home #wallChampion .wall-feature-preview{align-items:center}
+}
+@media(min-width:1024px) and (max-width:1280px){
+  .screen-home .home-entry-grid{gap:10px}
+  .screen-home .entry-card{grid-template-columns:37px minmax(0,1fr) 16px;gap:7px;padding:12px}
+  .screen-home .entry-icon{width:36px;height:36px}
+  .screen-home .entry-copy strong{font-size:clamp(14px,1.5vw,18px)}
+  .screen-home .home-paper{padding-inline:18px}
+  .screen-home .recommend-row,.screen-home .topic-preview-grid{gap:12px}
+}
+@media(min-width:740px) and (max-width:1023px){
+  /* Tablet: retain mobile controls while using the available screen width. */
+  .screen-home{max-width:900px;margin:auto}
+  .screen-home .home-paper{max-width:900px}
+  .screen-home .home-entry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .screen-home .warm-hero{min-height:660px}
+}
+@media(prefers-reduced-motion:reduce){
+  .screen-home .entry-card,.screen-home .recommend-card,
+  .screen-home .topic-preview-grid button,.screen-home .desktop-home-nav button{transition:none!important}
+}
