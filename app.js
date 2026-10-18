@@ -78,7 +78,14 @@ function renderHours(){
 function renderHome(){
   const ids=['poi_vishtynets_lake','poi_tokarevka_bridge','poi_devils_stone','poi_gross_rominten_church'];
   const list=ids.map(pointById).filter(Boolean);
-  $('#homeRecommendations').innerHTML=list.map(p=>`<button class="recommend-card" data-home-point="${esc(p.id)}" type="button"><img src="${esc(imageForPoint(p))}" alt="" loading="lazy" onerror="this.style.display='none'"><span class="recommend-fallback"></span><span class="recommend-copy"><strong>${esc(p.name)}</strong><small>${esc(primaryCategory(p))}</small></span></button>`).join('');
+  $('#homeRecommendations').innerHTML=list.map(p=>{
+    // Only use photographs explicitly linked to the place (or its related article).
+    // A generic forest fallback incorrectly depicts unrelated landmarks as the same place.
+    const photo=p.photos?.[0]||(p.articleIds||[]).map(articleById).find(a=>a?.hero)?.hero||'';
+    const theme=({poi_vishtynets_lake:'lake',poi_tokarevka_bridge:'bridge',poi_devils_stone:'stone',poi_gross_rominten_church:'church'})[p.id]||'nature';
+    const symbols={lake:'≈',bridge:'⌒',stone:'◆',church:'⌂',nature:'✦'};
+    return `<button class="recommend-card recommend-theme-${theme}${photo?' has-photo':' no-photo'}" data-home-point="${esc(p.id)}" type="button">${photo?`<img src="${esc(photo)}" alt="" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.remove('has-photo');this.parentElement.classList.add('no-photo')">`:''}<span class="recommend-fallback" aria-hidden="true"><span class="recommend-theme-symbol">${symbols[theme]}</span></span><span class="recommend-copy"><strong>${esc(p.name)}</strong><small>${esc(primaryCategory(p))}</small></span></button>`;
+  }).join('');
   $$('[data-home-point]').forEach(b=>b.onclick=()=>openPlace(b.dataset.homePoint));
 }
 
