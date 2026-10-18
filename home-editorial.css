@@ -28,3 +28,31 @@
 @media(max-width:740px){.screen-home #wallChampion .wall-feature-layout{grid-template-columns:1fr;gap:18px}.screen-home #wallChampion{margin-inline:14px}.screen-home #wallChampion .wall-feature-preview{min-height:150px}.screen-home #wallChampion .wall-feature-title{font-size:clamp(30px,8vw,42px)}}
 @media(max-width:380px){.screen-home #wallChampion{padding:18px}.screen-home #wallChampion .wall-feature-cta{width:100%}}
 @media(prefers-reduced-motion:reduce){.screen-home .topic-preview-grid button{transition:none}}
+
+/* Illustrated wall: parchment, botanical ornament and an actual example image. */
+.screen-home #wallChampion{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 82% 17%,#f8f3e8 0%,transparent 52%),repeating-linear-gradient(30deg,#eee5d4 0px,#eee5d4 1px,#f5eddf 1px,#f5eddf 7px);border-color:#d7c9b0}
+.screen-home #wallChampion:before,.screen-home #wallChampion:after{content:"";position:absolute;pointer-events:none;z-index:-1;opacity:.22;background-repeat:no-repeat;background-size:contain;width:170px;height:170px;background-image:url("assets/wall-botanical.svg")}
+.screen-home #wallChampion:before{bottom:-30px;left:-30px;transform:rotate(-16deg)}
+.screen-home #wallChampion:after{top:-44px;right:-40px;transform:rotate(158deg)}
+.screen-home #wallChampion .wall-feature-layout{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+.screen-home #wallChampion .wall-feature-preview{background:transparent;border:0;box-shadow:none;min-width:0;padding:12px 0;align-items:center}
+.screen-home #wallChampion .wall-example-frame{width:min(100%,400px);padding:11px 11px 27px;background:#fffdf7;box-shadow:0 14px 28px #3c31293b,0 2px 5px #3c31291b;transform:rotate(3deg);border:1px solid #f7f0e3}
+.screen-home #wallChampion .wall-example-frame img{display:block;width:100%;height:auto;aspect-ratio:13/10;object-fit:cover}
+.screen-home #wallChampion .wall-example-note{font:italic clamp(17px,2vw,21px)/1.3 Georgia,serif;color:#4e5d49;transform:rotate(-4deg);margin:18px 0 14px}
+.screen-home #wallChampion .wall-feature-preview-label{align-self:flex-start;margin-top:14px}
+.screen-home #wallChampion #wallChampionContent{align-self:stretch;font:14px/1.5 system-ui,sans-serif;color:#687367}
+.screen-home #wallChampion .wall-feature-link{align-self:flex-start;font-size:14px}
+@media(max-width:740px){
+.screen-home #wallChampion{padding:clamp(20px,5vw,34px);background:radial-gradient(ellipse at 75% 58%,#fbf4e6 0%,transparent 62%),repeating-linear-gradient(30deg,#eee5d4 0px,#eee5d4 1px,#f5eddf 1px,#f5eddf 7px)}
+.screen-home #wallChampion .wall-feature-layout{display:flex;flex-direction:column;align-items:stretch;gap:12px}
+.screen-home #wallChampion .wall-feature-title{font-size:clamp(30px,8.1vw,44px);line-height:1.08}
+.screen-home #wallChampion .wall-feature-title em{font-size:.91em}
+.screen-home #wallChampion .wall-feature-copy{font-size:15px;line-height:1.55;margin-bottom:20px}
+.screen-home #wallChampion .wall-feature-cta{min-height:50px}
+.screen-home #wallChampion .wall-feature-preview{min-height:0;padding:8px 0 0}
+.screen-home #wallChampion .wall-example-frame{width:min(86%,350px);margin:4px auto}
+.screen-home #wallChampion .wall-example-note{margin:14px 0 10px;align-self:center}
+.screen-home #wallChampion .wall-feature-preview-label{margin-top:8px}
+.screen-home #wallChampion:before{width:120px;height:120px}
+.screen-home #wallChampion:after{width:125px;height:125px}
+}
