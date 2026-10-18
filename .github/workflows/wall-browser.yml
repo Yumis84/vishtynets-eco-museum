@@ -1,0 +1,47 @@
+name: Wall interface browser smoke
+on:
+  pull_request:
+    paths:
+      - 'wall.html'
+      - 'index.html'
+      - 'wall-community.js'
+      - '.github/workflows/wall-browser.yml'
+  workflow_dispatch:
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium test runner
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Check mobile and desktop wall
+        run: |
+          python3 -m http.server 8765 >/tmp/wall-http.log 2>&1 &
+          node <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            for(const width of [390,1366]){
+              const page=await browser.newPage({viewport:{width,height:850}});
+              const errors=[];page.on('pageerror',e=>errors.push(e.message));
+              await page.goto('http://127.0.0.1:8765/wall.html');
+              await page.locator('#showWallEditor').click();
+              if(await page.locator('#wallEditor').isHidden())throw Error('editor hidden');
+              const dimensions=await page.locator('#canvas').evaluate(e=>({width:e.width,height:e.height}));
+              if(!dimensions.width||!dimensions.height)throw Error('canvas has zero size');
+              await page.locator('#text').click();
+              if(await page.locator('.obj.text').count()!==1)throw Error('text tool failed');
+              await page.locator('#showWallEditor').click();
+              if(!(await page.locator('#wallEditor').isHidden()))throw Error('editor did not collapse');
+              if(errors.length)throw Error(errors.join('; '));
+              console.log('PASS wall '+width);
+              await page.close();
+            }
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          JS
