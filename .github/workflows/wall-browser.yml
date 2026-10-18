@@ -36,6 +36,18 @@ jobs:
               if(!dimensions.width||!dimensions.height)throw Error('canvas has zero size');
               await page.locator('#text').click();
               if(await page.locator('.obj.text').count()!==1)throw Error('text tool failed');
+              const canvas=page.locator('#canvas');
+              await canvas.evaluate(el=>{const ctx=el.getContext('2d');ctx.fillStyle='#ff0000';ctx.fillRect(10,10,10,10)});
+              await page.setViewportSize({width:width===390?420:1200,height:850});
+              const pixel=await canvas.evaluate(el=>Array.from(el.getContext('2d').getImageData(10,10,1,1).data));
+              if(pixel[3]===0)throw Error('resize erased drawing');
+              await page.locator('#saveDraft').click();
+              if(!await page.evaluate(()=>!!localStorage.getItem('vishtynets-wall-draft-v1')))throw Error('draft not saved');
+              await page.reload();
+              await page.locator('#showWallEditor').click();
+              await page.locator('#loadDraft').click();
+              await page.waitForFunction(()=>document.getElementById('draftStatus').textContent.includes('восстановлен'));
+              if(await page.locator('.obj.text').count()!==1)throw Error('draft objects not restored');
               await page.locator('#showWallEditor').click();
               if(!(await page.locator('#wallEditor').isHidden()))throw Error('editor did not collapse');
               if(errors.length)throw Error(errors.join('; '));
