@@ -33,6 +33,8 @@ jobs:
               const canvas=page.locator('#canvas');
               if(await canvas.evaluate(el=>el.width===0||el.height===0))throw Error('empty canvas');
               if(await page.locator('[data-c]').count()!==9)throw Error('expected nine colors');
+              const rows=await page.locator('[data-c]').evaluateAll(els=>els.map(el=>Math.round(el.getBoundingClientRect().top)));
+              if(new Set(rows).size!==1)throw Error('colors wrap into multiple rows');
               if(await page.locator('#eraser').count()!==1)throw Error('eraser missing');
               if(await page.locator('[data-g]').count()!==0)throw Error('demo GIF controls still present');
               if(await page.locator('[data-s]').count()!==5)throw Error('expected five brush sizes');
