@@ -1,0 +1,64 @@
+{
+  "version": "0.1-draft",
+  "status": "awaiting-approved-artwork",
+  "aspect_ratio": "4:3",
+  "style_guide": "style-guide.md",
+  "categories": [
+    {
+      "id": "museum-history",
+      "title": "Музей и история",
+      "art_direction": "Старинное сельское здание, архивные мотивы",
+      "asset": null,
+      "status": "planned"
+    },
+    {
+      "id": "nature",
+      "title": "Природа",
+      "art_direction": "Виштынецкое озеро и лесные холмы",
+      "asset": null,
+      "status": "planned"
+    },
+    {
+      "id": "routes",
+      "title": "Маршруты",
+      "art_direction": "Карта края и компас",
+      "asset": null,
+      "status": "planned"
+    },
+    {
+      "id": "museum-of-time",
+      "title": "Музей времени",
+      "art_direction": "Механические часы и музейные предметы",
+      "asset": null,
+      "status": "planned"
+    },
+    {
+      "id": "accommodation",
+      "title": "Жильё рядом",
+      "art_direction": "Гостевой дом в лесном пейзаже",
+      "asset": null,
+      "status": "planned"
+    },
+    {
+      "id": "biodiversity",
+      "title": "Биоразнообразие",
+      "art_direction": "Растения и птицы края",
+      "asset": null,
+      "status": "planned"
+    },
+    {
+      "id": "library",
+      "title": "Библиотека",
+      "art_direction": "Книги, гербарий и документы",
+      "asset": null,
+      "status": "planned"
+    },
+    {
+      "id": "research",
+      "title": "Исследования и проекты",
+      "art_direction": "Полевые записи и бинокль",
+      "asset": null,
+      "status": "planned"
+    }
+  ]
+}
