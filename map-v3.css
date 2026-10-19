@@ -24,7 +24,7 @@
 .screen-map .map-tools{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}
 .screen-map .map-tools button{height:40px;border-radius:13px;padding:0 12px;justify-content:center;background:#f4ede2;border-color:#d4cbbb;color:#516456;font-size:12px;font-weight:850}
 .screen-map .map-tools button .v3-svg-icon{width:18px;height:18px}
-.screen-map .map-tools button.is-layer-active{background:#dfe7d8;border-color:#afbea9;color:#36513f}
+.screen-map .map-tools button.is-panel-open{background:#dfe7d8;border-color:#afbea9;color:#36513f}
 
 /* Категории карты */
 .screen-map .map-chips{gap:8px;margin:9px -12px -1px;padding:0 12px 3px;scroll-snap-type:x proximity}
@@ -83,3 +83,5 @@
   .screen-map .map-place-copy h3{font-size:18px}
   .screen-map .map-place-copy p{font-size:12px}
 }
+/* Keep zoom controls clear of the property card and its route button. */
+.screen-map:has(#mapCard .map-place-card) .leaflet-control-zoom{margin-bottom:250px!important}
