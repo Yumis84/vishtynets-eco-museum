@@ -82,9 +82,9 @@ function renderHome(){
     // Only use photographs explicitly linked to the place (or its related article).
     // A generic forest fallback incorrectly depicts unrelated landmarks as the same place.
     const archivalCover={
-      poi_vishtynets_lake:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0192.jpg',
-      poi_devils_stone:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0525.jpg',
-      poi_gross_rominten_church:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0502.jpg'
+      poi_vishtynets_lake:'assets/home-template/originals/lake-i0192.jpg',
+      poi_devils_stone:'assets/home-template/originals/stone-i0525.jpg',
+      poi_gross_rominten_church:'assets/home-template/originals/church-i0502.jpg'
     };
     const photo=p.photos?.[0]||(p.articleIds||[]).map(articleById).find(a=>a?.hero)?.hero||archivalCover[p.id]||'';
     const theme=({poi_vishtynets_lake:'lake',poi_tokarevka_bridge:'bridge',poi_devils_stone:'stone',poi_gross_rominten_church:'church'})[p.id]||'nature';
