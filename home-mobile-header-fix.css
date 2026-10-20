@@ -1,0 +1,15 @@
+/* Correct visible mobile brand and guarantee a graceful hero fallback. */
+@media(max-width:1023px){
+ .screen-home .home-head .desktop-home-brand{
+  display:inline-flex!important;align-items:center;gap:9px;
+  text-decoration:none!important;color:#294b38!important;
+  font:700 clamp(15px,4.2vw,22px)/1.15 Georgia,serif!important;
+  white-space:normal;max-width:calc(100% - 75px);
+ }
+ .screen-home .home-head .desktop-home-brand span:last-child{
+  display:block;text-decoration:none!important;
+ }
+ .screen-home .home-head .desktop-brand-mark{font-size:27px;line-height:1}
+ .screen-home .warm-hero{background:#344d40!important}
+ .screen-home .warm-hero-art{display:block!important;opacity:1!important;visibility:visible!important}
+}
