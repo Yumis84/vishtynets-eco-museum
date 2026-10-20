@@ -87,7 +87,7 @@ function renderHome(){
       poi_gross_rominten_church:'i0502.jpg'
     };
     const coverFile=coverFiles[p.id];
-    const photo=coverFile?'https://www.wystynez.ru/sc-pic/'+coverFile:(p.photos?.[0]||(p.articleIds||[]).map(articleById).find(a=>a?.hero)?.hero||'');
+    const photo=p.id==='poi_tokarevka_bridge'?'':(coverFile?'https://www.wystynez.ru/sc-pic/'+coverFile:(p.photos?.[0]||(p.articleIds||[]).map(articleById).find(a=>a?.hero)?.hero||''));
     const backupPhoto=coverFile?'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/'+coverFile:'';
     const theme=({poi_vishtynets_lake:'lake',poi_tokarevka_bridge:'bridge',poi_devils_stone:'stone',poi_gross_rominten_church:'church'})[p.id]||'nature';
     const symbols={lake:'≈',bridge:'⌒',stone:'◆',church:'⌂',nature:'✦'};
