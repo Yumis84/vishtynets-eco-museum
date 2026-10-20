@@ -227,7 +227,7 @@ async function loadGuestHouses(){
       if(!match)throw new Error('Invalid guest catalog');
       const houses=Function('"use strict";return ('+match[1]+')')();
       if(!Array.isArray(houses)||!houses.length)throw new Error('Empty guest catalog');
-      state.guestHouses=houses.filter(h=>h.active!==false&&Number.isFinite(h.lat)&&Number.isFinite(h.lng));
+      state.guestHouses=houses.filter(h=>h&&h.active!==false&&!h.parentId&&Number.isFinite(h.lat)&&Number.isFinite(h.lng));
       if(!state.guestHouses.length)throw new Error('No guest coordinates');
     }catch(e){state.showGuests=false}
     finally{guestHousesRequest=null}
