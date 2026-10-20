@@ -1,0 +1,41 @@
+{
+  "template": "approved-homepage-v1",
+  "approved_at": "2026-10-20",
+  "source_of_truth": {
+    "html": "index.html",
+    "mobile_css": "home-mobile-approved.css",
+    "desktop_css": "home-desktop-reference.css",
+    "runtime": "app.js"
+  },
+  "images": [
+    {
+      "id": "hero",
+      "file": "assets/home-template/originals/hero-rominta-i1423.jpg",
+      "source": "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1423.jpg",
+      "legacy": "https://www.wystynez.ru/sc-pic/i1423.jpg",
+      "use": "Главная обложка, Место, где природа хранит память"
+    },
+    {
+      "id": "lake",
+      "file": "assets/home-template/originals/lake-i0192.jpg",
+      "source": "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0192.jpg",
+      "legacy": "https://www.wystynez.ru/p24.htm",
+      "use": "Озеро Виштынецкое"
+    },
+    {
+      "id": "stone",
+      "file": "assets/home-template/originals/stone-i0525.jpg",
+      "source": "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0525.jpg",
+      "legacy": "https://www.wystynez.ru/p59.htm",
+      "use": "Чёртов камень"
+    },
+    {
+      "id": "church",
+      "file": "assets/home-template/originals/church-i0502.jpg",
+      "source": "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0502.jpg",
+      "legacy": "https://www.wystynez.ru/p55.htm",
+      "use": "Кирха Гросс Роминтен"
+    }
+  ],
+  "missing_photo": "Железнодорожный мост в Токаревке: архивный снимок объекта не подтверждён, не подменять фотографией другого моста"
+}
