@@ -84,15 +84,15 @@ function renderHome(){
     const coverFiles={
       poi_vishtynets_lake:'i0188.jpg',
       poi_tokarevka_bridge:'i0516.jpg',
-      poi_devils_stone:'i0525.jpg',
-      poi_gross_rominten_church:'i0502.jpg'
+      // p59.htm contains only text and a decorative 2px separator, not a stone photo.
+      poi_gross_rominten_church:'i0503.jpg'
     };
     // Prefer the public preserved GitHub archive. The old domain can be
     // unreliable, and its missing files previously produced blank cards.
     const coverFile=coverFiles[p.id];
-    const photo=coverFile
+    const photo=p.id==='poi_devils_stone' ? '' : (coverFile
       ? 'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/'+coverFile
-      : (p.photos?.[0]||(p.articleIds||[]).map(articleById).find(a=>a?.hero)?.hero||'');
+      : (p.photos?.[0]||(p.articleIds||[]).map(articleById).find(a=>a?.hero)?.hero||''));
     const backupPhoto=coverFile?'https://www.wystynez.ru/sc-pic/'+coverFile:'';
     const theme=({poi_vishtynets_lake:'lake',poi_tokarevka_bridge:'bridge',poi_devils_stone:'stone',poi_gross_rominten_church:'church'})[p.id]||'nature';
     const symbols={lake:'≈',bridge:'⌒',stone:'◆',church:'⌂',nature:'✦'};
