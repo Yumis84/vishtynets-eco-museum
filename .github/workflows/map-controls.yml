@@ -1,5 +1,8 @@
 name: Map controls regression
 on:
+  push:
+    branches: [main]
+    paths: ['app.js', 'map-v3.js', 'icons-v3-runtime.js', 'index.html', 'scripts/check-map-controls.cjs', '.github/workflows/map-controls.yml']
   pull_request:
     paths: ['app.js', 'map-v3.js', 'icons-v3-runtime.js', 'index.html', 'scripts/check-map-controls.cjs', '.github/workflows/map-controls.yml']
   workflow_dispatch:
@@ -18,9 +21,24 @@ jobs:
           node-version: '22'
       - run: npm install --no-save playwright@1.58.2
       - run: npx playwright install --with-deps chromium
+      - name: Wait for published script chain
+        if: github.event_name == 'push'
+        run: |
+          python3 - <<'PYTHON'
+          import urllib.request, time, hashlib
+          paths=['index.html','app.js','map-v3.js','icons-v3-runtime.js']
+          for attempt in range(40):
+              try:
+                  matches=all(urllib.request.urlopen('https://vishtynets.ru/'+p,timeout=15).read()==open(p,'rb').read() for p in paths)
+                  if matches:
+                      print('PASS live script chain byte equality');break
+              except Exception as error: print(type(error).__name__)
+              time.sleep(15)
+          else: raise SystemExit('Published script chain did not match checkout')
+          PYTHON
       - name: Mobile touch and desktop regression
         env:
-          MAP_TEST_URL: ${{ inputs.target_url }}
+          MAP_TEST_URL: ${{ github.event_name == 'push' && 'https://vishtynets.ru/' || inputs.target_url }}
           MAP_TEST_OUTPUT: map-test-results
         run: |
           python3 -m http.server 8765 >/tmp/map-http.log 2>&1 &
