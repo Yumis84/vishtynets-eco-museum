@@ -1,0 +1,26 @@
+/* Approved mobile homepage reference: scoped, no desktop/map changes. */
+@media (max-width:1023px){
+ .screen-home .warm-hero{background:#354d40;min-height:0!important;border-radius:0 0 28px 28px;box-shadow:none}
+ .screen-home .warm-hero-art{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:50% 43%;display:block}
+ .screen-home .warm-hero-overlay{background:linear-gradient(180deg,rgba(15,35,27,.10) 0%,rgba(16,37,28,.18) 26%,rgba(16,35,26,.36) 48%,rgba(16,36,26,.88) 100%)}
+ .screen-home .home-head{min-height:66px;padding:10px 18px!important;background:#faf7f0;position:relative;z-index:2}
+ .screen-home .desktop-home-brand{display:flex!important;color:#294b38!important;text-shadow:none!important;font-size:clamp(15px,4vw,23px)}
+ .screen-home .desktop-brand-mark{background:transparent!important;color:#31563f!important;border:0!important}
+ .screen-home .hero-menu{background:#f7f2e7;color:#2a4938;border:1px solid #d8d0bf;box-shadow:0 3px 12px #26392b19}
+ .screen-home .warm-hero-copy{margin-top:clamp(55px,12vw,120px)!important;padding:0 24px 20px!important}
+ .screen-home .warm-hero-copy h1{color:#fff!important;text-shadow:0 2px 7px #12291c70;font:700 clamp(36px,8.5vw,66px)/1.05 Georgia,serif!important}
+ .screen-home .warm-hero-copy p{color:#fff!important;text-shadow:0 1px 5px #12291c70;font-size:clamp(14px,3.2vw,19px)!important;line-height:1.5!important}
+ .screen-home .home-entry-grid{padding:8px 17px 22px!important;gap:9px!important}
+ .screen-home .entry-card{border-radius:19px!important;min-height:118px!important;background:#f8f5ed!important;box-shadow:0 4px 15px #0e281a28!important}
+ .screen-home .entry-map{background:#eef2e9!important}
+ .screen-home .entry-articles{background:#f5ebdc!important}
+ .screen-home .entry-audio{background:#eef2ec!important}
+ .screen-home .home-places-section .recommend-row{display:flex!important;gap:10px!important;overflow-x:auto!important;scroll-snap-type:x mandatory;padding:2px 0 8px!important}
+ .screen-home .home-places-section .recommend-card{flex:0 0 clamp(160px,35vw,230px)!important;width:clamp(160px,35vw,230px)!important;min-width:0!important;height:clamp(195px,44vw,265px)!important;border-radius:14px!important;overflow:hidden!important;position:relative;background:#526c5b}
+ .screen-home .home-places-section .recommend-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+ .screen-home .home-places-section .recommend-card::after{content:"";position:absolute;z-index:2;inset:25% 0 0;background:linear-gradient(transparent,#12291eea)}
+ .screen-home .home-places-section .recommend-card .recommend-copy{position:absolute;z-index:3;bottom:15px;left:13px;right:11px;text-align:left}
+ .screen-home .home-places-section .recommend-card .recommend-copy strong{font:700 clamp(17px,3.5vw,23px)/1.1 Georgia,serif;color:white;text-transform:none}
+ .screen-home .home-places-section .recommend-card .recommend-copy small{color:#f3f4e9;font-size:11px;letter-spacing:.05em}
+ .screen-home .home-places-section .recommend-card.no-photo .recommend-fallback{display:block;position:absolute;inset:0;z-index:1}
+}
