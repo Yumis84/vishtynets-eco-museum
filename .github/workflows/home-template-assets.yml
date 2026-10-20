@@ -1,0 +1,42 @@
+name: Preserve approved homepage photo originals
+on:
+  push:
+    branches: [feature/approved-mobile-home-20261020]
+    paths:
+      - 'assets/home-template/photo-sources.json'
+      - '.github/workflows/home-template-assets.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  archive-originals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Download original archival photos
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, urllib.request
+          data=json.loads(pathlib.Path('assets/home-template/photo-sources.json').read_text())
+          for photo in data['images']:
+              dest=pathlib.Path(photo['file'])
+              dest.parent.mkdir(parents=True,exist_ok=True)
+              with urllib.request.urlopen(photo['source'],timeout=25) as response:
+                  body=response.read()
+              if len(body)<1000 or not body.startswith(b'\xff\xd8\xff'):
+                  raise RuntimeError(f'Invalid JPEG for {photo["id"]}: {len(body)} bytes')
+              dest.write_bytes(body)
+              print(photo['id'],len(body),'bytes')
+          PY
+      - name: Commit preserved photo originals
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/home-template/originals/
+          if ! git diff --cached --quiet; then
+            git commit -m 'assets: preserve original homepage archive photos'
+            git push
+          fi
