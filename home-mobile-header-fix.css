@@ -13,3 +13,9 @@
  .screen-home .warm-hero{background:#344d40!important}
  .screen-home .warm-hero-art{display:block!important;opacity:1!important;visibility:visible!important}
 }
+
+/* The homepage and opened menu must use the exact same museum logo file. */
+@media(max-width:1023px){
+ .screen-home .home-head .desktop-home-brand{width:min(77vw,310px);max-width:calc(100% - 76px);min-width:0;flex:0 1 auto;}
+ .screen-home .home-head .desktop-brand-logo{display:block;width:100%;height:auto;max-height:64px;object-fit:contain;object-position:left center;}
+}
