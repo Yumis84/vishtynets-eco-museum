@@ -192,8 +192,8 @@ async function ensureMap(){
 }
 const MAP_CATEGORIES=['Все','Природа','История','Камни','Мосты','Музей','Гостевые дома'];
 function renderMapCategories(){
-  $('#mapCategories').innerHTML=MAP_CATEGORIES.map(c=>`<button class="${(c==='Гостевые дома'?state.showGuests:state.mapCategory===c)?'is-active':''}" data-map-category="${c}" type="button">${c}</button>`).join('');
-  $$('[data-map-category]').forEach(b=>b.onclick=async()=>{const c=b.dataset.mapCategory;if(c==='Гостевые дома'){state.showGuests=!state.showGuests;if(state.showGuests)await loadGuestHouses()}else state.mapCategory=c;renderMapCategories();renderMapMarkers()});
+  $('#mapCategories').innerHTML=MAP_CATEGORIES.map(c=>`<button class="${(c==='Гостевые дома'?state.showGuests:(state.showMuseum&&state.mapCategory===c))?'is-active':''}" data-map-category="${c}" type="button">${c}</button>`).join('');
+  $('[data-map-category]').forEach(b=>b.onclick=async()=>{const c=b.dataset.mapCategory;if(c==='Гостевые дома'){state.showGuests=!state.showGuests;if(state.showGuests)await loadGuestHouses()}else if(c==='Все'){state.mapCategory='Все';state.showMuseum=!state.showMuseum}else if(state.mapCategory===c&&state.showMuseum){state.mapCategory='Все';state.showMuseum=false}else{state.mapCategory=c;state.showMuseum=true}renderMapCategories();renderMapMarkers()});
 }
 function mapPointMatches(p){return Number.isFinite(p.lat)&&Number.isFinite(p.lng)&&(p.articleIds||[]).length&&pointMatchesCategory(p,state.mapCategory)}
 function mapPin(content,guest=false){return L.divIcon({className:'',html:`<div class="${guest?'guest-pin':'poi-pin'}"><span>${content}</span></div>`,iconSize:[34,34],iconAnchor:[17,33]})}
@@ -202,6 +202,7 @@ function renderMapMarkers(){
   if(state.showMuseum)points.filter(mapPointMatches).filter(p=>!q||[p.name,p.shortDescription,p.category,...(p.categories||[])].join(' ').toLowerCase().includes(q)).forEach(p=>{const marker=L.marker([p.lat,p.lng],{icon:mapPin(categoryIcon(primaryCategory(p)))}).addTo(state.markerLayer);marker.on('click',()=>selectMapPoint(p))});
   if(state.showGuests)state.guestHouses.filter(h=>Number.isFinite(h.lat)&&Number.isFinite(h.lng)).filter(h=>!q||[h.name,h.address,h.description].join(' ').toLowerCase().includes(q)).forEach(h=>{const marker=L.marker([h.lat,h.lng],{icon:mapPin('⌂',true)}).addTo(state.markerLayer);marker.on('click',()=>selectGuest(h))});
   if(state.selectedPoint && state.showMuseum && mapPointMatches(state.selectedPoint))selectMapPoint(state.selectedPoint,false);
+  else if(!state.showMuseum || (state.selectedPoint && !mapPointMatches(state.selectedPoint))){state.selectedPoint=null;$('#mapCard').innerHTML='';}
 }
 function selectMapPoint(p,fly=false){
   if(!p||!Number.isFinite(p.lat)||!state.map)return;state.selectedPoint=p;if(fly)state.map.flyTo([p.lat,p.lng],15);
