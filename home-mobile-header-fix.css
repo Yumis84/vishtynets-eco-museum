@@ -19,3 +19,12 @@
  .screen-home .home-head .desktop-home-brand{width:min(77vw,310px);max-width:calc(100% - 76px);min-width:0;flex:0 1 auto;}
  .screen-home .home-head .desktop-brand-logo{display:block;width:100%;height:auto;max-height:64px;object-fit:contain;object-position:left center;}
 }
+
+/* Fix: the original wide SVG contains embedded text, which clips on phones.
+   Show its genuine landscape emblem in a viewport and typeset the title separately. */
+@media(max-width:1023px){
+ .screen-home .home-head .desktop-home-brand{width:auto!important;max-width:calc(100% - 76px)!important;gap:10px!important;flex:0 1 auto!important;min-width:0!important;overflow:visible!important;}
+ .screen-home .home-head .desktop-brand-emblem{display:block!important;position:relative!important;flex:0 0 84px!important;width:84px!important;height:52px!important;overflow:hidden!important;}
+ .screen-home .home-head .desktop-brand-emblem .desktop-brand-logo{display:block!important;position:absolute!important;left:0!important;top:0!important;width:168px!important;max-width:none!important;height:auto!important;max-height:none!important;object-fit:initial!important;}
+ .screen-home .home-head .desktop-brand-title{display:block!important;min-width:0!important;white-space:normal!important;font:700 clamp(16px,4.3vw,21px)/1.12 Georgia,serif!important;color:#294b38!important;}
+}
