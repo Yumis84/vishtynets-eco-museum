@@ -193,7 +193,7 @@ async function ensureMap(){
 const MAP_CATEGORIES=['Все','Природа','История','Камни','Мосты','Музей','Гостевые дома'];
 function renderMapCategories(){
   $('#mapCategories').innerHTML=MAP_CATEGORIES.map(c=>`<button class="${(c==='Гостевые дома'?state.showGuests:(state.showMuseum&&state.mapCategory===c))?'is-active':''}" data-map-category="${c}" type="button">${c}</button>`).join('');
-  $$('[data-map-category]').forEach(b=>b.onclick=async()=>{const c=b.dataset.mapCategory;if(c==='Гостевые дома'){state.showGuests=!state.showGuests;if(state.showGuests)await loadGuestHouses()}else if(c==='Все'){state.mapCategory='Все';state.showMuseum=true}else if(state.mapCategory===c&&state.showMuseum){state.mapCategory='Все'}else{state.mapCategory=c;state.showMuseum=true}renderMapCategories();renderMapMarkers()});
+  $$('[data-map-category]').forEach(b=>b.onclick=async()=>{const c=b.dataset.mapCategory;if(c==='Гостевые дома'){state.showGuests=!state.showGuests;if(state.showGuests)await loadGuestHouses()}else if(c==='Все'){const wasAll=state.mapCategory==='Все'&&state.showMuseum;state.mapCategory='Все';state.showMuseum=!wasAll}else if(state.mapCategory===c&&state.showMuseum){state.mapCategory='Все'}else{state.mapCategory=c;state.showMuseum=true}renderMapCategories();renderMapMarkers()});
 }
 function mapPointMatches(p){return Number.isFinite(p.lat)&&Number.isFinite(p.lng)&&(p.articleIds||[]).length&&pointMatchesCategory(p,state.mapCategory)}
 function mapPin(content,guest=false){return L.divIcon({className:'',html:`<div class="${guest?'guest-pin':'poi-pin'}"><span>${content}</span></div>`,iconSize:[34,34],iconAnchor:[17,33]})}
@@ -243,9 +243,8 @@ function bind(){
     };
     showSheet('');renderLayerSheet();
     // Delegate from the persistent sheet panel: replacing its content cannot lose handlers.
-    $('#infoSheet').onclick=async e=>{
-      if(e.target.id==='infoSheet'){closeSheet();return}
-      const button=e.target.closest('[data-map-layer]');
+    $('#sheetContent').onclick=async e=>{
+      const button=e.target.closest('button[data-map-layer]');
       if(!button)return;
       const layer=button.dataset.mapLayer;
       if(layer==='museum')state.showMuseum=!state.showMuseum;
