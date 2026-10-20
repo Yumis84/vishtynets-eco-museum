@@ -1,0 +1,20 @@
+/* Unified editorial covers for Explore categories.
+   Images are sourced from existing museum points via imageForPoint, not invented places. */
+.screen-explore .category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.screen-explore .category-grid .explore-cover{position:relative;isolation:isolate;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;overflow:hidden;min-width:0;min-height:132px;padding:16px;border:1px solid #d9d2c1;border-radius:13px;background:linear-gradient(145deg,#7b927e,#294b3c);color:#fff;text-align:left;box-shadow:0 7px 18px #243d3020;transition:transform .18s,box-shadow .18s}
+.screen-explore .category-grid .explore-cover:nth-child(2){background:linear-gradient(145deg,#668673,#294a3c)}
+.screen-explore .category-grid .explore-cover:nth-child(3){background:linear-gradient(145deg,#a28b69,#4b493a)}
+.screen-explore .category-grid .explore-cover:nth-child(4){background:linear-gradient(145deg,#898b7d,#3f4a3b)}
+.screen-explore .category-grid .explore-cover:nth-child(5){background:linear-gradient(145deg,#8a9f99,#344e50)}
+.screen-explore .category-grid .explore-cover:nth-child(6){background:linear-gradient(145deg,#aa9578,#534b39)}
+.screen-explore .explore-cover-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:saturate(.8) contrast(1.04);transition:transform .3s}
+.screen-explore .explore-cover-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#152c2225 0%,#132c2385 52%,#12271feb 100%)}
+.screen-explore .explore-cover-icon{font-size:21px;line-height:1;margin-bottom:9px;opacity:.9}
+.screen-explore .explore-cover strong{font:normal 24px/1.1 Georgia,'Times New Roman',serif;letter-spacing:-.02em;text-shadow:0 2px 8px #182c22a0}
+.screen-explore .explore-cover-arrow{position:absolute;right:13px;bottom:12px;font-size:20px}
+.screen-explore .category-grid .explore-cover.is-active{outline:3px solid #9fae84;outline-offset:2px;border-color:#e6e5c6}
+.screen-explore .category-grid .explore-cover:focus-visible{outline:3px solid #bd8641;outline-offset:3px}
+@media(hover:hover){.screen-explore .category-grid .explore-cover:hover{transform:translateY(-3px);box-shadow:0 12px 25px #243d3033}.screen-explore .explore-cover:hover .explore-cover-photo{transform:scale(1.045)}}
+@media(min-width:740px){.screen-explore .category-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.screen-explore .category-grid .explore-cover{min-height:170px;padding:20px}.screen-explore .explore-cover strong{font-size:29px}}
+@media(min-width:1024px){.screen-explore{max-width:1320px;margin:auto;padding:40px 28px 70px}.screen-explore .category-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:24px}.screen-explore .category-grid .explore-cover{min-height:205px}.screen-explore .section-header h1{font-size:48px}.screen-explore .search-box{height:54px}.screen-explore .place-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}}
+@media(prefers-reduced-motion:reduce){.screen-explore .category-grid .explore-cover,.screen-explore .explore-cover-photo{transition:none}}
