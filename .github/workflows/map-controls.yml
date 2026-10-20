@@ -2,9 +2,9 @@ name: Map controls regression
 on:
   push:
     branches: [main]
-    paths: ['app.js', 'map-v3.js', 'icons-v3-runtime.js', 'index.html', 'scripts/check-map-controls.cjs', '.github/workflows/map-controls.yml']
+    paths: ['app.js', 'map-v3.js', 'map-v3.css', 'app.css', 'icons-v3-runtime.js', 'index.html', 'scripts/check-map-controls.cjs', '.github/workflows/map-controls.yml']
   pull_request:
-    paths: ['app.js', 'map-v3.js', 'icons-v3-runtime.js', 'index.html', 'scripts/check-map-controls.cjs', '.github/workflows/map-controls.yml']
+    paths: ['app.js', 'map-v3.js', 'map-v3.css', 'app.css', 'icons-v3-runtime.js', 'index.html', 'scripts/check-map-controls.cjs', '.github/workflows/map-controls.yml']
   workflow_dispatch:
     inputs:
       target_url:
