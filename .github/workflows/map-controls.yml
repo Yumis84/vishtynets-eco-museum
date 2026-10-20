@@ -1,0 +1,32 @@
+name: Map controls regression
+on:
+  pull_request:
+    paths: ['app.js', 'map-v3.js', 'icons-v3-runtime.js', 'index.html', 'scripts/check-map-controls.cjs', '.github/workflows/map-controls.yml']
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: 'Published URL; blank tests the checkout locally'
+        required: false
+        default: ''
+jobs:
+  map:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright@1.58.2
+      - run: npx playwright install --with-deps chromium
+      - name: Mobile touch and desktop regression
+        env:
+          MAP_TEST_URL: ${{ inputs.target_url }}
+          MAP_TEST_OUTPUT: map-test-results
+        run: |
+          python3 -m http.server 8765 >/tmp/map-http.log 2>&1 &
+          node scripts/check-map-controls.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: map-controls-evidence
+          path: map-test-results/
