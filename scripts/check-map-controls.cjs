@@ -20,7 +20,7 @@ fs.mkdirSync(out,{recursive:true});
   const count=async type=>page.locator('.leaflet-marker-pane .'+type).count();
   const snapshot=async step=>results.push({name,step,poi:await count('poi-pin'),guests:await count('guest-pin'),chips:await page.locator('#mapCategories button').evaluateAll(bs=>bs.map(b=>({label:b.dataset.mapCategory,pressed:b.getAttribute('aria-pressed'),active:b.classList.contains('is-active')})))});
   await click('#bottomNav [data-nav="map"]');
-  await page.waitForSelector('script[data-map-v3-safe]');
+  await page.waitForSelector('script[data-map-v3-safe]',{state:'attached'});
   await page.waitForFunction(()=>document.querySelector('#mapCategories .map-chip-label'));
   await page.waitForSelector('.poi-pin');
   const total=await count('poi-pin'); assert(total>0);
