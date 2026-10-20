@@ -192,12 +192,13 @@ async function ensureMap(){
 }
 const MAP_CATEGORIES=['Все','Природа','История','Камни','Мосты','Музей','Гостевые дома'];
 function renderMapCategories(){
-  $('#mapCategories').innerHTML=MAP_CATEGORIES.map(c=>`<button class="${(c==='Гостевые дома'?state.showGuests:(state.showMuseum&&state.mapCategory===c))?'is-active':''}" data-map-category="${c}" type="button">${c}</button>`).join('');
-  $$('[data-map-category]').forEach(b=>b.onclick=async()=>{const c=b.dataset.mapCategory;if(c==='Гостевые дома'){state.showGuests=!state.showGuests;if(state.showGuests)await loadGuestHouses()}else if(c==='Все'){const wasAll=state.mapCategory==='Все'&&state.showMuseum;state.mapCategory='Все';state.showMuseum=!wasAll}else if(state.mapCategory===c&&state.showMuseum){state.mapCategory='Все'}else{state.mapCategory=c;state.showMuseum=true}renderMapCategories();renderMapMarkers()});
+  $('#mapCategories').innerHTML=MAP_CATEGORIES.map(c=>`<button class="${(c==='Гостевые дома'?state.showGuests:(state.showMuseum&&state.mapCategory===c))?'is-active':''}" data-map-category="${c}" aria-pressed="${c==='Гостевые дома'?state.showGuests:(state.showMuseum&&state.mapCategory===c)}" type="button">${c}</button>`).join('');
+  $$('[data-map-category]').forEach(b=>b.onclick=async()=>{const c=b.dataset.mapCategory;if(c==='Гостевые дома'){state.showGuests=!state.showGuests;renderMapCategories();renderMapMarkers();if(state.showGuests)await loadGuestHouses()}else if(c==='Все'){const wasAll=state.mapCategory==='Все'&&state.showMuseum;state.mapCategory='Все';state.showMuseum=!wasAll}else if(state.mapCategory===c&&state.showMuseum){state.showMuseum=false}else{state.mapCategory=c;state.showMuseum=true}renderMapCategories();renderMapMarkers()});
 }
 function mapPointMatches(p){return Number.isFinite(p.lat)&&Number.isFinite(p.lng)&&(p.articleIds||[]).length&&pointMatchesCategory(p,state.mapCategory)}
 function mapPin(content,guest=false){return L.divIcon({className:'',html:`<div class="${guest?'guest-pin':'poi-pin'}"><span>${content}</span></div>`,iconSize:[34,34],iconAnchor:[17,33]})}
 function renderMapMarkers(){
+  if(!state.showGuests&&$('#mapCard .guest-place-card'))$('#mapCard').innerHTML='';
   if(!state.markerLayer)return;state.markerLayer.clearLayers();const q=($('#mapSearch')?.value||'').trim().toLowerCase();
   if(state.showMuseum)points.filter(mapPointMatches).filter(p=>!q||[p.name,p.shortDescription,p.category,...(p.categories||[])].join(' ').toLowerCase().includes(q)).forEach(p=>{const marker=L.marker([p.lat,p.lng],{icon:mapPin(categoryIcon(primaryCategory(p)))}).addTo(state.markerLayer);marker.on('click',()=>selectMapPoint(p))});
   if(state.showGuests)state.guestHouses.filter(h=>Number.isFinite(h.lat)&&Number.isFinite(h.lng)).filter(h=>!q||[h.name,h.address,h.description].join(' ').toLowerCase().includes(q)).forEach(h=>{const marker=L.marker([h.lat,h.lng],{icon:mapPin('⌂',true)}).addTo(state.markerLayer);marker.on('click',()=>selectGuest(h))});
@@ -211,12 +212,27 @@ function selectMapPoint(p,fly=false){
   $('[data-map-article]')?.addEventListener('click',e=>openArticle(e.currentTarget.dataset.mapArticle));
 }
 function selectGuest(h){
-  $('#mapCard').innerHTML=`<article class="map-place-card"><div class="map-place-photo">⌂</div><div class="map-place-copy"><span class="eyebrow">Гостевой дом</span><h3>${esc(h.name)}</h3><p>${esc(h.address||h.description||'')}</p><div class="map-place-actions"><button id="openGuestCatalog" type="button">Подробнее</button><a href="https://yandex.ru/maps/?rtext=~${h.lat},${h.lng}&rtt=auto" target="_blank" rel="noopener">Маршрут</a></div></div></article>`;
+  state.selectedPoint=null;
+  $('#mapCard').innerHTML=`<article class="map-place-card guest-place-card"><div class="map-place-photo">⌂</div><div class="map-place-copy"><span class="eyebrow">Гостевой дом</span><h3>${esc(h.name)}</h3><p>${esc(h.address||h.description||'')}</p><div class="map-place-actions"><button id="openGuestCatalog" type="button">Подробнее</button><a href="https://yandex.ru/maps/?rtext=~${h.lat},${h.lng}&rtt=auto" target="_blank" rel="noopener">Маршрут</a></div></div></article>`;
   $('#openGuestCatalog').onclick=()=>window.open('https://yumis84.github.io/guest-house-map/','_blank','noopener');
 }
+let guestHousesRequest=null;
 async function loadGuestHouses(){
   if(state.guestHouses.length)return;
-  try{const text=await fetch('https://raw.githubusercontent.com/Yumis84/guest-house-map/main/guest-houses.js',{cache:'no-store'}).then(r=>r.text());const m=text.match(/window\.GUEST_HOUSES\s*=\s*(\[[\s\S]*?\]);/);if(m)state.guestHouses=Function('"use strict";return ('+m[1]+')')().filter(h=>h.active!==false)}catch(e){state.showGuests=false}
+  if(!guestHousesRequest)guestHousesRequest=(async()=>{
+    try{
+      const response=await fetch('https://raw.githubusercontent.com/Yumis84/guest-house-map/main/guest-houses.js',{cache:'no-store'});
+      if(!response.ok)throw new Error('Guest catalog unavailable');
+      const text=await response.text(),match=text.match(/window\.GUEST_HOUSES\s*=\s*(\[[\s\S]*?\]);/);
+      if(!match)throw new Error('Invalid guest catalog');
+      const houses=Function('"use strict";return ('+match[1]+')')();
+      if(!Array.isArray(houses)||!houses.length)throw new Error('Empty guest catalog');
+      state.guestHouses=houses.filter(h=>h&&h.active!==false&&!h.parentId&&Number.isFinite(h.lat)&&Number.isFinite(h.lng));
+      if(!state.guestHouses.length)throw new Error('No guest coordinates');
+    }catch(e){state.showGuests=false}
+    finally{guestHousesRequest=null}
+  })();
+  await guestHousesRequest;
 }
 
 function bind(){
@@ -250,7 +266,7 @@ function bind(){
       if(layer==='museum')state.showMuseum=!state.showMuseum;
       if(layer==='guests')state.showGuests=!state.showGuests;
       renderLayerSheet();renderMapCategories();renderMapMarkers();
-      if(layer==='guests'&&state.showGuests){await loadGuestHouses();renderMapMarkers()}
+      if(layer==='guests'&&state.showGuests){await loadGuestHouses();renderMapCategories();renderMapMarkers();if($('#infoSheet').classList.contains('is-open')&&$('#sheetContent [data-map-layer]'))renderLayerSheet()}
     };
   };
   $('#menuDetailBack').onclick=()=>showScreen('menu',{remember:false});

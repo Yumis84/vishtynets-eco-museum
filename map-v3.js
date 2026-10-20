@@ -59,41 +59,6 @@ function openFilterSheet(){
   }));
 }
 
-function layerMarkup(){
-  const guests=activeGuestLayer();
-  return `<div class="map-layer-list">
-    <div class="map-layer-row">
-      <span class="map-layer-icon">${svg('museum')}</span>
-      <span><strong>Музейные места</strong><small>Проверенные точки природы, истории и культуры</small></span>
-      <button class="map-layer-switch is-active" type="button" aria-label="Музейные места включены" disabled></button>
-    </div>
-    <div class="map-layer-row">
-      <span class="map-layer-icon">${svg('bed')}</span>
-      <span><strong>Гостевые дома</strong><small>Данные загружаются из отдельного актуального сервиса</small></span>
-      <button class="map-layer-switch ${guests?'is-active':''}" id="mapGuestLayerSwitch" type="button" aria-pressed="${guests}"></button>
-    </div>
-    <div class="map-layer-row">
-      <span class="map-layer-icon">${svg('route')}</span>
-      <span><strong>Маршруты</strong><small>Появятся после проверки состава и координат точек</small></span>
-      <span class="explore-route-status">Готовится</span>
-    </div>
-  </div>`;
-}
-
-function openLayersSheet(){
-  openSheet('Слои','Включайте дополнительные данные поверх основной музейной карты.',layerMarkup());
-  const toggle=$('#mapGuestLayerSwitch',content);
-  toggle?.addEventListener('click',async()=>{
-    const chip=categories.querySelector('[data-map-category="Гостевые дома"]');
-    chip?.click();
-    await new Promise(resolve=>setTimeout(resolve,40));
-    const on=activeGuestLayer();
-    toggle.classList.toggle('is-active',on);
-    toggle.setAttribute('aria-pressed',String(on));
-    layersButton.classList.toggle('is-layer-active',on);
-  });
-}
-
 let pull=null;
 function installCardGesture(){
   cardWrap.addEventListener('touchstart',e=>{
@@ -149,7 +114,7 @@ function observeMapUi(){
 
 function init(){
   filterButton.onclick=openFilterSheet;
-  layersButton.onclick=openLayersSheet;
+  // app.js owns layers and map state; this module only decorates controls.
   enhanceCategoryChips();
   observeMapUi();
   installCardGesture();
