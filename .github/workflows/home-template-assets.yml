@@ -5,6 +5,7 @@ on:
     paths:
       - 'assets/home-template/photo-sources.json'
       - '.github/workflows/home-template-assets.yml'
+      - 'index.html'
   workflow_dispatch:
 permissions:
   contents: write
