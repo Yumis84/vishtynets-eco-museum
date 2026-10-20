@@ -31,7 +31,12 @@ function openAccess(){if(guide?.access?.mode==='open')return;accessModal.classLi
 function closeAccess(){accessModal.classList.remove('is-open');accessModal.setAttribute('aria-hidden','true')}
 accessModal.addEventListener('click',e=>{if(e.target.closest('[data-audio-close]'))closeAccess()});
 accessModal.querySelector('.audio-access-future button')?.addEventListener('click',async e=>{const b=e.currentTarget;b.disabled=true;b.textContent='Переход к оплате…';try{const returnUrl=new URL(location.href);returnUrl.searchParams.delete('payment_id');returnUrl.searchParams.delete('audio_payment');const r=await fetch('https://qwiecwfltybytqwytqoy.supabase.co/functions/v1/audio-guide-payment',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'create',amount:'100.00',description:'Аудиогид Виштынецкого экомузея — доступ 24 часа',return_url:returnUrl.toString()})});const d=await r.json();if(!r.ok||!d.confirmation_url)throw new Error('payment_create_failed');location.href=d.confirmation_url}catch(_e){b.disabled=false;b.textContent='Оплатить 100 ₽';alert('Не удалось создать платёж. Попробуйте ещё раз.')}});
-function url(t){const voice='grok';const bases=t?.audio?.voiceBaseUrls;const u=(bases&&bases[voice])||t?.audio?.publicUrl||t?.audio?.url||t?.audio?.src;if(!u)return'';try{return new URL(u,document.baseURI).href}catch{return u}}
+function url(t){
+  // Fail closed: never fall back to an original narrator recording.
+  const source=t?.kind==='intro'?'assets/audio/vstuplenie/AI-vstuplenie.mp3':t?.audio?.voiceBaseUrls?.grok;
+  if(!source||source.includes('/alexey/'))return '';
+  try{return new URL(source,document.baseURI).href}catch{return ''}
+}
 function stopAudio(){if(audio){audio.pause();audio.removeAttribute('src');audio.load();audio=null}audioTrackId=null}
 document.addEventListener('change',e=>{if(e.target?.matches?.('[data-audio-voice-select]')){stopAudio();update()}},false);
 function playlist(){const list=[];halls.forEach(h=>{expositionTracks.filter(t=>Number(t.hall)===Number(h.number)).sort((a,b)=>(Number(a.hallOrder)||0)-(Number(b.hallOrder)||0)).forEach(t=>list.push(t))});return list.length?list:expositionTracks.slice()}
