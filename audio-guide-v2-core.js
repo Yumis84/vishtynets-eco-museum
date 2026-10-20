@@ -32,10 +32,14 @@ function closeAccess(){accessModal.classList.remove('is-open');accessModal.setAt
 accessModal.addEventListener('click',e=>{if(e.target.closest('[data-audio-close]'))closeAccess()});
 accessModal.querySelector('.audio-access-future button')?.addEventListener('click',async e=>{const b=e.currentTarget;b.disabled=true;b.textContent='Переход к оплате…';try{const returnUrl=new URL(location.href);returnUrl.searchParams.delete('payment_id');returnUrl.searchParams.delete('audio_payment');const r=await fetch('https://qwiecwfltybytqwytqoy.supabase.co/functions/v1/audio-guide-payment',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'create',amount:'100.00',description:'Аудиогид Виштынецкого экомузея — доступ 24 часа',return_url:returnUrl.toString()})});const d=await r.json();if(!r.ok||!d.confirmation_url)throw new Error('payment_create_failed');location.href=d.confirmation_url}catch(_e){b.disabled=false;b.textContent='Оплатить 100 ₽';alert('Не удалось создать платёж. Попробуйте ещё раз.')}});
 function url(t){
-  // Fail closed: never fall back to an original narrator recording.
-  const source=t?.kind==='intro'?'assets/audio/vstuplenie/AI-vstuplenie.mp3':t?.audio?.voiceBaseUrls?.grok;
-  if(!source||source.includes('/alexey/'))return '';
-  try{return new URL(source,document.baseURI).href}catch{return ''}
+  // Data is reloaded by the bootstrap after the voice selector initializes.
+  // Derive the AI URL from the original track filename rather than relying
+  // on voiceBaseUrls.grok having been populated in that replaced object.
+  if(t?.kind==='intro')return new URL('assets/audio/vstuplenie/AI-vstuplenie.mp3',document.baseURI).href;
+  const candidate=t?.audio?.voiceBaseUrls?.grok||t?.audio?.publicUrl;
+  const filename=String(candidate||'').split('?')[0].split('/').pop();
+  if(!filename||!/^[-a-zA-Z0-9_]+\\.mp3$/i.test(filename))return '';
+  return new URL('assets/audio/grok/'+filename,document.baseURI).href;
 }
 function stopAudio(){if(audio){audio.pause();audio.removeAttribute('src');audio.load();audio=null}audioTrackId=null}
 document.addEventListener('change',e=>{if(e.target?.matches?.('[data-audio-voice-select]')){stopAudio();update()}},false);
