@@ -116,3 +116,21 @@
  .screen-home .home-places-section .recommend-card:hover{transform:translateY(-3px);box-shadow:0 11px 25px #263d3030!important}
  .screen-home .home-places-section .recommend-card:hover img{transform:scale(1.04)}
 }
+
+/* Desktop layout stabilization. Mobile-approved styles are untouched. */
+@media (min-width:1024px) {
+ .screen-home, .screen-home * { box-sizing:border-box; }
+ .screen-home .home-head { display:flex;align-items:center;gap:clamp(12px,2vw,30px); }
+ .screen-home .desktop-home-brand { flex:0 0 auto;min-width:0; }
+ .screen-home .desktop-home-nav { display:flex;flex:1 1 auto;min-width:0;justify-content:flex-end;flex-wrap:wrap;row-gap:0; }
+ .screen-home .warm-hero-copy,.screen-home .home-entry-grid,.screen-home .home-paper { width:100%;max-width:1280px; }
+ .screen-home .home-entry-grid { display:grid;grid-template-columns:repeat(4,minmax(0,1fr)); }
+ .screen-home .entry-card { min-width:0; }
+ .screen-home .entry-copy strong,.screen-home .entry-copy small { overflow-wrap:break-word; }
+ .screen-home .home-paper { margin-inline:auto; }
+}
+@media (min-width:1024px) and (max-width:1199px) {
+ .screen-home .home-head { gap:10px; }
+ .screen-home .desktop-home-nav button { font-size:12px!important;padding:8px 5px; }
+ .screen-home .entry-copy strong { font-size:18px!important; }
+}
