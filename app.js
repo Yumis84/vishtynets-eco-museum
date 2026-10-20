@@ -81,15 +81,17 @@ function renderHome(){
   $('#homeRecommendations').innerHTML=list.map(p=>{
     // Only use photographs explicitly linked to the place (or its related article).
     // A generic forest fallback incorrectly depicts unrelated landmarks as the same place.
-    const archivalCover={
-      poi_vishtynets_lake:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0192.jpg',
-      poi_devils_stone:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0525.jpg',
-      poi_gross_rominten_church:'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0502.jpg'
+    const coverFiles={
+      poi_vishtynets_lake:'i0188.jpg',
+      poi_devils_stone:'i0525.jpg',
+      poi_gross_rominten_church:'i0502.jpg'
     };
-    const photo=p.photos?.[0]||(p.articleIds||[]).map(articleById).find(a=>a?.hero)?.hero||archivalCover[p.id]||'';
+    const coverFile=coverFiles[p.id];
+    const photo=coverFile?'https://www.wystynez.ru/sc-pic/'+coverFile:(p.photos?.[0]||(p.articleIds||[]).map(articleById).find(a=>a?.hero)?.hero||'');
+    const backupPhoto=coverFile?'https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/'+coverFile:'';
     const theme=({poi_vishtynets_lake:'lake',poi_tokarevka_bridge:'bridge',poi_devils_stone:'stone',poi_gross_rominten_church:'church'})[p.id]||'nature';
     const symbols={lake:'≈',bridge:'⌒',stone:'◆',church:'⌂',nature:'✦'};
-    return `<button class="recommend-card recommend-theme-${theme}${photo?' has-photo':' no-photo'}" data-home-point="${esc(p.id)}" type="button">${photo?`<img src="${esc(photo)}" alt="" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.remove('has-photo');this.parentElement.classList.add('no-photo')">`:''}<span class="recommend-fallback" aria-hidden="true"><span class="recommend-theme-symbol">${symbols[theme]}</span></span><span class="recommend-copy"><strong>${esc(p.name)}</strong><small>${esc(primaryCategory(p))}</small></span></button>`;
+    return `<button class="recommend-card recommend-theme-${theme}${photo?' has-photo':' no-photo'}" data-home-point="${esc(p.id)}" type="button">${photo?`<img src="${esc(photo)}" data-backup="${esc(backupPhoto)}" alt="" loading="lazy" onerror="if(!this.dataset.retried && this.dataset.backup){this.dataset.retried='1';this.src=this.dataset.backup}else{this.style.display='none';this.parentElement.classList.remove('has-photo');this.parentElement.classList.add('no-photo')}">`:''}<span class="recommend-fallback" aria-hidden="true"><span class="recommend-theme-symbol">${symbols[theme]}</span></span><span class="recommend-copy"><strong>${esc(p.name)}</strong><small>${esc(primaryCategory(p))}</small></span></button>`;
   }).join('');
   $$('[data-home-point]').forEach(b=>b.onclick=()=>openPlace(b.dataset.homePoint));
 }
