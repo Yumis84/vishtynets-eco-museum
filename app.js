@@ -193,7 +193,7 @@ async function ensureMap(){
 const MAP_CATEGORIES=['Все','Природа','История','Камни','Мосты','Музей','Гостевые дома'];
 function renderMapCategories(){
   $('#mapCategories').innerHTML=MAP_CATEGORIES.map(c=>`<button class="${(c==='Гостевые дома'?state.showGuests:(state.showMuseum&&state.mapCategory===c))?'is-active':''}" data-map-category="${c}" type="button">${c}</button>`).join('');
-  $('[data-map-category]').forEach(b=>b.onclick=async()=>{const c=b.dataset.mapCategory;if(c==='Гостевые дома'){state.showGuests=!state.showGuests;if(state.showGuests)await loadGuestHouses()}else if(c==='Все'){state.mapCategory='Все';state.showMuseum=!state.showMuseum}else if(state.mapCategory===c&&state.showMuseum){state.mapCategory='Все';state.showMuseum=false}else{state.mapCategory=c;state.showMuseum=true}renderMapCategories();renderMapMarkers()});
+  $$('[data-map-category]').forEach(b=>b.onclick=async()=>{const c=b.dataset.mapCategory;if(c==='Гостевые дома'){state.showGuests=!state.showGuests;if(state.showGuests)await loadGuestHouses()}else if(c==='Все'){state.mapCategory='Все';state.showMuseum=!state.showMuseum}else if(state.mapCategory===c&&state.showMuseum){state.mapCategory='Все';state.showMuseum=false}else{state.mapCategory=c;state.showMuseum=true}renderMapCategories();renderMapMarkers()});
 }
 function mapPointMatches(p){return Number.isFinite(p.lat)&&Number.isFinite(p.lng)&&(p.articleIds||[]).length&&pointMatchesCategory(p,state.mapCategory)}
 function mapPin(content,guest=false){return L.divIcon({className:'',html:`<div class="${guest?'guest-pin':'poi-pin'}"><span>${content}</span></div>`,iconSize:[34,34],iconAnchor:[17,33]})}
@@ -239,7 +239,7 @@ function bind(){
       layerRow('museum','Музейные места','Проверенные точки природы, истории и культуры',state.showMuseum)+
       layerRow('guests','Гостевые дома','Данные загружаются из отдельного актуального сервиса',state.showGuests)+
       '<div class="map-layer-row" style="padding:16px;border:1px solid #d4cbbb;border-radius:20px;margin-top:12px"><strong>Маршруты</strong><p style="margin:5px 0 0">Готовятся после проверки состава и координат точек</p></div>');
-    $('[data-map-layer]',$('#sheetContent')).forEach(input=>input.addEventListener('change',async()=>{
+    $$('[data-map-layer]',$('#sheetContent')).forEach(input=>input.addEventListener('change',async()=>{
       if(input.dataset.mapLayer==='museum')state.showMuseum=input.checked;
       if(input.dataset.mapLayer==='guests'){
         state.showGuests=input.checked;
