@@ -1,7 +1,7 @@
 name: Preserve approved homepage photo originals
 on:
   push:
-    branches: [feature/approved-mobile-home-20261020]
+    branches: [main]
     paths:
       - 'assets/home-template/photo-sources.json'
       - '.github/workflows/home-template-assets.yml'
