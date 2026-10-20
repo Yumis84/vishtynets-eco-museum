@@ -193,7 +193,7 @@ async function ensureMap(){
 const MAP_CATEGORIES=['Все','Природа','История','Камни','Мосты','Музей','Гостевые дома'];
 function renderMapCategories(){
   $('#mapCategories').innerHTML=MAP_CATEGORIES.map(c=>`<button class="${(c==='Гостевые дома'?state.showGuests:(state.showMuseum&&state.mapCategory===c))?'is-active':''}" data-map-category="${c}" type="button">${c}</button>`).join('');
-  $$('[data-map-category]').forEach(b=>b.onclick=async()=>{const c=b.dataset.mapCategory;if(c==='Гостевые дома'){state.showGuests=!state.showGuests;if(state.showGuests)await loadGuestHouses()}else if(c==='Все'){state.mapCategory='Все';state.showMuseum=!state.showMuseum}else if(state.mapCategory===c&&state.showMuseum){state.mapCategory='Все';state.showMuseum=false}else{state.mapCategory=c;state.showMuseum=true}renderMapCategories();renderMapMarkers()});
+  $$('[data-map-category]').forEach(b=>b.onclick=async()=>{const c=b.dataset.mapCategory;if(c==='Гостевые дома'){state.showGuests=!state.showGuests;if(state.showGuests)await loadGuestHouses()}else if(c==='Все'){state.mapCategory='Все';state.showMuseum=true}else if(state.mapCategory===c&&state.showMuseum){state.mapCategory='Все';state.showMuseum=false}else{state.mapCategory=c;state.showMuseum=true}renderMapCategories();renderMapMarkers()});
 }
 function mapPointMatches(p){return Number.isFinite(p.lat)&&Number.isFinite(p.lng)&&(p.articleIds||[]).length&&pointMatchesCategory(p,state.mapCategory)}
 function mapPin(content,guest=false){return L.divIcon({className:'',html:`<div class="${guest?'guest-pin':'poi-pin'}"><span>${content}</span></div>`,iconSize:[34,34],iconAnchor:[17,33]})}
@@ -237,7 +237,7 @@ function bind(){
     const drawLayers=()=>{
       const row=(key,title,description,on)=>'<button type="button" data-map-layer="'+key+'" aria-pressed="'+on+'" style="width:100%;display:flex;align-items:center;gap:14px;padding:16px;border:1px solid #d4cbbb;border-radius:20px;margin:12px 0;background:transparent;color:inherit;text-align:left;cursor:pointer"><span style="flex:1"><strong style="display:block;font-size:18px">'+title+'</strong><small style="display:block;color:#777;line-height:1.45;margin-top:5px">'+description+'</small></span><span aria-hidden="true" style="display:block;flex:none;width:58px;height:34px;padding:4px;border-radius:24px;background:'+(on?'#66836b':'#c8c5bd')+'"><span style="display:block;width:26px;height:26px;border-radius:50%;background:white;transform:translateX('+(on?'24px':'0')+')"></span></span></button>';
       $('#sheetContent').innerHTML='<span class="eyebrow">Карта</span><h2>Слои</h2><p>Включайте дополнительные данные поверх основной музейной карты.</p>'+
-        row('museum','Музейные места','Проверенные точки природы, истории и культуры',state.showMuseum)+
+        row('museum','Достопримечательности','Все проверенные точки: природа, история, камни, мосты и музеи',state.showMuseum)+
         row('guests','Гостевые дома','Данные загружаются из отдельного актуального сервиса',state.showGuests)+
         '<div style="padding:16px;border:1px solid #d4cbbb;border-radius:20px;margin-top:12px"><strong>Маршруты</strong><p style="margin:5px 0 0">Готовятся после проверки состава и координат точек</p></div>';
     };
