@@ -1,0 +1,34 @@
+name: Archive homepage photographs on feature branch
+on:
+  push:
+    branches:
+      - feature/mobile-home-real-photos-20261020
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/mobile-home-real-photos-20261020
+      - name: Download originals
+        run: |
+          python3 - <<'PY'
+          import json,pathlib,urllib.request
+          for p in json.loads(pathlib.Path('assets/home-template/photo-sources.json').read_text())['images']:
+              dest=pathlib.Path(p['file'])
+              dest.parent.mkdir(parents=True,exist_ok=True)
+              with urllib.request.urlopen(p['source'],timeout=30) as response:
+                  data=response.read()
+              if not data.startswith(b'\xff\xd8\xff') or len(data)<1000:
+                  raise RuntimeError('Invalid JPEG: '+p['id'])
+              dest.write_bytes(data)
+          PY
+      - name: Commit photos
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/home-template/originals
+          git diff --cached --quiet || (git commit -m 'assets: preserve original homepage photos' && git push origin HEAD:feature/mobile-home-real-photos-20261020)
