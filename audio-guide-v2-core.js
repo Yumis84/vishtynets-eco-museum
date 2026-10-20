@@ -38,7 +38,7 @@ function url(t){
   if(t?.kind==='intro')return new URL('assets/audio/vstuplenie/AI-vstuplenie.mp3',document.baseURI).href;
   const candidate=t?.audio?.voiceBaseUrls?.grok||t?.audio?.publicUrl;
   const filename=String(candidate||'').split('?')[0].split('/').pop();
-  if(!filename||!/^[-a-zA-Z0-9_]+\\.mp3$/i.test(filename))return '';
+  if(!filename||!/^[-a-zA-Z0-9_]+\.mp3$/i.test(filename))return '';
   return new URL('assets/audio/grok/'+filename,document.baseURI).href;
 }
 function stopAudio(){if(audio){audio.pause();audio.removeAttribute('src');audio.load();audio=null}audioTrackId=null}
