@@ -10,15 +10,15 @@
   "images": [
     {
       "id": "hero",
-      "file": "assets/home-template/originals/hero-rominta-i1423.jpg",
-      "source": "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i1423.jpg",
+      "file": "assets/home-template/originals/hero-lake-i0188.jpg",
+      "source": "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0188.jpg",
       "legacy": "https://www.wystynez.ru/sc-pic/i1423.jpg",
       "use": "Главная обложка, Место, где природа хранит память"
     },
     {
       "id": "lake",
-      "file": "assets/home-template/originals/lake-i0192.jpg",
-      "source": "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0192.jpg",
+      "file": "assets/home-template/originals/lake-i0188.jpg",
+      "source": "https://raw.githubusercontent.com/falke0039/wystynez/main/sc-pic/i0188.jpg",
       "legacy": "https://www.wystynez.ru/p24.htm",
       "use": "Озеро Виштынецкое"
     },
