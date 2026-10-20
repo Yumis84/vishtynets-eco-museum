@@ -234,19 +234,23 @@ function bind(){
   $('#locateButton').onclick=()=>{if(!navigator.geolocation||!state.map)return;navigator.geolocation.getCurrentPosition(pos=>{const ll=[pos.coords.latitude,pos.coords.longitude];if(state.userMarker)state.userMarker.remove();state.userMarker=L.marker(ll,{icon:L.divIcon({className:'',html:'<div class="user-dot"></div>',iconSize:[15,15],iconAnchor:[7,7]})}).addTo(state.map);state.map.flyTo(ll,15)},()=>{}, {enableHighAccuracy:true,timeout:8000})};
   $('#mapFilterButton').onclick=()=>showSheet('<span class="eyebrow">Карта</span><h2>Фильтры</h2><p>Выберите категорию прямо над картой. На карте показываются только места с проверенными координатами. Непроверенные точки не публикуются как маркеры.</p>');
   $('#mapLayersButton').onclick=()=>{
-    const layerRow=(key,title,description,checked)=>'<label class="map-layer-row" style="display:flex;align-items:center;gap:14px;padding:16px;border:1px solid #d4cbbb;border-radius:20px;margin:12px 0;cursor:pointer"><span style="flex:1"><strong style="display:block;font-size:18px">'+title+'</strong><small style="display:block;color:#777;line-height:1.45;margin-top:5px">'+description+'</small></span><input type="checkbox" data-map-layer="'+key+'" '+(checked?'checked':'')+' style="width:24px;height:24px;accent-color:#55745c;flex:none" aria-label="'+title+'"></label>';
-    showSheet('<span class="eyebrow">Карта</span><h2>Слои</h2><p>Включайте дополнительные данные поверх основной музейной карты.</p>'+
-      layerRow('museum','Музейные места','Проверенные точки природы, истории и культуры',state.showMuseum)+
-      layerRow('guests','Гостевые дома','Данные загружаются из отдельного актуального сервиса',state.showGuests)+
-      '<div class="map-layer-row" style="padding:16px;border:1px solid #d4cbbb;border-radius:20px;margin-top:12px"><strong>Маршруты</strong><p style="margin:5px 0 0">Готовятся после проверки состава и координат точек</p></div>');
-    $$('[data-map-layer]',$('#sheetContent')).forEach(input=>input.addEventListener('change',async()=>{
-      if(input.dataset.mapLayer==='museum')state.showMuseum=input.checked;
-      if(input.dataset.mapLayer==='guests'){
-        state.showGuests=input.checked;
-        if(state.showGuests){await loadGuestHouses();input.checked=state.showGuests}
+    const drawLayers=()=>{
+      const row=(key,title,description,on)=>'<button type="button" data-map-layer="'+key+'" aria-pressed="'+on+'" style="width:100%;display:flex;align-items:center;gap:14px;padding:16px;border:1px solid #d4cbbb;border-radius:20px;margin:12px 0;background:transparent;color:inherit;text-align:left;cursor:pointer"><span style="flex:1"><strong style="display:block;font-size:18px">'+title+'</strong><small style="display:block;color:#777;line-height:1.45;margin-top:5px">'+description+'</small></span><span aria-hidden="true" style="display:block;flex:none;width:58px;height:34px;padding:4px;border-radius:24px;background:'+(on?'#66836b':'#c8c5bd')+'"><span style="display:block;width:26px;height:26px;border-radius:50%;background:white;transform:translateX('+(on?'24px':'0')+')"></span></span></button>';
+      $('#sheetContent').innerHTML='<span class="eyebrow">Карта</span><h2>Слои</h2><p>Включайте дополнительные данные поверх основной музейной карты.</p>'+
+        row('museum','Музейные места','Проверенные точки природы, истории и культуры',state.showMuseum)+
+        row('guests','Гостевые дома','Данные загружаются из отдельного актуального сервиса',state.showGuests)+
+        '<div style="padding:16px;border:1px solid #d4cbbb;border-radius:20px;margin-top:12px"><strong>Маршруты</strong><p style="margin:5px 0 0">Готовятся после проверки состава и координат точек</p></div>';
+    };
+    showSheet('');drawLayers();
+    $('#sheetContent').onclick=async e=>{
+      const button=e.target.closest('button[data-map-layer]');if(!button)return;
+      if(button.dataset.mapLayer==='museum')state.showMuseum=!state.showMuseum;
+      if(button.dataset.mapLayer==='guests'){
+        state.showGuests=!state.showGuests;
+        if(state.showGuests)await loadGuestHouses();
       }
-      renderMapCategories();renderMapMarkers();
-    }));
+      renderMapCategories();renderMapMarkers();drawLayers();
+    };
   };
   $('#menuDetailBack').onclick=()=>showScreen('menu',{remember:false});
   $('#menuDetailContent').addEventListener('click',e=>{const b=e.target.closest('[data-sheet-article]');if(b)openArticle(b.dataset.sheetArticle)});
