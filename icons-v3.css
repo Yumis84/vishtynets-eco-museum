@@ -125,3 +125,11 @@
   .bottom-nav button span{width:34px;height:34px;font-size:22px}
   .bottom-nav button span .v3-svg-icon{width:21px;height:21px}
 }
+
+/* Desktop entry cards use one shared layout; mobile keeps its approved layout. */
+@media (min-width:1024px){
+ .screen-home .home-entry-grid .entry-card{display:grid;grid-template-areas:'icon copy arrow';grid-template-columns:42px minmax(0,1fr) 18px;grid-template-rows:auto;align-items:center}
+ .screen-home .home-entry-grid .entry-icon{grid-area:icon}
+ .screen-home .home-entry-grid .entry-copy{grid-area:copy}
+ .screen-home .home-entry-grid .entry-card>b{grid-area:arrow}
+}
