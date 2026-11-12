@@ -20,4 +20,33 @@ groups.forEach(([title,items],i)=>{const group=document.createElement('div');gro
  const places=home.querySelector('.home-places-section');
  if(places){const section=document.createElement('section');section.className='desktop-v1-map';section.innerHTML='<div><span class="eyebrow">ПУТЕВОДИТЕЛЬ</span><h2>Карта Виштынецкого края</h2><p>Открывайте проверенные места, маршруты и гостевые дома на интерактивной карте.</p></div><button type="button" class="btn-primary">Открыть карту</button>';section.querySelector('button').addEventListener('click',()=>home.querySelector('[data-nav="map"]')?.click());places.before(section)}
 
+ // Reuse existing content in the approved desktop sequence. Markers restore
+ // the exact original DOM order whenever the viewport returns to mobile.
+ const paper=home.querySelector('.home-paper');
+ const desktopSections=paper&&[
+   paper.querySelector('.warm-topics'),
+   paper.querySelector('.desktop-v1-map'),
+   paper.querySelector('.home-places-section'),
+   paper.querySelector('.home-story-intro'),
+   paper.querySelector('.home-visit'),
+   paper.querySelector('#wallChampion')
+ ];
+ if(paper&&desktopSections.every(Boolean)){
+   const original=Array.from(paper.children).map(node=>{
+     const marker=document.createComment('desktop-section-position');
+     paper.insertBefore(marker,node);
+     return {node,marker};
+   });
+   const media=window.matchMedia('(min-width: 1024px)');
+   const arrange=()=>{
+     if(media.matches){
+       desktopSections.forEach(node=>paper.appendChild(node));
+     }else{
+       original.forEach(({node,marker})=>marker.after(node));
+     }
+   };
+   arrange();
+   media.addEventListener('change',arrange);
+ }
+
 })();
