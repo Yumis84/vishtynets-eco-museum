@@ -29,7 +29,7 @@ jobs:
           (async () => {
             const browser = await chromium.launch({headless:true});
             const errors=[];
-            for (const width of [390,768,1024,1280,1440,1920]) {
+            for (const width of [320,390,768,1024,1280,1440,1920]) {
               const page=await browser.newPage({viewport:{width,height:900},deviceScaleFactor:1});
               page.on('pageerror', e=>errors.push(width+': '+e.message));
               await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
@@ -37,7 +37,7 @@ jobs:
               await page.screenshot({path:'desktop-home-'+width+'.png',fullPage:true});
               const title=await page.locator('.screen-home h1').first().textContent();
               if(!title) throw Error('Missing home heading at '+width);
-              const desktop=await page.locator('.desktop-home-nav').first().isVisible();
+              const desktop=await page.locator('.desktop-v1-nav').first().isVisible();
               if(width>=1024 && !desktop) throw Error('Desktop navigation hidden at '+width);
               if(width<1024 && desktop) throw Error('Desktop navigation visible on mobile at '+width);
               if(width>=1024){
