@@ -37,6 +37,12 @@ jobs:
               await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
               await page.waitForTimeout(1200);
               await page.screenshot({path:'desktop-home-'+width+'.png',fullPage:true});
+              // content-visibility:auto can omit offscreen content in full-page captures.
+              await page.locator('#wallChampion').scrollIntoViewIfNeeded();
+              await page.waitForTimeout(500);
+              if (!await page.locator('#wallChampionTitle').isVisible()) throw Error('Wall section hidden at '+width);
+              if (!(await page.locator('#wallChampionContent').innerText()).trim()) throw Error('Wall status empty at '+width);
+              await page.screenshot({path:'desktop-wall-'+width+'.png'});
               const title=await page.locator('.screen-home h1').first().textContent();
               if(!title) throw Error('Missing home heading at '+width);
               const desktop=await page.locator('.desktop-v1-nav').first().isVisible();
@@ -63,4 +69,6 @@ jobs:
         if: always()
         with:
           name: desktop-home-screenshots
-          path: desktop-home-*.png
+          path: |
+            desktop-home-*.png
+            desktop-wall-*.png
