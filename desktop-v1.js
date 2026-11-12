@@ -17,4 +17,7 @@ groups.forEach(([title,items],i)=>{const group=document.createElement('div');gro
  trigger.addEventListener('click',()=>{const wasOpen=trigger.getAttribute('aria-expanded')==='true';close(false);if(!wasOpen){trigger.setAttribute('aria-expanded','true');panel.hidden=false}});group.append(trigger,panel);nav.append(group)});
  head.append(nav);document.addEventListener('click',e=>{if(!nav.contains(e.target))close(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape')close(true)});
  const copy=home.querySelector('.warm-hero-copy');const heading=document.createElement('div');heading.className='desktop-v1-heading';heading.innerHTML='<h1>Виштынецкий экомузей</h1><p>Авторский цифровой атлас Виштынецкого края</p>';copy.after(heading);
+ const places=home.querySelector('.home-places-section');
+ if(places){const section=document.createElement('section');section.className='desktop-v1-map';section.innerHTML='<div><span class="eyebrow">ПУТЕВОДИТЕЛЬ</span><h2>Карта Виштынецкого края</h2><p>Открывайте проверенные места, маршруты и гостевые дома на интерактивной карте.</p></div><button type="button" class="btn-primary">Открыть карту</button>';section.querySelector('button').addEventListener('click',()=>home.querySelector('[data-nav="map"]')?.click());places.before(section)}
+
 })();

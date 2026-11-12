@@ -160,3 +160,6 @@
  .desktop-v1-heading p{font-size:17px;margin:8px 0 0}
 }
 @media(max-width:1023px){.desktop-v1-nav,.desktop-v1-heading{display:none!important}}
+
+@media(min-width:1024px){.screen-home .desktop-v1-map{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:30px;border:1px solid #ddd5c7;border-radius:8px;background:#f0f2e9}.desktop-v1-map h2{font:normal 30px/1.2 Georgia,serif;color:#294336;margin:8px 0}.desktop-v1-map p{margin:0;color:#526257}.desktop-v1-map button{flex:none}}
+@media(max-width:1023px){.desktop-v1-map{display:none!important}}
