@@ -49,6 +49,8 @@ jobs:
               if(width>=1024 && !desktop) throw Error('Desktop navigation hidden at '+width);
               if(width<1024 && desktop) throw Error('Desktop navigation visible on mobile at '+width);
               if(width>=1024){
+                const sequence=await page.locator('.home-paper > section').evaluateAll(nodes=>nodes.map(n=>n.id==='wallChampion'?'wall':n.classList.contains('warm-topics')?'explore':n.classList.contains('desktop-v1-map')?'map':n.classList.contains('home-places-section')?'places':n.classList.contains('home-story-intro')?'stories':n.classList.contains('home-visit')?'visit':'other'));
+                if(sequence.join(',')!=='explore,map,places,stories,visit,wall') throw Error('Wrong desktop section order: '+sequence);
                 const menus=page.locator('.desktop-v1-trigger');
                 if(await menus.count()!==5)throw Error('Expected five desktop menus at '+width);
                 for(let i=0;i<5;i++){
@@ -58,6 +60,14 @@ jobs:
                   if(await menus.nth(i).getAttribute('aria-expanded')!=='false')throw Error('Menu failed to close '+i);
                 }
                 if(!await page.locator('.desktop-v1-map button').isVisible())throw Error('Map section missing');
+                if(width===1440){
+                  await page.locator('.desktop-v1-map button').click();
+                  if(!await page.locator('.screen-map').evaluate(el=>el.classList.contains('is-active'))) throw Error('Map entry did not navigate');
+                  await page.reload({waitUntil:'domcontentloaded'});
+                  await page.setViewportSize({width:390,height:900});
+                  const mobileOrder=await page.locator('.home-paper > section').evaluateAll(nodes=>nodes.map(n=>n.id==='wallChampion'?'wall':n.classList.contains('warm-topics')?'explore':n.classList.contains('desktop-v1-map')?'map':n.classList.contains('home-places-section')?'places':n.classList.contains('home-story-intro')?'stories':n.classList.contains('home-visit')?'visit':'other'));
+                  if(mobileOrder.join(',')!=='visit,map,places,explore,stories,wall') throw Error('Mobile order not restored: '+mobileOrder);
+                }
               }else if(await page.locator('.desktop-v1-nav').isVisible())throw Error('Desktop menu visible on mobile');
               await page.close();
             }
