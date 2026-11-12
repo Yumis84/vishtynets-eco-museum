@@ -6,6 +6,8 @@ on:
   pull_request:
     paths:
       - 'index.html'
+      - 'icons-v3.css'
+      - 'desktop-v1.js'
       - 'home-desktop-reference.css'
       - 'home-desktop.css'
       - 'home-museum-style.css'
