@@ -116,3 +116,50 @@
  .screen-home .home-places-section .recommend-card:hover{transform:translateY(-3px);box-shadow:0 11px 25px #263d3030!important}
  .screen-home .home-places-section .recommend-card:hover img{transform:scale(1.04)}
 }
+
+/* Desktop layout stabilization. Mobile-approved styles are untouched. */
+@media (min-width:1024px) {
+ .screen-home, .screen-home * { box-sizing:border-box; }
+ .screen-home .home-head { display:flex;align-items:center;gap:clamp(12px,2vw,30px); }
+ .screen-home .desktop-home-brand { flex:0 0 auto;min-width:0; }
+ .screen-home .desktop-home-nav { display:flex;flex:1 1 auto;min-width:0;justify-content:flex-end;flex-wrap:wrap;row-gap:0; }
+ .screen-home .warm-hero-copy,.screen-home .home-entry-grid,.screen-home .home-paper { width:100%;max-width:1280px; }
+ .screen-home .home-entry-grid { display:grid;grid-template-columns:repeat(4,minmax(0,1fr)); }
+ .screen-home .entry-card { min-width:0; }
+ .screen-home .entry-copy strong,.screen-home .entry-copy small { overflow-wrap:break-word; }
+ .screen-home .home-paper { margin-inline:auto; }
+}
+@media (min-width:1024px) and (max-width:1199px) {
+ .screen-home .home-head { gap:10px; }
+ .screen-home .desktop-home-nav button { font-size:12px!important;padding:8px 5px; }
+ .screen-home .entry-copy strong { font-size:18px!important; }
+}
+
+/* Desktop V1: constrain the actual logo elements used by index.html. */
+@media (min-width:1024px) {
+ .screen-home .desktop-brand-emblem{position:relative;display:block;flex:0 0 84px;width:84px;height:52px;overflow:hidden}
+ .screen-home .desktop-brand-logo{position:absolute;left:0;top:0;display:block;width:168px;max-width:none;height:auto}
+ .screen-home .desktop-brand-title{display:block;white-space:normal;font:700 19px/1.12 Georgia,serif;color:#294b38}
+ .screen-home .desktop-home-nav{flex-wrap:nowrap}
+}
+@media(min-width:1024px){
+ .screen-home .desktop-home-nav{display:none!important}
+ .screen-home .home-head{overflow:visible;position:relative}
+ .desktop-v1-nav{display:flex;align-items:center;justify-content:flex-end;gap:clamp(5px,1vw,18px);flex:1;min-width:0}
+ .desktop-v1-group{position:relative}
+ .desktop-v1-trigger{border:0;background:none;color:#304536;padding:14px 4px;font-size:clamp(11px,1vw,14px);cursor:pointer;white-space:nowrap}
+ .desktop-v1-trigger[aria-expanded=true]{color:#66815f;text-decoration:underline;text-underline-offset:7px}
+ .desktop-v1-menu{position:absolute;top:100%;right:0;z-index:99;min-width:250px;max-height:70vh;overflow:auto;padding:10px;background:#faf7f0;border:1px solid #d8d0bf;box-shadow:0 12px 28px #263d3030;border-radius:8px}
+ .desktop-v1-menu[hidden]{display:none}
+ .desktop-v1-menu button,.desktop-v1-menu a{display:block;width:100%;border:0;background:none;color:#294336;text-decoration:none;text-align:left;padding:10px 12px;font-size:14px;cursor:pointer}
+ .desktop-v1-menu button:hover,.desktop-v1-menu a:hover,.desktop-v1-menu :focus-visible{background:#e6eadf;outline:2px solid #8a9a78;outline-offset:-2px}
+ .screen-home .warm-hero{overflow:visible!important;grid-template-rows:76px clamp(190px,16vw,280px) auto auto}
+ .screen-home .warm-hero-copy{display:none!important}
+ .desktop-v1-heading{grid-row:3;max-width:1280px;width:100%;margin:auto;padding:20px 28px 10px;color:#293f32}
+ .desktop-v1-heading h1{font:normal clamp(40px,4vw,60px)/1.1 Georgia,serif;margin:0}
+ .desktop-v1-heading p{font-size:17px;margin:8px 0 0}
+}
+@media(max-width:1023px){.desktop-v1-nav,.desktop-v1-heading{display:none!important}}
+
+@media(min-width:1024px){.screen-home .desktop-v1-map{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:30px;border:1px solid #ddd5c7;border-radius:8px;background:#f0f2e9}.desktop-v1-map h2{font:normal 30px/1.2 Georgia,serif;color:#294336;margin:8px 0}.desktop-v1-map p{margin:0;color:#526257}.desktop-v1-map button{flex:none}}
+@media(max-width:1023px){.desktop-v1-map{display:none!important}}
