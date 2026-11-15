@@ -128,7 +128,7 @@
 
 /* Desktop entry cards use one shared layout; mobile keeps its approved layout. */
 @media (min-width:1024px){
- .screen-home .home-entry-grid .entry-card{display:grid;grid-template-areas:'icon copy arrow';grid-template-columns:42px minmax(0,1fr) 18px;grid-template-rows:auto;align-items:center}
+ .screen-home .home-entry-grid .entry-card{display:grid;grid-template-areas:'icon copy arrow';grid-template-columns:42px minmax(0,1fr) 18px;grid-template-rows:auto;align-items:center;align-content:center}
  .screen-home .home-entry-grid .entry-icon{grid-area:icon}
  .screen-home .home-entry-grid .entry-copy{grid-area:copy}
  .screen-home .home-entry-grid .entry-card>b{grid-area:arrow}
