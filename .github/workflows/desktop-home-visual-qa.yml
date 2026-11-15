@@ -50,11 +50,12 @@ jobs:
                 await base.screenshot({path:'mobile-main-'+width+'.png'});
                 // Render offscreen sections in both captures for reliable full-page comparison.
                 for(const [p,label] of [[page,'pr'],[base,'main']]){
-                  await p.addStyleTag({content:'.home-paper > section { content-visibility: visible !important; }'});
+                  const normalized=await p.addStyleTag({content:'.home-paper > section { content-visibility: visible !important; } .bottom-nav { visibility: hidden !important; }'});
                   await p.locator('#wallChampion').scrollIntoViewIfNeeded();
                   await p.waitForTimeout(500);
                   await p.evaluate(()=>window.scrollTo(0,0));
                   await p.screenshot({path:'mobile-full-'+label+'-'+width+'.png',fullPage:true});
+                  await normalized.evaluate(el=>el.remove());
                   await p.locator('.hero-menu').click();
                   if(!await p.locator('.screen-menu').evaluate(el=>el.classList.contains('is-active')))throw Error('Mobile menu did not open '+label+' '+width);
                   await p.screenshot({path:'mobile-menu-'+label+'-'+width+'.png'});
