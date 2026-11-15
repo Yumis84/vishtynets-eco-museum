@@ -128,7 +128,7 @@ jobs:
                 if(kind==='screen'&&!await qa.locator('.screen-'+value).evaluate(e=>e.classList.contains('is-active')))throw Error('Wrong screen '+label);
                 if(kind==='sheet'&&(!await qa.locator('#infoSheet').evaluate(e=>e.classList.contains('is-open'))||!(await qa.locator('#sheetContent').innerText()).includes(value)))throw Error('Wrong sheet '+label);
                 if(kind==='detail'&&(!await qa.locator('.screen-menu-detail').evaluate(e=>e.classList.contains('is-active'))||(await qa.locator('#menuDetailTitle').innerText())!==value))throw Error('Wrong detail '+label);
-                if(kind==='scroll'&&Math.abs(await qa.locator('.home-places-section').evaluate(e=>e.getBoundingClientRect().top))>200)throw Error('Scroll target not reached');
+                if(kind==='scroll')await qa.waitForFunction(()=>Math.abs(document.querySelector('.home-places-section').getBoundingClientRect().top)<200,null,{timeout:5000});
               }
             }
             await qa.close();
