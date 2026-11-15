@@ -110,7 +110,7 @@ jobs:
             }
             // Exercise every generated menu item on a fresh home screen.
             const cases=[
-              [['Все места','screen:explore'],['Природа','screen:articles'],['История','screen:articles'],['Камни','screen:articles'],['Культура','screen:articles']],
+              [['Все места','screen:explore'],['Природа','topic:Природа'],['История','topic:История'],['Камни','topic:Камни'],['Культура','topic:Культура']],
               [['Открыть карту','screen:map'],['Где остановиться','link:guest-house-map']],
               [['Места для посещения','scroll'],['Все места','screen:explore']],
               [['Статьи','screen:articles'],['Аудиогид','screen:audio'],['О музее','sheet:О музее'],['Экспозиции','detail:Экспозиции'],['Образовательные программы','detail:Образовательные программы'],['Проекты','detail:Проекты'],['Публикации','detail:Публикации'],['Хронология','detail:Хронология'],['Стена впечатлений','link:wall.html']],
@@ -119,6 +119,12 @@ jobs:
             const qa=await browser.newPage({viewport:{width:1440,height:900}});
             for(let g=0;g<cases.length;g++)for(const [label,expected] of cases[g]){
               await qa.goto('http://127.0.0.1:8765/',{waitUntil:'load'});
+              if(expected.startsWith('topic:')){
+                await qa.locator('.entry-explore').click();
+                await qa.locator('#exploreSearch').fill('несуществующий поисковый запрос');
+                await qa.locator('#favoritesToggle').click();
+                await qa.evaluate(()=>document.querySelector('.desktop-home-nav [data-nav="home"]').click());
+              }
               await qa.locator('.desktop-v1-trigger').nth(g).click();
               const item=qa.locator('#desktop-v1-menu-'+g).getByText(label,{exact:true});
               const [kind,value]=expected.split(':');
@@ -127,6 +133,14 @@ jobs:
               }else{
                 await item.click();
                 if(kind==='screen'&&!await qa.locator('.screen-'+value).evaluate(e=>e.classList.contains('is-active')))throw Error('Wrong screen '+label);
+                if(kind==='topic'){
+                  if(!await qa.locator('.screen-explore').evaluate(e=>e.classList.contains('is-active')))throw Error('Wrong topic screen '+label);
+                  const chip=qa.locator('[data-explore-category]').filter({hasText:value});
+                  if(!await chip.evaluate(el=>el.classList.contains('is-active')))throw Error('Topic filter not selected '+label);
+                  if(await qa.locator('#exploreSearch').inputValue()!=='')throw Error('Previous search not cleared '+label);
+                  if(await qa.locator('#favoritesToggle').evaluate(el=>el.classList.contains('is-active')))throw Error('Favorites still active '+label);
+                  if(await qa.locator('#exploreList [data-open-place]').count()===0)throw Error('No topic places '+label);
+                }
                 if(kind==='sheet'&&(!await qa.locator('#infoSheet').evaluate(e=>e.classList.contains('is-open'))||!(await qa.locator('#sheetContent').innerText()).includes(value)))throw Error('Wrong sheet '+label);
                 if(kind==='detail'&&(!await qa.locator('.screen-menu-detail').evaluate(e=>e.classList.contains('is-active'))||(await qa.locator('#menuDetailTitle').innerText())!==value))throw Error('Wrong detail '+label);
                 if(kind==='scroll')await qa.waitForFunction(()=>Math.abs(document.querySelector('.home-places-section').getBoundingClientRect().top)<200,null,{timeout:5000});
