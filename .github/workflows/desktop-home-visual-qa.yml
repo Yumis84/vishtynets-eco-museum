@@ -48,6 +48,19 @@ jobs:
                 await base.goto('http://127.0.0.1:8766/',{waitUntil:'domcontentloaded'});
                 await base.waitForTimeout(1200);
                 await base.screenshot({path:'mobile-main-'+width+'.png'});
+                // Render offscreen sections in both captures for reliable full-page comparison.
+                for(const [p,label] of [[page,'pr'],[base,'main']]){
+                  await p.addStyleTag({content:'.home-paper > section { content-visibility: visible !important; }'});
+                  await p.locator('#wallChampion').scrollIntoViewIfNeeded();
+                  await p.waitForTimeout(500);
+                  await p.evaluate(()=>window.scrollTo(0,0));
+                  await p.screenshot({path:'mobile-full-'+label+'-'+width+'.png',fullPage:true});
+                  await p.locator('.hero-menu').click();
+                  if(!await p.locator('.screen-menu').evaluate(el=>el.classList.contains('is-active')))throw Error('Mobile menu did not open '+label+' '+width);
+                  await p.screenshot({path:'mobile-menu-'+label+'-'+width+'.png'});
+                  await p.locator('[data-close-menu]').first().click();
+                  if(!await p.locator('.screen-home').evaluate(el=>el.classList.contains('is-active')))throw Error('Mobile menu did not close '+label+' '+width);
+                }
                 await base.close();
               }
               // content-visibility:auto can omit offscreen content in full-page captures.
@@ -94,6 +107,31 @@ jobs:
               }else if(await page.locator('.desktop-v1-nav').isVisible())throw Error('Desktop menu visible on mobile');
               await page.close();
             }
+            // Exercise every generated menu item on a fresh home screen.
+            const cases=[
+              [['Все места','screen:explore'],['Природа','screen:articles'],['История','screen:articles'],['Камни','screen:articles'],['Культура','screen:articles']],
+              [['Открыть карту','screen:map'],['Где остановиться','link:guest-house-map']],
+              [['Места для посещения','scroll'],['Все места','screen:explore']],
+              [['Статьи','screen:articles'],['Аудиогид','screen:audio'],['О музее','sheet:О музее'],['Экспозиции','detail:Экспозиции'],['Образовательные программы','detail:Образовательные программы'],['Проекты','detail:Проекты'],['Публикации','detail:Публикации'],['Хронология','detail:Хронология'],['Стена впечатлений','link:wall.html']],
+              [['Посетителям','sheet:Посетителям'],['Контакты','sheet:Контакты'],['Где остановиться','link:guest-house-map']]
+            ];
+            const qa=await browser.newPage({viewport:{width:1440,height:900}});
+            for(let g=0;g<cases.length;g++)for(const [label,expected] of cases[g]){
+              await qa.goto('http://127.0.0.1:8765/',{waitUntil:'load'});
+              await qa.locator('.desktop-v1-trigger').nth(g).click();
+              const item=qa.locator('#desktop-v1-menu-'+g).getByText(label,{exact:true});
+              const [kind,value]=expected.split(':');
+              if(kind==='link'){
+                if(!(await item.getAttribute('href')).includes(value))throw Error('Wrong link '+label);
+              }else{
+                await item.click();
+                if(kind==='screen'&&!await qa.locator('.screen-'+value).evaluate(e=>e.classList.contains('is-active')))throw Error('Wrong screen '+label);
+                if(kind==='sheet'&&(!await qa.locator('#infoSheet').evaluate(e=>e.classList.contains('is-open'))||!(await qa.locator('#sheetContent').innerText()).includes(value)))throw Error('Wrong sheet '+label);
+                if(kind==='detail'&&(!await qa.locator('.screen-menu-detail').evaluate(e=>e.classList.contains('is-active'))||(await qa.locator('#menuDetailTitle').innerText())!==value))throw Error('Wrong detail '+label);
+                if(kind==='scroll'&&Math.abs(await qa.locator('.home-places-section').evaluate(e=>e.getBoundingClientRect().top))>200)throw Error('Scroll target not reached');
+              }
+            }
+            await qa.close();
             await browser.close();
             if(errors.length) throw Error('JS errors: '+errors.join('; '));
           })().catch(e=>{console.error(e);process.exit(1)});
@@ -107,3 +145,5 @@ jobs:
             desktop-wall-*.png
             mobile-main-*.png
             mobile-pr-*.png
+            mobile-full-*.png
+            mobile-menu-*.png
