@@ -108,6 +108,34 @@ jobs:
               }else if(await page.locator('.desktop-v1-nav').isVisible())throw Error('Desktop menu visible on mobile');
               await page.close();
             }
+            // Mobile interactions: filters, search, favorites, article reader and back navigation.
+            for(const width of [320,390,768]){
+              const mobile=await browser.newPage({viewport:{width,height:900},hasTouch:true,isMobile:true});
+              await mobile.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
+              await mobile.locator('.entry-explore').tap();
+              if(!await mobile.locator('.screen-explore').evaluate(el=>el.classList.contains('is-active')))throw Error('Mobile explore navigation '+width);
+              await mobile.locator('[data-explore-category="Природа"]').tap();
+              if(!await mobile.locator('[data-explore-category="Природа"]').evaluate(el=>el.classList.contains('is-active')))throw Error('Mobile category '+width);
+              await mobile.locator('#exploreSearch').fill('несуществующий объект');
+              if(await mobile.locator('#exploreList [data-open-place]').count())throw Error('Mobile search did not filter '+width);
+              await mobile.locator('#exploreSearch').fill('');
+              await mobile.locator('#exploreList [data-fav-point]').first().tap();
+              await mobile.locator('#favoritesToggle').tap();
+              if(!(await mobile.locator('#favoritesToggle').evaluate(el=>el.classList.contains('is-active')))||!(await mobile.locator('#exploreList [data-open-place]').count()))throw Error('Mobile favorites '+width);
+              await mobile.locator('#favoritesToggle').tap();
+              await mobile.locator('#bottomNav [data-nav="articles"]').tap();
+              await mobile.locator('#articleList [data-open-article]').first().tap();
+              if(!await mobile.locator('.screen-article').evaluate(el=>el.classList.contains('is-active')))throw Error('Mobile article open '+width);
+              const favorite=mobile.locator('#articleFavorite');
+              const initial=await favorite.getAttribute('aria-pressed');
+              await favorite.tap();
+              if(await favorite.getAttribute('aria-pressed')===initial)throw Error('Mobile article favorite '+width);
+              await favorite.tap();
+              if(await favorite.getAttribute('aria-pressed')!==initial)throw Error('Mobile article favorite undo '+width);
+              await mobile.locator('#articleBack').tap();
+              if(!await mobile.locator('.screen-articles').evaluate(el=>el.classList.contains('is-active')))throw Error('Mobile article back '+width);
+              await mobile.close();
+            }
             // Exercise every generated menu item on a fresh home screen.
             const cases=[
               [['Все места','screen:explore'],['Природа','topic:Природа'],['История','topic:История'],['Камни','topic:Камни'],['Культура','topic:Культура']],
