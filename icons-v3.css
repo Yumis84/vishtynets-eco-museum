@@ -133,3 +133,8 @@
  .screen-home .home-entry-grid .entry-copy{grid-area:copy}
  .screen-home .home-entry-grid .entry-card>b{grid-area:arrow}
 }
+
+/* Keep the compact desktop icon grid consistent with the narrow desktop sizes. */
+@media (min-width:1024px) and (max-width:1150px){
+ .screen-home .home-entry-grid .entry-card{grid-template-columns:32px minmax(0,1fr) 14px}
+}
