@@ -13,7 +13,16 @@ const groups=[
 const nav=document.createElement('nav');nav.className='desktop-v1-nav';nav.setAttribute('aria-label','Разделы цифрового атласа');
 const close=(focus)=>{nav.querySelectorAll('[aria-expanded]').forEach(b=>{if(focus&&b.getAttribute('aria-expanded')==='true')b.focus();b.setAttribute('aria-expanded','false')});nav.querySelectorAll('.desktop-v1-menu').forEach(p=>p.hidden=true)};
 groups.forEach(([title,items],i)=>{const group=document.createElement('div');group.className='desktop-v1-group';const trigger=document.createElement('button');trigger.type='button';trigger.className='desktop-v1-trigger';trigger.textContent=title;trigger.setAttribute('aria-expanded','false');trigger.setAttribute('aria-controls',`desktop-v1-menu-${i}`);const panel=document.createElement('div');panel.className='desktop-v1-menu';panel.id=`desktop-v1-menu-${i}`;panel.hidden=true;
- items.forEach(([label,kind,value])=>{const el=document.createElement(kind==='link'?'a':'button');if(kind==='link'){el.href=value;if(value.startsWith('https:')){el.target='_blank';el.rel='noopener'}}else{el.type='button';el.addEventListener('click',()=>{close(false);if(kind==='scroll')home.querySelector(value)?.scrollIntoView({behavior:'smooth'});if(kind==='topic')home.querySelector('.topic-'+value)?.click();if(kind==='nav')home.querySelector(`[data-nav="${value}"]`)?.click();if(kind==='menu')document.querySelector(`.screen-menu [data-menu-section="${value}"]`)?.click()})}el.textContent=label;panel.append(el)});
+ items.forEach(([label,kind,value])=>{const el=document.createElement(kind==='link'?'a':'button');if(kind==='link'){el.href=value;if(value.startsWith('https:')){el.target='_blank';el.rel='noopener'}}else{el.type='button';el.addEventListener('click',()=>{close(false);if(kind==='scroll')home.querySelector(value)?.scrollIntoView({behavior:'smooth'});if(kind==='topic'){
+ const categories={nature:'Природа',history:'История',stone:'Камни',culture:'Культура'};
+ home.querySelector('[data-nav="explore"]')?.click();
+ const search=document.getElementById('exploreSearch');
+ if(search){search.value='';search.dispatchEvent(new Event('input',{bubbles:true}));}
+ const favorites=document.getElementById('favoritesToggle');
+ if(favorites?.classList.contains('is-active'))favorites.click();
+ const category=[...document.querySelectorAll('[data-explore-category]')].find(el=>el.dataset.exploreCategory===categories[value]);
+ category?.click();
+}if(kind==='nav')home.querySelector(`[data-nav="${value}"]`)?.click();if(kind==='menu')document.querySelector(`.screen-menu [data-menu-section="${value}"]`)?.click()})}el.textContent=label;panel.append(el)});
  trigger.addEventListener('click',()=>{const wasOpen=trigger.getAttribute('aria-expanded')==='true';close(false);if(!wasOpen){trigger.setAttribute('aria-expanded','true');panel.hidden=false}});group.append(trigger,panel);nav.append(group)});
  head.append(nav);document.addEventListener('click',e=>{if(!nav.contains(e.target))close(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape')close(true)});
  const copy=home.querySelector('.warm-hero-copy');const heading=document.createElement('div');heading.className='desktop-v1-heading';heading.innerHTML='<h1>Виштынецкий экомузей</h1><p>Авторский цифровой атлас Виштынецкого края</p>';copy.after(heading);
