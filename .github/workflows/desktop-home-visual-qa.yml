@@ -64,6 +64,8 @@ jobs:
               if(width>=1024){
                 const sequence=await page.locator('.home-paper > section').evaluateAll(nodes=>nodes.map(n=>n.id==='wallChampion'?'wall':n.classList.contains('warm-topics')?'explore':n.classList.contains('desktop-v1-map')?'map':n.classList.contains('home-places-section')?'places':n.classList.contains('home-story-intro')?'stories':n.classList.contains('home-visit')?'visit':'other'));
                 if(sequence.join(',')!=='explore,map,places,stories,visit,wall') throw Error('Wrong desktop section order: '+sequence);
+                const offsets=await page.locator('.home-entry-grid .entry-card').evaluateAll(cards=>cards.map(card=>{const c=card.getBoundingClientRect(),i=card.querySelector('.entry-icon').getBoundingClientRect();return (i.top+i.height/2)-(c.top+c.height/2)}));
+                if(offsets.some(v=>Math.abs(v)>3))throw Error('Desktop entry icons not vertically centered: '+offsets);
                 const menus=page.locator('.desktop-v1-trigger');
                 if(await menus.count()!==5)throw Error('Expected five desktop menus at '+width);
                 for(let i=0;i<5;i++){
