@@ -18,6 +18,10 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: baseline-main
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -26,6 +30,7 @@ jobs:
       - name: Capture homepage and test basic navigation
         run: |
           python3 -m http.server 8765 >/tmp/museum-server.log 2>&1 &
+          python3 -m http.server 8766 --directory baseline-main >/tmp/museum-main-server.log 2>&1 &
           node <<'JS'
           const { chromium } = require('playwright');
           (async () => {
@@ -37,6 +42,14 @@ jobs:
               await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
               await page.waitForTimeout(1200);
               await page.screenshot({path:'desktop-home-'+width+'.png',fullPage:true});
+              if(width<1024){
+                await page.screenshot({path:'mobile-pr-'+width+'.png'});
+                const base=await browser.newPage({viewport:{width,height:900},deviceScaleFactor:1});
+                await base.goto('http://127.0.0.1:8766/',{waitUntil:'domcontentloaded'});
+                await base.waitForTimeout(1200);
+                await base.screenshot({path:'mobile-main-'+width+'.png'});
+                await base.close();
+              }
               // content-visibility:auto can omit offscreen content in full-page captures.
               await page.locator('#wallChampion').scrollIntoViewIfNeeded();
               await page.waitForTimeout(500);
@@ -54,10 +67,18 @@ jobs:
                 const menus=page.locator('.desktop-v1-trigger');
                 if(await menus.count()!==5)throw Error('Expected five desktop menus at '+width);
                 for(let i=0;i<5;i++){
-                  await menus.nth(i).click();
+                  await menus.nth(i).focus();
+                  await page.keyboard.press('Enter');
                   if(await menus.nth(i).getAttribute('aria-expanded')!=='true')throw Error('Menu failed to open '+i);
+                  await page.keyboard.press('Tab');
+                  const focused=await page.evaluate(()=>document.activeElement.closest('.desktop-v1-menu')?.id);
+                  if(focused!=='desktop-v1-menu-'+i)throw Error('Menu does not receive keyboard focus '+i);
                   await page.keyboard.press('Escape');
                   if(await menus.nth(i).getAttribute('aria-expanded')!=='false')throw Error('Menu failed to close '+i);
+                  if(!await menus.nth(i).evaluate(el=>el===document.activeElement))throw Error('Escape did not restore focus '+i);
+                  await menus.nth(i).click();
+                  await page.locator('.desktop-v1-heading').click({position:{x:5,y:5}});
+                  if(await menus.nth(i).getAttribute('aria-expanded')!=='false')throw Error('Outside click failed '+i);
                 }
                 if(!await page.locator('.desktop-v1-map button').isVisible())throw Error('Map section missing');
                 if(width===1440){
@@ -82,3 +103,5 @@ jobs:
           path: |
             desktop-home-*.png
             desktop-wall-*.png
+            mobile-main-*.png
+            mobile-pr-*.png
