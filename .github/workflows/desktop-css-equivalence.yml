@@ -1,0 +1,81 @@
+name: Desktop CSS visual equivalence
+on:
+  pull_request:
+    paths:
+      - 'home-desktop-reference.css'
+      - 'home-desktop.css'
+      - 'home-museum-style.css'
+      - 'icons-v3.css'
+      - 'desktop-v1.js'
+      - '.github/workflows/desktop-css-equivalence.yml'
+jobs:
+  compare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: 8838596db4bcbaf1f44ee6977c96f1dad02bb6c1
+          path: css-before
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - name: Compare stable desktop states
+        run: |
+          python3 -m http.server 8771 >/tmp/css-after-server.log 2>&1 &
+          python3 -m http.server 8772 --directory css-before >/tmp/css-before-server.log 2>&1 &
+          node <<'JS'
+          const {chromium}=require('playwright');
+          const fs=require('fs');
+          (async()=>{
+            const browser=await chromium.launch();
+            const svg='<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="600" height="400" fill="#829687"/></svg>';
+            async function setup(port,width){
+              const page=await browser.newPage({viewport:{width,height:900},deviceScaleFactor:1});
+              await page.route('**/*',route=>{
+                const u=new URL(route.request().url());
+                if(u.hostname==='127.0.0.1')return route.continue();
+                if(route.request().resourceType()==='image')return route.fulfill({status:200,contentType:'image/svg+xml',body:svg});
+                return route.abort();
+              });
+              await page.clock.install({time:new Date('2026-11-15T12:00:00Z')});
+              await page.goto('http://127.0.0.1:'+port+'/',{waitUntil:'domcontentloaded'});
+              await page.addStyleTag({content:'*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}.home-paper>section{content-visibility:visible!important}'});
+              await page.evaluate(async()=>{for(const img of document.images)img.loading='eager';await document.fonts.ready;});
+              await page.waitForTimeout(800);
+              return page;
+            }
+            for(const width of [1024,1280,1440,1920]){
+              const before=await setup(8772,width),after=await setup(8771,width);
+              for(const state of ['home','menu']){
+                if(state==='menu'){
+                  for(const p of [before,after]){
+                    await p.locator('.desktop-v1-trigger').first().focus();
+                    await p.keyboard.press('Enter');
+                    if(await p.locator('.desktop-v1-trigger').first().getAttribute('aria-expanded')!=='true')throw Error('Menu failed to open '+width);
+                  }
+                }
+                const a=await before.screenshot({fullPage:state==='home'}),b=await after.screenshot({fullPage:state==='home'});
+                fs.writeFileSync('css-before-'+width+'-'+state+'.png',a);
+                fs.writeFileSync('css-after-'+width+'-'+state+'.png',b);
+                if(!a.equals(b))throw Error('CSS visual difference '+width+' '+state);
+                if(state==='menu')for(const p of [before,after]){
+                  await p.keyboard.press('Escape');
+                  if(await p.locator('.desktop-v1-trigger').first().getAttribute('aria-expanded')!=='false')throw Error('Escape failed '+width);
+                }
+              }
+              await before.close();await after.close();
+            }
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: desktop-css-comparison
+          path: |
+            css-before-*.png
+            css-after-*.png

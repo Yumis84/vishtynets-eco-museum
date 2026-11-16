@@ -6,16 +6,22 @@ on:
   pull_request:
     paths:
       - 'index.html'
+      - 'icons-v3.css'
+      - 'desktop-v1.js'
       - 'home-desktop-reference.css'
       - 'home-desktop.css'
       - 'home-museum-style.css'
       - '.github/workflows/desktop-home-visual-qa.yml'
 jobs:
   screenshot-and-smoke:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: baseline-main
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -24,24 +30,151 @@ jobs:
       - name: Capture homepage and test basic navigation
         run: |
           python3 -m http.server 8765 >/tmp/museum-server.log 2>&1 &
+          python3 -m http.server 8766 --directory baseline-main >/tmp/museum-main-server.log 2>&1 &
           node <<'JS'
           const { chromium } = require('playwright');
           (async () => {
             const browser = await chromium.launch({headless:true});
             const errors=[];
-            for (const width of [390,768,1024,1280,1440,1920]) {
+            for (const width of [320,390,768,1024,1280,1440,1920]) {
               const page=await browser.newPage({viewport:{width,height:900},deviceScaleFactor:1});
               page.on('pageerror', e=>errors.push(width+': '+e.message));
               await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
               await page.waitForTimeout(1200);
               await page.screenshot({path:'desktop-home-'+width+'.png',fullPage:true});
+              if(width<1024){
+                await page.screenshot({path:'mobile-pr-'+width+'.png'});
+                const base=await browser.newPage({viewport:{width,height:900},deviceScaleFactor:1});
+                await base.goto('http://127.0.0.1:8766/',{waitUntil:'domcontentloaded'});
+                await base.waitForTimeout(1200);
+                await base.screenshot({path:'mobile-main-'+width+'.png'});
+                // Render offscreen sections in both captures for reliable full-page comparison.
+                for(const [p,label] of [[page,'pr'],[base,'main']]){
+                  const normalized=await p.addStyleTag({content:'.home-paper > section { content-visibility: visible !important; } .bottom-nav { visibility: hidden !important; }'});
+                  await p.locator('#wallChampion').scrollIntoViewIfNeeded();
+                  await p.waitForTimeout(500);
+                  await p.evaluate(()=>window.scrollTo(0,0));
+                  await p.screenshot({path:'mobile-full-'+label+'-'+width+'.png',fullPage:true});
+                  await normalized.evaluate(el=>el.remove());
+                  await p.locator('.hero-menu').click();
+                  if(!await p.locator('.screen-menu').evaluate(el=>el.classList.contains('is-active')))throw Error('Mobile menu did not open '+label+' '+width);
+                  await p.screenshot({path:'mobile-menu-'+label+'-'+width+'.png'});
+                  await p.locator('[data-close-menu]').first().click();
+                  if(!await p.locator('.screen-home').evaluate(el=>el.classList.contains('is-active')))throw Error('Mobile menu did not close '+label+' '+width);
+                }
+                await base.close();
+              }
+              // content-visibility:auto can omit offscreen content in full-page captures.
+              await page.locator('#wallChampion').scrollIntoViewIfNeeded();
+              await page.waitForTimeout(500);
+              if (!await page.locator('#wallChampionTitle').isVisible()) throw Error('Wall section hidden at '+width);
+              if (!(await page.locator('#wallChampionContent').innerText()).trim()) throw Error('Wall status empty at '+width);
+              await page.screenshot({path:'desktop-wall-'+width+'.png'});
               const title=await page.locator('.screen-home h1').first().textContent();
               if(!title) throw Error('Missing home heading at '+width);
-              const desktop=await page.locator('.desktop-home-nav').first().isVisible();
+              const desktop=await page.locator('.desktop-v1-nav').first().isVisible();
               if(width>=1024 && !desktop) throw Error('Desktop navigation hidden at '+width);
               if(width<1024 && desktop) throw Error('Desktop navigation visible on mobile at '+width);
+              if(width>=1024){
+                const sequence=await page.locator('.home-paper > section').evaluateAll(nodes=>nodes.map(n=>n.id==='wallChampion'?'wall':n.classList.contains('warm-topics')?'explore':n.classList.contains('desktop-v1-map')?'map':n.classList.contains('home-places-section')?'places':n.classList.contains('home-story-intro')?'stories':n.classList.contains('home-visit')?'visit':'other'));
+                if(sequence.join(',')!=='explore,map,places,stories,visit,wall') throw Error('Wrong desktop section order: '+sequence);
+                const offsets=await page.locator('.home-entry-grid .entry-card').evaluateAll(cards=>cards.map(card=>{const c=card.getBoundingClientRect(),i=card.querySelector('.entry-icon').getBoundingClientRect();return (i.top+i.height/2)-(c.top+c.height/2)}));
+                if(offsets.some(v=>Math.abs(v)>3))throw Error('Desktop entry icons not vertically centered: '+offsets);
+                const menus=page.locator('.desktop-v1-trigger');
+                if(await menus.count()!==5)throw Error('Expected five desktop menus at '+width);
+                for(let i=0;i<5;i++){
+                  await menus.nth(i).focus();
+                  await page.keyboard.press('Enter');
+                  if(await menus.nth(i).getAttribute('aria-expanded')!=='true')throw Error('Menu failed to open '+i);
+                  await page.keyboard.press('Tab');
+                  const focused=await page.evaluate(()=>document.activeElement.closest('.desktop-v1-menu')?.id);
+                  if(focused!=='desktop-v1-menu-'+i)throw Error('Menu does not receive keyboard focus '+i);
+                  await page.keyboard.press('Escape');
+                  if(await menus.nth(i).getAttribute('aria-expanded')!=='false')throw Error('Menu failed to close '+i);
+                  if(!await menus.nth(i).evaluate(el=>el===document.activeElement))throw Error('Escape did not restore focus '+i);
+                  await menus.nth(i).click();
+                  await page.locator('.desktop-v1-heading').click({position:{x:5,y:5}});
+                  if(await menus.nth(i).getAttribute('aria-expanded')!=='false')throw Error('Outside click failed '+i);
+                }
+                if(!await page.locator('.desktop-v1-map button').isVisible())throw Error('Map section missing');
+                if(width===1440){
+                  await page.locator('.desktop-v1-map button').click();
+                  if(!await page.locator('.screen-map').evaluate(el=>el.classList.contains('is-active'))) throw Error('Map entry did not navigate');
+                  await page.reload({waitUntil:'domcontentloaded'});
+                  await page.setViewportSize({width:390,height:900});
+                  const mobileOrder=await page.locator('.home-paper > section').evaluateAll(nodes=>nodes.map(n=>n.id==='wallChampion'?'wall':n.classList.contains('warm-topics')?'explore':n.classList.contains('desktop-v1-map')?'map':n.classList.contains('home-places-section')?'places':n.classList.contains('home-story-intro')?'stories':n.classList.contains('home-visit')?'visit':'other'));
+                  if(mobileOrder.join(',')!=='visit,map,places,explore,stories,wall') throw Error('Mobile order not restored: '+mobileOrder);
+                }
+              }else if(await page.locator('.desktop-v1-nav').isVisible())throw Error('Desktop menu visible on mobile');
               await page.close();
             }
+            // Mobile interactions: filters, search, favorites, article reader and back navigation.
+            for(const width of [320,390,768]){
+              const mobile=await browser.newPage({viewport:{width,height:900},hasTouch:true,isMobile:true});
+              await mobile.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
+              await mobile.locator('.entry-explore').tap();
+              if(!await mobile.locator('.screen-explore').evaluate(el=>el.classList.contains('is-active')))throw Error('Mobile explore navigation '+width);
+              await mobile.locator('[data-explore-category="Природа"]').tap();
+              if(!await mobile.locator('[data-explore-category="Природа"]').evaluate(el=>el.classList.contains('is-active')))throw Error('Mobile category '+width);
+              await mobile.locator('#exploreSearch').fill('несуществующий объект');
+              if(await mobile.locator('#exploreList [data-open-place]').count())throw Error('Mobile search did not filter '+width);
+              await mobile.locator('#exploreSearch').fill('');
+              await mobile.locator('#exploreList [data-fav-point]').first().tap();
+              await mobile.locator('#favoritesToggle').tap();
+              if(!(await mobile.locator('#favoritesToggle').evaluate(el=>el.classList.contains('is-active')))||!(await mobile.locator('#exploreList [data-open-place]').count()))throw Error('Mobile favorites '+width);
+              await mobile.locator('#favoritesToggle').tap();
+              await mobile.locator('#bottomNav [data-nav="articles"]').tap();
+              await mobile.locator('#articleList [data-open-article]').first().tap();
+              if(!await mobile.locator('.screen-article').evaluate(el=>el.classList.contains('is-active')))throw Error('Mobile article open '+width);
+              const favorite=mobile.locator('#articleFavorite');
+              const initial=await favorite.getAttribute('aria-pressed');
+              await favorite.tap();
+              if(await favorite.getAttribute('aria-pressed')===initial)throw Error('Mobile article favorite '+width);
+              await favorite.tap();
+              if(await favorite.getAttribute('aria-pressed')!==initial)throw Error('Mobile article favorite undo '+width);
+              await mobile.locator('#articleBack').tap();
+              if(!await mobile.locator('.screen-articles').evaluate(el=>el.classList.contains('is-active')))throw Error('Mobile article back '+width);
+              await mobile.close();
+            }
+            // Exercise every generated menu item on a fresh home screen.
+            const cases=[
+              [['Все места','screen:explore'],['Природа','topic:Природа'],['История','topic:История'],['Камни','topic:Камни'],['Культура','topic:Культура']],
+              [['Открыть карту','screen:map'],['Где остановиться','link:guest-house-map']],
+              [['Места для посещения','scroll'],['Все места','screen:explore']],
+              [['Статьи','screen:articles'],['Аудиогид','screen:audio'],['О музее','sheet:О музее'],['Экспозиции','detail:Экспозиции'],['Образовательные программы','detail:Образовательные программы'],['Проекты','detail:Проекты'],['Публикации','detail:Публикации'],['Хронология','detail:Хронология'],['Стена впечатлений','link:wall.html']],
+              [['Посетителям','sheet:Посетителям'],['Контакты','sheet:Контакты'],['Где остановиться','link:guest-house-map']]
+            ];
+            const qa=await browser.newPage({viewport:{width:1440,height:900}});
+            for(let g=0;g<cases.length;g++)for(const [label,expected] of cases[g]){
+              await qa.goto('http://127.0.0.1:8765/',{waitUntil:'load'});
+              if(expected.startsWith('topic:')){
+                await qa.locator('.entry-explore').click();
+                await qa.locator('#exploreSearch').fill('несуществующий поисковый запрос');
+                await qa.locator('#favoritesToggle').click();
+                await qa.evaluate(()=>document.querySelector('.desktop-home-nav [data-nav="home"]').click());
+              }
+              await qa.locator('.desktop-v1-trigger').nth(g).click();
+              const item=qa.locator('#desktop-v1-menu-'+g).getByText(label,{exact:true});
+              const [kind,value]=expected.split(':');
+              if(kind==='link'){
+                if(!(await item.getAttribute('href')).includes(value))throw Error('Wrong link '+label);
+              }else{
+                await item.click();
+                if(kind==='screen'&&!await qa.locator('.screen-'+value).evaluate(e=>e.classList.contains('is-active')))throw Error('Wrong screen '+label);
+                if(kind==='topic'){
+                  if(!await qa.locator('.screen-explore').evaluate(e=>e.classList.contains('is-active')))throw Error('Wrong topic screen '+label);
+                  const chip=qa.locator('[data-explore-category]').filter({hasText:value});
+                  if(!await chip.evaluate(el=>el.classList.contains('is-active')))throw Error('Topic filter not selected '+label);
+                  if(await qa.locator('#exploreSearch').inputValue()!=='')throw Error('Previous search not cleared '+label);
+                  if(await qa.locator('#favoritesToggle').evaluate(el=>el.classList.contains('is-active')))throw Error('Favorites still active '+label);
+                  if(await qa.locator('#exploreList [data-open-place]').count()===0)throw Error('No topic places '+label);
+                }
+                if(kind==='sheet'&&(!await qa.locator('#infoSheet').evaluate(e=>e.classList.contains('is-open'))||!(await qa.locator('#sheetContent').innerText()).includes(value)))throw Error('Wrong sheet '+label);
+                if(kind==='detail'&&(!await qa.locator('.screen-menu-detail').evaluate(e=>e.classList.contains('is-active'))||(await qa.locator('#menuDetailTitle').innerText())!==value))throw Error('Wrong detail '+label);
+                if(kind==='scroll')await qa.waitForFunction(()=>Math.abs(document.querySelector('.home-places-section').getBoundingClientRect().top)<200,null,{timeout:5000});
+              }
+            }
+            await qa.close();
             await browser.close();
             if(errors.length) throw Error('JS errors: '+errors.join('; '));
           })().catch(e=>{console.error(e);process.exit(1)});
@@ -50,4 +183,10 @@ jobs:
         if: always()
         with:
           name: desktop-home-screenshots
-          path: desktop-home-*.png
+          path: |
+            desktop-home-*.png
+            desktop-wall-*.png
+            mobile-main-*.png
+            mobile-pr-*.png
+            mobile-full-*.png
+            mobile-menu-*.png
