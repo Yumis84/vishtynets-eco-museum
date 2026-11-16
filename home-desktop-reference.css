@@ -3,7 +3,7 @@
  body:has(.screen-home.is-active){background:#f8f5ee}
  .screen-home{max-width:none!important;padding:0!important;color:#273c30}
  .screen-home .warm-hero{
-   display:grid;grid-template-rows:76px clamp(190px,16vw,280px) auto auto;
+   display:grid;
    min-height:0!important;max-width:none!important;margin:0!important;border-radius:0!important;
    box-shadow:none!important;background:#f8f5ee;overflow:hidden;position:relative;
  }
@@ -37,7 +37,6 @@
  .screen-home .warm-hero{isolation:isolate}
  .screen-home .warm-hero-art{z-index:0}
  .screen-home .home-head,.screen-home .home-entry-grid{position:relative;z-index:1}
- .screen-home .home-entry-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
  .screen-home .entry-card{min-width:0;grid-template-columns:42px minmax(0,1fr) 18px}
  .screen-home .entry-copy{min-width:0}
  .screen-home .entry-copy strong{font-size:clamp(19px,1.6vw,25px)!important}
@@ -51,7 +50,6 @@
 @media(min-width:1024px) and (max-width:1150px){
  .screen-home .desktop-home-brand{font-size:18px!important}
  .screen-home .desktop-brand-mark{width:40px;height:40px}
- .screen-home .home-head{gap:8px}
  .screen-home .entry-card{grid-template-columns:32px minmax(0,1fr) 14px;padding:12px}
  .screen-home .entry-icon{width:32px;height:32px}
 }
@@ -115,7 +113,6 @@
  .screen-home .desktop-home-brand { flex:0 0 auto;min-width:0; }
  .screen-home .home-entry-grid,.screen-home .home-paper { width:100%;max-width:1280px; }
  .screen-home .home-entry-grid { display:grid;grid-template-columns:repeat(4,minmax(0,1fr)); }
- .screen-home .entry-card { min-width:0; }
  .screen-home .entry-copy strong,.screen-home .entry-copy small { overflow-wrap:break-word; }
  .screen-home .home-paper { margin-inline:auto; }
 }
