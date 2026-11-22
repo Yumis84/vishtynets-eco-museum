@@ -5,7 +5,7 @@
  .screen-home .warm-hero{
    display:grid;
    min-height:0!important;max-width:none!important;margin:0!important;border-radius:0!important;
-   box-shadow:none!important;background:#f8f5ee;overflow:hidden;position:relative;
+   box-shadow:none!important;background:#f8f5ee;position:relative;
  }
  .screen-home .home-head{grid-row:1;z-index:5;background:#faf7f1;padding:0 max(34px,calc((100vw - 1280px)/2))!important;min-height:76px}
  .screen-home .desktop-home-brand{color:#263e30!important;text-shadow:none!important;font-size:22px}
@@ -14,7 +14,7 @@
  .screen-home .warm-hero-art{position:absolute!important;top:76px;left:0;width:100%;height:clamp(190px,16vw,280px)!important;object-fit:cover;object-position:center 47%;filter:saturate(.7) contrast(.92)}
  .screen-home .warm-hero-overlay{display:none!important}
  .screen-home .home-kicker{display:none}
- .screen-home .home-entry-grid{grid-row:4;max-width:1280px;width:100%;margin:0 auto;padding:10px 0 20px!important;gap:16px!important}
+ .screen-home .home-entry-grid{grid-row:4;margin:0 auto;padding:10px 0 20px!important;gap:16px!important}
  .screen-home .entry-card{min-height:126px;border:1px solid #e5dfd2;border-radius:7px!important;background:#f0ebe2!important;backdrop-filter:none!important;box-shadow:none!important;color:#2d4034}
  .screen-home .entry-card:hover{transform:translateY(-2px)}
  .screen-home .entry-copy strong{font:normal 25px/1.2 Georgia,serif!important}
