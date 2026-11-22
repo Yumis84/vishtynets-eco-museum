@@ -24,7 +24,7 @@ fs.mkdirSync(out,{recursive:true});
   const pressed=async(selector,on)=>assert.equal(await page.locator(selector).getAttribute('aria-pressed'),String(on),selector);
   const count=async type=>page.locator('.leaflet-marker-pane .'+type).count();
   const snapshot=async step=>results.push({name,step,poi:await count('poi-pin'),guests:await count('guest-pin'),chips:await page.locator('#mapCategories button').evaluateAll(bs=>bs.map(b=>({label:b.dataset.mapCategory,pressed:b.getAttribute('aria-pressed'),active:b.classList.contains('is-active')})))});
-  await click(options.hasTouch?'#bottomNav [data-nav="map"]':'.desktop-home-nav [data-nav="map"]');
+  await click(options.hasTouch?'#bottomNav [data-nav="map"]':'.screen-home .entry-map');
   await page.waitForSelector('script[data-map-v3-safe]',{state:'attached'});
   await page.waitForFunction(()=>document.querySelector('#mapCategories .map-chip-label'));
   await page.waitForSelector('.poi-pin');
