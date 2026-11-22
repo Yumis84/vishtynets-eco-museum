@@ -67,6 +67,29 @@ jobs:
                   if(await p.locator('.desktop-v1-trigger').first().getAttribute('aria-expanded')!=='false')throw Error('Escape failed '+width);
                 }
               }
+              for(const p of [before,after]){
+                if(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth))throw Error('Horizontal overflow '+width);
+              }
+              const controls='.home-entry-grid .entry-card,.topic-preview-grid button,.home-places-section .recommend-card,.desktop-v1-trigger,.desktop-v1-map button';
+              const count=await before.locator(controls).count();
+              if(!count||count!==await after.locator(controls).count())throw Error('Control count '+width);
+              for(let index=0;index<count;index++){
+                for(const state of ['hover','focus']){
+                  const shots=[];
+                  for(const p of [before,after]){
+                    const control=p.locator(controls).nth(index);
+                    if(state==='hover')await control.hover();
+                    else{
+                      await p.mouse.move(0,0);
+                      await p.keyboard.press('Tab');
+                      await control.focus();
+                      if(!await control.evaluate(el=>el.matches(':focus-visible')))throw Error('Missing keyboard focus '+width+' '+index);
+                    }
+                    shots.push(await control.screenshot());
+                  }
+                  if(!shots[0].equals(shots[1]))throw Error('Control differs '+width+' '+index+' '+state);
+                }
+              }
               await before.close();await after.close();
             }
             await browser.close();
